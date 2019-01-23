@@ -3,7 +3,6 @@ package View;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 
 public class MainFrame extends JFrame {
 
@@ -18,18 +17,27 @@ public class MainFrame extends JFrame {
 
     private JPanel componentBoard;
         private JPanel switchBoard;
-            private JLabel stateName;
-            private JButton switchState;
+            private JButton button_switchState;
 
         private JPanel gamestateBoard;
+
 
     private JPanel gameContainer;
         private JPanel gameBoard;
         private JPanel physicsBoard;
+                private JLabel label_Gravity;
+                private JLabel label_Friction;
+                private JLabel label_BallPosition;
+                private JLabel label_Velocity;
+
+                private JLabel output_Gravity;
+                private JLabel output_Friction;
+                private JLabel output_BallPosition;
+                private JLabel output_Velocity;
 
 
 
-    private final int  WIDTH = 900, HEIGHT = 800;
+    private final int  WIDTH = 900, HEIGHT = 600;
 
     public MainFrame(){
 
@@ -45,6 +53,8 @@ public class MainFrame extends JFrame {
     }
 
     private void setUP(){
+        Utils util = new Utils();
+
         //--------------------------------------------------------
         //                     INIT COMPONENTS
         BorderLayout layout = new BorderLayout();
@@ -52,17 +62,18 @@ public class MainFrame extends JFrame {
 
         //--------------------------------------------------------
         //                     OPTIONS BOXES
+        BorderLayout layout_upperMenu = new BorderLayout();
+
         upperMenu = new JPanel();
         upperMenu.setSize(WIDTH,100);
-        BorderLayout layout_upperMenu = new BorderLayout();
         upperMenu.setLayout(layout_upperMenu);
-        upperMenu.setBackground(Color.WHITE);
+        upperMenu.setBackground(new Color(7, 7, 44, 160));
 
-
-        String[] menuOptions = new String[] {"Load", "Save","Quit"};
         optionsMenu = new JMenuBar();
         fileMenu = new JMenu("Options");
-        fileMenu.setSize(100,50);
+
+        optionsMenu.setBackground(null);
+        fileMenu.setBackground(null);
 
         saveItem  = new JMenuItem("Save");
         loadItem = new JMenuItem("Load");
@@ -81,76 +92,94 @@ public class MainFrame extends JFrame {
         //                     GAME BOX
 
         gameContainer = new JPanel();
+
         BorderLayout layout_gameContainer = new BorderLayout();
         gameContainer.setLayout(layout_gameContainer);
-
+        gameContainer.setPreferredSize(new Dimension(500, 500));
         gameBoard = new GameBoard();
+
         physicsBoard = new JPanel();
+
+        //--------------------------------------------------------
+        //                    physicsBoard
+
+        label_BallPosition = new JLabel("Ball Position");
+        label_Friction = new JLabel("Friction");
+        label_Gravity = new JLabel("Gravity");
+        label_Velocity = new JLabel("Velocity");
+
+        label_BallPosition = util.editLabel(label_BallPosition,12,Color.WHITE);
+        label_Friction = util.editLabel(label_Friction,12,Color.WHITE);
+        label_Gravity = util.editLabel(label_Gravity,12,Color.WHITE);
+        label_Velocity = util.editLabel(label_Velocity,12,Color.WHITE);
+
+        output_BallPosition = new JLabel("41.2");
+        output_Friction = new JLabel("26");
+        output_Gravity = new JLabel("54");
+        output_Velocity = new JLabel("10");
+
+        Color output_color = new Color(223, 223, 223, 154);
+        output_BallPosition = util.editLabel(output_BallPosition,11,output_color);
+        output_Friction = util.editLabel(output_Friction,11,output_color);
+        output_Gravity = util.editLabel(output_Gravity,11,output_color);
+        output_Velocity = util.editLabel(output_Velocity,11,output_color);
+
+        GridLayout layout_physicsComponent = new GridLayout(2,2,20,20);
+
+        physicsBoard.setLayout(layout_physicsComponent);
+        physicsBoard.setBackground(new Color(3, 3, 14, 160));
+
+        physicsBoard.setPreferredSize(new Dimension(WIDTH - 500, HEIGHT - 500));
+        physicsBoard.add(label_BallPosition);
+        physicsBoard.add(output_BallPosition);
+
+        physicsBoard.add(label_Friction);
+        physicsBoard.add(output_Friction);
+
+        physicsBoard.add(label_Gravity);
+        physicsBoard.add(output_Gravity);
+
+        physicsBoard.add(label_Velocity);
+        physicsBoard.add(output_Velocity);
+
+        physicsBoard.setSize(500,100);
+
+        //--------------------------------------------------------
+        //                    gameContainer
 
         gameContainer.add(gameBoard, BorderLayout.CENTER);
         gameContainer.add(physicsBoard, BorderLayout.PAGE_END);
 
         this.add(gameContainer, BorderLayout.CENTER);
 
-        //--------------------------------------------------------
+        //------------------------------------------------------------------
         //                     COMPONENT BOX
+
+        //--------------------------------------------------------
+        //                    componentBoard
+
         componentBoard = new JPanel();
         componentBoard.setSize(400,HEIGHT);
         componentBoard.setBackground(Color.WHITE);
 
         switchBoard = new JPanel();
-        GridLayout layout_switchBoard = new GridLayout(0,2);
-        switchBoard.setLayout(layout_gameContainer);
+        BorderLayout layout_switchBoard = new BorderLayout();
+        componentBoard.setLayout(layout_switchBoard);
 
-        stateName = new JLabel("Play Mode");
-        stateName.setFont(new Font("Monaco", Font.PLAIN, 20));
-        switchState = new JButton("Switch State");
-        switchState = addImgToBtn("/switch.png",switchState);
+        button_switchState = new JButton("Switch State");
+        button_switchState = util.addImgToBtn("/switch.png", button_switchState);
 
-        componentBoard.add(stateName);
-        componentBoard.add(switchState);
+        componentBoard.add(button_switchState, BorderLayout.PAGE_START);
 
 
+        //--------------------------------------------------------
+        //                    gamestateBoard
+
+        gamestateBoard = new PlayMode();
+
+        componentBoard.add(gamestateBoard,BorderLayout.CENTER);
         this.add(componentBoard,BorderLayout.LINE_START);
 
 
     }
-
-
-    private JButton addImgToBtn(String path,JButton button){
-        JButton play = new JButton("Play");
-        try {
-            Image img = ImageIO.read(getClass().getResource(path));
-            img = img.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
-            button.setIcon(new ImageIcon(img));
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
-        button.setVerticalTextPosition(SwingConstants.BOTTOM);
-        button.setHorizontalTextPosition(SwingConstants.CENTER);
-        button.setBorder(null);
-        button.setContentAreaFilled( false );
-
-        return button;
-    }
-    /*
-
-        this is how to make button invisible and fancy
-        JButton play = new JButton("Play");
-        try {
-            Image img = ImageIO.read(getClass().getResource("play.png"));
-            img = img.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
-            play.setIcon(new ImageIcon(img));
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
-        play.setVerticalTextPosition(SwingConstants.BOTTOM);
-        play.setHorizontalTextPosition(SwingConstants.CENTER);
-        play.setBorder(null);
-        play.setContentAreaFilled( false );
-
-
-     */
-
-
 }
