@@ -34,7 +34,10 @@ public class PlayMode extends JPanel implements Observer {
     private void init(){
 
         controlPanel = new JPanel();
-        GridLayout layout_controlPanel = new GridLayout(1,1,10,10);
+        //GridLayout layout_controlPanel = new GridLayout(4,1,10,10);
+        //controlPanel.setLayout(layout_controlPanel);
+
+        controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
 
         button_start  = new JButton("Start");
         button_stop = new JButton("Stop");
@@ -42,6 +45,7 @@ public class PlayMode extends JPanel implements Observer {
         button_tick = new JButton("Tick");
 
         controlPanel.add(button_start);
+        controlPanel.add(button_stop);
         controlPanel.add(button_tick);
         controlPanel.add(button_restart);
 

@@ -175,7 +175,7 @@ public class MainFrame extends JFrame {
         //--------------------------------------------------------
         //                    gamestateBoard
 
-        gamestateBoard = new PlayMode();
+        gamestateBoard = new BuildMode();
 
         componentBoard.add(gamestateBoard,BorderLayout.CENTER);
         this.add(componentBoard,BorderLayout.LINE_START);
