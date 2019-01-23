@@ -166,8 +166,9 @@ public class MainFrame extends JFrame {
         BorderLayout layout_switchBoard = new BorderLayout();
         componentBoard.setLayout(layout_switchBoard);
 
-        button_switchState = new JButton("Switch State");
-        button_switchState = util.addImgToBtn("/switch.png", button_switchState);
+        button_switchState = new JButton("Switch State");//switch.png
+        //
+        button_switchState = util.addImgToBtn("switch.png", button_switchState);
 
         componentBoard.add(button_switchState, BorderLayout.PAGE_START);
 

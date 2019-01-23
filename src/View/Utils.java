@@ -3,6 +3,7 @@ package View;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class Utils {
 
@@ -12,11 +13,13 @@ public class Utils {
         return l;
     }
 
-
     protected JButton addImgToBtn(String path,JButton button){
-        JButton play = new JButton("Play");
+        //this.icon = ImageIO.read(this.getClass().getResourceAsStream("resources/" + imgName));
+        String filePath = new File("").getAbsolutePath();
+        System.out.println(filePath);
+        System.out.println( filePath + "/res/" +  path);
         try {
-            Image img = ImageIO.read(getClass().getResource(path));
+            Image img = ImageIO.read(getClass().getResource(filePath + "/res/" +   path));
             img = img.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
             button.setIcon(new ImageIcon(img));
         } catch (Exception ex) {
