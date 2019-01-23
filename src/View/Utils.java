@@ -19,7 +19,7 @@ public class Utils {
         System.out.println(filePath);
         System.out.println( filePath + "/res/" +  path);
         try {
-            Image img = ImageIO.read(getClass().getResource(filePath + "/res/" +   path));
+            Image img = ImageIO.read(getClass().getResource("/" +   path));
             img = img.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
             button.setIcon(new ImageIcon(img));
         } catch (Exception ex) {
