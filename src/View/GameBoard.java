@@ -15,8 +15,6 @@ public class GameBoard extends JPanel {
     public void init(){
 
         this.setPreferredSize(new Dimension(WIDTH,HEIGTH));
-        this.setMaximumSize(new Dimension(WIDTH,HEIGTH));
-        this.setMinimumSize(new Dimension(WIDTH,HEIGTH));
 
         this.setBackground(Color.BLACK);
 

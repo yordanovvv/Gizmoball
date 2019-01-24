@@ -46,7 +46,7 @@ public class MainFrame extends JFrame implements iMainFrame{
 
     public MainFrame() {
 
-        this.setResizable(false);
+        this.setResizable(true);
         this.setTitle("GROUP 11 - Gizmonball");
         this.setSize(WIDTH, HEIGHT);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -76,9 +76,11 @@ public class MainFrame extends JFrame implements iMainFrame{
 
         optionsMenu = new JMenuBar();
         optionsMenu.setOpaque(true);
+        optionsMenu.setBackground(Color.WHITE);
 
         fileMenu = new JMenu("Options");
         fileMenu.setOpaque(true);
+        fileMenu.setBackground(Color.WHITE);
 
         saveItem = new JMenuItem("Save");
         loadItem = new JMenuItem("Load");
