@@ -76,11 +76,9 @@ public class MainFrame extends JFrame implements iMainFrame{
 
         optionsMenu = new JMenuBar();
         optionsMenu.setOpaque(true);
-        optionsMenu.setBackground(new Color(0, 9, 16, 167));
 
         fileMenu = new JMenu("Options");
         fileMenu.setOpaque(true);
-        fileMenu.setBackground(new Color(0, 9, 16, 167));
 
         saveItem = new JMenuItem("Save");
         loadItem = new JMenuItem("Load");
@@ -138,7 +136,7 @@ public class MainFrame extends JFrame implements iMainFrame{
         physicsBoard.setBorder(new CompoundBorder(
                 BorderFactory.createEmptyBorder(5, 5, 5, 5),
                 new CompoundBorder(
-                        BorderFactory.createLineBorder(new Color(3, 3, 14, 160), 6, true),
+                        BorderFactory.createLineBorder(new Color(0, 41, 57, 255), 6, true),
                         BorderFactory.createEmptyBorder(5, 5, 5, 5)
                 )
         ));
@@ -174,7 +172,7 @@ public class MainFrame extends JFrame implements iMainFrame{
         componentBoard.setSize(400, HEIGHT);
 
         switchBoard = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        switchBoard.setBackground((new Color(0, 41, 57, 167)));
+        switchBoard.setBackground((new Color(0, 41, 57, 255)));
 
         label_sameState = new JLabel("   GAME STATE");
         label_sameState = util.editLabel(label_sameState, 20, Color.WHITE);
@@ -204,6 +202,7 @@ public class MainFrame extends JFrame implements iMainFrame{
 
     @Override
     public void switchModes(int mode) {
+        this.invalidate();
         if(mode == 1){
             label_sameState.setText("   GAME STATE");
             button_switchState.setActionCommand("PLAY");
@@ -219,7 +218,6 @@ public class MainFrame extends JFrame implements iMainFrame{
             componentBoard.add(gamestateBoard, BorderLayout.CENTER);
         }
         this.validate();
-        this.repaint();
         this.repaint();
     }
 }

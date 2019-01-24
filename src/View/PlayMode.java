@@ -23,7 +23,7 @@ public class PlayMode extends JPanel implements Observer {
 
     public PlayMode(){
        // Color bg_color = new Color(241, 241, 255, 162);
-        this.setBackground(new Color(0, 41, 57, 167));
+        this.setBackground(new Color(0, 41, 57, 255));
         this.setBorder( BorderFactory.createEmptyBorder(20, 20, 20, 20));
         this.setPreferredSize(new Dimension(300,300));
         this.setLayout(new GridLayout(0,1,20,20));
@@ -33,7 +33,7 @@ public class PlayMode extends JPanel implements Observer {
 
     private void init(){
 
-        Color panel_colour = new Color(0, 41, 57, 167);
+        Color panel_colour = new Color(0, 55, 77, 255);
         Utils utils = new Utils();
 
         //--------------------------------------------------------
