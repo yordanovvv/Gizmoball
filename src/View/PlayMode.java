@@ -9,11 +9,13 @@ import java.util.Observer;
 public class PlayMode extends JPanel implements Observer {
 
     private JPanel controlPanel;
+        JPanel outterPanel;
+        JLabel label_title;
+
         JButton button_start;
         JButton button_stop;
         JButton button_tick;
         JButton button_restart;
-
 
     private JPanel statsPanel;
         JLabel label_stats;
@@ -38,6 +40,14 @@ public class PlayMode extends JPanel implements Observer {
         //                    CONTROL PANEL
 
         controlPanel = new JPanel();
+        outterPanel = new JPanel(new BorderLayout());
+
+        label_title = new JLabel("Controls");
+        label_title = utils.editLabel(label_title,15,Color.WHITE);
+
+        outterPanel.add(label_title,BorderLayout.PAGE_START);
+        outterPanel.setBackground(panel_colour);
+
         controlPanel.setBackground(panel_colour);
         controlPanel.setLayout(new GridLayout(0,2));
         controlPanel.setPreferredSize(new Dimension(200,200));
@@ -50,17 +60,19 @@ public class PlayMode extends JPanel implements Observer {
         button_restart = new JButton("Restart");
         button_tick = new JButton("Tick");
 
-        button_start = utils.addImgToBtn("switch.png",button_start);
-        button_stop = utils.addImgToBtn("switch.png",button_stop);
-        button_restart = utils.addImgToBtn("switch.png",button_restart);
-        button_tick = utils.addImgToBtn("switch.png",button_tick);
+        button_start = utils.addImgToBtn("switch.png",button_start, Color.WHITE);
+        button_stop = utils.addImgToBtn("switch.png",button_stop,Color.WHITE);
+        button_restart = utils.addImgToBtn("switch.png",button_restart,Color.WHITE);
+        button_tick = utils.addImgToBtn("switch.png",button_tick,Color.WHITE);
 
         controlPanel.add(button_start);
         controlPanel.add(button_stop);
         controlPanel.add(button_tick);
         controlPanel.add(button_restart);
 
-        this.add(controlPanel);
+        outterPanel.setBorder( BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        outterPanel.add(controlPanel,BorderLayout.CENTER);
+        this.add(outterPanel);
 
         //--------------------------------------------------------
         //                    STATS PANEL
@@ -86,6 +98,7 @@ public class PlayMode extends JPanel implements Observer {
                         "That puts them boys on rock, rock\n" +
                         "And they be lining down the block just to watch what I got (four, tres, two, uno)");
         label_stats = new JLabel("Stats");
+        label_stats = utils.editLabel(label_stats,15,Color.WHITE);
         container.setLineWrap(true);
         area_stats = new JScrollPane(container);
         area_stats.setBorder(BorderFactory.createLineBorder(Color.BLACK,1,true));
@@ -97,7 +110,6 @@ public class PlayMode extends JPanel implements Observer {
 
         statsPanel.setBorder( BorderFactory.createEmptyBorder(10, 10, 10, 10));
         this.add(statsPanel);
-
     }
 
     @Override

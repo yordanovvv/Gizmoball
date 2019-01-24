@@ -181,7 +181,7 @@ public class MainFrame extends JFrame {
         componentBoard.setLayout(layout_switchBoard);
 
         button_switchState = new JButton("Switch State");//switch.png
-        button_switchState = util.addImgToBtn("switch.png", button_switchState);
+        button_switchState = util.addImgToBtn("switch.png", button_switchState, Color.WHITE);
 
         switchBoard.add(button_switchState);
         switchBoard.add(label_sameState);
