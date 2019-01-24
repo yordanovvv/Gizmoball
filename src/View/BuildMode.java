@@ -1,6 +1,7 @@
 package View;
 
 import javax.swing.*;
+import javax.swing.plaf.ButtonUI;
 import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
@@ -29,12 +30,10 @@ public class BuildMode extends JPanel implements Observer {
 
 
     public BuildMode(){
-        Color bg_color = new Color(22, 21, 60, 171);
-
-        this.setBackground(bg_color);
+        this.setBackground(new Color(0, 41, 57, 167));
+        this.setBorder( BorderFactory.createEmptyBorder(20, 20, 20, 20));
         this.setPreferredSize(new Dimension(300,300));
         this.setLayout(new GridLayout(0,1,10,10));
-
 
         init();
 
@@ -42,10 +41,19 @@ public class BuildMode extends JPanel implements Observer {
 
     private void init() {
 
-        buildPanel = new JPanel(new BorderLayout());
+        Color panel_colour = new Color(0, 41, 57, 167);
+        Utils utils = new Utils();
 
+        //--------------------------------------------------------
+        //                    BUILD PANEL
+
+
+        buildPanel = new JPanel(new BorderLayout());
+        buildPanel.setBackground(panel_colour);
         JPanel container_build = new JPanel(new GridLayout(0,3));
+        container_build.setBackground(panel_colour);
         label_components = new JLabel("Components");
+        label_components = utils.editLabel(label_components,15,Color.WHITE);
 
         button_square = new JButton("Square");
         button_triangle = new JButton("Triangle");
@@ -53,6 +61,15 @@ public class BuildMode extends JPanel implements Observer {
         button_leftFlipper = new JButton("Left flipper");
         button_rightFlipper = new JButton("Right flipper");
         button_ball= new JButton("Ball");
+
+
+        button_square = utils.addImgToBtn("switch.png",button_square, Color.RED);
+        button_triangle = utils.addImgToBtn("switch.png",button_triangle,Color.BLUE);
+        button_circle = utils.addImgToBtn("switch.png",button_circle,Color.GREEN);
+        button_leftFlipper = utils.addImgToBtn("switch.png",button_leftFlipper,Color.YELLOW);
+        button_rightFlipper = utils.addImgToBtn("switch.png",button_rightFlipper, Color.ORANGE);
+        button_ball = utils.addImgToBtn("switch.png",button_ball,Color.PINK);
+        button_circle = utils.addImgToBtn("switch.png",button_circle,Color.WHITE);
 
         container_build.add(button_square);
         container_build.add(button_triangle);
@@ -65,9 +82,16 @@ public class BuildMode extends JPanel implements Observer {
         buildPanel.add(container_build,BorderLayout.CENTER);
 
 
+        //--------------------------------------------------------
+        //                    CONTROL PANEL
+
         controlsPanel = new JPanel(new BorderLayout());
+        controlsPanel.setBackground(panel_colour);
         JPanel container_play = new JPanel(new GridLayout(0,3));
+        container_play.setBackground(panel_colour);
+
         label_controls = new JLabel("Controls");
+        label_controls = utils.editLabel(label_controls,15,Color.WHITE);
 
         button_connectButton = new JButton("Connect");
         button_disconnect = new JButton("Disconnect");
@@ -83,6 +107,15 @@ public class BuildMode extends JPanel implements Observer {
         container_play.add(button_move);
         container_play.add(button_clear);
         container_play.add(button_move);
+
+
+        button_rotate = utils.addImgToBtn("switch.png",button_rotate, Color.WHITE);
+        button_connectButton = utils.addImgToBtn("switch.png",button_connectButton,Color.WHITE);
+        button_disconnect = utils.addImgToBtn("switch.png",button_disconnect,Color.WHITE);
+        button_delete = utils.addImgToBtn("switch.png",button_delete,Color.WHITE);
+        button_move = utils.addImgToBtn("switch.png",button_move, Color.WHITE);
+        button_clear = utils.addImgToBtn("switch.png",button_clear,Color.WHITE);
+        button_move = utils.addImgToBtn("switch.png",button_move,Color.WHITE);
 
         controlsPanel.add(label_controls,BorderLayout.PAGE_START);
         controlsPanel.add(container_play,BorderLayout.CENTER);
