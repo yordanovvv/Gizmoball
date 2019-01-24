@@ -2,6 +2,9 @@ package View;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.AbstractBorder;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public class MainFrame extends JFrame {
@@ -18,6 +21,7 @@ public class MainFrame extends JFrame {
     private JPanel componentBoard;
         private JPanel switchBoard;
             private JButton button_switchState;
+            private JLabel label_sameState;
 
         private JPanel gamestateBoard;
 
@@ -30,10 +34,10 @@ public class MainFrame extends JFrame {
                 private JLabel label_BallPosition;
                 private JLabel label_Velocity;
 
-                private JLabel output_Gravity;
-                private JLabel output_Friction;
-                private JLabel output_BallPosition;
-                private JLabel output_Velocity;
+                private JTextField output_Gravity;
+                private JTextField output_Friction;
+                private JTextField output_BallPosition;
+                private JTextField output_Velocity;
 
 
 
@@ -67,7 +71,7 @@ public class MainFrame extends JFrame {
         upperMenu = new JPanel();
         upperMenu.setSize(WIDTH,100);
         upperMenu.setLayout(layout_upperMenu);
-        upperMenu.setBackground(new Color(7, 7, 44, 160));
+        upperMenu.setBackground((new Color(0, 22, 30, 167)));
 
         optionsMenu = new JMenuBar();
         fileMenu = new JMenu("Options");
@@ -108,26 +112,33 @@ public class MainFrame extends JFrame {
         label_Gravity = new JLabel("Gravity");
         label_Velocity = new JLabel("Velocity");
 
-        label_BallPosition = util.editLabel(label_BallPosition,12,Color.WHITE);
-        label_Friction = util.editLabel(label_Friction,12,Color.WHITE);
-        label_Gravity = util.editLabel(label_Gravity,12,Color.WHITE);
-        label_Velocity = util.editLabel(label_Velocity,12,Color.WHITE);
+        label_BallPosition = util.editLabel(label_BallPosition,12,Color.BLACK);
+        label_Friction = util.editLabel(label_Friction,12,Color.BLACK);
+        label_Gravity = util.editLabel(label_Gravity,12,Color.BLACK);
+        label_Velocity = util.editLabel(label_Velocity,12,Color.BLACK);
 
-        output_BallPosition = new JLabel("41.2");
-        output_Friction = new JLabel("26");
-        output_Gravity = new JLabel("54");
-        output_Velocity = new JLabel("10");
+        output_BallPosition = new JTextField("41.2");
+        output_Friction = new JTextField("26");
+        output_Gravity = new JTextField("54");
+        output_Velocity = new JTextField("10");
 
-        Color output_color = new Color(223, 223, 223, 154);
-        output_BallPosition = util.editLabel(output_BallPosition,11,output_color);
-        output_Friction = util.editLabel(output_Friction,11,output_color);
-        output_Gravity = util.editLabel(output_Gravity,11,output_color);
-        output_Velocity = util.editLabel(output_Velocity,11,output_color);
+        output_BallPosition = util.styleTextField(output_BallPosition,11);
+        output_Friction = util.styleTextField(output_Friction,11);
+        output_Gravity = util.styleTextField(output_Gravity,11);
+        output_Velocity = util.styleTextField(output_Velocity,11);
 
         GridLayout layout_physicsComponent = new GridLayout(2,2,20,20);
 
         physicsBoard.setLayout(layout_physicsComponent);
-        physicsBoard.setBackground(new Color(3, 3, 14, 160));
+        physicsBoard.setBackground(Color.WHITE);
+
+        physicsBoard.setBorder(new CompoundBorder(
+                       BorderFactory.createEmptyBorder(5, 5, 5, 5),
+                      new CompoundBorder(
+                              BorderFactory.createLineBorder(new Color(3, 3, 14, 160),6,true),
+                              BorderFactory.createEmptyBorder(5, 5, 5, 5)
+                      )
+                        ));
 
         physicsBoard.setPreferredSize(new Dimension(WIDTH - 500, HEIGHT - 500));
         physicsBoard.add(label_BallPosition);
@@ -141,8 +152,6 @@ public class MainFrame extends JFrame {
 
         physicsBoard.add(label_Velocity);
         physicsBoard.add(output_Velocity);
-
-        physicsBoard.setSize(500,100);
 
         //--------------------------------------------------------
         //                    gameContainer
@@ -160,27 +169,33 @@ public class MainFrame extends JFrame {
 
         componentBoard = new JPanel();
         componentBoard.setSize(400,HEIGHT);
-        componentBoard.setBackground(Color.WHITE);
 
-        switchBoard = new JPanel();
+        switchBoard = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        switchBoard.setBackground((new Color(0, 41, 57, 167)));
+
+        label_sameState = new JLabel("   GAME STATE");
+        label_sameState =  util.editLabel(label_sameState,20,Color.WHITE);
+        //label_sameState.setHorizontalAlignment(Label.CENTER);
+
         BorderLayout layout_switchBoard = new BorderLayout();
         componentBoard.setLayout(layout_switchBoard);
 
         button_switchState = new JButton("Switch State");//switch.png
-        //
         button_switchState = util.addImgToBtn("switch.png", button_switchState);
 
-        componentBoard.add(button_switchState, BorderLayout.PAGE_START);
+        switchBoard.add(button_switchState);
+        switchBoard.add(label_sameState);
+
+        componentBoard.add(switchBoard, BorderLayout.PAGE_START);
 
 
         //--------------------------------------------------------
         //                    gamestateBoard
 
-        gamestateBoard = new BuildMode();
+        gamestateBoard = new PlayMode();
 
         componentBoard.add(gamestateBoard,BorderLayout.CENTER);
         this.add(componentBoard,BorderLayout.LINE_START);
-
-
     }
+
 }

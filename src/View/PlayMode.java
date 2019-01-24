@@ -1,6 +1,7 @@
 package View;
 
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
 import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
@@ -15,34 +16,44 @@ public class PlayMode extends JPanel implements Observer {
 
 
     private JPanel statsPanel;
-        JLabel label_stat;
-
+        JLabel label_stats;
+        JScrollPane area_stats;
 
     public PlayMode(){
-        GridLayout layout_playMode = new GridLayout(1,1,10,10);
-
-        Color bg_color = new Color(22, 21, 60, 171);
-
-        this.setBackground(bg_color);
+       // Color bg_color = new Color(241, 241, 255, 162);
+        this.setBackground(new Color(0, 41, 57, 167));
+        this.setBorder( BorderFactory.createEmptyBorder(20, 20, 20, 20));
         this.setPreferredSize(new Dimension(300,300));
-        this.setLayout(layout_playMode);
-
+        this.setLayout(new GridLayout(0,1,20,20));
 
         init();
     }
 
     private void init(){
 
-        controlPanel = new JPanel();
-        //GridLayout layout_controlPanel = new GridLayout(4,1,10,10);
-        //controlPanel.setLayout(layout_controlPanel);
+        Color panel_colour = new Color(0, 41, 57, 167);
+        Utils utils = new Utils();
 
-        controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
+        //--------------------------------------------------------
+        //                    CONTROL PANEL
+
+        controlPanel = new JPanel();
+        controlPanel.setBackground(panel_colour);
+        controlPanel.setLayout(new GridLayout(0,2));
+        controlPanel.setPreferredSize(new Dimension(200,200));
+        controlPanel.setMaximumSize(new Dimension(200,200));
+
+        controlPanel.setBorder( BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         button_start  = new JButton("Start");
         button_stop = new JButton("Stop");
         button_restart = new JButton("Restart");
         button_tick = new JButton("Tick");
+
+        button_start = utils.addImgToBtn("switch.png",button_start);
+        button_stop = utils.addImgToBtn("switch.png",button_stop);
+        button_restart = utils.addImgToBtn("switch.png",button_restart);
+        button_tick = utils.addImgToBtn("switch.png",button_tick);
 
         controlPanel.add(button_start);
         controlPanel.add(button_stop);
@@ -51,7 +62,42 @@ public class PlayMode extends JPanel implements Observer {
 
         this.add(controlPanel);
 
+        //--------------------------------------------------------
+        //                    STATS PANEL
+
         statsPanel = new JPanel();
+        statsPanel.setBackground(panel_colour);
+        statsPanel.setLayout(new BorderLayout());
+        statsPanel.setPreferredSize(new Dimension(200,200));
+        statsPanel.setMaximumSize(new Dimension(200,200));
+
+        JTextArea container = new JTextArea(
+                "Fergalicious definition make them boys go loco\n" +
+                        "They want my treasure, so they get their pleasures from my photo\n" +
+                        "You could see me, you can't squeeze me\n" +
+                        "I ain't easy, I ain't sleazy\n" +
+                        "I got reasons why I tease 'em\n" +
+                        "Boys just come and go like seasons\n" +
+                        "Fergalicious (so delicious)\n" +
+                        "But I ain't promiscuous\n" +
+                        "And if you was suspicious\n" +
+                        "All that shit is fictitious\n" +
+                        "I blow kisses (mwah)\n" +
+                        "That puts them boys on rock, rock\n" +
+                        "And they be lining down the block just to watch what I got (four, tres, two, uno)");
+        label_stats = new JLabel("Stats");
+        container.setLineWrap(true);
+        area_stats = new JScrollPane(container);
+        area_stats.setBorder(BorderFactory.createLineBorder(Color.BLACK,1,true));
+
+        statsPanel.add(label_stats, BorderLayout.PAGE_START);
+        statsPanel.add(area_stats, BorderLayout.CENTER);
+        statsPanel.setAutoscrolls(true);
+        statsPanel.setEnabled(false);
+
+        statsPanel.setBorder( BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        this.add(statsPanel);
+
     }
 
     @Override
