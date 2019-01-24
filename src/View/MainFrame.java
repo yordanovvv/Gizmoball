@@ -8,8 +8,10 @@ import javax.swing.border.AbstractBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.util.Observable;
+import java.util.Observer;
 
-public class MainFrame extends JFrame implements iMainFrame{
+public class MainFrame extends JFrame implements iMainFrame, Observer {
 
     public static void main(String[] args) {
         MainFrame view = new MainFrame();
@@ -46,7 +48,7 @@ public class MainFrame extends JFrame implements iMainFrame{
 
     public MainFrame() {
 
-        this.setResizable(true);
+        this.setResizable(false);
         this.setTitle("GROUP 11 - Gizmonball");
         this.setSize(WIDTH, HEIGHT);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -220,6 +222,11 @@ public class MainFrame extends JFrame implements iMainFrame{
             componentBoard.add(gamestateBoard, BorderLayout.CENTER);
         }
         this.validate();
+        this.repaint();
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
         this.repaint();
     }
 }
