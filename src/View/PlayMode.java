@@ -60,10 +60,10 @@ public class PlayMode extends JPanel implements Observer {
         button_restart = new JButton("Restart");
         button_tick = new JButton("Tick");
 
-        button_start = utils.addImgToBtn("switch.png",button_start, Color.WHITE);
-        button_stop = utils.addImgToBtn("switch.png",button_stop,Color.WHITE);
-        button_restart = utils.addImgToBtn("switch.png",button_restart,Color.WHITE);
-        button_tick = utils.addImgToBtn("switch.png",button_tick,Color.WHITE);
+        button_start = utils.addImgToBtn("play.png",button_start, Color.GREEN);
+        button_stop = utils.addImgToBtn("pause.png",button_stop,Color.RED);
+        button_restart = utils.addImgToBtn("restart.png",button_restart,Color.CYAN);
+        button_tick = utils.addImgToBtn("tick.png",button_tick,Color.ORANGE);
 
         controlPanel.add(button_start);
         controlPanel.add(button_stop);

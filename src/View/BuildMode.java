@@ -63,13 +63,13 @@ public class BuildMode extends JPanel implements Observer {
         button_ball= new JButton("Ball");
 
 
-        button_square = utils.addImgToBtn("switch.png",button_square, Color.RED);
-        button_triangle = utils.addImgToBtn("switch.png",button_triangle,Color.BLUE);
-        button_circle = utils.addImgToBtn("switch.png",button_circle,Color.GREEN);
-        button_leftFlipper = utils.addImgToBtn("switch.png",button_leftFlipper,Color.YELLOW);
-        button_rightFlipper = utils.addImgToBtn("switch.png",button_rightFlipper, Color.ORANGE);
-        button_ball = utils.addImgToBtn("switch.png",button_ball,Color.PINK);
-        button_circle = utils.addImgToBtn("switch.png",button_circle,Color.WHITE);
+        button_square = utils.addImgToBtn("square.png",button_square, Color.RED);
+        button_triangle = utils.addImgToBtn("triangle.png",button_triangle,Color.CYAN);
+        //button_circle = utils.addImgToBtn("circle1.png",button_circle,Color.GREEN);
+        button_leftFlipper = utils.addImgToBtn("leftFlipper.png",button_leftFlipper,Color.YELLOW);
+        button_rightFlipper = utils.addImgToBtn("rightFlipper.png",button_rightFlipper, Color.ORANGE);
+        button_ball = utils.addImgToBtn("football.png",button_ball, Color.BLACK);
+        button_circle = utils.addImgToBtn("circle.png",button_circle,Color.GREEN);
 
         container_build.add(button_square);
         container_build.add(button_triangle);
@@ -104,18 +104,18 @@ public class BuildMode extends JPanel implements Observer {
         container_play.add(button_connectButton);
         container_play.add(button_disconnect);
         container_play.add(button_delete);
-        container_play.add(button_move);
+        //container_play.add(button_move);
         container_play.add(button_clear);
         container_play.add(button_move);
 
 
-        button_rotate = utils.addImgToBtn("switch.png",button_rotate, Color.WHITE);
-        button_connectButton = utils.addImgToBtn("switch.png",button_connectButton,Color.WHITE);
-        button_disconnect = utils.addImgToBtn("switch.png",button_disconnect,Color.WHITE);
-        button_delete = utils.addImgToBtn("switch.png",button_delete,Color.WHITE);
-        button_move = utils.addImgToBtn("switch.png",button_move, Color.WHITE);
-        button_clear = utils.addImgToBtn("switch.png",button_clear,Color.WHITE);
-        button_move = utils.addImgToBtn("switch.png",button_move,Color.WHITE);
+        button_rotate = utils.addImgToBtn("rotate.png",button_rotate, Color.WHITE);
+        button_connectButton = utils.addImgToBtn("connected.png",button_connectButton,Color.WHITE);
+        button_disconnect = utils.addImgToBtn("disconnected.png",button_disconnect,Color.WHITE);
+        button_delete = utils.addImgToBtn("delete.png",button_delete,Color.WHITE);
+        //button_move = utils.addImgToBtn("move1.png",button_move, Color.BLACK);
+        button_clear = utils.addImgToBtn("clearAll.png",button_clear,Color.WHITE);
+        button_move = utils.addImgToBtn("move.png",button_move,Color.WHITE);
 
         controlsPanel.add(label_controls,BorderLayout.PAGE_START);
         controlsPanel.add(container_play,BorderLayout.CENTER);
