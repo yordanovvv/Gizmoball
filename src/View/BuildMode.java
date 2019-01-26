@@ -16,10 +16,12 @@ public class BuildMode extends JPanel implements Observer {
     private JButton button_leftFlipper;
     private JButton button_rightFlipper;
     private JButton button_ball;
+    private JButton button_absorber;
 
     private JPanel controlsPanel;
     private JLabel label_controls;
     private JButton button_connectButton;
+    private JButton button_keypressConnect;
     private JButton button_disconnect;
     private JButton button_rotate;
     private JButton button_move;
@@ -58,22 +60,23 @@ public class BuildMode extends JPanel implements Observer {
         button_square = new JButton("Square");
         button_triangle = new JButton("Triangle");
         button_circle= new JButton("Circle");
+        button_absorber = new JButton("Absorber");
         button_leftFlipper = new JButton("Left flipper");
         button_rightFlipper = new JButton("Right flipper");
         button_ball= new JButton("Ball");
 
-
         button_square = utils.addImgToBtn("square.png",button_square, Color.RED);
         button_triangle = utils.addImgToBtn("triangle.png",button_triangle,Color.CYAN);
-        //button_circle = utils.addImgToBtn("circle1.png",button_circle,Color.GREEN);
+        button_circle = utils.addImgToBtn("circle.png",button_circle,Color.GREEN);
+        button_absorber = utils.addImgToBtn("absorber.png", button_absorber, Color.MAGENTA);
         button_leftFlipper = utils.addImgToBtn("leftFlipper.png",button_leftFlipper,Color.YELLOW);
         button_rightFlipper = utils.addImgToBtn("rightFlipper.png",button_rightFlipper, Color.ORANGE);
         button_ball = utils.addImgToBtn("football.png",button_ball, Color.BLACK);
-        button_circle = utils.addImgToBtn("circle.png",button_circle,Color.GREEN);
 
         container_build.add(button_square);
         container_build.add(button_triangle);
         container_build.add(button_circle);
+        container_build.add(button_absorber);
         container_build.add(button_leftFlipper);
         container_build.add(button_rightFlipper);
         container_build.add(button_ball);
@@ -99,23 +102,24 @@ public class BuildMode extends JPanel implements Observer {
         button_move = new JButton("Move");
         button_clear = new JButton("Clear");
         button_delete = new JButton("Delete");
+        button_keypressConnect = new JButton("Connect Key");
 
         container_play.add(button_rotate);
         container_play.add(button_connectButton);
         container_play.add(button_disconnect);
         container_play.add(button_delete);
-        //container_play.add(button_move);
         container_play.add(button_clear);
         container_play.add(button_move);
+        container_play.add(button_keypressConnect);
 
 
         button_rotate = utils.addImgToBtn("rotate.png",button_rotate, Color.WHITE);
         button_connectButton = utils.addImgToBtn("connected.png",button_connectButton,Color.WHITE);
         button_disconnect = utils.addImgToBtn("disconnected.png",button_disconnect,Color.WHITE);
         button_delete = utils.addImgToBtn("delete.png",button_delete,Color.WHITE);
-        //button_move = utils.addImgToBtn("move1.png",button_move, Color.BLACK);
         button_clear = utils.addImgToBtn("clearAll.png",button_clear,Color.WHITE);
         button_move = utils.addImgToBtn("move.png",button_move,Color.WHITE);
+        button_keypressConnect = utils.addImgToBtn("keypress.png", button_keypressConnect, Color.WHITE);
 
         controlsPanel.add(label_controls,BorderLayout.PAGE_START);
         controlsPanel.add(container_play,BorderLayout.CENTER);

@@ -55,8 +55,8 @@ public class PlayMode extends JPanel implements Observer {
 
         controlPanel.setBorder( BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        button_start  = new JButton("Start");
-        button_stop = new JButton("Stop");
+        button_start  = new JButton("Play");
+        button_stop = new JButton("Pause");
         button_restart = new JButton("Restart");
         button_tick = new JButton("Tick");
 

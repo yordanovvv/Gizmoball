@@ -44,12 +44,12 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
     private JTextField output_Velocity;
 
 
-    private final int WIDTH = 900, HEIGHT = 600;
+    private final int WIDTH = 1000, HEIGHT = 700;
 
     public MainFrame() {
 
         this.setResizable(false);
-        this.setTitle("GROUP 11 - Gizmonball");
+        this.setTitle("GROUP 11 - Gizmoball");
         this.setSize(WIDTH, HEIGHT);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         BorderLayout layout = new BorderLayout();
@@ -104,7 +104,7 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
 
         BorderLayout layout_gameContainer = new BorderLayout();
         gameContainer.setLayout(layout_gameContainer);
-        gameContainer.setPreferredSize(new Dimension(500, 500));
+        gameContainer.setPreferredSize(new Dimension(600, 600));
         gameBoard = new GameBoard();
 
         physicsBoard = new JPanel();
@@ -145,7 +145,7 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
                 )
         ));
 
-        physicsBoard.setPreferredSize(new Dimension(WIDTH - 500, HEIGHT - 500));
+        physicsBoard.setPreferredSize(new Dimension(WIDTH - 600, HEIGHT - 600));
         physicsBoard.add(label_BallPosition);
         physicsBoard.add(output_BallPosition);
 
