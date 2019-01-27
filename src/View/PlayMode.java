@@ -33,7 +33,7 @@ public class PlayMode extends JPanel implements Observer {
 
     private void init(){
 
-        Color panel_colour = new Color(0, 41, 57, 255);
+        Color panel_colour = new Color(0, 55, 77, 255);
         Utils utils = new Utils();
 
         //--------------------------------------------------------
