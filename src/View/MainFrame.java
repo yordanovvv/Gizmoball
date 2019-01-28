@@ -1,6 +1,7 @@
 package View;
 
 import Controller.MainFrameListeners.ChangeModeListener;
+import Controller.MainFrameListeners.ControlListener;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -70,6 +71,7 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
         //--------------------------------------------------------
         //                     OPTIONS BOXES
         BorderLayout layout_upperMenu = new BorderLayout();
+        ControlListener menuListener = new ControlListener(this);
 
         upperMenu = new JPanel();
         upperMenu.setSize(WIDTH, 100);
@@ -85,8 +87,16 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
         fileMenu.setBackground(Color.WHITE);
 
         saveItem = new JMenuItem("Save");
+        saveItem.addActionListener(menuListener);
+        saveItem.setActionCommand("Save");
+
         loadItem = new JMenuItem("Load");
+        loadItem.addActionListener(menuListener);
+        loadItem.setActionCommand("Load");
+
         quitItem = new JMenuItem("Quit");
+        quitItem.addActionListener(menuListener);
+        quitItem.setActionCommand("Quit");
 
         fileMenu.add(saveItem);
         fileMenu.add(loadItem);
@@ -224,6 +234,27 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
         this.validate();
         this.repaint();
     }
+
+    @Override
+    public int generatePopUp(String title, String msg) {
+        JFrame frame = new JFrame();
+        String[] options = {"Yes", "No"};
+        return JOptionPane.showOptionDialog(frame,
+                msg,
+                title,
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[1]);
+    }
+
+    @Override
+    public void quit() {
+        this.setVisible(false);
+        System.exit(0);
+    }
+
 
     @Override
     public void update(Observable o, Object arg) {

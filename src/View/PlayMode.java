@@ -84,20 +84,8 @@ public class PlayMode extends JPanel implements Observer {
         statsPanel.setMaximumSize(new Dimension(200,200));
 
         JTextArea container = new JTextArea(
-                "Fergalicious definition make them boys go loco\n" +
-                        "They want my treasure, so they get their pleasures from my photo\n" +
-                        "You could see me, you can't squeeze me\n" +
-                        "I ain't easy, I ain't sleazy\n" +
-                        "I got reasons why I tease 'em\n" +
-                        "Boys just come and go like seasons\n" +
-                        "Fergalicious (so delicious)\n" +
-                        "But I ain't promiscuous\n" +
-                        "And if you was suspicious\n" +
-                        "All that shit is fictitious\n" +
-                        "I blow kisses (mwah)\n" +
-                        "That puts them boys on rock, rock\n" +
-                        "And they be lining down the block just to watch what I got (four, tres, two, uno)");
-        label_stats = new JLabel("Stats");
+                "No triggers available");
+        label_stats = new JLabel("Triggers");
         label_stats = utils.editLabel(label_stats,15,Color.WHITE);
         container.setLineWrap(true);
         area_stats = new JScrollPane(container);
