@@ -12,18 +12,18 @@ import java.awt.event.ActionListener;
 
 public class ChangeModeListener implements ActionListener {
 
-    private iMainFrame mainFrame;
+    private iMainFrame view;
 
-    public ChangeModeListener(iMainFrame mainFrame){
-        this.mainFrame = mainFrame;
+    public ChangeModeListener(iMainFrame view){
+        this.view = view;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("PLAY")){
-            mainFrame.switchModes(2);
+            view.switchModes(2);
         }else{
-            mainFrame.switchModes(1);
+            view.switchModes(1);
         }
 
     }

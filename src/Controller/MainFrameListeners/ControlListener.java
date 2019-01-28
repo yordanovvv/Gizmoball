@@ -8,16 +8,16 @@ import java.awt.event.ActionListener;
 
 public class ControlListener implements ActionListener {
 
-    iMainFrame mainFrame;
+    iMainFrame view;
 
-    public ControlListener(iMainFrame mainFrame){
-        this.mainFrame = mainFrame;
+    public ControlListener(iMainFrame view){
+        this.view = view;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         String actionCMD =  e.getActionCommand();
-
+        //todo check that the file loaders actually follow MVC
         if(actionCMD.equals("Save")){
             JFrame f = new JFrame();
             JFileChooser fileLoader = new JFileChooser();
@@ -34,9 +34,9 @@ public class ControlListener implements ActionListener {
                //todo cancel file loading
             }
         }else if(actionCMD.equals("Quit")){
-            int choice = mainFrame.generatePopUp("Quit?","Are you sure you want to quit?");
+            int choice = view.generatePopUp("Quit?","Are you sure you want to quit?");
             if(choice == 0){
-                mainFrame.quit();
+                view.quit();
             }
         }else if(actionCMD.equals("Load")){
             JFrame f = new JFrame();

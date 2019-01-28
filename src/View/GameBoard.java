@@ -24,7 +24,7 @@ public class GameBoard extends JPanel implements Observer {
         graphics = new JPanel() {
             public void paintComponent(Graphics g) {
                 g.setColor(new Color(165, 237, 237, 255));
-                g.drawLine(0,0,500,500);
+               // g.drawLine(0,0,500,500);
                 this.setBackground(Color.BLACK);
             }
         };

@@ -208,7 +208,7 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
         //--------------------------------------------------------
         //                    gamestateBoard
 
-        gamestateBoard = new BuildMode();
+        gamestateBoard = new BuildMode(this);
 
         componentBoard.add(gamestateBoard, BorderLayout.CENTER);
         this.add(componentBoard, BorderLayout.LINE_START);
@@ -221,14 +221,14 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
             label_sameState.setText("   GAME STATE");
             button_switchState.setActionCommand("PLAY");
             componentBoard.remove(gamestateBoard);
-            gamestateBoard = new PlayMode();
+            gamestateBoard = new PlayMode(this);
             componentBoard.add(gamestateBoard, BorderLayout.CENTER);
 
         }else{
             label_sameState.setText("  BUILD STATE");
             button_switchState.setActionCommand("BUILD");
             componentBoard.remove(gamestateBoard);
-            gamestateBoard = new BuildMode();
+            gamestateBoard = new BuildMode(this);
             componentBoard.add(gamestateBoard, BorderLayout.CENTER);
         }
         this.validate();

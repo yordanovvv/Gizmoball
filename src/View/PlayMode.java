@@ -21,12 +21,16 @@ public class PlayMode extends JPanel implements Observer {
         JLabel label_stats;
         JScrollPane area_stats;
 
-    public PlayMode(){
+        private MainFrame mainFrame;
+
+    public PlayMode(MainFrame mainFrame){
        // Color bg_color = new Color(241, 241, 255, 162);
         this.setBackground(new Color(0, 41, 57, 255));
         this.setBorder( BorderFactory.createEmptyBorder(20, 20, 20, 20));
         this.setPreferredSize(new Dimension(300,300));
         this.setLayout(new GridLayout(0,1,20,20));
+
+        this.mainFrame = mainFrame;
 
         init();
     }

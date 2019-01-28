@@ -1,5 +1,7 @@
 package View;
 
+import Controller.BuildListeners.AddBallListener;
+
 import javax.swing.*;
 import javax.swing.plaf.ButtonUI;
 import java.awt.*;
@@ -28,14 +30,16 @@ public class BuildMode extends JPanel implements Observer {
     private JButton button_delete;
     private JButton button_clear;
 
+    private iMainFrame mainFrame;
 
 
-
-    public BuildMode(){
+    public BuildMode(iMainFrame mainFrame){
         this.setBackground(new Color(0, 41, 57, 255));
         this.setBorder( BorderFactory.createEmptyBorder(20, 20, 20, 20));
         this.setPreferredSize(new Dimension(300,300));
         this.setLayout(new GridLayout(0,1,10,10));
+
+        this.mainFrame = mainFrame;
 
         init();
 
@@ -123,6 +127,9 @@ public class BuildMode extends JPanel implements Observer {
 
         controlsPanel.add(label_controls,BorderLayout.PAGE_START);
         controlsPanel.add(container_play,BorderLayout.CENTER);
+
+        AddBallListener addBallListener = new AddBallListener(mainFrame);
+        button_ball.addActionListener(addBallListener);
 
         this.add(buildPanel);
         this.add(controlsPanel);
