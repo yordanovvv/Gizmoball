@@ -24,7 +24,9 @@ public class GameBoard extends JPanel implements Observer {
         graphics = new JPanel() {
             public void paintComponent(Graphics g) {
                 g.setColor(new Color(165, 237, 237, 255));
-               // g.drawLine(0,0,500,500);
+                g.drawLine(0,0,500,500);
+
+                //paintGrid(g);
                 this.setBackground(Color.BLACK);
             }
         };
@@ -37,15 +39,17 @@ public class GameBoard extends JPanel implements Observer {
 
     private void paintGrid( Graphics g){
         g.setColor(new Color(165, 237, 237, 255));
-
-       /* double seg_size = 500/25;
+        g.setColor(Color.WHITE);
+        /*
+       double seg_size = 500/25;
         for (int i = 0; i < WIDTH; i++) {
             for (int j = 0; j < HEIGTH; j++) {
-                g.drawLine(0.);
+                g.drawLine(0, 0 , (int) seg_size*i, (int) seg_size*j);
             }
 
-        }*/
-      // g.drawLine(0,500,0,500);
+        }
+        */
+      g.drawLine(0,500,0,500);
 
     }
 

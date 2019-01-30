@@ -44,7 +44,6 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
     private JTextField output_BallPosition;
     private JTextField output_Velocity;
 
-
     private final int WIDTH = 1000, HEIGHT = 700;
 
     public MainFrame() {
@@ -212,6 +211,8 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
 
         componentBoard.add(gamestateBoard, BorderLayout.CENTER);
         this.add(componentBoard, BorderLayout.LINE_START);
+
+
     }
 
     @Override
