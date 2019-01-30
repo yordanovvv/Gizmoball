@@ -24,7 +24,18 @@ public class GameBoard extends JPanel implements Observer {
         graphics = new JPanel() {
             public void paintComponent(Graphics g) {
                 g.fillRect(0,0,600,600);
+
+
+                g.setColor(new Color(80, 170, 44, 255));
+                g.fillOval(0,0,30,30);
+                g.fillOval(0,30,30,30);
+
+                g.setColor(new Color(170, 71, 144, 255));
+                g.fillRect(0,540,600,60);
+
+
                 g.setColor(new Color(118, 170, 170, 255));
+
                 for (int i = 0; i <= 600; i=i+(30)) {
                     g.drawLine(i,0,i,600);
                 }
@@ -37,6 +48,13 @@ public class GameBoard extends JPanel implements Observer {
         graphics.setPreferredSize(new Dimension(WIDTH,HEIGTH));
 
         this.add(graphics,BorderLayout.CENTER);
+    }
+
+    public void paintcmp(int x,int y, String cmp){
+        double x_coord = x*30;
+        double y_coord = y*30;
+
+
     }
 
     @Override
