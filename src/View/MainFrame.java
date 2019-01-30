@@ -44,7 +44,8 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
     private JTextField output_BallPosition;
     private JTextField output_Velocity;
 
-    private final int WIDTH = 1000, HEIGHT = 700;
+
+    private final int WIDTH = 900, HEIGHT = 750;
 
     public MainFrame() {
 
@@ -114,6 +115,8 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
         BorderLayout layout_gameContainer = new BorderLayout();
         gameContainer.setLayout(layout_gameContainer);
         gameContainer.setPreferredSize(new Dimension(600, 600));
+        gameContainer.setMaximumSize(new Dimension(600,600));
+        gameContainer.setMinimumSize(new Dimension(600,600));
         gameBoard = new GameBoard();
 
         physicsBoard = new JPanel();
@@ -154,7 +157,8 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
                 )
         ));
 
-        physicsBoard.setPreferredSize(new Dimension(WIDTH - 600, HEIGHT - 600));
+        physicsBoard.setMaximumSize(new Dimension(WIDTH - 700, HEIGHT - 700));
+        physicsBoard.setMinimumSize(new Dimension(WIDTH - 700, HEIGHT - 700));
         physicsBoard.add(label_BallPosition);
         physicsBoard.add(output_BallPosition);
 
@@ -211,8 +215,6 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
 
         componentBoard.add(gamestateBoard, BorderLayout.CENTER);
         this.add(componentBoard, BorderLayout.LINE_START);
-
-
     }
 
     @Override
