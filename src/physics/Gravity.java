@@ -1,4 +1,4 @@
-package Physics;
+package physics;
 
 public class Gravity {
 }
