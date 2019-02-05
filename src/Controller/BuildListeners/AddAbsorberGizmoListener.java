@@ -1,27 +1,16 @@
 package Controller.BuildListeners;
 
-import View.ComponentPopup;
 import View.iMainFrame;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
-public class AddBallListener implements iAddGizmoListener{
+public class AddAbsorberGizmoListener implements iAddGizmoListener{
 
-    iMainFrame view;
+    private final iMainFrame view;
 
-
-    public AddBallListener(iMainFrame view){
+    public AddAbsorberGizmoListener(iMainFrame view){
         this.view = view;
     }
-
-    /*
-    public void actionPerformed(ActionEvent e) {
-        ComponentPopup c = new ComponentPopup();
-    }
-    */
-
     @Override
     public void mousePressed(MouseEvent e) {
 
@@ -44,7 +33,6 @@ public class AddBallListener implements iAddGizmoListener{
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("Mouse clicked on ball!");
-        ComponentPopup c = new ComponentPopup();
+        System.out.println("Absorber selected");
     }
 }

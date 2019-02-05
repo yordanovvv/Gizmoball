@@ -5,7 +5,7 @@ import java.util.List;
 
 public class GizmoballModel {
 
-    Ball ball = new Ball();
+    Ball ball = new Ball(0,0,0,0);
     List<iGizmo> gizmos = new ArrayList<>();
 
     private void addBall(Ball ball){}

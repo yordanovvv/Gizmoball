@@ -1,6 +1,6 @@
 package View;
 
-import Controller.BuildListeners.AddBallListener;
+import Controller.BuildListeners.*;
 
 import javax.swing.*;
 import javax.swing.plaf.ButtonUI;
@@ -129,7 +129,19 @@ public class BuildMode extends JPanel implements Observer {
         controlsPanel.add(container_play,BorderLayout.CENTER);
 
         AddBallListener addBallListener = new AddBallListener(mainFrame);
-        button_ball.addActionListener(addBallListener);
+        AddSquareGizmoListener addSquareGizmoListener = new AddSquareGizmoListener(mainFrame);
+        AddCircleGizmoListener addCircleGizmoListener = new AddCircleGizmoListener(mainFrame);
+        AddTriangleGizmoListener addTriangleGizmoListener = new AddTriangleGizmoListener(mainFrame);
+        AddAbsorberGizmoListener addAbsorberGizmoListener = new AddAbsorberGizmoListener(mainFrame);
+        //button_ball.addActionListener(addBallListener);
+        button_ball.addMouseListener(addBallListener);
+        button_square.addMouseListener(addSquareGizmoListener);
+        button_circle.addMouseListener(addCircleGizmoListener);
+        button_triangle.addMouseListener(addTriangleGizmoListener);
+        button_absorber.addMouseListener(addAbsorberGizmoListener);
+
+
+
 
         this.add(buildPanel);
         this.add(controlsPanel);
