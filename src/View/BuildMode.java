@@ -140,9 +140,6 @@ public class BuildMode extends JPanel implements Observer {
         button_triangle.addMouseListener(addTriangleGizmoListener);
         button_absorber.addMouseListener(addAbsorberGizmoListener);
 
-
-
-
         this.add(buildPanel);
         this.add(controlsPanel);
 

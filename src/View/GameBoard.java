@@ -25,14 +25,12 @@ public class GameBoard extends JPanel implements Observer {
             public void paintComponent(Graphics g) {
                 g.fillRect(0,0,600,600);
 
-
                 g.setColor(new Color(80, 170, 44, 255));
                 g.fillOval(0,0,30,30);
                 g.fillOval(0,30,30,30);
 
                 g.setColor(new Color(170, 71, 144, 255));
                 g.fillRect(0,540,600,60);
-
 
                 g.setColor(new Color(118, 170, 170, 255));
 

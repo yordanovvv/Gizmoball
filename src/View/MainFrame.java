@@ -2,12 +2,11 @@ package View;
 
 import Controller.MainFrameListeners.ChangeModeListener;
 import Controller.MainFrameListeners.ControlListener;
+import Controller.MainFrameListeners.KeyListenerTest;
+import javafx.scene.input.KeyCode;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.AbstractBorder;
 import javax.swing.border.CompoundBorder;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
@@ -55,6 +54,7 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         BorderLayout layout = new BorderLayout();
         this.setLayout(layout);
+        this.setFocusable(true); //Needed for keylistener to work
 
         setUP();
 
@@ -64,6 +64,12 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
 
     private void setUP() {
         Utils util = new Utils();
+
+
+
+        KeyListenerTest kl = new KeyListenerTest();
+        this.addKeyListener(kl);
+        //kl.keyPressed(KeyCode.E);
 
         //--------------------------------------------------------
         //                     INIT COMPONENTS
@@ -176,6 +182,8 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
 
         gameContainer.add(gameBoard, BorderLayout.CENTER);
         gameContainer.add(physicsBoard, BorderLayout.PAGE_END);
+
+
 
         this.add(gameContainer, BorderLayout.CENTER);
 
