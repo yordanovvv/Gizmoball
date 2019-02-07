@@ -25,7 +25,7 @@ public interface iGizmo {
 
     void setGizmoConnection(String id);
 
-    void setKeyConnection(String key, String action);
+    void setKeyConnection(String key, String keyboard, String action);
 
     void rotate();
 
@@ -37,15 +37,15 @@ public interface iGizmo {
 
     int getYCoord();
 
-    ArrayList<LineSegment> getCircles();
+    ArrayList<Circle> getCircles();
 
     ArrayList<LineSegment> getLines();
 
-    int getGizmoConnection();
+    ArrayList<String> getGizmoConnections();
 
-    int getKeyConnection();
+    ArrayList<String> getKeyConnections();
 
-    void removeGizmoConnection();
+    void removeGizmoConnection(String id);
 
     void removeKeyConnection();
 
