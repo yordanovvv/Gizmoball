@@ -11,7 +11,7 @@ public interface iGizmo {
 
     //Setters and getters
 
-    void setID(int id);
+    void setID(String id);
 
     void setXCoord(int x);
 
@@ -23,15 +23,15 @@ public interface iGizmo {
 
     void generateLines();
 
-    void setGizmoConnection(int id);
+    void setGizmoConnection(String id);
 
-    void setKeyConnection(int id, String key, String action);
+    void setKeyConnection(String key, String action);
 
     void rotate();
 
     int getRotationAngle();
 
-    int getID();
+    String getID();
 
     int getXCoord();
 
