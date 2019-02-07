@@ -228,19 +228,22 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
     @Override
     public void switchModes(int mode) {
         this.invalidate();
-        if(mode == 1){
+        if (mode == 1) {
             label_sameState.setText("   GAME STATE");
             button_switchState.setActionCommand("PLAY");
             componentBoard.remove(gamestateBoard);
             gamestateBoard = new PlayMode(this);
             componentBoard.add(gamestateBoard, BorderLayout.CENTER);
 
-        }else{
+
+        } else {
             label_sameState.setText("  BUILD STATE");
             button_switchState.setActionCommand("BUILD");
             componentBoard.remove(gamestateBoard);
             gamestateBoard = new BuildMode(this);
             componentBoard.add(gamestateBoard, BorderLayout.CENTER);
+
+
         }
         this.validate();
         this.repaint();
