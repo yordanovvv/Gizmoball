@@ -36,27 +36,30 @@ public class GameBoard extends JPanel implements Observer{
         super.paintComponent(g);
         GizmoballModel m = new GizmoballModel();
 
+        int x , y;
         for(iGizmo gizmo : m.getGizmos()){
+            x = gizmo.getXCoord() * 30;
+            y = gizmo.getYCoord() * 30;
             switch (gizmo.getGizmoType()){
                 case "Circle":
-                    paintCircle(g, gizmo.getXCoord(),gizmo.getYCoord());
+                    paintCircle(g, x,y);
                     break;
                 case "Square":
-                    paintSquare(g, gizmo.getXCoord(),gizmo.getYCoord());
+                    paintSquare(g,x,y);
                     break;
                 case "Triangle":
-                    paintTriangle(g, gizmo.getXCoord(),gizmo.getYCoord());
+                    paintTriangle(g,x,y);
                     break;
 
                 case "Absorber":
-                    paintAbsorber(g, gizmo.getXCoord(),gizmo.getYCoord(),gizmo.getHeight(),gizmo.getWidth());
+                    paintAbsorber(g,x,y,gizmo.getHeight(),gizmo.getWidth());
                     break;
 
                 case "LeftFlipper":
-                    paintLeftFlipper(g, gizmo.getXCoord(),gizmo.getYCoord());
+                    paintLeftFlipper(g,x,y);
                     break;
                 case "RightFlipper":
-                    paintRightFlipper(g, gizmo.getXCoord(),gizmo.getYCoord());
+                    paintRightFlipper(g,x,y);
                     break;
             }
         }
