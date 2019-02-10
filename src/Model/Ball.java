@@ -19,7 +19,7 @@ public class Ball extends Observable {
     {
         xpos = x;
         ypos = y;
-        colour = Color.BLUE;
+        colour = new Color(59, 112, 170, 255); //todo remove as not needed
         velocity = new Vect(xv, yv);
         radius = 10;
         stopped = false;

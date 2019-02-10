@@ -39,7 +39,6 @@ public class PlayMode extends JPanel implements Observer {
 
         Color panel_colour = new Color(0, 55, 77, 255);
         Utils utils = new Utils();
-
         //--------------------------------------------------------
         //                    CONTROL PANEL
 
@@ -106,6 +105,6 @@ public class PlayMode extends JPanel implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-
+        this.repaint();
     }
 }
