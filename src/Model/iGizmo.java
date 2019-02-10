@@ -11,6 +11,8 @@ public interface iGizmo {
 
     //Setters and getters
 
+    String getGizmoType();
+
     void setID(String id);
 
     void setXCoord(int x);
@@ -32,6 +34,12 @@ public interface iGizmo {
     int getRotationAngle();
 
     String getID();
+    // ------------------------
+    //todo check that these are okay.They are added for the absorber
+    int getHeight();
+
+    int getWidth();
+    // ------------------------
 
     int getXCoord();
 

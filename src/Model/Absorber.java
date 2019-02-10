@@ -16,7 +16,7 @@ public class Absorber implements iGizmo {
     private int YCoord;
     private int XCoord2;
     private int YCoord2;
-    private int height;
+    private int height, width;
     private ArrayList<LineSegment> lines;
     private ArrayList<Circle> circles;
     private ArrayList<String> gizmoConnections;
@@ -69,6 +69,11 @@ public class Absorber implements iGizmo {
             //TODO should be a method in Ball that allows it to be activate by absorber
 
         }
+    }
+
+    @Override
+    public String getGizmoType() {
+        return "Absorber";
     }
 
     @Override
@@ -179,6 +184,11 @@ public class Absorber implements iGizmo {
 
     public int getHeight() {
         return height;
+    }
+
+    @Override
+    public int getWidth() {
+        return width;
     }
 
     public Color getColour() {

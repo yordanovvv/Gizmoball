@@ -115,8 +115,13 @@ public class GizmoballModel extends Observable{
 
     private void addGizmo(iGizmo gizmo){}
 
-    private List<iGizmo> getGizmos(){
-        return null;
+    //todo fix this. I have done this in order to make the view work -N
+    public Ball getBall(){
+        return ball;
+    }
+
+    public List<iGizmo> getGizmos(){
+        return gizmos;
     }
 
 }

@@ -13,10 +13,6 @@ import java.util.Observer;
 
 public class MainFrame extends JFrame implements iMainFrame, Observer {
 
-    public static void main(String[] args) {
-        MainFrame view = new MainFrame();
-    }
-
     private JPanel upperMenu;
     private JMenuBar optionsMenu;
     private JMenu fileMenu;

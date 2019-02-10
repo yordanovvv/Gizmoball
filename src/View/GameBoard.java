@@ -1,26 +1,57 @@
 package View;
 
+import static java.lang.Math.toIntExact;
+import Model.Ball;
+import Model.GizmoballModel;
 import Model.iGizmo;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.LinkedList;
 import java.util.Observable;
 import java.util.Observer;
 
 public class GameBoard extends JPanel implements Observer , iGameBoard{
 
     private final int WIDTH = 600, HEIGTH = 600;
-    private LinkedList<iGizmo> components;
 
     public GameBoard() {
-        components = new LinkedList<>();
         init();
-        //model.addObserver(this) todo
     }
 
    public void paintComponent (Graphics g) {
         super.paintComponent(g);
+        GizmoballModel m = new GizmoballModel();
+
+        for(iGizmo gizmo : m.getGizmos()){
+            switch (gizmo.getGizmoType()){
+                case "Circle":
+                    paintCircle(g, gizmo.getXCoord(),gizmo.getYCoord());
+                    break;
+                case "Square":
+                    paintSquare(g, gizmo.getXCoord(),gizmo.getYCoord());
+                    break;
+                case "Triangle":
+                    paintTriangle(g, gizmo.getXCoord(),gizmo.getYCoord());
+                    break;
+
+                case "Absorber":
+                    paintAbsorber(g, gizmo.getXCoord(),gizmo.getYCoord(),gizmo.getHeight(),gizmo.getWidth());
+                    break;
+
+                case "LeftFlipper":
+                    paintLeftFlipper(g, gizmo.getXCoord(),gizmo.getYCoord());
+                    break;
+                case "RightFlipper":
+                    paintRightFlipper(g, gizmo.getXCoord(),gizmo.getYCoord());
+                    break;
+            }
+        }
+
+        //todo please check this
+       Ball b = m.getBall();
+       paintBall(g,toIntExact(Math.round(b.getExactX())),toIntExact(Math.round(b.getExactY())));
+
+       repaint();
     }
 
     private void init(){
@@ -28,10 +59,8 @@ public class GameBoard extends JPanel implements Observer , iGameBoard{
         this.setPreferredSize(new Dimension(WIDTH,HEIGTH));
         this.setBackground(Color.BLACK);
     }
-
     //--------------------------------------------------------
     //                    paint components
-
     private void paintCircle(Graphics g,int x, int y){
         g.setColor(new Color(80, 170, 44, 255));
         g.fillOval(x,y,30,30);
@@ -110,86 +139,28 @@ public class GameBoard extends JPanel implements Observer , iGameBoard{
 
     @Override
     public void updateGizmos(iGizmo cmp) {
-        for (int i = 0; i < components.size(); i++) {
-            if(components.get(i).getID() == cmp.getID()){
-                components.remove(i);
-                components.add(i,cmp);
-            }
-        }
+
     }
 
     @Override
     public void addGizmos(iGizmo cmp) {
-        components.add(cmp);
+
     }
 
     @Override
     public void removeGizmos(iGizmo cmp) {
-        for (int i = 0; i < components.size(); i++) {
-            if(components.get(i).getID() == cmp.getID()){
-                components.remove(i);
-            }
-        }
+
     }
 
+    @Override
+    public void addBall(Ball ball) {
+
+    }
+
+    @Override
+    public void removeBall(Ball ball) {
+
+    }
     //--------------------------------------------------------
     //                    end of interface stuff
-
 }
-
-
-/*g.fillRect(0,0,600,600);
-
-
-        g.setColor(new Color(80, 170, 44, 255));
-        g.fillOval(0,0,30,30);
-        g.fillOval(0,30,30,30);
-
-        g.setColor(new Color(170, 71, 144, 255));
-        g.fillRect(0,540,600,60);
-
-        int xPoly[] = {120, (120+30),120, (120+30), (120+30), (120+30)};
-        int yPoly[] = {120, (120+30),120, 120     , 120      ,(120+30)};
-
-        Polygon poly = new Polygon(xPoly, yPoly, xPoly.length);
-        g.setColor(new Color(59, 112, 170, 255));
-        g.fillPolygon(poly);
-
-        g.setColor(new Color(170, 169, 50, 255));
-        int x = 180,y = 180;
-
-        int[] px = {x,x+15 ,x+13 ,x+1};
-        int[] py = {y+5,y+5  ,y+56 ,y+56};
-        Polygon poly1 = new Polygon(px, py, px.length);
-        g.fillPolygon(poly1);
-        g.fillOval(x,y,15,15);
-        g.fillOval(x+1,y+48,12,12);
-        g.setColor(new Color(0, 0, 0, 255));
-        g.fillOval(x+5,y+6,5,5);
-
-
-        g.setColor(new Color(255, 251, 255, 255));
-        g.fillOval(450,200,20,20);*/
-                /*
-                ball sticks to the wall for a couple of ticks
-                this is not needed for the actual gizmo.
-
-                moses wants the plans updates,
-                he wants to flesh out the progress report
-                so what each person is goign to be doing
-                */
-
-
-
-       /* g.setColor(new Color(170, 10, 21, 255));
-        g.fillRect(180,30,30,30);
-
-
-        g.setColor(new Color(118, 170, 170, 255));
-
-        for (int i = 0; i <= 600; i=i+(30)) {
-            g.drawLine(i,0,i,600);
-        }
-        for (int i = 0; i <=600; i=i+(30)) {
-            g.drawLine(0,i,600,i);
-        }*/
