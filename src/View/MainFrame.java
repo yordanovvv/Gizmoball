@@ -119,7 +119,7 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
         gameContainer.setPreferredSize(new Dimension(600, 600));
         gameContainer.setMaximumSize(new Dimension(600,600));
         gameContainer.setMinimumSize(new Dimension(600,600));
-        gameBoard = new GameBoard();
+        gameBoard = new GameBoard("BUILD");
 
         physicsBoard = new JPanel();
 
@@ -231,6 +231,9 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
             gamestateBoard = new PlayMode(this);
             componentBoard.add(gamestateBoard, BorderLayout.CENTER);
 
+            gameContainer.remove(gameBoard);
+            gameBoard = new GameBoard("PLAY");
+            gameContainer.add(gameBoard, BorderLayout.CENTER);
 
         } else {
             label_sameState.setText("  BUILD STATE");
@@ -239,8 +242,14 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
             gamestateBoard = new BuildMode(this);
             componentBoard.add(gamestateBoard, BorderLayout.CENTER);
 
-
+            gameContainer.remove(gameBoard);
+            gameBoard = new GameBoard("BUILD");
+            gameContainer.add(gameBoard, BorderLayout.CENTER);
         }
+
+        gameBoard.revalidate();
+        gameBoard.repaint();
+
         this.validate();
         this.repaint();
     }

@@ -10,14 +10,28 @@ import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
-public class GameBoard extends JPanel implements Observer , iGameBoard{
+public class GameBoard extends JPanel implements Observer{
 
     private final int WIDTH = 600, HEIGTH = 600;
-
-    public GameBoard() {
+    private String mode;
+    public GameBoard(String mode) {
         init();
+        this.mode = mode;
     }
 
+    /**
+     * Initialises the game screen
+     */
+    private void init(){
+        this.setLayout(new BorderLayout());
+        this.setPreferredSize(new Dimension(WIDTH,HEIGTH));
+        this.setBackground(Color.BLACK);
+    }
+
+    /**
+     * Gets the list of gizmos + ball from the Model and paints them
+     * @param g inner graphics component
+     */
    public void paintComponent (Graphics g) {
         super.paintComponent(g);
         GizmoballModel m = new GizmoballModel();
@@ -47,6 +61,11 @@ public class GameBoard extends JPanel implements Observer , iGameBoard{
             }
         }
 
+        if(mode.equals("BUILD")){
+            paintGrid(g);
+        }
+
+
         //todo please check this
        Ball b = m.getBall();
        paintBall(g,toIntExact(Math.round(b.getExactX())),toIntExact(Math.round(b.getExactY())));
@@ -54,13 +73,9 @@ public class GameBoard extends JPanel implements Observer , iGameBoard{
        repaint();
     }
 
-    private void init(){
-        this.setLayout(new BorderLayout());
-        this.setPreferredSize(new Dimension(WIDTH,HEIGTH));
-        this.setBackground(Color.BLACK);
-    }
     //--------------------------------------------------------
-    //                    paint components
+    //                    PAINTING COMPONENTS
+
     private void paintCircle(Graphics g,int x, int y){
         g.setColor(new Color(80, 170, 44, 255));
         g.fillOval(x,y,30,30);
@@ -114,14 +129,13 @@ public class GameBoard extends JPanel implements Observer , iGameBoard{
     }
 
     //--------------------------------------------------------
-    //                    observer
+    //                     OBSERVER
     @Override
     public void update(Observable o, Object arg) {
         repaint();
     }
     //--------------------------------------------------------
-    //                    interface stuff
-    @Override
+    //                    GRID CONTROLS
     public void paintGrid(Graphics g) {
         g.setColor(new Color(118, 170, 170, 255));
         for (int i = 0; i <= 600; i=i+(30)) {
@@ -131,36 +145,4 @@ public class GameBoard extends JPanel implements Observer , iGameBoard{
             g.drawLine(0,i,600,i);
         }
     }
-
-    @Override
-    public void removeGrid(Graphics g) {
-        g.clearRect(0,0,this.HEIGTH,this.WIDTH);
-    }
-
-    @Override
-    public void updateGizmos(iGizmo cmp) {
-
-    }
-
-    @Override
-    public void addGizmos(iGizmo cmp) {
-
-    }
-
-    @Override
-    public void removeGizmos(iGizmo cmp) {
-
-    }
-
-    @Override
-    public void addBall(Ball ball) {
-
-    }
-
-    @Override
-    public void removeBall(Ball ball) {
-
-    }
-    //--------------------------------------------------------
-    //                    end of interface stuff
 }

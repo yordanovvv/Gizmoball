@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
-public class BuildMode extends JPanel implements Observer {
+public class BuildMode extends JPanel{
 
     private JPanel buildPanel;
     private JLabel label_components;
@@ -142,12 +142,6 @@ public class BuildMode extends JPanel implements Observer {
 
         this.add(buildPanel);
         this.add(controlsPanel);
-
-    }
-
-
-    @Override
-    public void update(Observable o, Object arg) {
 
     }
 }

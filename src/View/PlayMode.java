@@ -6,7 +6,7 @@ import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
-public class PlayMode extends JPanel implements Observer {
+public class PlayMode extends JPanel {
 
     private JPanel controlPanel;
         JPanel outterPanel;
@@ -101,10 +101,5 @@ public class PlayMode extends JPanel implements Observer {
 
         statsPanel.setBorder( BorderFactory.createEmptyBorder(10, 10, 10, 10));
         this.add(statsPanel);
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        this.repaint();
     }
 }
