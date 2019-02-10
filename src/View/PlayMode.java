@@ -1,5 +1,7 @@
 package View;
 
+import Controller.MainFrameListeners.KeyListenerTest;
+
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import java.awt.*;
@@ -29,13 +31,19 @@ public class PlayMode extends JPanel {
         this.setBorder( BorderFactory.createEmptyBorder(20, 20, 20, 20));
         this.setPreferredSize(new Dimension(300,300));
         this.setLayout(new GridLayout(0,1,20,20));
+        this.setFocusable(true);
 
         this.mainFrame = mainFrame;
+
+        KeyListenerTest kl = new KeyListenerTest("play");
+        mainFrame.getFocusOwner().addKeyListener(kl);
 
         init();
     }
 
     private void init(){
+
+        //--------------------
 
         Color panel_colour = new Color(0, 55, 77, 255);
         Utils utils = new Utils();

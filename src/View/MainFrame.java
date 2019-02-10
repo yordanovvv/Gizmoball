@@ -1,5 +1,7 @@
 package View;
 
+import Controller.BuildListeners.AddButtonGizmoListener;
+import Controller.BuildListeners.GridClickListener;
 import Controller.MainFrameListeners.ChangeModeListener;
 import Controller.MainFrameListeners.ControlListener;
 import Controller.MainFrameListeners.KeyListenerTest;
@@ -60,12 +62,6 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
 
     private void setUP() {
         Utils util = new Utils();
-
-
-
-        KeyListenerTest kl = new KeyListenerTest();
-        this.addKeyListener(kl);
-        //kl.keyPressed(KeyCode.E);
 
         //--------------------------------------------------------
         //                     INIT COMPONENTS
@@ -219,6 +215,7 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
 
         componentBoard.add(gamestateBoard, BorderLayout.CENTER);
         this.add(componentBoard, BorderLayout.LINE_START);
+
     }
 
     @Override
@@ -253,6 +250,13 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
         this.validate();
         this.repaint();
     }
+
+    //Craig's out of place method.
+    //Currently using this to pass the "gameBoard" into the buildMode class, so I can add the appropriate listener.
+    public JPanel getGameBoard() {
+        return gameBoard;
+    }
+    //-------
 
     @Override
     public int generatePopUp(String title, String msg) {

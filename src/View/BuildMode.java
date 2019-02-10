@@ -1,10 +1,12 @@
 package View;
 
 import Controller.BuildListeners.*;
+import Controller.MainFrameListeners.KeyListenerTest;
 
 import javax.swing.*;
 import javax.swing.plaf.ButtonUI;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -30,16 +32,22 @@ public class BuildMode extends JPanel{
     private JButton button_delete;
     private JButton button_clear;
 
-    private iMainFrame mainFrame;
+    private MainFrame mainFrame;
 
 
-    public BuildMode(iMainFrame mainFrame){
+    public BuildMode(MainFrame mainFrame){
         this.setBackground(new Color(0, 41, 57, 255));
         this.setBorder( BorderFactory.createEmptyBorder(20, 20, 20, 20));
         this.setPreferredSize(new Dimension(300,300));
         this.setLayout(new GridLayout(0,1,10,10));
 
         this.mainFrame = mainFrame;
+
+        this.setFocusable(true); //Needed for keylistener to work
+
+        KeyListenerTest kl = new KeyListenerTest("build");
+        //mainFrame.getFocusOwner().addKeyListener(kl);
+        mainFrame.addKeyListener(kl);
 
         init();
 
@@ -128,17 +136,40 @@ public class BuildMode extends JPanel{
         controlsPanel.add(label_controls,BorderLayout.PAGE_START);
         controlsPanel.add(container_play,BorderLayout.CENTER);
 
+        //------- Craigs Testing -------------
+
+        /*
         AddBallListener addBallListener = new AddBallListener(mainFrame);
         AddSquareGizmoListener addSquareGizmoListener = new AddSquareGizmoListener(mainFrame);
         AddCircleGizmoListener addCircleGizmoListener = new AddCircleGizmoListener(mainFrame);
         AddTriangleGizmoListener addTriangleGizmoListener = new AddTriangleGizmoListener(mainFrame);
         AddAbsorberGizmoListener addAbsorberGizmoListener = new AddAbsorberGizmoListener(mainFrame);
-        //button_ball.addActionListener(addBallListener);
-        button_ball.addMouseListener(addBallListener);
-        button_square.addMouseListener(addSquareGizmoListener);
-        button_circle.addMouseListener(addCircleGizmoListener);
-        button_triangle.addMouseListener(addTriangleGizmoListener);
-        button_absorber.addMouseListener(addAbsorberGizmoListener);
+        */
+
+        //Grid Listener only needs to be in BUILDMODE Class, as in PLAYMODE we are not clicking the grid.
+        GridClickListener board_listener = new GridClickListener(mainFrame, "square");
+
+        AddButtonGizmoListener ballButListener = new AddButtonGizmoListener("ball", board_listener);
+        AddButtonGizmoListener squareButListener = new AddButtonGizmoListener("square", board_listener);
+        AddButtonGizmoListener circleButListener = new AddButtonGizmoListener("circle", board_listener);
+        AddButtonGizmoListener triangleButListener = new AddButtonGizmoListener("triangle", board_listener);
+        AddButtonGizmoListener absorbButListener = new AddButtonGizmoListener("absorber", board_listener);
+
+        AddButtonGizmoListener leftFlipButListener = new AddButtonGizmoListener("leftFlipper", board_listener);
+        AddButtonGizmoListener rightFlipButListener = new AddButtonGizmoListener("rightFlipper", board_listener);
+
+        button_square.addMouseListener(squareButListener);
+        button_triangle.addMouseListener(triangleButListener);
+        button_circle.addMouseListener(circleButListener);
+        button_absorber.addMouseListener(absorbButListener);
+
+        button_leftFlipper.addMouseListener(leftFlipButListener);
+        button_rightFlipper.addMouseListener(rightFlipButListener);
+
+        button_ball.addMouseListener(ballButListener);
+
+        mainFrame.getGameBoard().addMouseListener(board_listener);
+        //---------------------------------------
 
         this.add(buildPanel);
         this.add(controlsPanel);

@@ -11,6 +11,7 @@ public class AddBallListener implements iAddGizmoListener{
 
     iMainFrame view;
 
+    //TODO Remove this and all the other multiple billions of redundant listeners - C
 
     public AddBallListener(iMainFrame view){
         this.view = view;
