@@ -1,10 +1,6 @@
 package View;
-
-import Controller.BuildListeners.AddButtonGizmoListener;
-import Controller.BuildListeners.GridClickListener;
 import Controller.MainFrameListeners.ChangeModeListener;
 import Controller.MainFrameListeners.ControlListener;
-import Controller.MainFrameListeners.KeyListenerTest;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -252,8 +248,8 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
 
     //Craig's out of place method.
     //Currently using this to pass the "gameBoard" into the buildMode class, so I can add the appropriate listener.
-    public JPanel getGameBoard() {
-        return gameBoard;
+    public GameBoard getGameBoard() {
+        return (GameBoard)gameBoard;
     }
     //-------
 

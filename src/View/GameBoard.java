@@ -14,8 +14,12 @@ public class GameBoard extends JPanel implements Observer{
 
     private final int WIDTH = 600, HEIGTH = 600;
     private String mode;
+    GizmoballModel m;
+    Ball b;
     public GameBoard(String mode) {
         init();
+        m = new GizmoballModel();
+        b = m.getBall();
         this.mode = mode;
     }
 
@@ -34,7 +38,7 @@ public class GameBoard extends JPanel implements Observer{
      */
    public void paintComponent (Graphics g) {
         super.paintComponent(g);
-        GizmoballModel m = new GizmoballModel();
+        //m = new GizmoballModel();
 
         int x , y;
         for(iGizmo gizmo : m.getGizmos()){
@@ -52,7 +56,7 @@ public class GameBoard extends JPanel implements Observer{
                     break;
 
                 case "Absorber":
-                    paintAbsorber(g,x,y,gizmo.getHeight(),gizmo.getWidth());
+                    paintAbsorber(g,x,y,gizmo.getHeight()*30,gizmo.getWidth()*30);
                     break;
 
                 case "LeftFlipper":
@@ -67,10 +71,8 @@ public class GameBoard extends JPanel implements Observer{
         if(mode.equals("BUILD")){
             paintGrid(g);
         }
-
-
         //todo please check this
-       Ball b = m.getBall();
+      // b = m.getBall();
        paintBall(g,toIntExact(Math.round(b.getExactX())),toIntExact(Math.round(b.getExactY())));
 
        repaint();
@@ -135,6 +137,7 @@ public class GameBoard extends JPanel implements Observer{
     //                     OBSERVER
     @Override
     public void update(Observable o, Object arg) {
+        b.setExactX(b.getExactX()+3); //todo fix me
         repaint();
     }
     //--------------------------------------------------------

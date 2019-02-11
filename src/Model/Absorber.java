@@ -44,6 +44,7 @@ public class Absorber implements iGizmo {
 
         //TODO not sure about the intergral stuff,ie height/width
         height = YCoord2 - YCoord;
+        width = XCoord2 - XCoord;
 
         //Absorber may have many balls
         balls = new ArrayList<Ball>();

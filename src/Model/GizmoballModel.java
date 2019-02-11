@@ -22,9 +22,23 @@ public class GizmoballModel extends Observable{
         //position (25,25) in pixels, Velocity (100,100) pixels per tick
         ball = new Ball(25, 25, 100, 100);
         gizmos = new ArrayList<iGizmo>();
+        Absorber aborber = new Absorber("A1",0,10,10,20);
 
+        gizmos.add(aborber);
     }
 
+    public void loop(){
+        while(true){
+            moveBall();
+            this.setChanged(); //notify observers, redraw updated view TODO
+            this.notifyObservers();
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     public void moveBall()
     {
         double moveTime = 0.05; //20 times per second
