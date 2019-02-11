@@ -9,6 +9,5 @@ public class GizmoBall {
         model.addObserver(view.getGameBoard());
         model.saveGame();
         model.loadGame();
-        model.loop();
     }
 }

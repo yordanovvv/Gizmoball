@@ -23,6 +23,11 @@ public class GameBoard extends JPanel implements Observer{
         this.mode = mode;
     }
 
+    //TODO Check if this is in right place -C
+    public GizmoballModel getGizModel(){
+        return m;
+    }
+
     /**
      * Initialises the game screen
      */

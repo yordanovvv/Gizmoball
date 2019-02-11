@@ -27,18 +27,6 @@ public class GizmoballModel extends Observable{
         //gizmos.add(aborber);
     }
 
-    public void loop(){
-        while(true){
-            moveBall();
-            this.setChanged(); //notify observers, redraw updated view TODO
-            this.notifyObservers();
-            try {
-                Thread.sleep(4);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
     public void moveBall()
     {
         double moveTime = 0.05; //20 times per second
@@ -128,7 +116,7 @@ public class GizmoballModel extends Observable{
     //TODO these need to be done
     private void addBall(Ball ball){}
 
-    private void addGizmo(iGizmo gizmo){}
+    public void addGizmo(iGizmo gizmo){}
 
     //todo fix this. I have done this in order to make the view work -N
     public Ball getBall(){

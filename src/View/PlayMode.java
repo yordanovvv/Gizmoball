@@ -1,5 +1,6 @@
 package View;
 
+import Controller.BuildListeners.PlayModeListener;
 import Controller.MainFrameListeners.KeyListenerTest;
 
 import javax.swing.*;
@@ -84,6 +85,17 @@ public class PlayMode extends JPanel {
         outterPanel.setBorder( BorderFactory.createEmptyBorder(10, 10, 10, 10));
         outterPanel.add(controlPanel,BorderLayout.CENTER);
         this.add(outterPanel);
+
+        //--------------------------------------------------------
+        //                 BUTTON LISTENER!
+        //Need to pass in the view for mainframe!
+        PlayModeListener startClickListener = new PlayModeListener(mainFrame, "start");
+        PlayModeListener stopClickListener = new PlayModeListener(mainFrame, "stop");
+        PlayModeListener tickClickListener = new PlayModeListener(mainFrame, "tick");
+
+        button_start.addActionListener(startClickListener);
+        button_stop.addActionListener(stopClickListener);
+        button_tick.addActionListener(tickClickListener);
 
         //--------------------------------------------------------
         //                    STATS PANEL

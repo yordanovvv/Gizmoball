@@ -24,7 +24,9 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
     private JPanel gamestateBoard;
 
     private JPanel gameContainer;
-    private JPanel gameBoard;
+    //private JPanel gameBoard;
+
+    private GameBoard gameBoard;
 
     private JPanel physicsBoard;
     private JLabel label_Gravity;
@@ -249,10 +251,9 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
         this.repaint();
     }
 
-    //Craig's out of place method.
-    //Currently using this to pass the "gameBoard" into the buildMode class, so I can add the appropriate listener.
+    //Currently using this to pass the "gameBoard" into the buildMode class, so I can add the appropriate listener. -C
     public GameBoard getGameBoard() {
-        return (GameBoard)gameBoard;
+        return gameBoard;
     }
     //-------
 

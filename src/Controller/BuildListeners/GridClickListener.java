@@ -1,6 +1,7 @@
 package Controller.BuildListeners;
 
 import Model.Circle;
+import Model.GizmoballModel;
 import Model.Square;
 import Model.iGizmo;
 import View.ComponentPopup;
@@ -15,24 +16,38 @@ public class GridClickListener implements MouseListener {
     private String selected;
     //private MainFrame mf;
 
+    int gridX;
+    int gridY;
+
     private final int GRID_SIZE = 30;
+
+    GizmoballModel m;
 
     public GridClickListener(MainFrame mainFrame, String selected){
         this.selected = selected;
         //this.mf = mainFrame;
+        //mainFrame.getGameBoard();
+        //mainFrame.getGameBoard().getGizModel();
+        m = mainFrame.getGameBoard().getGizModel();
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
+
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
         System.out.println("Mouse clicked at : " + e.getX() + " | " + e.getY());
         System.out.println("Currently selected : " + selected);
 
-        int gridX = e.getX()/GRID_SIZE;
-        int gridY = e.getY()/GRID_SIZE;
+        gridX = e.getX()/GRID_SIZE;
+        gridY = e.getY()/GRID_SIZE;
 
         System.out.println("Placing a " +  selected + " at grid position " + gridX + " | " + gridY);
 
-        iGizmo g;
+        iGizmo giz;
 
         switch(selected){
             case "ball":
@@ -40,28 +55,39 @@ public class GridClickListener implements MouseListener {
                 ComponentPopup compPop = new ComponentPopup();
                 break;
             case "circle":
-                g = new Circle();
-                //gizmos.addGizmo(c, gridX, gridY); //Assumption that .addGizmo does a check etc...
-                //Just how do I pass in the gizmoModel here, or do I even need to do that??
+                giz = new Circle();
+                m.addGizmo(giz);
+                //gizmos.addGizmo(giz, gridX, gridY); //Assumption that .addGizmo does a check etc...
                 break;
             case "square":
-                g = new Square();
+                giz = new Square();
                 break;
-                //  |
-                //  |
-                //  |
-                // \/  and so on...
+            //  |
+            //  |
+            //  |
+            // \/  and so on...
         }
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+
+        int start_gridX = gridX;
+        int start_gridY = gridY;
+
+        int end_gridX = e.getX()/GRID_SIZE;
+        int end_gridY = e.getY()/GRID_SIZE;
+
+        System.out.println("release mouse");
+        if (selected=="absorber"){
+
+            System.out.println("Absorber start : " + start_gridX + " | " + start_gridY);
+            System.out.println("Absorber end : " + end_gridX + " | " + end_gridY);
+
+            //create absorber here!
+
+        }
+
 
     }
 
@@ -82,4 +108,5 @@ public class GridClickListener implements MouseListener {
     public void setSelected(String s){
         this.selected = s;
     }
+
 }
