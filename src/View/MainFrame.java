@@ -1,6 +1,7 @@
 package View;
 import Controller.MainFrameListeners.ChangeModeListener;
 import Controller.MainFrameListeners.ControlListener;
+import Model.GizmoballModel;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -36,11 +37,13 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
     private JTextField output_BallPosition;
     private JTextField output_Velocity;
 
+    private GizmoballModel model;
 
     private final int WIDTH = 900, HEIGHT = 750;
 
-    public MainFrame() {
+    public MainFrame(GizmoballModel model) {
 
+        this.model = model;
         this.setResizable(false);
         this.setTitle("GROUP 11 - Gizmoball");
         this.setSize(WIDTH, HEIGHT);
@@ -110,7 +113,7 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
         gameContainer.setPreferredSize(new Dimension(600, 600));
         gameContainer.setMaximumSize(new Dimension(600,600));
         gameContainer.setMinimumSize(new Dimension(600,600));
-        gameBoard = new GameBoard("BUILD");
+        gameBoard = new GameBoard("BUILD",model);
 
         physicsBoard = new JPanel();
 
@@ -224,7 +227,7 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
             componentBoard.add(gamestateBoard, BorderLayout.CENTER);
 
             gameContainer.remove(gameBoard);
-            gameBoard = new GameBoard("PLAY");
+            gameBoard = new GameBoard("PLAY",model);
             gameContainer.add(gameBoard, BorderLayout.CENTER);
 
         } else {
@@ -235,7 +238,7 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
             componentBoard.add(gamestateBoard, BorderLayout.CENTER);
 
             gameContainer.remove(gameBoard);
-            gameBoard = new GameBoard("BUILD");
+            gameBoard = new GameBoard("BUILD",model);
             gameContainer.add(gameBoard, BorderLayout.CENTER);
         }
 

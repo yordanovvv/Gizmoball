@@ -16,9 +16,9 @@ public class GameBoard extends JPanel implements Observer{
     private String mode;
     GizmoballModel m;
     Ball b;
-    public GameBoard(String mode) {
+    public GameBoard(String mode, GizmoballModel m) {
         init();
-        m = new GizmoballModel();
+        this.m = m;
         b = m.getBall();
         this.mode = mode;
     }
@@ -38,49 +38,48 @@ public class GameBoard extends JPanel implements Observer{
      */
    public void paintComponent (Graphics g) {
         super.paintComponent(g);
-        //m = new GizmoballModel();
 
+        Graphics2D g2 = (Graphics2D) g;
         int x , y;
         for(iGizmo gizmo : m.getGizmos()){
             x = gizmo.getXCoord() * 30;
             y = gizmo.getYCoord() * 30;
             switch (gizmo.getGizmoType()){
                 case "Circle":
-                    paintCircle(g, x,y);
+                    paintCircle(g2, x,y);
                     break;
                 case "Square":
-                    paintSquare(g,x,y);
+                    paintSquare(g2,x,y);
                     break;
                 case "Triangle":
-                    paintTriangle(g,x,y);
+                    paintTriangle(g2,x,y);
                     break;
 
                 case "Absorber":
-                    paintAbsorber(g,x,y,gizmo.getHeight()*30,gizmo.getWidth()*30);
+                    paintAbsorber(g2,x,y,gizmo.getHeight()*30,gizmo.getWidth()*30);
                     break;
 
                 case "LeftFlipper":
-                    paintLeftFlipper(g,x,y);
+                    paintLeftFlipper(g2,x,y);
                     break;
                 case "RightFlipper":
-                    paintRightFlipper(g,x,y);
+                    paintRightFlipper(g2,x,y);
                     break;
             }
         }
 
         if(mode.equals("BUILD")){
-            paintGrid(g);
+            paintGrid(g2);
         }
         //todo please check this
-      // b = m.getBall();
-       paintBall(g,toIntExact(Math.round(b.getExactX())),toIntExact(Math.round(b.getExactY())));
+       Ball b = m.getBall();
+       paintBall(g2,toIntExact(Math.round(b.getExactX())),toIntExact(Math.round(b.getExactY())));
 
        repaint();
     }
 
     //--------------------------------------------------------
     //                    PAINTING COMPONENTS
-
     private void paintCircle(Graphics g,int x, int y){
         g.setColor(new Color(80, 170, 44, 255));
         g.fillOval(x,y,30,30);
@@ -137,7 +136,6 @@ public class GameBoard extends JPanel implements Observer{
     //                     OBSERVER
     @Override
     public void update(Observable o, Object arg) {
-        b.setExactX(b.getExactX()+3); //todo fix me
         repaint();
     }
     //--------------------------------------------------------
