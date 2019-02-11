@@ -130,7 +130,7 @@ public class Absorber implements iGizmo {
     @Override
     public void generateLines() {
         LineSegment topLine = new LineSegment(XCoord, YCoord2, XCoord2, YCoord2);
-        LineSegment bottomLine = new LineSegment(XCoord, YCoord2, XCoord2, YCoord2);
+        LineSegment bottomLine = new LineSegment(XCoord, YCoord, XCoord2, YCoord);
         LineSegment leftLine = new LineSegment(XCoord, YCoord, XCoord, YCoord2);
         LineSegment rightLine = new LineSegment(XCoord2, YCoord, XCoord2, YCoord2);
         lines.add(topLine);
