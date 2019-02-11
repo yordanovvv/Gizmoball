@@ -10,7 +10,7 @@ import physics.Geometry;
 import physics.LineSegment;
 import physics.Vect;
 
-public class GizmoballModel extends Observable implements Serializable {
+public class GizmoballModel extends Observable{
 
     private Ball ball;
     private List<iGizmo> gizmos;
