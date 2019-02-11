@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -9,7 +10,7 @@ import physics.Geometry;
 import physics.LineSegment;
 import physics.Vect;
 
-public class GizmoballModel extends Observable{
+public class GizmoballModel extends Observable implements Serializable {
 
     private Ball ball;
     private List<iGizmo> gizmos;
@@ -124,4 +125,68 @@ public class GizmoballModel extends Observable{
         return gizmos;
     }
 
+    public void saveGame() {
+//        FileOutputStream fileOut;
+//        try {
+//            fileOut = new FileOutputStream("temp.ser");
+//            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+//            out.writeObject(ball);
+//            out.close();
+//            fileOut.close();
+//            System.out.println("Serialized data is saved in temp.ser");
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//
+//            e.printStackTrace();
+//        }
+        try {
+            FileWriter fileWriter = new FileWriter("game.giz");
+            fileWriter.write(ball.toString());
+            fileWriter.flush();
+
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void loadGame() {
+//        Ball ball;
+//
+//        try {
+//            FileInputStream fileIn = new FileInputStream("temp.ser");
+//            ObjectInputStream in = new ObjectInputStream(fileIn);
+//            ball = (Ball) in.readObject();
+//            System.out.println("After Deserialization");
+//            System.out.println(ball);
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("game.giz"));
+            String line;
+            String[] array = new String[10];
+            while((line = bufferedReader.readLine()) != null) {
+                array = line.split(" ");
+                switch(array[0]) {
+                    case "Ball":
+                        ball = new Ball(Double.parseDouble(array[2]), Double.parseDouble(array[3]), Double.parseDouble(array[4]), Double.parseDouble(array[5]));
+                        System.out.println(ball);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -4,7 +4,6 @@ import View.BuildMode;
 import View.MainFrame;
 import View.PlayMode;
 import View.iMainFrame;
-import sun.applet.Main;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

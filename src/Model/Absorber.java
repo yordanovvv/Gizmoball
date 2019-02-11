@@ -1,6 +1,5 @@
 package Model;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import physics.Circle;
 import physics.LineSegment;
 
@@ -74,6 +73,11 @@ public class Absorber implements iGizmo {
     @Override
     public String getGizmoType() {
         return "Absorber";
+    }
+
+    @Override
+    public String toString() {
+        return getGizmoType() + " " + getID() + " " + getXCoord() + " " + getYCoord() + " " + getXCoord2() + " " + getYCoord2();
     }
 
     @Override

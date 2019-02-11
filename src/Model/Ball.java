@@ -3,6 +3,7 @@ import java.awt.Color;
 import physics.Circle;
 import physics.Vect;
 
+import java.io.Serializable;
 import java.util.Observable;
 
 public class Ball extends Observable {
@@ -72,5 +73,10 @@ public class Ball extends Observable {
     public void setExactY(double y)
     {
         ypos = y;
+    }
+
+    @Override
+    public String toString() {
+        return "Ball " + getID() + " " + getExactX() + " " + getExactY() + " " + getVelo().x() + " " + getVelo().y();
     }
 }

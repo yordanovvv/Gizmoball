@@ -5,7 +5,6 @@ import Controller.BuildListeners.GridClickListener;
 import Controller.MainFrameListeners.ChangeModeListener;
 import Controller.MainFrameListeners.ControlListener;
 import Controller.MainFrameListeners.KeyListenerTest;
-import javafx.scene.input.KeyCode;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;

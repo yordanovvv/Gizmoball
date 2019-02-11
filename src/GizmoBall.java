@@ -6,5 +6,7 @@ public class GizmoBall {
         GizmoballModel model = new GizmoballModel();
         MainFrame view = new MainFrame();
         model.addObserver(view);
+        model.saveGame();
+        model.loadGame();
     }
 }
