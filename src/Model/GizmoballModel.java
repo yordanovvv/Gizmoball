@@ -14,11 +14,13 @@ public class GizmoballModel extends Observable{
 
     private Ball ball;
     private List<iGizmo> gizmos;
+    private Wall walls;
 
-    //TODO private List<Wall> walls;
+    //TODO private List<Model.Wall> walls;
 
     public GizmoballModel()
     {
+        walls= new Wall(0,0,20,20);
         //position (25,25) in pixels, Velocity (100,100) pixels per tick
         ball = new Ball(25, 25, 100, 100);
         gizmos = new ArrayList<iGizmo>();
