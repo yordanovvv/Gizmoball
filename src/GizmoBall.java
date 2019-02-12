@@ -1,5 +1,4 @@
 import Model.GizmoballModel;
-import View.GameBoard;
 import View.MainFrame;
 
 public class GizmoBall {

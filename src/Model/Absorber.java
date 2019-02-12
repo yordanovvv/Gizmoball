@@ -48,8 +48,6 @@ public class Absorber implements iGizmo {
 
         //Absorber may have many balls
         balls = new ArrayList<Ball>();
-
-
     }
 
     public void addBall(Ball b) {
@@ -66,7 +64,11 @@ public class Absorber implements iGizmo {
     public void activateAbsorber() {
         if (!balls.isEmpty()) {
             Ball fireBall = balls.remove(0);
-            //TODO should be a method in Ball that allows it to be activate by absorber
+            //TODO should be a method in Ball that allows it to be activated by absorber
+
+            //I think we can just make a new ball and delete the one tha absorber absorbed, no need for a method in the ball class -L
+            //and idk if we need a list of balls in the absorber?
+            Ball ballShot = new Ball(width/2, height, 0, -100);
 
         }
     }

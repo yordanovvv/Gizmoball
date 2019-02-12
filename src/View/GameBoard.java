@@ -1,25 +1,31 @@
 package View;
 
 import static java.lang.Math.toIntExact;
+
 import Model.Ball;
 import Model.GizmoballModel;
 import Model.iGizmo;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 public class GameBoard extends JPanel implements Observer{
 
+
     private final int WIDTH = 600, HEIGTH = 600;
     private String mode;
     GizmoballModel m;
     Ball b;
+    ArrayList<iGizmo> gizmos;
     public GameBoard(String mode, GizmoballModel m) {
         init();
         this.m = m;
         b = m.getBall();
+        gizmos = m.getGizmos();
+
         this.mode = mode;
     }
 

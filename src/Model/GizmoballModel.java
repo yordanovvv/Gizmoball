@@ -10,24 +10,24 @@ import physics.Geometry;
 import physics.LineSegment;
 import physics.Vect;
 
-import javax.sound.sampled.Line;
-
 public class GizmoballModel extends Observable{
 
     private Ball ball;
-    private List<iGizmo> gizmos;
+    private ArrayList<iGizmo> gizmos;
     private Wall walls;
     //TODO private List<Flipper>;
+    private iGizmo absorber;
 
     public GizmoballModel()
     {
         //position of ball (25,25) in pixels, Velocity (100,100) pixels per tick
-        ball = new Ball(25, 25, 100, 100);
+        ball = new Ball(25, 70, 150, 150);
         gizmos = new ArrayList<iGizmo>();
         walls = new Wall(0, 0, 600, 600);
+        //walls = new Wall(-10, -10, 575, 575);
 
-        //Absorber aborber = new Absorber("A1",0,10,10,20);
-        //gizmos.add(aborber);
+        absorber = new Absorber("A1",0,600,600,200);
+        gizmos.add(absorber);
     }
 
     public void moveBall()
@@ -140,7 +140,7 @@ public class GizmoballModel extends Observable{
         return ball;
     }
 
-    public List<iGizmo> getGizmos(){
+    public ArrayList<iGizmo> getGizmos(){
         return gizmos;
     }
 

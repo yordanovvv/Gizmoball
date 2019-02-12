@@ -1,9 +1,8 @@
 package Model;
-import java.awt.Color;
+
 import physics.Circle;
 import physics.Vect;
 
-import java.io.Serializable;
 import java.util.Observable;
 
 public class Ball extends Observable {
@@ -12,16 +11,14 @@ public class Ball extends Observable {
     private double radius;
     private double xpos;
     private double ypos;
-    private Color colour;
     private String ID;
     private boolean stopped;
 
     public Ball(double x, double y, double xv, double yv) {
         xpos = x;
         ypos = y;
-        colour = new Color(59, 112, 170, 255); //todo remove as not needed
         velocity = new Vect(xv, yv);
-        radius = 10;
+        radius = 15;
         stopped = false;
     }
 
