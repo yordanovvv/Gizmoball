@@ -10,22 +10,23 @@ import physics.Geometry;
 import physics.LineSegment;
 import physics.Vect;
 
+import javax.sound.sampled.Line;
+
 public class GizmoballModel extends Observable{
 
     private Ball ball;
     private List<iGizmo> gizmos;
     private Wall walls;
-
-    //TODO private List<Model.Wall> walls;
+    //TODO private List<Flipper>;
 
     public GizmoballModel()
     {
-        walls= new Wall(0,0,20,20);
-        //position (25,25) in pixels, Velocity (100,100) pixels per tick
+        //position of ball (25,25) in pixels, Velocity (100,100) pixels per tick
         ball = new Ball(25, 25, 100, 100);
         gizmos = new ArrayList<iGizmo>();
-        //Absorber aborber = new Absorber("A1",0,10,10,20);
+        walls = new Wall(0, 0, 600, 600);
 
+        //Absorber aborber = new Absorber("A1",0,10,10,20);
         //gizmos.add(aborber);
     }
 
@@ -46,7 +47,7 @@ public class GizmoballModel extends Observable{
             }
 
         }
-        this.setChanged(); //notify observers, redraw updated view TODO
+        this.setChanged(); //notify observers, redraw updated view
         this.notifyObservers();
 
     }
@@ -76,8 +77,20 @@ public class GizmoballModel extends Observable{
         double shortestTime = Double.MAX_VALUE;
         double timeC = 0.0; //time until collision with a line
         double timeL = 0.0; //time until collision with a circle
+        double timeW = 0.0;
 
-        //TODO iterate through walls to see if collision with a wall will occur
+
+        //iterating through walls
+        ArrayList<LineSegment> lines = walls.drawWalls();
+        for (LineSegment ls : lines) {
+
+            timeW = Geometry.timeUntilWallCollision(ls, ballCircle, ballVelocity);
+            if (timeW < shortestTime) {
+                shortestTime = timeW; //we are hitting a line segment
+                newVelo = Geometry.reflectWall(ls, ball.getVelo(), 1.0);
+            }
+            //circles with radius 0 at the end of walls? No probably?
+        }
 
         //iterating through  gizmos
         // (i.e. lines and circles that gizmos are composed of) to find tuc
@@ -86,32 +99,33 @@ public class GizmoballModel extends Observable{
             ArrayList <LineSegment> lineSegs = gizmo.getLines();
             ArrayList <Circle> circls = gizmo.getCircles();
 
-            //TODO what does gizmo return if there are no circle or line segments e.g. if it is a square bumper or a circle
-            //an empty list maybe?
-            //so that we can check if (circls.size()>0) then iterate through circls
-
-
-            for (LineSegment ls : lineSegs)
+            if (lineSegs.size()>0)
             {
-                timeL = Geometry.timeUntilWallCollision(ls, ballCircle, ballVelocity);
-                if (timeL < shortestTime)
+                for (LineSegment ls : lineSegs)
                 {
-                    shortestTime = timeL; //we are hitting a line segment
-                    newVelo = Geometry.reflectWall(ls, ball.getVelo(), 1.0);
+                    timeL = Geometry.timeUntilWallCollision(ls, ballCircle, ballVelocity);
+                    if (timeL < shortestTime)
+                    {
+                        shortestTime = timeL; //we are hitting a line segment
+                        newVelo = Geometry.reflectWall(ls, ball.getVelo(), 1.0);
+                    }
                 }
             }
 
-            for (Circle c : circls)
+
+            if (circls.size()>0)
             {
-                timeC = Geometry.timeUntilCircleCollision(c, ballCircle, ballVelocity);
-                if (timeC < shortestTime)
+                for (Circle c : circls)
                 {
-                    shortestTime = timeC; //we are hitting a circle
-                    newVelo = Geometry.reflectCircle(c.getCenter(), ball.getCircle().getCenter(), ball.getVelo(),1.0);
+                    timeC = Geometry.timeUntilCircleCollision(c, ballCircle, ballVelocity);
+                    if (timeC < shortestTime)
+                    {
+                        shortestTime = timeC; //we are hitting a circle
+                        newVelo = Geometry.reflectCircle(c.getCenter(), ball.getCircle().getCenter(), ball.getVelo(),1.0);
+                    }
                 }
             }
         }
-
         return new CollisionDetails(shortestTime, newVelo);
     }
 
@@ -121,12 +135,24 @@ public class GizmoballModel extends Observable{
     public void addGizmo(iGizmo gizmo){}
 
     //todo fix this. I have done this in order to make the view work -N
+
     public Ball getBall(){
         return ball;
     }
 
     public List<iGizmo> getGizmos(){
         return gizmos;
+    }
+
+    public Wall getWalls()
+    {
+        return walls;
+    }
+
+    public void setBallSpeed(int x, int y)
+    {
+        Vect v = new Vect(x, y);
+        ball.setVelo(v);
     }
 
     public void saveGame() {
