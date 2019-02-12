@@ -1,14 +1,15 @@
 package View;
 
 import static java.lang.Math.toIntExact;
+
+import Model.Absorber;
 import Model.Ball;
 import Model.GizmoballModel;
 import Model.iGizmo;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Path2D;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -19,7 +20,6 @@ public class GameBoard extends JPanel implements Observer{
     GizmoballModel m;
     Ball b;
     public GameBoard(String mode, GizmoballModel m) {
-
         init();
         this.m = m;
         b = m.getBall();
@@ -47,21 +47,8 @@ public class GameBoard extends JPanel implements Observer{
    public void paintComponent (Graphics g) {
         super.paintComponent(g);
 
-     //   Graphics2D g2c = (Graphics2D) g.create();
         Graphics2D g2 = (Graphics2D) g;
-
         int x , y;
-
-        AffineTransform t = new AffineTransform();
-
-        //Path2D.Double path = new Path2D.Double();
-       // path.append(r, false);
-
-        paintLeftFlipper(g2, 20, 20);
-        t.rotate(Math.toRadians(40));
-
-
-
         for(iGizmo gizmo : m.getGizmos()){
             x = gizmo.getXCoord() * 30;
             y = gizmo.getYCoord() * 30;
@@ -95,13 +82,11 @@ public class GameBoard extends JPanel implements Observer{
         //todo please check this
        Ball b = m.getBall();
        paintBall(g2,toIntExact(Math.round(b.getExactX())),toIntExact(Math.round(b.getExactY())));
+       //Absorber a = (Absorber) m.getAbsorber();
+       //paintAbsorber(g2,a.getXCoord2(), a.getYCoord2(), a.getXCoord(), a.getYCoord());
 
        repaint();
     }
-    //--------------------------------------------------------
-    //                    ROTATE
-
-
 
     //--------------------------------------------------------
     //                    PAINTING COMPONENTS
@@ -137,18 +122,6 @@ public class GameBoard extends JPanel implements Observer{
     }
 
     private void paintRightFlipper(Graphics g,int x, int y){
-        g.setColor(new Color(170, 169, 50, 255));
-        int[] pxFR = {x+15,x+15+15 ,x+13+15 ,x+1+15};
-        int[] pyFR = {y+5,y+5  ,y+56 ,y+56};
-        Polygon polyFR= new Polygon(pxFR, pyFR, pyFR.length);
-        g.fillPolygon(polyFR);
-        g.fillOval(x+15,y,15,15);
-        g.fillOval(x+1+15,y+48,12,12);
-        g.setColor(new Color(0, 0, 0, 255));
-        g.fillOval(x+5+15,y+6,5,5);
-    }
-
-    private void paintRightFlipper2(Graphics g,int x, int y){
         g.setColor(new Color(170, 169, 50, 255));
         int[] pxFR = {x+15,x+15+15 ,x+13+15 ,x+1+15};
         int[] pyFR = {y+5,y+5  ,y+56 ,y+56};

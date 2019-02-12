@@ -2,7 +2,6 @@ package Model;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 
 import physics.Circle;
@@ -26,7 +25,7 @@ public class GizmoballModel extends Observable{
         walls = new Wall(0, 0, 600, 600);
         //walls = new Wall(-10, -10, 575, 575);
 
-        absorber = new Absorber("A1",0,600,600,200);
+        absorber = new Absorber("A1",0,600,600,400);
         gizmos.add(absorber);
     }
 
@@ -153,6 +152,11 @@ public class GizmoballModel extends Observable{
     {
         Vect v = new Vect(x, y);
         ball.setVelo(v);
+    }
+
+    public iGizmo getAbsorber()
+    {
+        return absorber;
     }
 
     public void saveGame() {
