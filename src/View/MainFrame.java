@@ -41,7 +41,7 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
 
     private GizmoballModel model;
 
-    private final int WIDTH = 900, HEIGHT = 750;
+    private final int WIDTH = 901, HEIGHT = 734;
 
     public MainFrame(GizmoballModel model) {
 

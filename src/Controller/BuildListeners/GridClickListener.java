@@ -55,12 +55,12 @@ public class GridClickListener implements MouseListener {
                 ComponentPopup compPop = new ComponentPopup();
                 break;
             case "circle":
-                giz = new Circle();
-                m.addGizmo(giz);
+                //giz = new Circle();
+                //m.addGizmo(giz);
                 //gizmos.addGizmo(giz, gridX, gridY); //Assumption that .addGizmo does a check etc...
                 break;
             case "square":
-                giz = new Square();
+               // giz = new Square();
                 break;
             //  |
             //  |
