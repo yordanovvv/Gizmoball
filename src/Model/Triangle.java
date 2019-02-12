@@ -7,6 +7,32 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Triangle implements iGizmo {
+
+    private String ID;
+    private Color colour;
+    private int XCoord;
+    private int YCoord;
+    private int height, width;
+    private ArrayList<LineSegment> lines;
+    private ArrayList<Circle> circles;
+    private ArrayList<String> gizmoConnections;
+    private ArrayList<String> keyConnections;
+
+
+    public Triangle(String id, int XCoord, int YCoord) {
+        this.ID = id;
+        this.XCoord = XCoord;
+        this.YCoord = YCoord;
+        generateCircles();
+        generateLines();
+
+
+        lines = new ArrayList<>();
+        circles = new ArrayList<>();
+        gizmoConnections = new ArrayList<>();
+        keyConnections = new ArrayList<>();
+    }
+
     @Override
     public String getGizmoType() {
         return "Triangle";
@@ -14,36 +40,60 @@ public class Triangle implements iGizmo {
 
     @Override
     public void setID(String id) {
+        this.ID = id;
 
     }
 
     @Override
     public void setXCoord(int x) {
+        this.XCoord = x;
 
     }
 
     @Override
     public void setYCoord(int y) {
+        this.YCoord = y;
 
     }
 
     @Override
     public void setColour(Color colour) {
-
+        this.colour = colour;
     }
 
     @Override
     public void generateCircles() {
+
+        Circle top = new Circle(XCoord, YCoord, 0);
+        Circle right = new Circle(XCoord + 1, YCoord, 0);
+        Circle bottomLeft = new Circle(XCoord, YCoord + 1, 0);
+
+        circles.add(top);
+        circles.add(right);
+        circles.add(bottomLeft);
+
 
     }
 
     @Override
     public void generateLines() {
 
+
+        LineSegment line1 = new LineSegment(XCoord, YCoord + 1, XCoord + 1, YCoord);
+
+        LineSegment line2 = new LineSegment(XCoord, YCoord, XCoord, YCoord + 1);
+
+        LineSegment line3 = new LineSegment(XCoord, YCoord, XCoord + 1, YCoord);
+
+        lines.add(line1);
+        lines.add(line2);
+        lines.add(line3);
+
     }
 
     @Override
     public void setGizmoConnection(String id) {
+        gizmoConnections.add(id);
 
     }
 
@@ -52,6 +102,8 @@ public class Triangle implements iGizmo {
 
     }
 
+
+    //TODO needs done as triangles can be roated
     @Override
     public void rotate() {
 
@@ -64,51 +116,52 @@ public class Triangle implements iGizmo {
 
     @Override
     public String getID() {
-        return null;
+        return ID;
     }
 
     @Override
     public int getHeight() {
-        return 0;
+        return height;
     }
 
     @Override
     public int getWidth() {
-        return 0;
+        return width;
     }
 
     @Override
     public int getXCoord() {
-        return 0;
+        return XCoord;
     }
 
     @Override
     public int getYCoord() {
-        return 0;
+        return YCoord;
     }
 
     @Override
     public ArrayList<Circle> getCircles() {
-        return null;
+        return circles;
     }
 
     @Override
     public ArrayList<LineSegment> getLines() {
-        return null;
+        return lines;
     }
 
     @Override
     public ArrayList<String> getGizmoConnections() {
-        return null;
+        return gizmoConnections;
     }
 
     @Override
     public ArrayList<String> getKeyConnections() {
-        return null;
+        return keyConnections;
     }
 
     @Override
     public void removeGizmoConnection(String id) {
+        gizmoConnections.remove(id);
 
     }
 
