@@ -38,7 +38,7 @@ public class GameBoard extends JPanel implements Observer{
         return m;
     }
 
-    GridClickListener gameBoardListener;// = new GridClickListener(this, "square");
+    GridClickListener gameBoardListener; //= new GridClickListener(this, "square");
 
     /**
      * Initialises the game screen
@@ -48,8 +48,8 @@ public class GameBoard extends JPanel implements Observer{
         this.setPreferredSize(new Dimension(WIDTH,HEIGTH));
         this.setBackground(Color.BLACK);
 
+        gameBoardListener = new GridClickListener(this, "square");
         if (mode.equals("BUILD")) {
-            //System.out.println("gbl : " + gameBoardListener);
             this.addMouseListener(gameBoardListener);
         }
     }

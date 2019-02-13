@@ -1,9 +1,6 @@
 package Controller.BuildListeners;
 
-import Model.Circle;
-import Model.GizmoballModel;
-import Model.Square;
-import Model.iGizmo;
+import Model.*;
 import View.ComponentPopup;
 import View.GameBoard;
 import View.MainFrame;
@@ -15,6 +12,8 @@ public class GridClickListener implements MouseListener {
 
     private String id;
     private String selected;
+
+    GameBoard board;
     //private MainFrame mf;
 
     int gridX;
@@ -26,10 +25,13 @@ public class GridClickListener implements MouseListener {
 
     public GridClickListener(GameBoard board, String selected){
         this.selected = selected;
+        this.board = board;
         //this.mf = mainFrame;
         //mainFrame.getGameBoard();
         //mainFrame.getGameBoard().getGizModel();
         m = board.getGizModel();
+
+        System.out.println("Listener initialised");
     }
 
     @Override
@@ -50,18 +52,34 @@ public class GridClickListener implements MouseListener {
 
         iGizmo giz;
 
+        //TODO : Make sure each new gizmo has a unique name
+        //TODO ; Check gizmo position for overlapping gizmos
         switch(selected){
             case "ball":
                 //Would prefer this here, but can also have it when BALL button clicked - C
                 ComponentPopup compPop = new ComponentPopup();
                 break;
             case "circle":
-                //giz = new Circle();
-                //m.addGizmo(giz);
+                giz = new Circle();
+                m.addGizmo(giz);
                 //gizmos.addGizmo(giz, gridX, gridY); //Assumption that .addGizmo does a check etc...
                 break;
             case "square":
-               // giz = new Square();
+                //Why are there 4 parameters here??
+                giz = new Square("S", gridX, gridY, gridX, gridY);
+                m.addGizmo(giz);
+                break;
+            case "triangle":
+
+                System.out.println(m);
+
+                //for ()
+
+                giz = new Triangle("T",gridX, gridY);
+                m.addGizmo(giz);
+
+                //board.repaint();
+
                 break;
             //  |
             //  |
@@ -87,6 +105,14 @@ public class GridClickListener implements MouseListener {
 
             //create absorber here!
 
+            //TODO : Check overlap
+            //Functionality for more than one absorber??
+            if (m.getAbsorber()==null) {
+                Absorber abs = new Absorber("A", start_gridX, start_gridY, end_gridX+1, end_gridY+1);
+                m.addGizmo(abs);
+            } else {
+                System.out.println("Absorber already exists");
+            }
         }
 
 

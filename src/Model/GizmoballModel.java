@@ -28,8 +28,8 @@ public class GizmoballModel extends Observable{
         walls = new Wall(0, 0, 20, 20);
         //walls = new Wall(-10, -10, 575, 575);
 
-        absorber = new Absorber("A1",0,19,20,20);
-        gizmos.add(absorber);
+        //absorber = new Absorber("A1",0,19,20,20);
+        //gizmos.add(absorber);
 
         t = new Triangle("T1",1, 1);
         t2 = new Triangle("T2",10, 10);
@@ -142,7 +142,9 @@ public class GizmoballModel extends Observable{
     //TODO these need to be done
     private void addBall(Ball ball){}
 
-    public void addGizmo(iGizmo gizmo){}
+    public void addGizmo(iGizmo gizmo){
+        gizmos.add(gizmo);
+    }
 
     //todo fix this. I have done this in order to make the view work -N
 

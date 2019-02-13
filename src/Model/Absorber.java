@@ -60,7 +60,6 @@ public class Absorber implements iGizmo {
 
     }
 
-
     //TODO not sure how to link ball and absorber
     public Vect activateAbsorber() {
        // if (!balls.isEmpty()) {
