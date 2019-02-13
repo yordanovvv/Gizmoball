@@ -17,20 +17,23 @@ public class Triangle implements iGizmo {
     private ArrayList<Circle> circles;
     private ArrayList<String> gizmoConnections;
     private ArrayList<String> keyConnections;
+    private final double constant = 30-.73;
 
 
     public Triangle(String id, int XCoord, int YCoord) {
         this.ID = id;
         this.XCoord = XCoord;
         this.YCoord = YCoord;
-        generateCircles();
-        generateLines();
 
 
         lines = new ArrayList<>();
         circles = new ArrayList<>();
         gizmoConnections = new ArrayList<>();
         keyConnections = new ArrayList<>();
+
+        generateCircles();
+        generateLines();
+
     }
 
     @Override
@@ -79,11 +82,11 @@ public class Triangle implements iGizmo {
     public void generateLines() {
 
 
-        LineSegment line1 = new LineSegment(XCoord, YCoord + 1, XCoord + 1, YCoord);
+        LineSegment line1 = new LineSegment(XCoord*constant, YCoord*constant , (XCoord + 1)*constant, YCoord*constant);
 
-        LineSegment line2 = new LineSegment(XCoord, YCoord, XCoord, YCoord + 1);
+        LineSegment line2 = new LineSegment(XCoord*constant, YCoord*constant, XCoord*constant, (YCoord + 1*constant));
 
-        LineSegment line3 = new LineSegment(XCoord, YCoord, XCoord + 1, YCoord);
+        LineSegment line3 = new LineSegment(XCoord*constant, (YCoord+1)*constant, (XCoord + 1)*constant, YCoord*constant);
 
         lines.add(line1);
         lines.add(line2);
@@ -138,6 +141,7 @@ public class Triangle implements iGizmo {
     public int getYCoord() {
         return YCoord;
     }
+
 
     @Override
     public ArrayList<Circle> getCircles() {

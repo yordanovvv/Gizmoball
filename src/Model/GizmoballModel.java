@@ -16,6 +16,8 @@ public class GizmoballModel extends Observable{
     private Wall walls;
     //TODO private List<Flipper>;
     private iGizmo absorber;
+    private iGizmo t;
+    private iGizmo t2;
 
     public GizmoballModel()
     {
@@ -26,7 +28,13 @@ public class GizmoballModel extends Observable{
         //walls = new Wall(-10, -10, 575, 575);
 
         absorber = new Absorber("A1",0,19,20,20);
-        //gizmos.add(absorber);
+        gizmos.add(absorber);
+
+        t = new Triangle("T1",1, 1);
+        t2 = new Triangle("T2",10, 10);
+
+        gizmos.add(t);
+        gizmos.add(t2);
 
     }
 
