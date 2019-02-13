@@ -48,24 +48,6 @@ public class GameBoard extends JPanel implements Observer{
 
         Graphics2D g2 = (Graphics2D) g;
         int x , y;
-
-
-        //todo remove. I am checking that the walls are okay
-        Wall wall = m.getWalls();
-        int xWall = wall.getXCoord()*30;
-        int x1Wall = wall.getXCoord2()*30;
-
-       int yWall = wall.getYCoord()*30;
-       int y1Wall = wall.getYCoord2()*30;
-
-       g.setColor(Color.red);
-
-       g.drawLine(xWall,yWall,xWall,y1Wall);
-       g.drawLine(xWall,yWall,x1Wall,yWall);
-       g.drawLine(xWall,y1Wall,x1Wall,y1Wall);
-       g.drawLine(x1Wall,yWall,x1Wall,y1Wall);
-
-
         for(iGizmo gizmo : m.getGizmos()){
             x = gizmo.getXCoord() * 30; //we need scale here so do not remove
             y = gizmo.getYCoord()* 30;

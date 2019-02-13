@@ -46,7 +46,7 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
     public MainFrame(GizmoballModel model) {
 
         this.model = model;
-        this.setResizable(false);
+       // this.setResizable(false);
         this.setTitle("GROUP 11 - Gizmoball");
         this.setSize(WIDTH, HEIGHT);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
