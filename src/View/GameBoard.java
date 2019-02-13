@@ -102,6 +102,10 @@ public class GameBoard extends JPanel implements Observer{
     }
 
     private void paintTriangle(Graphics g,int x, int y){
+        //System.out.println("****************");
+        //System.out.println(x/30);
+        //System.out.println(y/30);
+        //System.out.println("****************");
         int xPoly[] = {x, (x+30),x, (x+30), (x+30), (x+30)};
         int yPoly[] = {y, (y+30),y, y     , y      ,(y+30)};
 
