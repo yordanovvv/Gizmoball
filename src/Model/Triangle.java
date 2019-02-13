@@ -17,7 +17,7 @@ public class Triangle implements iGizmo {
     private ArrayList<Circle> circles;
     private ArrayList<String> gizmoConnections;
     private ArrayList<String> keyConnections;
-    private final double constant = 30-.73;
+    private final double constant = 30;
 
 
     public Triangle(String id, int XCoord, int YCoord) {
@@ -67,9 +67,9 @@ public class Triangle implements iGizmo {
     @Override
     public void generateCircles() {
 
-        Circle top = new Circle(XCoord, YCoord, 0);
-        Circle right = new Circle(XCoord + 1, YCoord, 0);
-        Circle bottomLeft = new Circle(XCoord, YCoord + 1, 0);
+        Circle top = new Circle(XCoord*constant, YCoord*constant, 0);
+        Circle right = new Circle((XCoord + 1)*constant, YCoord*constant, 0);
+        Circle bottomLeft = new Circle(XCoord*constant, (YCoord + 1)*constant, 0);
 
         circles.add(top);
         circles.add(right);
@@ -82,12 +82,16 @@ public class Triangle implements iGizmo {
     public void generateLines() {
 
 
-        LineSegment line1 = new LineSegment(XCoord*constant, YCoord*constant , (XCoord + 1)*constant, YCoord*constant);
+        LineSegment line1 = new LineSegment(XCoord*constant, YCoord*constant , (XCoord + 1)*constant, (YCoord + 1)*constant);
 
-        LineSegment line2 = new LineSegment(XCoord*constant, YCoord*constant, XCoord*constant, (YCoord + 1*constant));
+        LineSegment line2 = new LineSegment(XCoord*constant, YCoord*constant, (XCoord+1)*constant, (YCoord )*constant);
 
-        LineSegment line3 = new LineSegment(XCoord*constant, (YCoord+1)*constant, (XCoord + 1)*constant, YCoord*constant);
+        LineSegment line3 = new LineSegment((XCoord+1)*constant, (YCoord)*constant, (XCoord + 1)*constant, (YCoord+1)*constant);
 
+        //System.out.println(XCoord);
+       // System.out.println(YCoord);
+       // System.out.println(XCoord+1);
+        //System.out.println(YCoord+1);;
         lines.add(line1);
         lines.add(line2);
         lines.add(line3);
