@@ -2,10 +2,7 @@ package View;
 
 import static java.lang.Math.toIntExact;
 
-import Model.Absorber;
-import Model.Ball;
-import Model.GizmoballModel;
-import Model.iGizmo;
+import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,8 +44,28 @@ public class GameBoard extends JPanel implements Observer{
    public void paintComponent (Graphics g) {
         super.paintComponent(g);
 
+
+
         Graphics2D g2 = (Graphics2D) g;
         int x , y;
+
+
+        //todo remove. I am checking that the walls are okay
+        Wall wall = m.getWalls();
+        int xWall = wall.getXCoord()*30;
+        int x1Wall = wall.getXCoord2()*30;
+
+       int yWall = wall.getYCoord()*30;
+       int y1Wall = wall.getYCoord2()*30;
+
+       g.setColor(Color.red);
+
+       g.drawLine(xWall,yWall,xWall,y1Wall);
+       g.drawLine(xWall,yWall,x1Wall,yWall);
+       g.drawLine(xWall,y1Wall,x1Wall,y1Wall);
+       g.drawLine(x1Wall,yWall,x1Wall,y1Wall);
+
+
         for(iGizmo gizmo : m.getGizmos()){
             x = gizmo.getXCoord() * 30; //we need scale here so do not remove
             y = gizmo.getYCoord()* 30;
@@ -81,7 +98,9 @@ public class GameBoard extends JPanel implements Observer{
         }
         //todo please check this
        Ball b = m.getBall();
-       paintBall(g2,toIntExact(Math.round(b.getExactX())),toIntExact(Math.round(b.getExactY())));
+        int xBall = toIntExact(Math.round(b.getExactX()));//*30;
+        int yBall = toIntExact(Math.round(b.getExactY()));//*30;
+       paintBall(g2,xBall,yBall);
        //Absorber a = (Absorber) m.getAbsorber();
        //paintAbsorber(g2,a.getXCoord2(), a.getYCoord2(), a.getXCoord(), a.getYCoord());
 
@@ -97,7 +116,7 @@ public class GameBoard extends JPanel implements Observer{
 
     private void paintBall(Graphics g,int x, int y){
         g.setColor(new Color(255, 251, 255, 255));
-        g.fillOval(x-8,y-8,15,15);
+        g.fillOval(x,y,16,16);
     }
 
     private void paintTriangle(Graphics g,int x, int y){

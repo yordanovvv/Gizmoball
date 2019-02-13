@@ -20,14 +20,16 @@ public class GizmoballModel extends Observable{
     public GizmoballModel()
     {
         //position of ball (25,25) in pixels, Velocity (100,100) pixels per tick
-        ball = new Ball(25, 70, 150, 150);
+        ball = new Ball(500, 400, 150, 150);
         gizmos = new ArrayList<iGizmo>();
         walls = new Wall(0, 0, 20, 20);
         //walls = new Wall(-10, -10, 575, 575);
 
         absorber = new Absorber("A1",0,19,20,20);
         gizmos.add(absorber);
+
     }
+
 
     public void moveBall()
     {
@@ -80,7 +82,7 @@ public class GizmoballModel extends Observable{
 
 
         //iterating through walls
-        ArrayList<LineSegment> lines = walls.drawWalls();
+        ArrayList<LineSegment> lines = walls.getWalls();
         for (LineSegment ls : lines) {
 
             timeW = Geometry.timeUntilWallCollision(ls, ballCircle, ballVelocity);
