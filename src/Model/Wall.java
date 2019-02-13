@@ -10,6 +10,7 @@ public class Wall {
     private int YCoord;
     private int XCoord2;
     private int YCoord2;
+    private final double constant = 30-.4;
 
     public Wall(int XCoord,int YCoord, int XCoord2, int YCoord2){
         this.XCoord=XCoord;
@@ -21,10 +22,10 @@ public class Wall {
 
     public ArrayList<LineSegment> drawWalls(){
         ArrayList<LineSegment> walls = new ArrayList<>();
-        LineSegment topWall= new LineSegment(XCoord,YCoord2,XCoord2,YCoord2);
-        LineSegment bottomWall= new LineSegment(XCoord,YCoord, XCoord2,YCoord);
-        LineSegment leftWall= new LineSegment(XCoord, YCoord, XCoord, YCoord2);
-        LineSegment rightWall= new LineSegment(XCoord2, YCoord, XCoord2, YCoord2);
+        LineSegment bottomWall= new LineSegment(XCoord * constant,YCoord2* constant,XCoord2* constant,YCoord2* constant);
+        LineSegment topWall= new LineSegment(XCoord* constant,YCoord* constant, XCoord2* constant,YCoord* constant);
+        LineSegment leftWall= new LineSegment(XCoord* constant, YCoord* constant, XCoord* constant, YCoord2* constant);
+        LineSegment rightWall= new LineSegment(XCoord2* constant, YCoord* constant, XCoord2* constant, YCoord2* constant);
 
         walls.add(topWall);
         walls.add(bottomWall);
