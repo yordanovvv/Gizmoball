@@ -22,10 +22,10 @@ public class GizmoballModel extends Observable{
         //position of ball (25,25) in pixels, Velocity (100,100) pixels per tick
         ball = new Ball(25, 70, 150, 150);
         gizmos = new ArrayList<iGizmo>();
-        walls = new Wall(0, 0, 600, 600);
+        walls = new Wall(0, 0, 20, 20);
         //walls = new Wall(-10, -10, 575, 575);
 
-        absorber = new Absorber("A1",0,570,600,600);
+        absorber = new Absorber("A1",0,19,20,20);
         gizmos.add(absorber);
     }
 

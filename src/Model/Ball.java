@@ -14,11 +14,12 @@ public class Ball extends Observable {
     private String ID;
     private boolean stopped;
 
+    //fixed size. so size 1 for pixel
     public Ball(double x, double y, double xv, double yv) {
         xpos = x;
         ypos = y;
         velocity = new Vect(xv, yv);
-        radius = 15;
+        radius = 0.25;//todo adjust all of the sizing to L's because spec.
         stopped = false;
     }
 

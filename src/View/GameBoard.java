@@ -50,8 +50,8 @@ public class GameBoard extends JPanel implements Observer{
         Graphics2D g2 = (Graphics2D) g;
         int x , y;
         for(iGizmo gizmo : m.getGizmos()){
-            x = gizmo.getXCoord();
-            y = gizmo.getYCoord();
+            x = gizmo.getXCoord() * 30; //we need scale here so do not remove
+            y = gizmo.getYCoord()* 30;
             switch (gizmo.getGizmoType()){
                 case "Circle":
                     paintCircle(g2, x,y);
@@ -64,7 +64,7 @@ public class GameBoard extends JPanel implements Observer{
                     break;
 
                 case "Absorber":
-                    paintAbsorber(g2,x,y,gizmo.getWidth(),gizmo.getHeight());
+                    paintAbsorber(g2,x,y,gizmo.getWidth()*30,gizmo.getHeight()*30);
                     break;
 
                 case "LeftFlipper":
@@ -97,7 +97,7 @@ public class GameBoard extends JPanel implements Observer{
 
     private void paintBall(Graphics g,int x, int y){
         g.setColor(new Color(255, 251, 255, 255));
-        g.fillOval(x,y,30,30);
+        g.fillOval(x-8,y-8,15,15);
     }
 
     private void paintTriangle(Graphics g,int x, int y){
