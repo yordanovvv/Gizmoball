@@ -5,6 +5,7 @@ import Model.GizmoballModel;
 import Model.Square;
 import Model.iGizmo;
 import View.ComponentPopup;
+import View.GameBoard;
 import View.MainFrame;
 
 import java.awt.event.MouseEvent;
@@ -23,12 +24,12 @@ public class GridClickListener implements MouseListener {
 
     GizmoballModel m;
 
-    public GridClickListener(MainFrame mainFrame, String selected){
+    public GridClickListener(GameBoard board, String selected){
         this.selected = selected;
         //this.mf = mainFrame;
         //mainFrame.getGameBoard();
         //mainFrame.getGameBoard().getGizModel();
-        m = mainFrame.getGameBoard().getGizModel();
+        m = board.getGizModel();
     }
 
     @Override

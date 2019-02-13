@@ -1,13 +1,11 @@
 package View;
 
-import Controller.BuildListeners.PlayModeListener;
+import Controller.PlayListeners.PlayModeListener;
 import Controller.MainFrameListeners.KeyListenerTest;
+import Model.GizmoballModel;
 
 import javax.swing.*;
-import javax.swing.border.CompoundBorder;
 import java.awt.*;
-import java.util.Observable;
-import java.util.Observer;
 
 public class PlayMode extends JPanel {
 
@@ -36,8 +34,20 @@ public class PlayMode extends JPanel {
 
         this.mainFrame = mainFrame;
 
-        KeyListenerTest kl = new KeyListenerTest("play");
-        mainFrame.getFocusOwner().addKeyListener(kl);
+        //KeyListenerTest kl = new KeyListenerTest("play", mainFrame);
+
+        GizmoballModel model = mainFrame.getGameBoard().getGizModel();
+        KeyListenerTest absorberListener = new KeyListenerTest(model.getAbsorber().getID(),
+                model, 'f', model.getAbsorber());
+
+        System.out.println("--------sssss");
+        mainFrame.addKeyListener(absorberListener);
+        mainFrame.requestFocus();
+
+        System.out.println(mainFrame.getKeyListeners());
+
+
+        //mainFrame.getFocusOwner().addKeyListener(kl);
 
         init();
     }
@@ -96,6 +106,10 @@ public class PlayMode extends JPanel {
         button_start.addActionListener(startClickListener);
         button_stop.addActionListener(stopClickListener);
         button_tick.addActionListener(tickClickListener);
+
+        button_start.setFocusable(false);
+        button_stop.setFocusable(false);
+        button_tick.setFocusable(false);
 
         //--------------------------------------------------------
         //                    STATS PANEL

@@ -1,18 +1,31 @@
 package Controller.MainFrameListeners;
 
 
+import Model.Absorber;
+import Model.GizmoballModel;
+import Model.iGizmo;
+import View.MainFrame;
+
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+//TODO : Refactor this to absorberListener or something?
 public class KeyListenerTest implements KeyListener {
 
-    //TODO Link somehow with absorbers?
     //TODO Link with connections
 
-    public KeyListenerTest(String id){
-        System.out.println("Init KeyListener : " + id + " Mode.");
-        //a.getInputMap.put(KeyStroke.getKeyStroke("A"), System.out.println("Test123"));
+    GizmoballModel model;
+    char key;
+    iGizmo giz;
+
+    public KeyListenerTest(String id, GizmoballModel model, char key, iGizmo giz){
+        System.out.println("Init KeyListener for gizmo id : " + id);
+
+        this.model = model;
+        this.key = key;
+        this.giz = giz;
+
     }
 
     @Override
@@ -23,9 +36,11 @@ public class KeyListenerTest implements KeyListener {
     public void keyPressed(KeyEvent e) {
         System.out.println("Key : " + e.getKeyChar() + " pressed.");
 
-        //Dummy code.
-        if (e.getKeyChar() == 'c'){
+        if (e.getKeyChar() == key ){
             System.out.println("Absorber fire!");
+            //Trigger the absorber !
+            //model.getAbsorber().activateAbsorber();
+            model.getBall().setVelo(model.getAbsorber().activateAbsorber());
         }
 
     }

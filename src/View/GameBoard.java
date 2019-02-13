@@ -2,7 +2,11 @@ package View;
 
 import static java.lang.Math.toIntExact;
 
-import Model.*;
+import Controller.BuildListeners.GridClickListener;
+import Model.Absorber;
+import Model.Ball;
+import Model.GizmoballModel;
+import Model.iGizmo;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,16 +21,24 @@ public class GameBoard extends JPanel implements Observer{
     GizmoballModel m;
     Ball b;
     public GameBoard(String mode, GizmoballModel m) {
-        init();
+
+        gameBoardListener = new GridClickListener(this, "square");
+
         this.m = m;
         b = m.getBall();
         this.mode = mode;
+
+        init();
+
     }
 
     //TODO Check if this is in right place -C
+    //TODO Continue this
     public GizmoballModel getGizModel(){
         return m;
     }
+
+    GridClickListener gameBoardListener;// = new GridClickListener(this, "square");
 
     /**
      * Initialises the game screen
@@ -35,6 +47,17 @@ public class GameBoard extends JPanel implements Observer{
         this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(WIDTH,HEIGTH));
         this.setBackground(Color.BLACK);
+
+        if (mode.equals("BUILD")) {
+            //System.out.println("gbl : " + gameBoardListener);
+            this.addMouseListener(gameBoardListener);
+        }
+    }
+
+    //---- TODO : Check this method is in right place
+    public GridClickListener getListener(){
+        //System.out.println(gameBoardListener);
+        return gameBoardListener;
     }
 
     /**
@@ -44,13 +67,11 @@ public class GameBoard extends JPanel implements Observer{
    public void paintComponent (Graphics g) {
         super.paintComponent(g);
 
-
-
         Graphics2D g2 = (Graphics2D) g;
         int x , y;
         for(iGizmo gizmo : m.getGizmos()){
-            x = gizmo.getXCoord() * 30; //we need scale here so do not remove
-            y = gizmo.getYCoord()* 30;
+            x = gizmo.getXCoord() * 30;
+            y = gizmo.getYCoord() * 30;
             switch (gizmo.getGizmoType()){
                 case "Circle":
                     paintCircle(g2, x,y);
@@ -80,9 +101,7 @@ public class GameBoard extends JPanel implements Observer{
         }
         //todo please check this
        Ball b = m.getBall();
-        int xBall = toIntExact(Math.round(b.getExactX()));//*30;
-        int yBall = toIntExact(Math.round(b.getExactY()));//*30;
-       paintBall(g2,xBall,yBall);
+       paintBall(g2,toIntExact(Math.round(b.getExactX())),toIntExact(Math.round(b.getExactY())));
        //Absorber a = (Absorber) m.getAbsorber();
        //paintAbsorber(g2,a.getXCoord2(), a.getYCoord2(), a.getXCoord(), a.getYCoord());
 

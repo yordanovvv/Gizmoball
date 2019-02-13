@@ -6,6 +6,7 @@ import Model.GizmoballModel;
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import java.awt.*;
+import java.awt.event.KeyListener;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -41,7 +42,7 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
 
     private GizmoballModel model;
 
-    private final int WIDTH = 901, HEIGHT = 734;
+    private final int WIDTH = 1100, HEIGHT = 900;
 
     public MainFrame(GizmoballModel model) {
 
@@ -201,6 +202,7 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
         button_switchState = new JButton("Switch State");//switch.png
         button_switchState = util.addImgToBtn("switch.png", button_switchState, Color.WHITE);
         button_switchState.addActionListener(new ChangeModeListener(this));
+        button_switchState.setFocusable(false);
 
         switchBoard.add(button_switchState);
         switchBoard.add(label_sameState);
@@ -220,6 +222,12 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
 
     @Override
     public void switchModes(int mode) {
+
+        //Clear all the keylisteners
+        for (KeyListener kl : this.getKeyListeners()) {
+            this.removeKeyListener(kl);
+        }
+
         this.invalidate();
         if (mode == 1) {
             label_sameState.setText("   GAME STATE");

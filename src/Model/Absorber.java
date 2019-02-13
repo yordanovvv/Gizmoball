@@ -2,6 +2,7 @@ package Model;
 
 import physics.Circle;
 import physics.LineSegment;
+import physics.Vect;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -61,9 +62,9 @@ public class Absorber implements iGizmo {
 
 
     //TODO not sure how to link ball and absorber
-    public void activateAbsorber() {
-        if (!balls.isEmpty()) {
-            Ball fireBall = balls.remove(0);
+    public Vect activateAbsorber() {
+       // if (!balls.isEmpty()) {
+            //Ball fireBall = balls.remove(0);
             //TODO should be a method in Ball that allows it to be activated by absorber
 
             //I think we can just make a new ball or change the x,y, velocity of the one tha absorber absorbed -L
@@ -71,7 +72,11 @@ public class Absorber implements iGizmo {
 
             Ball ballShot = new Ball(width/2, height, 0, -100);
 
-        }
+            Vect returnVector = new Vect(0, -250);
+            return returnVector;
+
+        //}
+        //return null;
     }
 
     @Override

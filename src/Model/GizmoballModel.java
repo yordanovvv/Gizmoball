@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import Controller.MainFrameListeners.KeyListenerTest;
 import physics.Circle;
 import physics.Geometry;
 import physics.LineSegment;
@@ -26,7 +27,10 @@ public class GizmoballModel extends Observable{
         //walls = new Wall(-10, -10, 575, 575);
 
         absorber = new Absorber("A1",0,19,20,20);
-        //gizmos.add(absorber);
+        gizmos.add(absorber);
+
+
+
 
     }
 
@@ -156,9 +160,9 @@ public class GizmoballModel extends Observable{
         ball.setVelo(v);
     }
 
-    public iGizmo getAbsorber()
+    public Absorber getAbsorber()
     {
-        return absorber;
+        return (Absorber) absorber;
     }
 
     public void saveGame() {

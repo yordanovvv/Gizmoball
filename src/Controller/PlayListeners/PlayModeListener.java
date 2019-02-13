@@ -1,6 +1,9 @@
-package Controller.BuildListeners;
+package Controller.PlayListeners;
 
+import Controller.MainFrameListeners.KeyListenerTest;
+import Model.Absorber;
 import Model.GizmoballModel;
+import Model.iGizmo;
 import View.MainFrame;
 
 import javax.swing.*;
@@ -36,6 +39,7 @@ public class PlayModeListener implements ActionListener {
         if (e.getSource() == timer){
             gModel.moveBall();
         } else {
+            System.out.println(e.getActionCommand());
             switch (e.getActionCommand()) {
                 case "Play":
                     gModel.getBall().setStopped(false);
@@ -54,6 +58,8 @@ public class PlayModeListener implements ActionListener {
                     //Reload file?
                     break;
             }
+            mf.getFocusOwner().setFocusable(true);
+            mf.requestFocus();
         }
     }
 }
