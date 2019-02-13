@@ -50,6 +50,8 @@ public class Ball extends Observable {
         return stopped;
     }
 
+    public void setStopped(boolean value) { stopped = value; }
+
     public void setID(String id) {
         ID = id;
     }

@@ -38,13 +38,17 @@ public class PlayModeListener implements ActionListener {
         } else {
             switch (e.getActionCommand()) {
                 case "Play":
-                    timer.start();
+                    gModel.getBall().setStopped(false);
+                    timer.restart();
                     break;
                 case "Pause":
+                    gModel.getBall().setStopped(true);
                     timer.stop(); //FIXME : Make timer actually stop....
                     break;
                 case "Tick":
+                    gModel.getBall().setStopped(false);
                     gModel.moveBall();
+                    gModel.getBall().setStopped(true);
                     break;
                 case "Restart":
                     //Reload file?
