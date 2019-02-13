@@ -28,8 +28,8 @@ public class GizmoballModel extends Observable{
         walls = new Wall(0, 0, 20, 20);
         //walls = new Wall(-10, -10, 575, 575);
 
-        //absorber = new Absorber("A1",0,19,20,20);
-        //gizmos.add(absorber);
+        absorber = new Absorber("A1",0,19,20,20);
+        gizmos.add(absorber);
 
         t = new Triangle("T1",1, 1);
         t2 = new Triangle("T2",10, 10);
