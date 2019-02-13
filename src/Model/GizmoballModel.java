@@ -25,7 +25,7 @@ public class GizmoballModel extends Observable{
         walls = new Wall(0, 0, 600, 600);
         //walls = new Wall(-10, -10, 575, 575);
 
-        absorber = new Absorber("A1",0,600,600,400);
+        absorber = new Absorber("A1",0,570,600,600);
         gizmos.add(absorber);
     }
 

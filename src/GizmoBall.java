@@ -20,7 +20,7 @@ public class GizmoBall {
         GizmoballModel model = new GizmoballModel();
         MainFrame view = new MainFrame(model);
         model.addObserver(view.getGameBoard());
-        model.saveGame();
-        model.loadGame();
+//        model.saveGame();
+//        model.loadGame();
     }
 }
