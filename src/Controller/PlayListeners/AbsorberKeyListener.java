@@ -1,4 +1,4 @@
-package Controller.MainFrameListeners;
+package Controller.PlayListeners;
 
 
 import Model.Absorber;
@@ -11,15 +11,15 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 //TODO : Refactor this to absorberListener or something?
-public class KeyListenerTest implements KeyListener {
+public class AbsorberKeyListener implements KeyListener {
 
     //TODO Link with connections
 
     GizmoballModel model;
     char key;
-    iGizmo giz;
+    iGizmo giz; //not used
 
-    public KeyListenerTest(String id, GizmoballModel model, char key, iGizmo giz){
+    public AbsorberKeyListener(String id, GizmoballModel model, char key, iGizmo giz){
         System.out.println("Init KeyListener for gizmo id : " + id);
 
         this.model = model;
@@ -34,15 +34,12 @@ public class KeyListenerTest implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println("Key : " + e.getKeyChar() + " pressed.");
-
         if (e.getKeyChar() == key ){
             System.out.println("Absorber fire!");
             //Trigger the absorber !
             //model.getAbsorber().activateAbsorber();
             model.getBall().setVelo(model.getAbsorber().activateAbsorber());
         }
-
     }
 
     @Override

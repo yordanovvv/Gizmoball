@@ -1,16 +1,11 @@
 package Controller.PlayListeners;
 
-import Controller.MainFrameListeners.KeyListenerTest;
-import Model.Absorber;
 import Model.GizmoballModel;
-import Model.iGizmo;
 import View.MainFrame;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class PlayModeListener implements ActionListener {
 
@@ -34,12 +29,10 @@ public class PlayModeListener implements ActionListener {
 
     @Override
     public final void actionPerformed(final ActionEvent e) {
-        //System.out.println("If you see this repeated you screwed up big time you tool.");
-        //System.out.println("Is timer running : " + timer.isRunning());
         if (e.getSource() == timer){
             gModel.moveBall();
         } else {
-            System.out.println(e.getActionCommand());
+            //System.out.println(e.getActionCommand());
             switch (e.getActionCommand()) {
                 case "Play":
                     gModel.getBall().setStopped(false);
@@ -58,7 +51,7 @@ public class PlayModeListener implements ActionListener {
                     //Reload file?
                     break;
             }
-            mf.getFocusOwner().setFocusable(true);
+            mf.setFocusable(true);
             mf.requestFocus();
         }
     }

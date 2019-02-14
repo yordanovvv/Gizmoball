@@ -10,6 +10,7 @@ import Model.iGizmo;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -20,10 +21,8 @@ public class GameBoard extends JPanel implements Observer{
     private String mode;
     GizmoballModel m;
     Ball b;
+    GridClickListener gameBoardListener;
     public GameBoard(String mode, GizmoballModel m) {
-
-        gameBoardListener = new GridClickListener(this, "square");
-
         this.m = m;
         b = m.getBall();
         this.mode = mode;
@@ -38,8 +37,6 @@ public class GameBoard extends JPanel implements Observer{
         return m;
     }
 
-    GridClickListener gameBoardListener; //= new GridClickListener(this, "square");
-
     /**
      * Initialises the game screen
      */
@@ -48,15 +45,21 @@ public class GameBoard extends JPanel implements Observer{
         this.setPreferredSize(new Dimension(WIDTH,HEIGTH));
         this.setBackground(Color.BLACK);
 
+        updateListener();
+    }
+
+    private void updateListener(){
         gameBoardListener = new GridClickListener(this, "square");
+        //clear all previous mouse listeners
+        for (MouseListener m : this.getMouseListeners()){
+            this.removeMouseListener(m);
+        }
         if (mode.equals("BUILD")) {
             this.addMouseListener(gameBoardListener);
         }
     }
-
     //---- TODO : Check this method is in right place
-    public GridClickListener getListener(){
-        //System.out.println(gameBoardListener);
+    public GridClickListener getListener() {
         return gameBoardListener;
     }
 

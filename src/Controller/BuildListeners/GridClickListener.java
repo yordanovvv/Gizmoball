@@ -26,12 +26,9 @@ public class GridClickListener implements MouseListener {
     public GridClickListener(GameBoard board, String selected){
         this.selected = selected;
         this.board = board;
-        //this.mf = mainFrame;
-        //mainFrame.getGameBoard();
-        //mainFrame.getGameBoard().getGizModel();
-        m = board.getGizModel();
 
-        System.out.println("Listener initialised");
+        m = board.getGizModel();
+        
     }
 
     @Override
@@ -42,8 +39,8 @@ public class GridClickListener implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        System.out.println("Mouse clicked at : " + e.getX() + " | " + e.getY());
-        System.out.println("Currently selected : " + selected);
+        //System.out.println("Mouse clicked at : " + e.getX() + " | " + e.getY());
+        //System.out.println("Currently selected : " + selected);
 
         gridX = e.getX()/GRID_SIZE;
         gridY = e.getY()/GRID_SIZE;
@@ -52,39 +49,42 @@ public class GridClickListener implements MouseListener {
 
         iGizmo giz;
 
-        //TODO : Make sure each new gizmo has a unique name
         //TODO ; Check gizmo position for overlapping gizmos
+        int idNo=1;
         switch(selected){
             case "ball":
                 //Would prefer this here, but can also have it when BALL button clicked - C
-                ComponentPopup compPop = new ComponentPopup();
+                ComponentPopup compPop = new ComponentPopup(); //Not doing anything with this yet,  don't have multiple ball support
                 break;
             case "circle":
-                giz = new Circle();
+                //Used to get next unique idNumber
+                for (iGizmo g : m.getGizmos()){
+                    if (g.getGizmoType().equals("Circle")){
+                        idNo++;
+                    }
+                }
+                //TODO : Update this when Circle is defined.
+                giz = new Circle(); //Circle has not yet been defined
                 m.addGizmo(giz);
-                //gizmos.addGizmo(giz, gridX, gridY); //Assumption that .addGizmo does a check etc...
                 break;
             case "square":
-                //Why are there 4 parameters here??
-                giz = new Square("S", gridX, gridY, gridX, gridY);
+                for (iGizmo g : m.getGizmos()){
+                    if (g.getGizmoType().equals("Square")){
+                        idNo++;
+                    }
+                }
+                giz = new Square("S"+idNo, gridX, gridY, gridX, gridY); //Why not 2 parameters instead of 4 ?
                 m.addGizmo(giz);
                 break;
             case "triangle":
-
-                System.out.println(m);
-
-                //for ()
-
-                giz = new Triangle("T",gridX, gridY);
+                for (iGizmo g : m.getGizmos()){
+                    if (g.getGizmoType().equals("Triangle")){
+                        idNo++;
+                    }
+                }
+                giz = new Triangle("T"+idNo,gridX, gridY);
                 m.addGizmo(giz);
-
-                //board.repaint();
-
                 break;
-            //  |
-            //  |
-            //  |
-            // \/  and so on...
         }
     }
 
@@ -97,14 +97,10 @@ public class GridClickListener implements MouseListener {
         int end_gridX = e.getX()/GRID_SIZE;
         int end_gridY = e.getY()/GRID_SIZE;
 
-        System.out.println("release mouse");
-        if (selected=="absorber"){
-
+       if (selected=="absorber"){
             System.out.println("Absorber start : " + start_gridX + " | " + start_gridY);
             System.out.println("Absorber end : " + end_gridX + " | " + end_gridY);
-
             //create absorber here!
-
             //TODO : Check overlap
             //Functionality for more than one absorber??
             if (m.getAbsorber()==null) {

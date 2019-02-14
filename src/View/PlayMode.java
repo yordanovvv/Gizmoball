@@ -1,7 +1,7 @@
 package View;
 
 import Controller.PlayListeners.PlayModeListener;
-import Controller.MainFrameListeners.KeyListenerTest;
+import Controller.PlayListeners.AbsorberKeyListener;
 import Model.GizmoballModel;
 
 import javax.swing.*;
@@ -34,20 +34,14 @@ public class PlayMode extends JPanel {
 
         this.mainFrame = mainFrame;
 
-        //KeyListenerTest kl = new KeyListenerTest("play", mainFrame);
+        //AbsorberKeyListener kl = new AbsorberKeyListener("play", mainFrame);
 
         GizmoballModel model = mainFrame.getGameBoard().getGizModel();
-        KeyListenerTest absorberListener = new KeyListenerTest(model.getAbsorber().getID(),
+        AbsorberKeyListener absorberListener = new AbsorberKeyListener(model.getAbsorber().getID(),
                 model, 'f', model.getAbsorber());
 
-        System.out.println("--------sssss");
         mainFrame.addKeyListener(absorberListener);
         mainFrame.requestFocus();
-
-        System.out.println(mainFrame.getKeyListeners());
-
-
-        //mainFrame.getFocusOwner().addKeyListener(kl);
 
         init();
     }
