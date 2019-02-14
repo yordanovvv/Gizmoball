@@ -3,13 +3,13 @@ package View;
 import static java.lang.Math.toIntExact;
 
 import Controller.BuildListeners.GridClickListener;
-import Model.Ball;
-import Model.GizmoballModel;
-import Model.iGizmo;
+import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseListener;
+import java.awt.geom.AffineTransform;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -68,6 +68,14 @@ public class GameBoard extends JPanel implements Observer{
    public void paintComponent (Graphics g) {
         super.paintComponent(g);
 
+        Wall w = m.getWalls();
+        w.getXCoord();
+        g.setColor(Color.MAGENTA);
+        g.drawLine(w.getXCoord()*30,w.getYCoord()*30,w.getXCoord2()*30,w.getYCoord()*30);
+        g.drawLine(w.getXCoord()*30,w.getYCoord()*30,w.getXCoord()*30,w.getYCoord2()*30);
+        g.drawLine(w.getXCoord2()*30,w.getYCoord2()*30,w.getXCoord2()*30,w.getYCoord()*30);
+        g.drawLine(w.getXCoord2()*30,w.getYCoord2()*30,w.getXCoord()*30,w.getYCoord2()*30);
+
         Graphics2D g2 = (Graphics2D) g;
         int x , y;
         for(iGizmo gizmo : m.getGizmos()){
@@ -87,10 +95,10 @@ public class GameBoard extends JPanel implements Observer{
                     paintAbsorber(g2,x,y,gizmo.getWidth()*30,gizmo.getHeight()*30);
                     break;
                 case "LeftFlipper":
-                    paintLeftFlipper(g2,x,y);
+                    paintLeftFlipper(g2,x,y,gizmo.getRotationAngle());
                     break;
                 case "RightFlipper":
-                    paintRightFlipper(g2,x,y);
+                    paintRightFlipper(g2,x,y,gizmo.getRotationAngle());
                     break;
             }
         }
@@ -101,6 +109,8 @@ public class GameBoard extends JPanel implements Observer{
         //todo please check this
        Ball b = m.getBall();
        paintBall(g2,toIntExact(Math.round(b.getExactX())),toIntExact(Math.round(b.getExactY())));
+       //Absorber a = (Absorber) m.getAbsorber();
+       //paintAbsorber(g2,a.getXCoord2(), a.getYCoord2(), a.getXCoord(), a.getYCoord());
 
        repaint();
     }
@@ -127,28 +137,46 @@ public class GameBoard extends JPanel implements Observer{
         g.fillPolygon(poly);
     }
 
-    private void paintLeftFlipper(Graphics g,int x, int y){
-        g.setColor(new Color(170, 169, 50, 255));
+    private void paintLeftFlipper(Graphics g,int x, int y, int angle){
+        Graphics2D g2 =(Graphics2D) g.create();
+
+        g2.rotate(Math.toDegrees(angle), getWidth() / 2, getHeight() / 2);
+
+        g2.setColor(new Color(170, 169, 50, 255));
         int[] px = {x,x+15 ,x+13 ,x+1};
         int[] py = {y+5,y+5  ,y+56 ,y+56};
         Polygon poly1 = new Polygon(px, py, px.length);
-        g.fillPolygon(poly1);
-        g.fillOval(x,y,15,15);
-        g.fillOval(x+1,y+48,12,12);
-        g.setColor(new Color(0, 0, 0, 255));
-        g.fillOval(x+5,y+6,5,5);
+        g2.fillPolygon(poly1);
+        g2.fillOval(x,y,15,15);
+        g2.fillOval(x+1,y+48,12,12);
+        g2.setColor(new Color(0, 0, 0, 255));
+        g2.fillOval(x+5,y+6,5,5);
+
+        g2.dispose();
     }
 
-    private void paintRightFlipper(Graphics g,int x, int y){
-        g.setColor(new Color(170, 169, 50, 255));
+    private void paintRightFlipper(Graphics g,int x, int y, int angle){
+        Graphics2D g2 =(Graphics2D) g.create();
+
+        AffineTransform transform = new AffineTransform();
+        AffineTransform old = g2.getTransform();
+        transform.rotate(Math.toRadians(angle), x + 30/2, y + 5);
+        g2.transform(transform);
+
+        g2.setColor(new Color(170, 169, 50, 255));
+
         int[] pxFR = {x+15,x+15+15 ,x+13+15 ,x+1+15};
-        int[] pyFR = {y+5,y+5  ,y+56 ,y+56};
+        int[] pyFR = {y+5 ,y+5     ,y+56    ,y+56};
         Polygon polyFR= new Polygon(pxFR, pyFR, pyFR.length);
-        g.fillPolygon(polyFR);
-        g.fillOval(x+15,y,15,15);
-        g.fillOval(x+1+15,y+48,12,12);
-        g.setColor(new Color(0, 0, 0, 255));
-        g.fillOval(x+5+15,y+6,5,5);
+        g2.fillPolygon(polyFR);
+
+        g2.fillOval(x+15,y,15,15);
+        g2.fillOval(x+1+15,y+48,12,12);
+        g2.setColor(new Color(0, 0, 0, 255));
+        g2.fillOval(x+5+15,y+6,5,5);
+
+        g2.setTransform(old);
+        g2.dispose();
     }
 
     private void paintAbsorber(Graphics g, int x, int y, int width,int height){

@@ -7,13 +7,35 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class RightFlipper implements iGizmo {
+    private int rotationAngle = 0;
+    private String ID;
 
-    private int x, y;
+    private Color colour;
+    private int XCoord;
+    private int YCoord;
+    private int height, width;
+    private ArrayList<LineSegment> lines;
+    private ArrayList<Circle> circles;
+    private ArrayList<String> gizmoConnections;
+    private ArrayList<String> keyConnections;
+    private final double constant = 30;
+    private boolean down = false;
 
-    public RightFlipper(int x, int y){
-        this.x = x;
-        this.y = y;
+    public RightFlipper(String id, int x, int y){
+        this.ID = id;
+        this.XCoord = x;
+        this.YCoord = y;
 
+        height = 2;
+        width = 2;
+
+        lines = new ArrayList<>();
+        circles = new ArrayList<>();
+        gizmoConnections = new ArrayList<>();
+        keyConnections = new ArrayList<>();
+
+        generateCircles();
+        generateLines();
     }
 
 
@@ -25,37 +47,50 @@ public class RightFlipper implements iGizmo {
 
     @Override
     public void setID(String id) {
-
+        this.ID = id;
     }
 
     @Override
     public void setXCoord(int x) {
-
+        this.XCoord = x;
     }
 
     @Override
     public void setYCoord(int y) {
-
+        this.YCoord = y;
     }
 
     @Override
     public void setColour(Color colour) {
-
+        this.colour = colour;
     }
 
     @Override
     public void generateCircles() {
-
+       // the radius is in pixels as we are graphing it to the screen.
+        Circle bigTopCircle = new Circle((XCoord+.5)*constant,(YCoord)*constant,15);
+        Circle bigBottomCircle = new Circle((XCoord+.66)*constant,(YCoord+.2)*constant,5);
+        Circle topLeft;
+        Circle topRight;
+        Circle bottomLeft;
+        Circle bottomRight;
+        circles.add(bigTopCircle);
+        circles.add(bigBottomCircle);
     }
 
     @Override
     public void generateLines() {
 
+        LineSegment leftLine = new LineSegment(XCoord*constant + 15,YCoord*constant + 5,XCoord * constant + 30,YCoord * constant + 5);
+        LineSegment rightLine = new LineSegment(XCoord*constant + 28,YCoord*constant + 56,XCoord * constant + 16,YCoord * constant + 56);
+
+        lines.add(leftLine);
+        lines.add(rightLine);
     }
 
     @Override
     public void setGizmoConnection(String id) {
-
+        gizmoConnections.add(id);
     }
 
     @Override
@@ -65,62 +100,71 @@ public class RightFlipper implements iGizmo {
 
     @Override
     public void rotate() {
+        int rotation = 5;
+        if(rotationAngle==90 && down == false)
+            down = true;
+        else if(rotationAngle == 0)
+            down = false;
+        else if (down == true)
+            rotation = -5;
 
+
+        rotationAngle+=rotation;
     }
 
     @Override
     public int getRotationAngle() {
-        return 0;
+        return rotationAngle;
     }
 
     @Override
     public String getID() {
-        return null;
+        return ID;
     }
 
     @Override
     public int getHeight() {
-        return 0;
+        return height;
     }
 
     @Override
     public int getWidth() {
-        return 0;
+        return width;
     }
 
     @Override
     public int getXCoord() {
-        return x;
+        return XCoord;
     }
 
     @Override
     public int getYCoord() {
-        return y;
+        return YCoord;
     }
 
     @Override
     public ArrayList<Circle> getCircles() {
-        return null;
+        return circles;
     }
 
     @Override
     public ArrayList<LineSegment> getLines() {
-        return null;
+        return lines;
     }
 
     @Override
     public ArrayList<String> getGizmoConnections() {
-        return null;
+        return gizmoConnections;
     }
 
     @Override
     public ArrayList<String> getKeyConnections() {
-        return null;
+        return keyConnections;
     }
 
     @Override
     public void removeGizmoConnection(String id) {
-
+        gizmoConnections.remove(id);
     }
 
     @Override

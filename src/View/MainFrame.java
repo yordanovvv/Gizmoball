@@ -114,9 +114,10 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
 
         BorderLayout layout_gameContainer = new BorderLayout();
         gameContainer.setLayout(layout_gameContainer);
-        gameContainer.setPreferredSize(new Dimension(600, 600));
-        gameContainer.setMaximumSize(new Dimension(600,600));
-        gameContainer.setMinimumSize(new Dimension(600,600));
+        int size = 700;
+        gameContainer.setPreferredSize(new Dimension(size, size));
+        gameContainer.setMaximumSize(new Dimension(size,size));
+        gameContainer.setMinimumSize(new Dimension(size,size));
         gameBoard = new GameBoard("BUILD",model);
 
         physicsBoard = new JPanel();

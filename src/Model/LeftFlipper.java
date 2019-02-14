@@ -7,6 +7,21 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class LeftFlipper implements iGizmo {
+    private String id;
+
+    private Color colour;
+    private int XCoord;
+    private int YCoord;
+    private int height, width;
+    private ArrayList<LineSegment> lines;
+    private ArrayList<Circle> circles;
+    private ArrayList<String> gizmoConnections;
+    private ArrayList<String> keyConnections;
+    private final double constant = 30-.73;
+
+    private int rotationAngle = 0;
+    private boolean down = false;
+
 
     @Override
     public String getGizmoType() {
@@ -55,12 +70,21 @@ public class LeftFlipper implements iGizmo {
 
     @Override
     public void rotate() {
+        int rotation = 5;
+        if(rotationAngle==90 && down == false)
+            down = true;
+        else if(rotationAngle == 0)
+            down = false;
+        else if (down == true)
+            rotation = -5;
 
+
+        rotationAngle+=rotation;
     }
 
     @Override
     public int getRotationAngle() {
-        return 0;
+        return rotationAngle;
     }
 
     @Override

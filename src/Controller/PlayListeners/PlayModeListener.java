@@ -40,7 +40,7 @@ public class PlayModeListener implements ActionListener {
                     break;
                 case "Pause":
                     gModel.getBall().setStopped(true);
-                    timer.stop(); //FIXME : Make timer actually stop....
+                    timer.stop();
                     break;
                 case "Tick":
                     gModel.getBall().setStopped(false);

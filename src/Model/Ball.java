@@ -19,7 +19,7 @@ public class Ball extends Observable {
         xpos = x;
         ypos = y;
         velocity = new Vect(xv, yv);
-        radius = 0.25;//todo adjust all of the sizing to L's because spec.
+        radius = 0.3;//todo adjust all of the sizing to L's because spec.
         stopped = false;
     }
 
@@ -41,7 +41,7 @@ public class Ball extends Observable {
     }
 
     public Circle getCircle() {
-        return new Circle(xpos, ypos, radius);
+        return new Circle((xpos+radius), ypos+radius, radius*30);
     }
 
     public String getID() { return ID; }

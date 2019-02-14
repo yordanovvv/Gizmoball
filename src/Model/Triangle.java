@@ -79,8 +79,8 @@ public class Triangle implements iGizmo {
 
     @Override
     public void generateLines() {
-        LineSegment line1 = new LineSegment(XCoord*constant, YCoord*constant , (XCoord + 1)*constant, (YCoord + 1)*constant);
-        LineSegment line2 = new LineSegment(XCoord*constant, YCoord*constant, (XCoord+1)*constant, (YCoord )*constant);
+        LineSegment line2 = new LineSegment(XCoord*constant, YCoord*constant , (XCoord + 1)*constant, (YCoord + 1)*constant);
+        LineSegment line1 = new LineSegment(XCoord*constant, YCoord*constant, (XCoord+1)*constant, (YCoord )*constant);
         LineSegment line3 = new LineSegment((XCoord+1)*constant, (YCoord)*constant, (XCoord + 1)*constant, (YCoord+1)*constant);
 
         lines.add(line1);
@@ -161,7 +161,6 @@ public class Triangle implements iGizmo {
     @Override
     public void removeGizmoConnection(String id) {
         gizmoConnections.remove(id);
-
     }
 
     @Override

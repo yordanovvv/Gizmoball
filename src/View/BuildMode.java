@@ -1,14 +1,9 @@
 package View;
 
-import Controller.BuildListeners.*;
-//import Controller.MainFrameListeners.KeyListenerTest;
+import Controller.BuildListeners.AddButtonGizmoListener;
 
 import javax.swing.*;
-import javax.swing.plaf.ButtonUI;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.util.Observable;
-import java.util.Observer;
 
 public class BuildMode extends JPanel{
 
