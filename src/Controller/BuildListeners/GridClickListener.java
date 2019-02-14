@@ -3,7 +3,6 @@ package Controller.BuildListeners;
 import Model.*;
 import View.ComponentPopup;
 import View.GameBoard;
-import View.MainFrame;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -16,10 +15,13 @@ public class GridClickListener implements MouseListener {
     GameBoard board;
     //private MainFrame mf;
 
+    private final int GRID_SIZE = 30;
+
     int gridX;
     int gridY;
+    double rad = 0.5 ;
 
-    private final int GRID_SIZE = 30;
+
 
     GizmoballModel m;
 
@@ -39,11 +41,12 @@ public class GridClickListener implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        //System.out.println("Mouse clicked at : " + e.getX() + " | " + e.getY());
+        //System.out.println("Mouse clicked atX : " + e.getX() + " | " + e.getY());
         //System.out.println("Currently selected : " + selected);
 
         gridX = e.getX()/GRID_SIZE;
         gridY = e.getY()/GRID_SIZE;
+
 
         System.out.println("Placing a " +  selected + " at grid position " + gridX + " | " + gridY);
 
@@ -59,12 +62,12 @@ public class GridClickListener implements MouseListener {
             case "circle":
                 //Used to get next unique idNumber
                 for (iGizmo g : m.getGizmos()){
-                    if (g.getGizmoType().equals("Circle")){
+                    if (g.getGizmoType().equals("GizmoCircle")){
                         idNo++;
                     }
                 }
-                //TODO : Update this when Circle is defined.
-                giz = new Circle(); //Circle has not yet been defined
+                //TODO : Update this when GizmoCircle is defined.
+                giz = new GizmoCircle("C"+idNo, gridX, gridY, rad); //GizmoCircle has not yet been defined
                 m.addGizmo(giz);
                 break;
             case "square":
