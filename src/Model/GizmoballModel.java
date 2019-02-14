@@ -18,6 +18,7 @@ public class GizmoballModel extends Observable{
     private iGizmo absorber;
     private iGizmo t;
     private iGizmo t2;
+    private boolean absorberCollision = false;
 
     public GizmoballModel()
     {
@@ -37,13 +38,13 @@ public class GizmoballModel extends Observable{
         Triangle t5 = new Triangle("T5",12, 12);
         Triangle t6 = new Triangle("T6",14, 14);
 
-        gizmos.add(t);
+       /* gizmos.add(t);
         gizmos.add(t2);
         gizmos.add(t3);
         gizmos.add(t4);
         gizmos.add(t5);
         gizmos.add(t6);
-
+*/
     }
 
 
@@ -59,6 +60,16 @@ public class GizmoballModel extends Observable{
             {
                 ball = moveBallForTime(ball, moveTime);
             } else {
+                if(absorberCollision == true) //collision with an absorber
+                {
+                    ball = moveBallForTime(ball, tuc + moveTime);
+                    absorber.addBall(ball);
+                    ball.setStopped(true);
+                    //newVelo = new Vect(0,0);
+                    //absorber.eatBall or sth
+                    //System.out.println("absorber!!!");
+
+                }
                 ball = moveBallForTime(ball, tuc); //collision in time tuc
                 ball.setVelo(cd.getVelo()); //velocity after the collision
             }
@@ -92,9 +103,9 @@ public class GizmoballModel extends Observable{
 
         //find shortest time
         double shortestTime = Double.MAX_VALUE;
-        double timeC = 0.0; //time until collision with a line
-        double timeL = 0.0; //time until collision with a circle
-        double timeW = 0.0;
+        double timeC = 0.0; //time until collision with a circle
+        double timeL = 0.0; //time until collision with a line
+        double timeW = 0.0; //                            wall
 
 
         //iterating through walls
@@ -104,9 +115,9 @@ public class GizmoballModel extends Observable{
             timeW = Geometry.timeUntilWallCollision(ls, ballCircle, ballVelocity);
             if (timeW < shortestTime) {
                 shortestTime = timeW; //we are hitting a line segment
+                absorberCollision =false;
                 newVelo = Geometry.reflectWall(ls, ball.getVelo(), 1.0);
             }
-            //circles with radius 0 at the end of walls? No probably?
         }
 
         //iterating through  gizmos
@@ -124,6 +135,12 @@ public class GizmoballModel extends Observable{
                     if (timeL < shortestTime)
                     {
                         shortestTime = timeL; //we are hitting a line segment
+                        if (gizmo.getGizmoType().equals("Absorber"))
+                        {
+                            absorberCollision = true;
+
+                        }
+                        else absorberCollision = false;
                         newVelo = Geometry.reflectWall(ls, ball.getVelo(), 1.0);
                     }
                 }
@@ -138,16 +155,23 @@ public class GizmoballModel extends Observable{
                     if (timeC < shortestTime)
                     {
                         shortestTime = timeC; //we are hitting a circle
+                        absorberCollision = false;
                         newVelo = Geometry.reflectCircle(c.getCenter(), ball.getCircle().getCenter(), ball.getVelo(),1.0);
                     }
                 }
             }
         }
-        return new CollisionDetails(shortestTime, newVelo);
+
+
+        CollisionDetails cd = new CollisionDetails(shortestTime, newVelo);
+        return cd;
     }
 
     //TODO these need to be done
-    private void addBall(Ball ball){}
+    private void addBall(Ball ball)
+    {
+
+    }
 
     public void addGizmo(iGizmo gizmo){
         gizmos.add(gizmo);

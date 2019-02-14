@@ -177,4 +177,9 @@ public class Square implements iGizmo {
     public void removeKeyConnection() {
 
     }
+
+    @Override
+    public void addBall(Ball ball) {
+
+    }
 }

@@ -17,7 +17,7 @@ public class Triangle implements iGizmo {
     private ArrayList<Circle> circles;
     private ArrayList<String> gizmoConnections;
     private ArrayList<String> keyConnections;
-    private final double constant = 30;
+    private final double constant = 30-.73;
 
 
     public Triangle(String id, int XCoord, int YCoord) {
@@ -69,11 +69,11 @@ public class Triangle implements iGizmo {
 
         Circle top = new Circle(XCoord*constant, YCoord*constant, 0);
         Circle right = new Circle((XCoord + 1)*constant, YCoord*constant, 0);
-        Circle bottomLeft = new Circle((XCoord+1)*constant, (YCoord + 1)*constant, 0);
+        Circle bottomRight = new Circle((XCoord+1)*constant, (YCoord + 1)*constant, 0);
 
         circles.add(top);
         circles.add(right);
-        circles.add(bottomLeft);
+        circles.add(bottomRight);
 
     }
 
@@ -166,6 +166,11 @@ public class Triangle implements iGizmo {
 
     @Override
     public void removeKeyConnection() {
+
+    }
+
+    @Override
+    public void addBall(Ball ball) {
 
     }
 }

@@ -117,4 +117,9 @@ public class LeftFlipper implements iGizmo {
     public void removeKeyConnection() {
 
     }
+
+    @Override
+    public void addBall(Ball ball) {
+
+    }
 }

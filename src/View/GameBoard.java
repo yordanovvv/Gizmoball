@@ -3,7 +3,6 @@ package View;
 import static java.lang.Math.toIntExact;
 
 import Controller.BuildListeners.GridClickListener;
-import Model.Absorber;
 import Model.Ball;
 import Model.GizmoballModel;
 import Model.iGizmo;
@@ -11,7 +10,6 @@ import Model.iGizmo;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -103,8 +101,6 @@ public class GameBoard extends JPanel implements Observer{
         //todo please check this
        Ball b = m.getBall();
        paintBall(g2,toIntExact(Math.round(b.getExactX())),toIntExact(Math.round(b.getExactY())));
-       //Absorber a = (Absorber) m.getAbsorber();
-       //paintAbsorber(g2,a.getXCoord2(), a.getYCoord2(), a.getXCoord(), a.getYCoord());
 
        repaint();
     }

@@ -58,4 +58,5 @@ public interface iGizmo {
     void removeKeyConnection();
 
 
+    void addBall(Ball ball);
 }
