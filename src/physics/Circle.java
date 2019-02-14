@@ -25,7 +25,7 @@ package physics;
  *
  *
  * @author   Lik Mui
- * @version  $Id: Circle.java,v 1.1 2002/08/21 21:49:40 kirky Exp $
+ * @version  $Id: GizmoCircle.java,v 1.1 2002/08/21 21:49:40 kirky Exp $
  * @date     $Date: 2002/08/21 21:49:40 $
  *
  *********************************************************************/
@@ -35,7 +35,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Ellipse2D;
 
 /**
- * Circle is an immutable abstract data type which models the
+ * GizmoCircle is an immutable abstract data type which models the
  * mathematical notion of a circle in cartesian space.
  */
 public final class Circle implements Serializable {
@@ -134,7 +134,7 @@ public final class Circle implements Serializable {
     }
 
     public String toString() {
-        return "[Circle center=" + centerPoint + " radius=" + radius + "]";
+        return "[GizmoCircle center=" + centerPoint + " radius=" + radius + "]";
     }
 
     public int hashCode() {

@@ -33,6 +33,6 @@ public class AddCircleGizmoListener implements iAddGizmoListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("Circle clicked : " + e);
+        System.out.println("GizmoCircle clicked : " + e);
     }
 }

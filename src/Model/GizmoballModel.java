@@ -41,6 +41,9 @@ public class GizmoballModel extends Observable{
         Triangle t5 = new Triangle("T5",12, 12);
         Triangle t6 = new Triangle("T6",14, 14);
 
+        //GizmoCircle c1 = new GizmoCircle("C1",12,13,1);
+        //gizmos.add(c1);
+
        /* gizmos.add(t);
         gizmos.add(t2);
         gizmos.add(t3);

@@ -67,7 +67,7 @@ public class BuildMode extends JPanel{
 
         button_square = new JButton("Square");
         button_triangle = new JButton("Triangle");
-        button_circle= new JButton("Circle");
+        button_circle= new JButton("GizmoCircle");
         button_absorber = new JButton("Absorber");
         button_leftFlipper = new JButton("Left flipper");
         button_rightFlipper = new JButton("Right flipper");
