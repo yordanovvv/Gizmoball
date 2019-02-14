@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import Controller.PlayListeners.FlipperKeyListener;
 import physics.Circle;
 import physics.Geometry;
 import physics.LineSegment;
@@ -29,10 +30,13 @@ public class GizmoballModel extends Observable{
         //walls = new Wall(-10, -10, 575, 575);
 
         absorber = new Absorber("A1",0,19,20,20);
-       // gizmos.add(absorber);
+        gizmos.add(absorber);
 
         RightFlipper rightFlipper = new RightFlipper("R1",10,10);
         gizmos.add(rightFlipper);
+
+        FlipperKeyListener rightFlipListener = new FlipperKeyListener("right", this, 'r', rightFlipper);//remove this in the long run
+
 
         t = new Triangle("T1",13, 14);
         Triangle  t2 = new Triangle("T2",12, 13);
@@ -41,7 +45,7 @@ public class GizmoballModel extends Observable{
         Triangle t5 = new Triangle("T5",12, 12);
         Triangle t6 = new Triangle("T6",14, 14);
 
-
+        /*
         Square s1 = new Square("S1",8,8);
         Square s2 = new Square("S1",9,8);
         Square s3 = new Square("S1",10,8);
@@ -83,6 +87,7 @@ public class GizmoballModel extends Observable{
         gizmos.add(s18);
         gizmos.add(s19);
         //gizmos.add(s20);
+        */
 
        /* gizmos.add(t);
         gizmos.add(t2);
@@ -184,7 +189,6 @@ public class GizmoballModel extends Observable{
                         if (gizmo.getGizmoType().equals("Absorber"))
                         {
                             absorberCollision = true;
-
                         }
                         else absorberCollision = false;
                         newVelo = Geometry.reflectWall(ls, ball.getVelo(), 1.0);
@@ -222,6 +226,9 @@ public class GizmoballModel extends Observable{
     public void addGizmo(iGizmo gizmo){
         gizmos.add(gizmo);
     }
+
+    //craig testing stuff
+    public void removeGizmo(iGizmo gizmo){gizmos.remove(gizmo);}
 
     //todo fix this. I have done this in order to make the view work -N
 

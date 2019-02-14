@@ -2,6 +2,7 @@ package Controller.PlayListeners;
 
 import Model.GizmoballModel;
 import Model.LeftFlipper;
+import Model.RightFlipper;
 import Model.iGizmo;
 
 import java.awt.event.KeyEvent;
@@ -30,6 +31,10 @@ public class FlipperKeyListener implements KeyListener {
     public void keyPressed(KeyEvent e) {
         if (e.getKeyChar() == key ){
             System.out.println("Flipper flip!");
+
+            flipper.rotate();
+
+            //flipper.rotate();
             //flipper.flip();
         }
     }

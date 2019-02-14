@@ -1,11 +1,14 @@
 package View;
 
+import Controller.PlayListeners.FlipperKeyListener;
 import Controller.PlayListeners.PlayModeListener;
 import Controller.PlayListeners.AbsorberKeyListener;
 import Model.GizmoballModel;
+import Model.iGizmo;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseListener;
 
 public class PlayMode extends JPanel {
 
@@ -39,6 +42,16 @@ public class PlayMode extends JPanel {
         GizmoballModel model = mainFrame.getGameBoard().getGizModel();
         AbsorberKeyListener absorberListener = new AbsorberKeyListener(model.getAbsorber().getID(),
                 model, 'f', model.getAbsorber());
+
+        for (iGizmo g : model.getGizmos()){
+            if (g.getGizmoType().equals("RightFlipper")){
+                FlipperKeyListener flipperListener = new FlipperKeyListener("right", model, 'r', g);
+                mainFrame.addKeyListener(flipperListener);
+            }
+        }
+
+
+
 
         mainFrame.addKeyListener(absorberListener);
         mainFrame.requestFocus();
@@ -93,6 +106,13 @@ public class PlayMode extends JPanel {
         //--------------------------------------------------------
         //                 BUTTON LISTENER!
         //Need to pass in the view for mainframe!
+
+        /*
+        for (MouseListener m : button_start.getMouseListeners()){
+            button_start.removeMouseListener(m);
+        }
+        */
+
         PlayModeListener startClickListener = new PlayModeListener(mainFrame, "start");
         PlayModeListener stopClickListener = new PlayModeListener(mainFrame, "stop");
         PlayModeListener tickClickListener = new PlayModeListener(mainFrame, "tick");
