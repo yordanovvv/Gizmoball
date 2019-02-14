@@ -23,7 +23,7 @@ public class GizmoballModel extends Observable{
     public GizmoballModel()
     {
         //position of ball (25,25) in pixels, Velocity (100,100) pixels per tick
-        ball = new Ball(110, 100, 150, 150);
+        ball = new Ball(280, 303, 150, 150);
         gizmos = new ArrayList<iGizmo>();
         walls = new Wall(0, 0, 20, 20);
         //walls = new Wall(-10, -10, 575, 575);
@@ -40,6 +40,49 @@ public class GizmoballModel extends Observable{
         Triangle t4 = new Triangle("T4",13, 12);
         Triangle t5 = new Triangle("T5",12, 12);
         Triangle t6 = new Triangle("T6",14, 14);
+
+
+        Square s1 = new Square("S1",8,8);
+        Square s2 = new Square("S1",9,8);
+        Square s3 = new Square("S1",10,8);
+        Square s4 = new Square("S1",11,8);
+        Square s5 = new Square("S1",8,9);
+        Square s6 = new Square("S1",8,10);
+        Square s7 = new Square("S1",8,11);
+        Square s8 = new Square("S1",8,12);
+        Square s9 = new Square("S1",10,12);
+        Square s10 = new Square("S1",11,12);
+        Square s11 = new Square("S1",8,12);
+        Square s12 = new Square("S1",9,12);
+        Square s13 = new Square("S1",10,12);
+        Square s14 = new Square("S1",11,12);
+        Square s15 = new Square("S1",12,12);
+        Square s16 = new Square("S1",12,8);
+        Square s17 = new Square("S1",12,9);
+        Square s18 = new Square("S1",12,10);
+        Square s19 = new Square("S1",12,11);
+        Square s20 = new Square("S1",9,9);
+
+        gizmos.add(s1);
+        gizmos.add(s2);
+        gizmos.add(s3);
+        gizmos.add(s4);
+        gizmos.add(s5);
+        gizmos.add(s6);
+        gizmos.add(s7);
+        gizmos.add(s8);
+        gizmos.add(s9);
+        gizmos.add(s10);
+        gizmos.add(s11);
+        gizmos.add(s12);
+        gizmos.add(s13);
+        gizmos.add(s14);
+        gizmos.add(s15);
+        gizmos.add(s16);
+        gizmos.add(s17);
+        gizmos.add(s18);
+        gizmos.add(s19);
+        //gizmos.add(s20);
 
        /* gizmos.add(t);
         gizmos.add(t2);

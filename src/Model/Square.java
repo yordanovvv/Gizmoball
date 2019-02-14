@@ -13,8 +13,6 @@ public class Square implements iGizmo {
     private Color colour;
     private int XCoord;
     private int YCoord;
-    private int XCoord2;
-    private int YCoord2;
     private int height, width = 1;
     private ArrayList<LineSegment> lines;
     private ArrayList<Circle> circles;
@@ -24,13 +22,10 @@ public class Square implements iGizmo {
 
     //Constructor for creating squares
 
-    public Square(String id, int XCoord, int YCoord, int XCoord2, int YCoord2) {
+    public Square(String id, int XCoord, int YCoord) {
         this.ID = id;
         this.XCoord = XCoord;
         this.YCoord = YCoord;
-        this.XCoord2 = XCoord2;
-        this.YCoord2 = YCoord2;
-
 
         lines = new ArrayList<>();
         circles = new ArrayList<>();
@@ -75,9 +70,9 @@ public class Square implements iGizmo {
     public void generateCircles() {
 
         Circle topLeftCorner = new Circle(XCoord* constant, YCoord* constant, 0);
-        Circle topRightCorner = new Circle(XCoord2* constant, YCoord2* constant, 0);
-        Circle bottomLeftCorner = new Circle(XCoord* constant, YCoord2* constant, 0);
-        Circle bottomRightCorner = new Circle(XCoord2* constant, YCoord* constant, 0);
+        Circle topRightCorner = new Circle((XCoord + 1)* constant, (YCoord + 1)* constant, 0);
+        Circle bottomLeftCorner = new Circle(XCoord* constant, (YCoord + 1)* constant, 0);
+        Circle bottomRightCorner = new Circle((XCoord + 1)* constant, YCoord* constant, 0);
         circles.add(topLeftCorner);
         circles.add(topRightCorner);
         circles.add(bottomLeftCorner);
