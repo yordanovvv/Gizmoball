@@ -42,11 +42,12 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
 
     private GizmoballModel model;
 
-    private final int WIDTH = 1100, HEIGHT = 900;
+    private final int WIDTH = 900, HEIGHT = 700;
 
     public MainFrame(GizmoballModel model) {
 
         this.model = model;
+        this.pack();
        // this.setResizable(false);
         this.setTitle("GROUP 11 - Gizmoball");
         this.setSize(WIDTH, HEIGHT);

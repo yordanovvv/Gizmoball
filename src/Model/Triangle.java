@@ -69,29 +69,20 @@ public class Triangle implements iGizmo {
 
         Circle top = new Circle(XCoord*constant, YCoord*constant, 0);
         Circle right = new Circle((XCoord + 1)*constant, YCoord*constant, 0);
-        Circle bottomLeft = new Circle(XCoord*constant, (YCoord + 1)*constant, 0);
+        Circle bottomLeft = new Circle((XCoord+1)*constant, (YCoord + 1)*constant, 0);
 
         circles.add(top);
         circles.add(right);
         circles.add(bottomLeft);
 
-
     }
 
     @Override
     public void generateLines() {
-
-
         LineSegment line1 = new LineSegment(XCoord*constant, YCoord*constant , (XCoord + 1)*constant, (YCoord + 1)*constant);
-
         LineSegment line2 = new LineSegment(XCoord*constant, YCoord*constant, (XCoord+1)*constant, (YCoord )*constant);
-
         LineSegment line3 = new LineSegment((XCoord+1)*constant, (YCoord)*constant, (XCoord + 1)*constant, (YCoord+1)*constant);
 
-        //System.out.println(XCoord);
-       // System.out.println(YCoord);
-       // System.out.println(XCoord+1);
-        //System.out.println(YCoord+1);;
         lines.add(line1);
         lines.add(line2);
         lines.add(line3);

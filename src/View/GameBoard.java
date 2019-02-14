@@ -85,11 +85,9 @@ public class GameBoard extends JPanel implements Observer{
                 case "Triangle":
                     paintTriangle(g2,x,y);
                     break;
-
                 case "Absorber":
                     paintAbsorber(g2,x,y,gizmo.getWidth()*30,gizmo.getHeight()*30);
                     break;
-
                 case "LeftFlipper":
                     paintLeftFlipper(g2,x,y);
                     break;
@@ -120,14 +118,11 @@ public class GameBoard extends JPanel implements Observer{
 
     private void paintBall(Graphics g,int x, int y){
         g.setColor(new Color(255, 251, 255, 255));
-        g.fillOval(x,y,16,16);
+        g.fillOval(x-8,y-8,16,16);
     }
 
     private void paintTriangle(Graphics g,int x, int y){
-        //System.out.println("****************");
-        //System.out.println(x/30);
-        //System.out.println(y/30);
-        //System.out.println("****************");
+
         int xPoly[] = {x, (x+30),x, (x+30), (x+30), (x+30)};
         int yPoly[] = {y, (y+30),y, y     , y      ,(y+30)};
 

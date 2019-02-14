@@ -22,7 +22,7 @@ public class GizmoballModel extends Observable{
     public GizmoballModel()
     {
         //position of ball (25,25) in pixels, Velocity (100,100) pixels per tick
-        ball = new Ball(500, 400, 150, 150);
+        ball = new Ball(400, 401, 150, 150);
         gizmos = new ArrayList<iGizmo>();
         walls = new Wall(0, 0, 20, 20);
         //walls = new Wall(-10, -10, 575, 575);
@@ -30,18 +30,26 @@ public class GizmoballModel extends Observable{
         absorber = new Absorber("A1",0,19,20,20);
         gizmos.add(absorber);
 
-        t = new Triangle("T1",1, 1);
-        t2 = new Triangle("T2",10, 10);
+        t = new Triangle("T1",13, 14);
+        Triangle  t2 = new Triangle("T2",12, 13);
+        Triangle t3 = new Triangle("T3",14, 13);
+        Triangle t4 = new Triangle("T4",13, 12);
+        Triangle t5 = new Triangle("T5",12, 12);
+        Triangle t6 = new Triangle("T6",14, 14);
 
         gizmos.add(t);
         gizmos.add(t2);
+        gizmos.add(t3);
+        gizmos.add(t4);
+        gizmos.add(t5);
+        gizmos.add(t6);
 
     }
 
 
     public void moveBall()
     {
-        double moveTime = 0.05; //20 times per second
+        double moveTime = 0.06; //20 times per second
 
         if (ball != null && !ball.isStopped())
         {

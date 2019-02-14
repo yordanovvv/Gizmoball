@@ -7,6 +7,17 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class RightFlipper implements iGizmo {
+
+    private int x, y;
+
+    public RightFlipper(int x, int y){
+        this.x = x;
+        this.y = y;
+
+    }
+
+
+
     @Override
     public String getGizmoType() {
         return "RightFlipper";
@@ -79,12 +90,12 @@ public class RightFlipper implements iGizmo {
 
     @Override
     public int getXCoord() {
-        return 0;
+        return x;
     }
 
     @Override
     public int getYCoord() {
-        return 0;
+        return y;
     }
 
     @Override
