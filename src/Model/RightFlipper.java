@@ -67,8 +67,10 @@ public class RightFlipper implements iGizmo {
 
     @Override
     public void generateCircles() {
+        //todo fix me
+        //XCoord*constant + 20.9
        // the radius is in pixels as we are graphing it to the screen.
-        Circle bigTopCircle = new Circle(XCoord*constant + 20.4,YCoord*constant +7.51,7.05);
+        Circle bigTopCircle = new Circle(XCoord*constant + 20.91,YCoord*constant +7.51,7);
         Circle bigBottomCircle = new Circle(XCoord*constant + 20,YCoord*constant +7.5+48,6);
         Circle topLeft;
         Circle topRight;
@@ -81,11 +83,12 @@ public class RightFlipper implements iGizmo {
     @Override
     public void generateLines() {
 
-        LineSegment rightL = new LineSegment((XCoord+1)*constant,YCoord*constant +7.51,(XCoord + .9) * constant,YCoord*constant +7.5+48);
+        //todo fix me
+        LineSegment rightL = new LineSegment((XCoord+.9)*constant,YCoord*constant +7.51,(XCoord + .9) * constant,YCoord*constant +7.5+48);
         LineSegment leftL = new LineSegment((XCoord+.516)*constant,YCoord*constant +7.51,(YCoord + .6)*constant,YCoord*constant +7.5+48);
 
-        lines.add(rightL);
-        lines.add(leftL);
+       // lines.add(rightL);
+        //lines.add(leftL);
     }
 
     @Override
@@ -100,13 +103,13 @@ public class RightFlipper implements iGizmo {
 
     @Override
     public void rotate() {
-        int rotation = 5;
-        if(rotationAngle==90 && down == false)
+        int rotation = 18;
+        if(rotationAngle==72 && down == false)
             down = true;
         else if(rotationAngle == 0)
             down = false;
         else if (down == true)
-            rotation = -5;
+            rotation = -rotation;
 
 
         rotationAngle+=rotation;
