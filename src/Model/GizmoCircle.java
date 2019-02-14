@@ -17,7 +17,7 @@ public class GizmoCircle implements iGizmo {
     private ArrayList<LineSegment> lines;
     private ArrayList<String> gizmoConnections;
     private ArrayList<String> keyConnections;
-    private final double constant = 30 - .73;
+    private final double constant = 30;
 
 
     public GizmoCircle(String id, int XCoord, int YCoord, double radius){
@@ -69,7 +69,7 @@ public class GizmoCircle implements iGizmo {
     public void generateCircles() {
 
 
-        Circle circle= new Circle(XCoord*constant,YCoord*constant,radius*constant);
+        Circle circle= new Circle((XCoord + radius)*constant,(YCoord+radius)*constant,radius*constant);
         circles.add(circle);
     }
 
