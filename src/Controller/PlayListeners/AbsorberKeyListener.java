@@ -39,12 +39,15 @@ public class AbsorberKeyListener implements KeyListener {
         if (e.getKeyChar() == key ){
             System.out.println("Absorber fire!");
             model.getBall().setStopped(false);
-            //Trigger the absorber !
+
             Ball b = model.getAbsorber().activateAbsorber();
+            if (b != null){
+            //Trigger the absorber !
+            System.out.println(b);
             Vect velo = b.getVelo();
             model.getBall().setVelo(velo);
             model.getBall().setStopped(false);
-
+            }
             //model.setBall() = b;
         }
     }

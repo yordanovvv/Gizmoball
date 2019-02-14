@@ -140,7 +140,11 @@ public class GameBoard extends JPanel implements Observer{
     private void paintLeftFlipper(Graphics g,int x, int y, int angle){
         Graphics2D g2 =(Graphics2D) g.create();
 
-        g2.rotate(Math.toDegrees(angle), getWidth() / 2, getHeight() / 2);
+
+        AffineTransform transform = new AffineTransform();
+        AffineTransform old = g2.getTransform();
+        transform.rotate(Math.toRadians(angle), x + (30/2) + 5, y + 5);
+        g2.transform(transform);
 
         g2.setColor(new Color(170, 169, 50, 255));
         int[] px = {x,x+15 ,x+13 ,x+1};
@@ -152,6 +156,8 @@ public class GameBoard extends JPanel implements Observer{
         g2.setColor(new Color(0, 0, 0, 255));
         g2.fillOval(x+5,y+6,5,5);
 
+
+        g2.setTransform(old);
         g2.dispose();
     }
 
@@ -160,7 +166,7 @@ public class GameBoard extends JPanel implements Observer{
 
         AffineTransform transform = new AffineTransform();
         AffineTransform old = g2.getTransform();
-        transform.rotate(Math.toRadians(angle), x + 30/2, y + 5);
+        transform.rotate(Math.toRadians(angle), x + (30/2) + 5, y + 5);
         g2.transform(transform);
 
         g2.setColor(new Color(170, 169, 50, 255));

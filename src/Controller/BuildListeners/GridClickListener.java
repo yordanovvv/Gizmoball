@@ -76,7 +76,7 @@ public class GridClickListener implements MouseListener {
                         idNo++;
                     }
                 }
-                giz = new Square("S"+idNo, gridX, gridY, gridX, gridY); //Why not 2 parameters instead of 4 ?
+                giz = new Square("S"+idNo, gridX, gridY);
                 m.addGizmo(giz);
                 break;
             case "triangle":

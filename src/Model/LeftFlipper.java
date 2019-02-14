@@ -7,7 +7,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class LeftFlipper implements iGizmo {
-    private String id;
+    private String ID;
 
     private Color colour;
     private int XCoord;
@@ -23,6 +23,25 @@ public class LeftFlipper implements iGizmo {
     private boolean down = false;
 
 
+    public LeftFlipper(String id, int x, int y){
+        this.ID = id;
+        this.XCoord = x;
+        this.YCoord = y;
+
+        height = 2;
+        width = 2;
+
+        lines = new ArrayList<>();
+        circles = new ArrayList<>();
+        gizmoConnections = new ArrayList<>();
+        keyConnections = new ArrayList<>();
+
+        generateCircles();
+        generateLines();
+    }
+
+
+
     @Override
     public String getGizmoType() {
         return "LeftFlipper";
@@ -30,37 +49,51 @@ public class LeftFlipper implements iGizmo {
 
     @Override
     public void setID(String id) {
-
+        this.ID = id;
     }
 
     @Override
     public void setXCoord(int x) {
-
+    this.XCoord = x;
     }
 
     @Override
     public void setYCoord(int y) {
-
+        this.YCoord = y;
     }
 
     @Override
     public void setColour(Color colour) {
-
+            this.colour = colour;
     }
 
     @Override
     public void generateCircles() {
 
+        //todo fix me
+        Circle bigTopCircle = new Circle(XCoord*constant + 20.91,YCoord*constant +7.51,7);
+        Circle bigBottomCircle = new Circle(XCoord*constant + 20,YCoord*constant +7.5+48,6);
+        Circle topLeft;
+        Circle topRight;
+        Circle bottomLeft;
+        Circle bottomRight;
+        circles.add(bigTopCircle);
+        circles.add(bigBottomCircle);
     }
 
     @Override
     public void generateLines() {
+        //todo fix me
+        LineSegment rightL = new LineSegment((XCoord+.9)*constant,YCoord*constant +7.51,(XCoord + .9) * constant,YCoord*constant +7.5+48);
+        LineSegment leftL = new LineSegment((XCoord+.516)*constant,YCoord*constant +7.51,(YCoord + .6)*constant,YCoord*constant +7.5+48);
 
+        // lines.add(rightL);
+        //lines.add(leftL);
     }
 
     @Override
     public void setGizmoConnection(String id) {
-
+        gizmoConnections.add(id);
     }
 
     @Override
@@ -70,13 +103,13 @@ public class LeftFlipper implements iGizmo {
 
     @Override
     public void rotate() {
-        int rotation = 5;
-        if(rotationAngle==90 && down == false)
+        int rotation = -18;
+        if(rotationAngle==-72 && down == false)
             down = true;
         else if(rotationAngle == 0)
             down = false;
         else if (down == true)
-            rotation = -5;
+            rotation = -rotation;
 
 
         rotationAngle+=rotation;
@@ -89,52 +122,52 @@ public class LeftFlipper implements iGizmo {
 
     @Override
     public String getID() {
-        return null;
+        return ID;
     }
 
     @Override
     public int getHeight() {
-        return 0;
+        return height;
     }
 
     @Override
     public int getWidth() {
-        return 0;
+        return width;
     }
 
     @Override
     public int getXCoord() {
-        return 0;
+        return XCoord;
     }
 
     @Override
     public int getYCoord() {
-        return 0;
+        return YCoord;
     }
 
     @Override
     public ArrayList<Circle> getCircles() {
-        return null;
+        return circles;
     }
 
     @Override
     public ArrayList<LineSegment> getLines() {
-        return null;
+        return lines;
     }
 
     @Override
     public ArrayList<String> getGizmoConnections() {
-        return null;
+        return gizmoConnections;
     }
 
     @Override
     public ArrayList<String> getKeyConnections() {
-        return null;
+        return keyConnections;
     }
 
     @Override
     public void removeGizmoConnection(String id) {
-
+        gizmoConnections.remove(id);
     }
 
     @Override

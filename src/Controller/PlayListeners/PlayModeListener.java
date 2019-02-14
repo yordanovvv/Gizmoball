@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 public class PlayModeListener implements ActionListener {
 
+
     MainFrame mf;
     String id;
 
@@ -18,8 +19,6 @@ public class PlayModeListener implements ActionListener {
     public PlayModeListener(MainFrame mainframe, String id){
         this.id = id;
         this.mf = mainframe;
-
-        //mf.getGameBoard();
 
         gModel = mf.getGameBoard().getGizModel();
         timer = new Timer(50, this);
