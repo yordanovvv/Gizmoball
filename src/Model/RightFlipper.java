@@ -68,8 +68,8 @@ public class RightFlipper implements iGizmo {
     @Override
     public void generateCircles() {
        // the radius is in pixels as we are graphing it to the screen.
-        Circle bigTopCircle = new Circle((XCoord+.5)*constant,(YCoord)*constant,15);
-        Circle bigBottomCircle = new Circle((XCoord+.66)*constant,(YCoord+.2)*constant,5);
+        Circle bigTopCircle = new Circle((XCoord+.5)*constant + 15,(YCoord)*constant,7.5);
+        Circle bigBottomCircle = new Circle((XCoord+.5)*constant,(YCoord+.2)*constant+56,5);
         Circle topLeft;
         Circle topRight;
         Circle bottomLeft;
@@ -81,11 +81,11 @@ public class RightFlipper implements iGizmo {
     @Override
     public void generateLines() {
 
-        LineSegment leftLine = new LineSegment(XCoord*constant + 15,YCoord*constant + 5,XCoord * constant + 30,YCoord * constant + 5);
-        LineSegment rightLine = new LineSegment(XCoord*constant + 28,YCoord*constant + 56,XCoord * constant + 16,YCoord * constant + 56);
+        LineSegment leftLine = new LineSegment((XCoord+.5)*constant,(YCoord + .166)*constant,(XCoord + 1) * constant,(YCoord + .166)*constant);
+        LineSegment rightLine = new LineSegment((XCoord+.93)*constant,(YCoord + 1.86)*constant,(YCoord + .53)*constant,(YCoord + 1.86)*constant);
 
-        lines.add(leftLine);
-        lines.add(rightLine);
+        //lines.add(leftLine);
+       // lines.add(rightLine);
     }
 
     @Override

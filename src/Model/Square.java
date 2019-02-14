@@ -20,6 +20,7 @@ public class Square implements iGizmo {
     private ArrayList<Circle> circles;
     private ArrayList<String> gizmoConnections;
     private ArrayList<String> keyConnections;
+    private int constant = 30;
 
     //Constructor for creating squares
 
@@ -73,10 +74,10 @@ public class Square implements iGizmo {
     @Override
     public void generateCircles() {
 
-        Circle topLeftCorner = new Circle(XCoord, YCoord, 0);
-        Circle topRightCorner = new Circle(XCoord2, YCoord2, 0);
-        Circle bottomLeftCorner = new Circle(XCoord, YCoord2, 0);
-        Circle bottomRightCorner = new Circle(XCoord2, YCoord, 0);
+        Circle topLeftCorner = new Circle(XCoord* constant, YCoord* constant, 0);
+        Circle topRightCorner = new Circle(XCoord2* constant, YCoord2* constant, 0);
+        Circle bottomLeftCorner = new Circle(XCoord* constant, YCoord2* constant, 0);
+        Circle bottomRightCorner = new Circle(XCoord2* constant, YCoord* constant, 0);
         circles.add(topLeftCorner);
         circles.add(topRightCorner);
         circles.add(bottomLeftCorner);
@@ -88,10 +89,10 @@ public class Square implements iGizmo {
     @Override
     public void generateLines() {
 
-        LineSegment topLine = new LineSegment(XCoord, YCoord2, XCoord2, YCoord2);
-        LineSegment bottomLine = new LineSegment(XCoord, YCoord, XCoord2, YCoord);
-        LineSegment leftLine = new LineSegment(XCoord, YCoord, XCoord, YCoord2);
-        LineSegment rightLine = new LineSegment(XCoord2, YCoord, XCoord2, YCoord2);
+        LineSegment topLine = new LineSegment(XCoord * constant, YCoord * constant, (XCoord + 1) * constant, YCoord* constant);
+        LineSegment bottomLine = new LineSegment(XCoord* constant, YCoord* constant, XCoord * constant, (YCoord + 1)* constant);
+        LineSegment leftLine = new LineSegment(XCoord* constant, (YCoord + 1)* constant, (XCoord + 1)* constant, (YCoord + 1)* constant);
+        LineSegment rightLine = new LineSegment((XCoord + 1)* constant, YCoord* constant, (XCoord + 1)* constant, (YCoord + 1)* constant);
         lines.add(topLine);
         lines.add(bottomLine);
         lines.add(leftLine);

@@ -23,13 +23,16 @@ public class GizmoballModel extends Observable{
     public GizmoballModel()
     {
         //position of ball (25,25) in pixels, Velocity (100,100) pixels per tick
-        ball = new Ball(400, 401, 150, 150);
+        ball = new Ball(110, 100, 150, 150);
         gizmos = new ArrayList<iGizmo>();
         walls = new Wall(0, 0, 20, 20);
         //walls = new Wall(-10, -10, 575, 575);
 
         absorber = new Absorber("A1",0,19,20,20);
-        gizmos.add(absorber);
+       // gizmos.add(absorber);
+
+        RightFlipper rightFlipper = new RightFlipper("R1",10,10);
+        gizmos.add(rightFlipper);
 
         t = new Triangle("T1",13, 14);
         Triangle  t2 = new Triangle("T2",12, 13);
