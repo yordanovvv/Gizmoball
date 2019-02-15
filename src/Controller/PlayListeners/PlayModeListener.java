@@ -34,14 +34,19 @@ public class PlayModeListener implements ActionListener {
             //System.out.println(e.getActionCommand());
             switch (e.getActionCommand()) {
                 case "Play":
+                    gModel.getRightFlipListener().setIsStopped(false);
                     gModel.getBall().setStopped(false);
                     timer.restart();
                     break;
                 case "Pause":
+                    gModel.getRightFlipListener().setIsStopped(true);
                     gModel.getBall().setStopped(true);
                     timer.stop();
                     break;
                 case "Tick":
+                    gModel.getRightFlipListener().setIsStopped(false);
+                    gModel.getRightFlipListener().moveFlipper("TICK");
+
                     gModel.getBall().setStopped(false);
                     gModel.moveBall();
                     gModel.getBall().setStopped(true);
