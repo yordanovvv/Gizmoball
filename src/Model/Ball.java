@@ -15,7 +15,8 @@ public class Ball extends Observable {
     private boolean stopped;
 
     //fixed size. so size 1 for pixel
-    public Ball(double x, double y, double xv, double yv) {
+    public Ball(String id, double x, double y, double xv, double yv) {
+        this.ID = id;
         xpos = x;
         ypos = y;
         velocity = new Vect(xv, yv);

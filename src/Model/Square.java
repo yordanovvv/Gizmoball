@@ -178,4 +178,9 @@ public class Square implements iGizmo {
     public void addBall(Ball ball) {
 
     }
+
+    @Override
+    public String toString() {
+        return getGizmoType() + " " + getID() + " " + getXCoord() + " " + getYCoord();
+    }
 }

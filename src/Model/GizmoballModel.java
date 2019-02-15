@@ -24,7 +24,7 @@ public class GizmoballModel extends Observable{
     public GizmoballModel()
     {
         //position of ball (25,25) in pixels, Velocity (100,100) pixels per tick
-        ball = new Ball(280, 303, 150, 150);
+        ball = new Ball("B1", 280, 303, 150, 150);
         gizmos = new ArrayList<iGizmo>();
         walls = new Wall(0, 0, 20, 20);
         //walls = new Wall(-10, -10, 575, 575);
@@ -257,58 +257,61 @@ public class GizmoballModel extends Observable{
     }
 
     public void saveGame() {
-//        FileOutputStream fileOut;
-//        try {
-//            fileOut = new FileOutputStream("temp.ser");
-//            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-//            out.writeObject(ball);
-//            out.close();
-//            fileOut.close();
-//            System.out.println("Serialized data is saved in temp.ser");
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//
-//            e.printStackTrace();
-//        }
+        System.out.println("SAVING GAME\n\n");
         try {
             FileWriter fileWriter = new FileWriter("game.giz");
-            fileWriter.write(ball.toString());
+            fileWriter.write(ball.toString() + "\n");
+            for(iGizmo gizmo : gizmos) {
+                fileWriter.write(gizmo.toString() + "\n");
+            }
             fileWriter.flush();
 
             fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        System.out.println("printing model on save");
+        for(iGizmo gizmo : gizmos) {
+            System.out.println(gizmo);
+        }
     }
 
     public void loadGame() {
-//        Ball ball;
-//
-//        try {
-//            FileInputStream fileIn = new FileInputStream("temp.ser");
-//            ObjectInputStream in = new ObjectInputStream(fileIn);
-//            ball = (Ball) in.readObject();
-//            System.out.println("After Deserialization");
-//            System.out.println(ball);
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
+        System.out.println("loading game\n\n");
+        gizmos = new ArrayList<>();
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader("game.giz"));
             String line;
-            String[] array = new String[10];
+            String[] array;
             while((line = bufferedReader.readLine()) != null) {
                 array = line.split(" ");
                 switch(array[0]) {
                     case "Ball":
-                        ball = new Ball(Double.parseDouble(array[2]), Double.parseDouble(array[3]), Double.parseDouble(array[4]), Double.parseDouble(array[5]));
-                        System.out.println(ball);
+                        ball = new Ball(array[1], Double.parseDouble(array[2]), Double.parseDouble(array[3]), Double.parseDouble(array[4]), Double.parseDouble(array[5]));
+                        break;
+                    case "Absorber":
+                        Absorber abs = new Absorber(array[1], Integer.parseInt(array[2]), Integer.parseInt(array[3]), Integer.parseInt(array[4]), Integer.parseInt(array[5]));
+                        gizmos.add(abs);
+                        break;
+                    case "Square":
+                        Square square = new Square(array[1], Integer.parseInt(array[2]), Integer.parseInt(array[3]));
+                        gizmos.add(square);
+                        break;
+                    case "Circle":
+                        GizmoCircle circle = new GizmoCircle(array[1], Integer.parseInt(array[2]), Integer.parseInt(array[3]), Double.parseDouble(array[4]));
+                        gizmos.add(circle);
+                        break;
+                    case "Triangle":
+                        Triangle triangle = new Triangle(array[1], Integer.parseInt(array[2]), Integer.parseInt(array[3]));
+                        gizmos.add(triangle);
+                        break;
+                    case "RightFlipper":
+                        RightFlipper rightFlipper = new RightFlipper(array[1], Integer.parseInt(array[2]), Integer.parseInt(array[3]));
+                        gizmos.add(rightFlipper);
+                        break;
+                    case "LeftFlipper":
+                        LeftFlipper leftFlipper = new LeftFlipper(array[1], Integer.parseInt(array[2]), Integer.parseInt(array[3]));
+                        gizmos.add(leftFlipper);
                         break;
                     default:
                         break;
@@ -318,6 +321,11 @@ public class GizmoballModel extends Observable{
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+
+        System.out.println("printing model on load");
+        for(iGizmo gizmo : gizmos) {
+            System.out.println(gizmo);
         }
     }
 }

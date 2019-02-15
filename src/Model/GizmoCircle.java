@@ -38,7 +38,7 @@ public class GizmoCircle implements iGizmo {
 
     @Override
     public String getGizmoType() {
-        return "GizmoCircle";
+        return "Circle";
     }
 
     @Override
@@ -157,5 +157,10 @@ public class GizmoCircle implements iGizmo {
     @Override
     public void addBall(Ball ball) {
 
+    }
+
+    @Override
+    public String toString() {
+        return getGizmoType() + " " + getID() + " " + getXCoord() + " " + getYCoord() + " " + radius;
     }
 }
