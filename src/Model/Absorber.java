@@ -113,10 +113,10 @@ public class Absorber implements iGizmo {
 
     @Override
     public void generateCircles () {
-        Circle topLeftCorner = new Circle(XCoord, YCoord, 0);
-        Circle topRightCorner = new Circle(XCoord2, YCoord2, 0);
-        Circle bottomLeftCorner = new Circle(XCoord, YCoord2, 0);
-        Circle bottomRightCorner = new Circle(XCoord2, YCoord, 0);
+        Circle topLeftCorner = new Circle(XCoord*constant, YCoord*constant, 0);
+        Circle topRightCorner = new Circle(XCoord2*constant, YCoord2*constant, 0);
+        Circle bottomLeftCorner = new Circle(XCoord*constant, YCoord2*constant, 0);
+        Circle bottomRightCorner = new Circle(XCoord2*constant, YCoord*constant, 0);
         circles.add(topLeftCorner);
         circles.add(topRightCorner);
         circles.add(bottomLeftCorner);
