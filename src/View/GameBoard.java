@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
-import java.util.ArrayList;
+
 import java.util.Observable;
 import java.util.Observer;
 
@@ -108,9 +108,13 @@ public class GameBoard extends JPanel implements Observer{
         }
         //todo please check this
        Ball b = m.getBall();
-       paintBall(g2,toIntExact(Math.round(b.getExactX())),toIntExact(Math.round(b.getExactY())));
-       //Absorber a = (Absorber) m.getAbsorber();
-       //paintAbsorber(g2,a.getXCoord2(), a.getYCoord2(), a.getXCoord(), a.getYCoord());
+       // paintBall(g2,toIntExact(Math.round(b.getExactX())),toIntExact(Math.round(b.getExactY())));
+       //paintBall(g2,b.getExactX(),b.getExactY());
+
+       int p = (int) (b.getExactX() - b.getRadius());
+       int q = (int) (b.getExactY() - b.getRadius());
+       int width = (int) (2 * b.getRadius());
+       paintBall(g,p, q, width);
 
        repaint();
     }
@@ -122,9 +126,10 @@ public class GameBoard extends JPanel implements Observer{
         g.fillOval(x,y,30,30);
     }
 
-    private void paintBall(Graphics g,int x, int y){
+    private void paintBall(Graphics g,int x, int y, int width){
         g.setColor(new Color(255, 251, 255, 255));
-        g.fillOval(x-8,y-8,16,16);
+        //g.fillOval(x-8,y-8, 16,16);
+        g.fillOval(x, y, width, width);
     }
 
     private void paintTriangle(Graphics g,int x, int y){

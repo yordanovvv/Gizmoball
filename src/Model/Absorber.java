@@ -59,16 +59,10 @@ public class Absorber implements iGizmo {
     public Ball activateAbsorber() {
         if (!balls.isEmpty()) {
             Ball fireBall = balls.get(0);
-            Vect shootUp = new Vect(0, -250);
+            Vect shootUp = new Vect(0, -750);
             fireBall.setVelo(shootUp);
             fireBall.setStopped(false);
 
-            //TODO should be a method in Ball that allows it to be activated by absorber
-
-            //I think we can just make a new ball or change the x,y, velocity of the one tha absorber absorbed -L
-            //and idk if we need a list of balls in the absorber?
-
-            //Ball ballShot = new Ball(width/2, height, 0, -100)
             return fireBall;
         }
         return null;
@@ -230,9 +224,7 @@ public class Absorber implements iGizmo {
     }
 
     @Override
-    public void removeKeyConnection () {
-
-    }
+    public void removeKeyConnection () {}
 
     @Override
     public void addBall(Ball b) {
