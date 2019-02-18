@@ -46,7 +46,7 @@ public class Ball extends Observable {
     }
 
     public Circle getCircle() {
-        return new Circle((xpos+radius)*constant, (ypos+radius)*constant, radius*constant);
+        return new Circle((xpos)*constant, (ypos)*constant, radius*constant);
     }
 
     public String getID() { return ID; }
