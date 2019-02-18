@@ -14,14 +14,16 @@ public class PlayModeListener implements ActionListener {
     String id;
 
     private Timer timer;
+    private Timer statisticsTimer;
     private GizmoballModel gModel;
 
-    public PlayModeListener(MainFrame mainframe, String id){
+    public PlayModeListener(MainFrame mainframe, String id) {
         this.id = id;
         this.mf = mainframe;
 
         gModel = mf.getGameBoard().getGizModel();
         timer = new Timer(50, this);
+        statisticsTimer = new Timer(50, this);
 
 
     }
@@ -29,10 +31,17 @@ public class PlayModeListener implements ActionListener {
     @Override
     public final void actionPerformed(final ActionEvent e) {
 
-        if (e.getSource() == timer){
+        if (e.getSource() == timer) {
             gModel.moveBall();
 
             System.out.println(gModel.getBall().getVelo());
+        } else if (e.getSource() == statisticsTimer) {
+
+            int s = gModel.getBallSpeed();
+            String speed = Integer.toString(s);
+            mf.output_Velocity.setText(speed);
+
+
         } else {
             //System.out.println(e.getActionCommand());
             switch (e.getActionCommand()) {
@@ -41,6 +50,7 @@ public class PlayModeListener implements ActionListener {
                     //gModel.getRightFlipListener().setIsStopped(false);
                     gModel.getBall().setStopped(false);
                     timer.restart();
+                    statisticsTimer.start();
                     break;
                 case "Pause":
                     //gModel.getRightFlipListener().setIsStopped(true);

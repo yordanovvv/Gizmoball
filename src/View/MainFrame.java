@@ -38,7 +38,7 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
     private JTextField output_Gravity;
     private JTextField output_Friction;
     private JTextField output_BallPosition;
-    private JTextField output_Velocity;
+    public JTextField output_Velocity;
 
     private GizmoballModel model;
 
@@ -139,10 +139,10 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
         label_Gravity = util.editLabel(label_Gravity, 12, Color.BLACK);
         label_Velocity = util.editLabel(label_Velocity, 12, Color.BLACK);
 
-        output_BallPosition = new JTextField("41.2");
-        output_Friction = new JTextField("26");
-        output_Gravity = new JTextField("54");
-        output_Velocity = new JTextField("10");
+        output_BallPosition = new JTextField("");
+        output_Friction = new JTextField("");
+        output_Gravity = new JTextField("");
+        output_Velocity = new JTextField("");
 
         output_BallPosition = util.styleTextField(output_BallPosition, 11);
         output_Friction = util.styleTextField(output_Friction, 11);
