@@ -62,6 +62,10 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
 
     }
 
+    public GizmoballModel getModel(){
+        return model;
+    }
+
     private void setUP() {
         Utils util = new Utils();
 

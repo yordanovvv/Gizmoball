@@ -1,5 +1,6 @@
 package Controller.MainFrameListeners;
 
+import View.MainFrame;
 import View.iMainFrame;
 
 import javax.swing.*;
@@ -8,9 +9,9 @@ import java.awt.event.ActionListener;
 
 public class ControlListener implements ActionListener {
 
-    iMainFrame view;
+    MainFrame view;
 
-    public ControlListener(iMainFrame view){
+    public ControlListener(MainFrame view){
         this.view = view;
     }
 
@@ -29,6 +30,9 @@ public class ControlListener implements ActionListener {
             if (rVal == JFileChooser.APPROVE_OPTION) {
 
                 //todo file saving for controller
+
+                view.getModel().saveGame();
+
             }
             if (rVal == JFileChooser.CANCEL_OPTION) {
                //todo cancel file loading
@@ -48,6 +52,8 @@ public class ControlListener implements ActionListener {
             int rVal = fileLoader.showOpenDialog(f);
             if (rVal == JFileChooser.APPROVE_OPTION) {
                 //todo file loading for controller
+
+                view.getModel().loadGame();
             }
             if (rVal == JFileChooser.CANCEL_OPTION) {
                 //todo cancel file loading
