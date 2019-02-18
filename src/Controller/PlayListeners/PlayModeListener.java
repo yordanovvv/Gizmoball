@@ -28,16 +28,15 @@ public class PlayModeListener implements ActionListener {
 
     @Override
     public final void actionPerformed(final ActionEvent e) {
+
         if (e.getSource() == timer){
             gModel.moveBall();
 
             System.out.println(gModel.getBall().getVelo());
-
-
-
         } else {
             //System.out.println(e.getActionCommand());
             switch (e.getActionCommand()) {
+
                 case "Play":
                     //gModel.getRightFlipListener().setIsStopped(false);
                     gModel.getBall().setStopped(false);

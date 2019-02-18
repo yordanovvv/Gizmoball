@@ -104,8 +104,8 @@ public class RightFlipper implements iGizmo {
         Circle  bigTopCircle = circles.get(0);
         for (int i = 0; i < circles.size(); i++) {
             Angle rotation = new Angle(rotationAngle);
-            Circle c = circles.get(i);
-            circles.set(i,Geometry.rotateAround(c,bigTopCircle.getCenter(),rotation));
+            Circle currentCircle = circles.get(i);
+            circles.set(i,Geometry.rotateAround(currentCircle,bigTopCircle.getCenter(),rotation));
         }
     }
 

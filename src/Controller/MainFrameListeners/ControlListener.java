@@ -20,7 +20,7 @@ public class ControlListener implements ActionListener {
         String actionCMD =  e.getActionCommand();
         //todo check that the file loaders actually follow MVC
         if(actionCMD.equals("Save")){
-            JFrame f = new JFrame();
+            /*JFrame f = new JFrame();
             JFileChooser fileLoader = new JFileChooser();
             fileLoader.setDialogTitle("Save Gizmo");
 
@@ -36,14 +36,14 @@ public class ControlListener implements ActionListener {
             }
             if (rVal == JFileChooser.CANCEL_OPTION) {
                //todo cancel file loading
-            }
+            }*/view.getModel().saveGame();
         }else if(actionCMD.equals("Quit")){
             int choice = view.generatePopUp("Quit?","Are you sure you want to quit?");
             if(choice == 0){
                 view.quit();
             }
         }else if(actionCMD.equals("Load")){
-            JFrame f = new JFrame();
+           /* JFrame f = new JFrame();
             JFileChooser fileLoader = new JFileChooser();
             fileLoader.setDialogTitle("Load Gizmo");
 
@@ -57,7 +57,8 @@ public class ControlListener implements ActionListener {
             }
             if (rVal == JFileChooser.CANCEL_OPTION) {
                 //todo cancel file loading
-            }
+            }*/
+            view.getModel().loadGame();
         }
 
     }
