@@ -30,6 +30,11 @@ public class PlayModeListener implements ActionListener {
     public final void actionPerformed(final ActionEvent e) {
         if (e.getSource() == timer){
             gModel.moveBall();
+
+            System.out.println(gModel.getBall().getVelo());
+
+
+
         } else {
             //System.out.println(e.getActionCommand());
             switch (e.getActionCommand()) {
