@@ -109,7 +109,7 @@ public class FlipperKeyListener implements KeyListener {
         //as we are only doing it 1/2 the way so 540 one way
         //it changes is via 18 degrees so 30???
         //todo check my math, i am dead -Nells
-        final Timer timer = new Timer(30, e -> {
+        final Timer timer = new Timer(50, e -> {
             tickFlipper();
             Timer t = (Timer) e.getSource();
             if (counter == 4) t.stop();
