@@ -67,8 +67,6 @@ public class GizmoCircle implements iGizmo {
 
     @Override
     public void generateCircles() {
-
-
         Circle circle= new Circle((XCoord + radius)*constant,(YCoord+radius)*constant,radius*constant);
         circles.add(circle);
     }

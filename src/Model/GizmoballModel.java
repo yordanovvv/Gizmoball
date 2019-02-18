@@ -28,7 +28,7 @@ public class GizmoballModel extends Observable {
         gizmos = new ArrayList<iGizmo>();
         walls = new Wall(0, 0, 20, 20);
 
-        absorber = new Absorber("A1", 0, 19, 20, 20);
+        absorber = new Absorber("A1", 0, 18, 20, 20);
         gizmos.add(absorber);
 
         RightFlipper rightFlipper = new RightFlipper("R1", 10, 10);
@@ -44,22 +44,31 @@ public class GizmoballModel extends Observable {
         if (ball != null && !ball.isStopped()) {
 
             ball.setVelo(ball.applyGravity(gravity));
+            ball.setVelo(ball.applyFriction());
 
             CollisionDetails cd = timeUntilCollision();
+
             double tuc = cd.getTuc();
-            ball.setVelo(ball.applyFriction(moveTime, tuc));
+
             if (tuc > moveTime) //no collision
             {
                 ball = moveBallForTime(ball, moveTime);
             } else {
-                if (absorberCollision == true) //collision with an absorber
+                if (absorberCollision == true && ball.getVelo().y()>0) //collision with an absorber
                 {
-                    ball = moveBallForTime(ball, tuc + moveTime*0.75);
+                    ball = moveBallForTime(ball, tuc + moveTime);
                     absorber.addBall(ball);
                     ball.setStopped(true);
+                    absorberCollision = false;
                 }
-                ball = moveBallForTime(ball, tuc); //collision in time tuc
-                ball.setVelo(cd.getVelo()); //velocity after the collision
+                else if(absorberCollision == true && ball.getVelo().y()<0) //ball is moving up so ignore absorber line
+                {
+                    ball = moveBallForTime(ball, moveTime);
+                }
+                else {
+                    ball = moveBallForTime(ball, tuc); //collision in time tuc
+                    ball.setVelo(cd.getVelo()); //velocity after the collision
+                }
             }
 
         }
@@ -92,6 +101,7 @@ public class GizmoballModel extends Observable {
         double timeL = 0.0; //time until collision with a line
         double timeW = 0.0; //                            wall
 
+        absorberCollision = false;
 
         //iterating through walls
         ArrayList<LineSegment> lines = walls.getWalls();
@@ -175,8 +185,7 @@ public class GizmoballModel extends Observable {
         ball.setVelo(v);
     }
 
-    public Absorber getAbsorber()
-    {
+    public Absorber getAbsorber() {
         return (Absorber) absorber;
     }
 

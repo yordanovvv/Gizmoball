@@ -85,7 +85,7 @@ public class Ball extends Observable {
         return "Ball " + getID() + " " + getExactX() + " " + getExactY() + " " + getVelo().x() + " " + getVelo().y();
     }
 
-    public Vect applyFriction(double moveTime, double tuc)
+    public Vect applyFriction()
     {
         double mu = 0.025; //per second
         double mu2 = 0.025; //per L

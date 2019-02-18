@@ -21,7 +21,7 @@ public class Absorber implements iGizmo {
     private ArrayList<String> gizmoConnections;
     private ArrayList<String> keyConnections;
     private ArrayList<Ball> balls;
-    private final double constant = 30 - .73;
+    private final int constant = 30;
 
     //Constructor for creating absorber
     public Absorber(String id, int XCoord, int YCoord, int XCoord2, int YCoord2) {
@@ -55,7 +55,6 @@ public class Absorber implements iGizmo {
 
     }
 
-    //TODO not sure how to link ball and absorber
     public Ball activateAbsorber() {
         if (!balls.isEmpty()) {
             Ball fireBall = balls.get(0);
@@ -86,7 +85,7 @@ public class Absorber implements iGizmo {
     }
 
     @Override
-    public void setXCoord ( int x){
+    public void setXCoord (int x){
 
         this.XCoord = x;
 
@@ -128,16 +127,16 @@ public class Absorber implements iGizmo {
     @Override
     public void generateLines () {
 
-        LineSegment topLine = new LineSegment(XCoord * constant, YCoord2 * constant, XCoord2 * constant, YCoord2 * constant);
-        LineSegment bottomLine = new LineSegment(XCoord * constant, YCoord * constant, XCoord2 * constant, YCoord * constant);
+        LineSegment topLine = new LineSegment(XCoord * constant, YCoord * constant, XCoord2 * constant, YCoord * constant);
+        LineSegment bottomLine = new LineSegment(XCoord * constant, YCoord2 * constant, XCoord2 * constant, YCoord2 * constant);
         LineSegment leftLine = new LineSegment(XCoord * constant, YCoord * constant, XCoord * constant, YCoord2 * constant);
         LineSegment rightLine = new LineSegment(XCoord2 * constant, YCoord * constant, XCoord2 * constant, YCoord2 * constant);
+
         lines.add(topLine);
         lines.add(bottomLine);
         lines.add(leftLine);
         lines.add(rightLine);
     }
-
 
     @Override
     public void setGizmoConnection (String id){

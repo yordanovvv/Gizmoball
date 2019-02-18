@@ -16,6 +16,7 @@ public class Wall {
 
 
     private LineSegment bottomWall,topWall,leftWall,rightWall;
+    ArrayList<LineSegment> walls = new ArrayList<>();
 
 
     public Wall(int XCoord,int YCoord, int XCoord2, int YCoord2){
@@ -24,36 +25,32 @@ public class Wall {
         this.XCoord2=XCoord2;
         this.YCoord2=YCoord2;
 
-        drawWalls();
-
+        setUpWalls();
     }
 
     public ArrayList<LineSegment> getWalls(){
-        ArrayList<LineSegment> walls = new ArrayList<>();
-        walls.add(topWall);
-        walls.add(bottomWall);
-        walls.add(leftWall);
-        walls.add(rightWall);
-
         return walls;
     }
 
-    private void drawWalls(){
+    private void setUpWalls(){
         //ArrayList<LineSegment> walls = new ArrayList<>();
          bottomWall= new LineSegment(XCoord * constant,YCoord2* constant,XCoord2* constant,YCoord2* constant);
          topWall= new LineSegment(XCoord* constant,YCoord* constant, XCoord2* constant,YCoord* constant);
          leftWall = new LineSegment(XCoord* constant, YCoord* constant, XCoord* constant, YCoord2* constant);
          rightWall= new LineSegment(XCoord2* constant, YCoord* constant, XCoord2* constant, YCoord2* constant);
 
-      /*  walls.add(topWall);
+        walls.add(topWall);
+        walls.add(bottomWall);
+        walls.add(leftWall);
+        walls.add(rightWall);
+
+       /* walls.add(topWall);
         walls.add(bottomWall);
         walls.add(leftWall);
         walls.add(rightWall);
 
         return walls;*/
     }
-
-    //todo remove
 
 
     public int getXCoord() {
