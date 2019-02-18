@@ -17,6 +17,7 @@ public class FlipperKeyListener implements KeyListener {
     iGizmo flipper;
     boolean isStopped;
     private int counter ;
+    Timer timer1;
 
     public FlipperKeyListener(String rot, GizmoballModel model, char key, iGizmo flipper){
         this.rot = rot;
@@ -26,6 +27,17 @@ public class FlipperKeyListener implements KeyListener {
         this.isStopped = false;
 
         counter = 0;
+
+        //Stuff for flipper animation
+        ActionListener actListener = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                moveFlipper();
+            }
+        };
+        this.timer1=new Timer(50,actListener);
+        timer1.start();
 
     }
 
@@ -69,6 +81,8 @@ public class FlipperKeyListener implements KeyListener {
             }
         }
 
+
+
     private void tickFlipper(){
         flipper.rotate();
         model.hasChanged();
@@ -78,6 +92,18 @@ public class FlipperKeyListener implements KeyListener {
 
     private void moveFlipper(){
 
+        tickFlipper();
+        if(counter==4) {
+            timer1.stop();
+            counter=0;
+        }
+        counter++;
+        timer1.start();
+
+
+
+        }
+       /* counter++;
         final Timer timer = new Timer(1, e -> {
             tickFlipper();
             Timer t = (Timer)e.getSource();
@@ -85,7 +111,8 @@ public class FlipperKeyListener implements KeyListener {
             counter++;
         });
         timer.start();
-    }
+   */
 }
+
 
 
