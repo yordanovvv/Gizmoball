@@ -3,6 +3,9 @@ package Controller.PlayListeners;
 import Model.GizmoballModel;
 import Model.iGizmo;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -13,6 +16,7 @@ public class FlipperKeyListener implements KeyListener {
     char key;
     iGizmo flipper;
     boolean isStopped;
+    private int counter ;
 
     public FlipperKeyListener(String rot, GizmoballModel model, char key, iGizmo flipper){
         this.rot = rot;
@@ -20,6 +24,9 @@ public class FlipperKeyListener implements KeyListener {
         this.key = key;
         this.flipper = flipper;
         this.isStopped = false;
+
+        counter = 0;
+
     }
 
     @Override
@@ -49,8 +56,10 @@ public class FlipperKeyListener implements KeyListener {
     public void moveFlipper(String direction){
         if(!isStopped) {
             if (direction.equals("UP") && flipper.getRotationAngle() == 0) {
+                counter = 0;
                 moveFlipper();
             } else if (direction.equals("DOWN") && flipper.getRotationAngle() == 90) {
+                counter = 0;
                 moveFlipper();
             } else if (direction.equals("TICK")) {
                 tickFlipper();
@@ -66,14 +75,17 @@ public class FlipperKeyListener implements KeyListener {
         model.notifyObservers();
     }
 
+
     private void moveFlipper(){
-        for (int i = 0; i <5; i++) {
+
+        final Timer timer = new Timer(1, e -> {
             tickFlipper();
-            try {
-                Thread.sleep(8);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+            Timer t = (Timer)e.getSource();
+            if(counter==4) t.stop();
+            counter++;
+        });
+        timer.start();
     }
 }
+
+

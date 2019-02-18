@@ -32,7 +32,7 @@ public class GizmoballModel extends Observable {
         gizmos.add(absorber);
 
         RightFlipper rightFlipper = new RightFlipper("R1", 10, 10);
-    //    gizmos.add(rightFlipper);
+       gizmos.add(rightFlipper);
 
         FlipperKeyListener rightFlipListener = new FlipperKeyListener("right", this, 'r', rightFlipper);//remove this in the long run
     }
