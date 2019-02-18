@@ -29,7 +29,7 @@ public class FlipperKeyListener implements KeyListener {
         counter = 0;
 
         //Stuff for flipper animation
-        ActionListener actListener = new ActionListener() {
+     /*   ActionListener actListener = new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -37,7 +37,7 @@ public class FlipperKeyListener implements KeyListener {
             }
         };
         this.timer1=new Timer(50,actListener);
-        timer1.start();
+        timer1.start();*/
 
     }
 
@@ -90,9 +90,9 @@ public class FlipperKeyListener implements KeyListener {
     }
 
 
-    private void moveFlipper(){
+    private void moveFlipper() {
 
-        tickFlipper();
+        /*tickFlipper();
         if(counter==4) {
             timer1.stop();
             counter=0;
@@ -102,16 +102,21 @@ public class FlipperKeyListener implements KeyListener {
 
 
 
-        }
-       /* counter++;
-        final Timer timer = new Timer(1, e -> {
+        }*/
+        //counter++;
+
+        //need to rotate at an angular velocity of 1080 per second
+        //as we are only doing it 1/2 the way so 540 one way
+        //it changes is via 18 degrees so 30???
+        //todo check my math, i am dead -Nells
+        final Timer timer = new Timer(30, e -> {
             tickFlipper();
-            Timer t = (Timer)e.getSource();
-            if(counter==4) t.stop();
+            Timer t = (Timer) e.getSource();
+            if (counter == 4) t.stop();
             counter++;
         });
         timer.start();
-   */
+    }
 }
 
 
