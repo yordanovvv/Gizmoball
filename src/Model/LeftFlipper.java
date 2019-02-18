@@ -17,7 +17,7 @@ public class LeftFlipper implements iGizmo {
     private ArrayList<Circle> circles;
     private ArrayList<String> gizmoConnections;
     private ArrayList<String> keyConnections;
-    private final double constant = 30-.73;
+    private final double constant = 30;
 
     private int rotationAngle = 0;
     private boolean down = false;

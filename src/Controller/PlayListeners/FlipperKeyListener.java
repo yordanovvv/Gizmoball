@@ -49,29 +49,28 @@ public class FlipperKeyListener implements KeyListener {
     public void moveFlipper(String direction){
         if(!isStopped) {
             if (direction.equals("UP") && flipper.getRotationAngle() == 0) {
-                move();
-                System.out.println(flipper.getRotationAngle());
+                moveFlipper();
             } else if (direction.equals("DOWN") && flipper.getRotationAngle() == 90) {
-                move();
+                moveFlipper();
             } else if (direction.equals("TICK")) {
-                tick();
+                tickFlipper();
             } else if(direction.equals("RESET")) {
-                while(flipper.getRotationAngle()!= 90){tick();}
+              //undefined
                 }
             }
         }
 
-    private void tick(){
+    private void tickFlipper(){
         flipper.rotate();
         model.hasChanged();
         model.notifyObservers();
     }
 
-    private void move(){
-        for (int i = 0; i <=4; i++) {
-            tick();
+    private void moveFlipper(){
+        for (int i = 0; i <5; i++) {
+            tickFlipper();
             try {
-                Thread.sleep(3);
+                Thread.sleep(8);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

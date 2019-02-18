@@ -24,9 +24,7 @@ public class GameBoard extends JPanel implements Observer{
         this.m = m;
         b = m.getBall();
         this.mode = mode;
-
         init();
-
     }
 
     //TODO Check if this is in right place -C
@@ -89,7 +87,7 @@ public class GameBoard extends JPanel implements Observer{
                     paintSquare(g2,x,y);
                     break;
                 case "Triangle":
-                    paintTriangle(g2,x,y);
+                    paintTriangle(g2,x,y,gizmo.getRotationAngle());
                     break;
                 case "Absorber":
                     paintAbsorber(g2,x,y,gizmo.getWidth()*30,gizmo.getHeight()*30);
@@ -132,7 +130,15 @@ public class GameBoard extends JPanel implements Observer{
         g.fillOval(x, y, width, width);
     }
 
-    private void paintTriangle(Graphics g,int x, int y){
+    private void paintTriangle(Graphics g,int x, int y, int angle){
+        Graphics2D g2 =(Graphics2D) g.create();
+
+
+        AffineTransform transform = new AffineTransform();
+        AffineTransform old = g2.getTransform();
+        transform.rotate(Math.toRadians(angle), x + (30/2) + 5, y + 5);
+        g2.transform(transform);
+
 
         int xPoly[] = {x, (x+30),x, (x+30), (x+30), (x+30)};
         int yPoly[] = {y, (y+30),y, y     , y      ,(y+30)};
@@ -140,6 +146,9 @@ public class GameBoard extends JPanel implements Observer{
         Polygon poly = new Polygon(xPoly, yPoly, xPoly.length);
         g.setColor(new Color(59, 112, 170, 255));
         g.fillPolygon(poly);
+
+        g2.setTransform(old);
+        g2.dispose();
     }
 
     private void paintLeftFlipper(Graphics g,int x, int y, int angle){

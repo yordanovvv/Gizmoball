@@ -207,7 +207,7 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
 
         button_switchState = new JButton("Switch State");//switch.png
         button_switchState = util.addImgToBtn("switch.png", button_switchState, Color.WHITE);
-        button_switchState.addActionListener(new ChangeModeListener(this));
+        button_switchState.addActionListener(new ChangeModeListener(this,model));
         button_switchState.setFocusable(false);
 
         switchBoard.add(button_switchState);

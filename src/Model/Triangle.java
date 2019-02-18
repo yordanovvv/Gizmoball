@@ -17,7 +17,7 @@ public class Triangle implements iGizmo {
     private ArrayList<Circle> circles;
     private ArrayList<String> gizmoConnections;
     private ArrayList<String> keyConnections;
-    private final double constant = 30-.73;
+    private final double constant = 30;
 
 
     public Triangle(String id, int XCoord, int YCoord) {

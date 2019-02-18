@@ -260,5 +260,8 @@ public class GizmoballModel extends Observable {
         for(iGizmo gizmo : gizmos) {
             System.out.println(gizmo);
         }
+
+        this.hasChanged();
+        this.notifyObservers();
     }
 }

@@ -1,7 +1,6 @@
 package Model;
 
-import physics.Circle;
-import physics.LineSegment;
+import physics.*;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -33,7 +32,6 @@ public class RightFlipper implements iGizmo {
         circles = new ArrayList<>();
         gizmoConnections = new ArrayList<>();
         keyConnections = new ArrayList<>();
-
         generateCircles();
         generateLines();
     }
@@ -76,6 +74,7 @@ public class RightFlipper implements iGizmo {
         Circle topRight;
         Circle bottomLeft;
         Circle bottomRight;
+
         circles.add(bigTopCircle);
         circles.add(bigBottomCircle);
     }
@@ -101,6 +100,15 @@ public class RightFlipper implements iGizmo {
 
     }
 
+    private void updateLinePositins(){
+        Circle  bigTopCircle = circles.get(0);
+        for (int i = 0; i < circles.size(); i++) {
+            Angle rotation = new Angle(rotationAngle);
+            Circle c = circles.get(i);
+            circles.set(i,Geometry.rotateAround(c,bigTopCircle.getCenter(),rotation));
+        }
+    }
+
     @Override
     public void rotate() {
         int rotation = 18;
@@ -110,9 +118,8 @@ public class RightFlipper implements iGizmo {
             down = false;
         else if (down == true)
             rotation = -rotation;
-
-
         rotationAngle+=rotation;
+        updateLinePositins();
     }
 
     @Override
