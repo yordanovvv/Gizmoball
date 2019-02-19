@@ -113,6 +113,14 @@ public class Triangle implements iGizmo {
 
         if (rotationCount == 3) {
 
+            LineSegment line1 = new LineSegment(XCoord*constant, (YCoord+1)*constant, (XCoord+1)*constant, (YCoord +1)*constant);
+            LineSegment line2 = new LineSegment((XCoord+1)*constant, YCoord*constant , (XCoord+1)*constant, (YCoord + 1)*constant);
+            LineSegment line3 = new LineSegment((XCoord)*constant, (YCoord+1)*constant, (XCoord+1)*constant, (YCoord)*constant);
+
+
+            lines.add(line1);
+            lines.add(line2);
+            lines.add(line3);
 
 
 
@@ -137,7 +145,7 @@ public class Triangle implements iGizmo {
         } else if (rotationCount == 1) {
 
             LineSegment line1 = new LineSegment(XCoord*constant, YCoord*constant, (XCoord+1)*constant, (YCoord )*constant);
-            LineSegment line2 = new LineSegment(XCoord*constant, YCoord*constant , (XCoord + 1)*constant, (YCoord + 1)*constant);
+            LineSegment line2 = new LineSegment(XCoord*constant, YCoord*constant , (XCoord)*constant, (YCoord + 1)*constant);
             LineSegment line3 = new LineSegment((XCoord)*constant, (YCoord+1)*constant, (XCoord+1)*constant, (YCoord)*constant);
 
             lines.add(line1);
@@ -151,8 +159,14 @@ public class Triangle implements iGizmo {
 
         } else if (rotationCount == 2) {
 
+            LineSegment line1 = new LineSegment(XCoord*constant, (YCoord+1)*constant, (XCoord+1)*constant, (YCoord +1)*constant);
+            LineSegment line2 = new LineSegment(XCoord*constant, YCoord*constant , (XCoord)*constant, (YCoord + 1)*constant);
+            LineSegment line3 = new LineSegment((XCoord)*constant, (YCoord)*constant, (XCoord+1)*constant, (YCoord+1)*constant);
 
 
+            lines.add(line1);
+            lines.add(line2);
+            lines.add(line3);
 
 
 
