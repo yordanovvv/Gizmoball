@@ -15,6 +15,8 @@ public class Ball extends Observable {
     private String ID;
     private boolean stopped;
     private double constant = 30;
+    private double speed;
+    private double friction;
 
     //fixed size. so size 1 for pixel
     public Ball(String id, double x, double y, double xv, double yv) {
@@ -89,26 +91,73 @@ public class Ball extends Observable {
     {
         double mu = 0.025; //per second
         double mu2 = 0.025; //per L
-        double delta_t = 0.0009; //what is a sufficiently small delta_t?
+        double delta_t = 0.05;
+        //Vect absVold = new Vect (abs(Vold.x()), abs(Vold.y()));
 
-        Vect Vold = this.getVelo();
-        Vect absVold = new Vect (abs(Vold.x()), abs(Vold.y()));
-        double x = Vold.x() * (1 - (mu * delta_t) - (mu2 * absVold.x() * delta_t));
-        double y = Vold.y() * (1 - (mu * delta_t) - (mu2 * absVold.y() * delta_t));
+        Vect Vnew  = this.getVelo().times(1 - (mu * delta_t) - (mu2 * abs(this.getVelo().length()) * delta_t/30));
 
-        Vect Vnew = new Vect(x,y);
+      //  Vect Vold = this.getVelo();
+      //  double x = Vold.x() * (1 - (mu * delta_t) - (mu2 * absVold.x() * delta_t));
+       // double y = Vold.y() * (1 - (mu * delta_t) - (mu2 * absVold.y() * delta_t));
+
+
+        friction = Vnew.length();
 
         return Vnew;
     }
 
-    public Vect applyGravity(double g)
+    public double getFriction()
+    {
+        return friction;
+    }
+
+  /*  public double applyFriction(double moveT)
+    {
+        double mu = 0.025; //per second
+        double mu2 = 0.025; //per L
+        double delta_t = 0.05; //what is a sufficiently small delta_t?
+
+        double Vold = this.calculateSpeed(delta_t);
+
+        double absVold = abs(Vold);
+        double Vnew = Vold * (1 - (mu * delta_t) - (mu2 * absVold * delta_t));
+
+        return Vnew;
+    }*/
+
+    public void applyGravity(double g, double time)
     {
         Vect velocity = this.getVelo();
+        Vect grav = new Vect (0, g*constant*time);
 
-        double x = velocity.x();// + g; gravity only acts in the y direction
-        double y = velocity.y()+g;
+        this.setVelo(this.getVelo().plus(grav));
 
-        velocity = new Vect(x,y);
-        return velocity;
+       // double x = velocity.x();// + g; gravity only acts in the y direction
+        //double y = velocity.y()+g;
+
+       // velocity = new Vect(x,y);
+        //return velocity;
+    }
+
+    public double calculateSpeed(double time)
+    {
+        double timeInSecs = 1/time; //ticks per second
+        Vect velocity = this.getVelo();
+        double x = velocity.x();
+        double y = velocity.y();
+
+        //speed = sqrt(x*x + y*y)/timeInSecs;
+
+        //speed = velocity.length()/30;
+
+        speed = velocity.length()/timeInSecs;
+
+        return speed;
+
+    }
+
+    public double getSpeed()
+    {
+        return speed;
     }
 }

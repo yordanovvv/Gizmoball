@@ -1,14 +1,10 @@
 package Controller.PlayListeners;
 
-
-import Model.Absorber;
 import Model.Ball;
 import Model.GizmoballModel;
 import Model.iGizmo;
-import View.MainFrame;
 import physics.Vect;
 
-import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -42,7 +38,7 @@ public class AbsorberKeyListener implements KeyListener {
 
             Ball b = model.getAbsorber().activateAbsorber();
             if (b != null){
-            //Trigger the absorber !
+            //Trigger the absorber!
             System.out.println(b);
             Vect velo = b.getVelo();
             model.getBall().setVelo(velo);

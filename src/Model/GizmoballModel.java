@@ -5,10 +5,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import Controller.PlayListeners.FlipperKeyListener;
-import physics.Circle;
-import physics.Geometry;
-import physics.LineSegment;
-import physics.Vect;
+import physics.*;
 
 public class GizmoballModel extends Observable {
 
@@ -23,8 +20,9 @@ public class GizmoballModel extends Observable {
 
     public GizmoballModel() {
 
-        ball = new Ball("B1", 6, 6, 2.5, 2.5); //2.5 = 50L/sec if moveTime is 0.05 (20 ticks/sec)
-        //ball = new Ball("B1" ,280, 303, 150, 150);
+        ball = new Ball("B1", 5, 5,  7.5, 7.5); //2.5 = 50L/sec if moveTime is 0.05 (20 ticks/sec)
+        //  ball.setVelo(new Vect(new Angle(200, 200), 8*30));
+
         gizmos = new ArrayList<iGizmo>();
         walls = new Wall(0, 0, 20, 20);
 
@@ -44,8 +42,6 @@ public class GizmoballModel extends Observable {
     int collideSticky = 0; //TODO : Remove this after prototyping
     public void moveBall() {
         double moveTime = 0.05; //20 times per second
-
-
 
         if (ball != null && !ball.isStopped()) {
 
