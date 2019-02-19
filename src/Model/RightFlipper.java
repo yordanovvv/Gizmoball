@@ -103,12 +103,19 @@ public class RightFlipper implements iGizmo {
 
     }
 
-    private void updateLinePositins(){
-        Circle  bigTopCircle = circles.get(0);
+    private void updateLinePositions(){
+        // transform.rotate(Math.toRadians(angle), x + (30/2) + 5, y + 5);
+        Circle  center = circles.get(0);
+        for (int i = 0; i < lines.size(); i++) {
+            Angle rotation = new Angle(Math.toRadians(rotationAngle));
+            LineSegment currentLine = lines.get(i);
+            lines.set(i,Geometry.rotateAround(currentLine,center.getCenter(),rotation));
+        }
+
         for (int i = 0; i < circles.size(); i++) {
-            Angle rotation = new Angle(rotationAngle);
+            Angle rotation = new Angle(Math.toRadians(rotationAngle));
             Circle currentCircle = circles.get(i);
-            circles.set(i,Geometry.rotateAround(currentCircle,bigTopCircle.getCenter(),rotation));
+            circles.set(i, Geometry.rotateAround(currentCircle,center.getCenter(),rotation));
         }
     }
 
@@ -122,7 +129,7 @@ public class RightFlipper implements iGizmo {
         else if (down == true)
             rotation = -rotation;
         rotationAngle+=rotation;
-        updateLinePositins();
+        updateLinePositions();
     }
 
     @Override
