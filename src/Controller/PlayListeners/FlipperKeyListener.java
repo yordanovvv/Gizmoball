@@ -4,8 +4,6 @@ import Model.GizmoballModel;
 import Model.iGizmo;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -33,7 +31,7 @@ public class FlipperKeyListener implements KeyListener {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                moveFlipper();
+                triggerFlipper();
             }
         };
         this.timer1=new Timer(50,actListener);
@@ -43,20 +41,20 @@ public class FlipperKeyListener implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        if (e.getKeyChar() == key ){
-            moveFlipper("UP");
-        }
+
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-
+        if (e.getKeyChar() == key ){
+            triggerFlipper("UP");
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         if (e.getKeyChar() == key) {
-            moveFlipper("DOWN");
+            triggerFlipper("DOWN");
         }
     }
 
@@ -65,7 +63,7 @@ public class FlipperKeyListener implements KeyListener {
     }
 
 
-    public void moveFlipper(String direction){
+    public void triggerFlipper(String direction){
         if(!isStopped) {
             if (direction.equals("UP") && flipper.getRotationAngle() == 0) {
                 counter = 0;
@@ -77,7 +75,7 @@ public class FlipperKeyListener implements KeyListener {
                 tickFlipper();
             } else if(direction.equals("RESET")) {
               //undefined
-                }
+            }
             }
         }
 
