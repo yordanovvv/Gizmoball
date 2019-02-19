@@ -19,6 +19,7 @@ public class Square implements iGizmo {
     private ArrayList<String> gizmoConnections;
     private ArrayList<String> keyConnections;
     private int constant = 30;
+    public int rotationCount;
 
     //Constructor for creating squares
 
@@ -31,6 +32,8 @@ public class Square implements iGizmo {
         circles = new ArrayList<>();
         gizmoConnections = new ArrayList<>();
         keyConnections = new ArrayList<>();
+
+        rotationCount = 0;
 
         generateCircles();
         generateLines();
@@ -111,6 +114,8 @@ public class Square implements iGizmo {
     @Override
     public void rotate() {
 //TODO guess this will be empty as square looks same rotated
+        rotationCount++;
+        if(rotationCount > 3) rotationCount = 0;
     }
 
     @Override
@@ -177,6 +182,11 @@ public class Square implements iGizmo {
     @Override
     public void addBall(Ball ball) {
 
+    }
+
+
+    public int getRotationCount() {
+        return rotationCount;
     }
 
 

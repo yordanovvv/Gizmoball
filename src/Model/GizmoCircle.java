@@ -18,6 +18,7 @@ public class GizmoCircle implements iGizmo {
     private ArrayList<String> gizmoConnections;
     private ArrayList<String> keyConnections;
     private final double constant = 30;
+    private int rotationCount;
 
 
     public GizmoCircle(String id, int XCoord, int YCoord, double radius){
@@ -28,6 +29,7 @@ public class GizmoCircle implements iGizmo {
 
         gizmoConnections = new ArrayList<>();
         keyConnections = new ArrayList<>();
+        rotationCount = 0;
 
         circles = new ArrayList<>();
         lines=new ArrayList<>();
@@ -89,7 +91,8 @@ public class GizmoCircle implements iGizmo {
 
     @Override
     public void rotate() {
-
+        rotationCount++;
+        if(rotationCount > 3) rotationCount = 0;
     }
 
     @Override
@@ -157,6 +160,9 @@ public class GizmoCircle implements iGizmo {
 
     }
 
+    public int getRotationCount() {
+        return rotationCount;
+    }
 
     @Override
     public String toString() {

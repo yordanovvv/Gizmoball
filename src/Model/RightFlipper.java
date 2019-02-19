@@ -18,6 +18,7 @@ public class RightFlipper implements iGizmo {
     private ArrayList<String> gizmoConnections;
     private ArrayList<String> keyConnections;
     private final double constant = 30;
+    private int rotationCount;
     private boolean down = false;
 
     public RightFlipper(String id, int x, int y){
@@ -32,6 +33,8 @@ public class RightFlipper implements iGizmo {
         circles = new ArrayList<>();
         gizmoConnections = new ArrayList<>();
         keyConnections = new ArrayList<>();
+        rotationCount = 0;
+
         generateCircles();
         generateLines();
     }
@@ -187,6 +190,10 @@ public class RightFlipper implements iGizmo {
 
     }
 
+
+    public int getRotationCount() {
+        return rotationCount;
+    }
 
     @Override
     public String toString() {
