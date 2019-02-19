@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
-public class MainFrame extends JFrame implements iMainFrame, Observer{
+public class MainFrame extends JFrame implements iMainFrame, Observer, ActionListener{
 
     private JPanel upperMenu;
     private JMenuBar optionsMenu;
@@ -42,7 +42,7 @@ public class MainFrame extends JFrame implements iMainFrame, Observer{
     private JTextField output_Velocity;
 
     private GizmoballModel model;
-   // private Timer timer;
+    private Timer timer;
 
     private final int WIDTH = 1000, HEIGHT = 800;
 
@@ -56,9 +56,8 @@ public class MainFrame extends JFrame implements iMainFrame, Observer{
         BorderLayout layout = new BorderLayout();
         this.setLayout(layout);
         this.setFocusable(true); //Needed for keylistener to work
-       // timer = new Timer(50, this);
-       // timer.start();
-
+        timer = new Timer(50, this);
+        timer.start();
 
         setUP();
 
@@ -180,6 +179,8 @@ public class MainFrame extends JFrame implements iMainFrame, Observer{
         physicsBoard.add(label_Velocity);
         physicsBoard.add(output_Velocity);
 
+
+
         //--------------------------------------------------------
         //                    gameContainer
 
@@ -262,17 +263,20 @@ public class MainFrame extends JFrame implements iMainFrame, Observer{
         this.repaint();
     }
 
-   /* @Override
+    @Override
     public void actionPerformed(ActionEvent e) {
-
-        try
-        {
-            output_Velocity.setText(String.valueOf(model.getBall().getSpeed()));
-        }
+        double velo = 0;//model.getBall().getSpeed();
+        try{
+          if(velo != model.getBall().getSpeed())
+           {
+               output_Velocity.setText(String.valueOf(Math.round(model.getBall().getSpeed()*100)/100));
+           }
+          //else output_Velocity.setText(String.valueOf(velo)); //this breaks it
+         }
         catch (NullPointerException ex)
         {
-
+            output_Velocity.setText("0");
         }
-        System.out.println("speed: " );
-    }*/
+        //  System.out.println("speed: " + String.valueOf(model.getBall().getSpeed()) );
+    }
 }
