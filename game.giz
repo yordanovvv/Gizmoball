@@ -1,24 +1,33 @@
-Ball B1 4 5 0 0
+Ball B1 5 5 0 0
 Absorber A1 0 18 20 20
 RightFlipper R1 10 10
-Square S1 4 3
-Triangle T1 3 4
+Square S1 3 4
+Triangle T1 7 7
 Rotate T1
-Triangle T2 2 5
+Triangle T2 6 7
 Rotate T2
-Triangle T3 3 6
+Rotate T2
+Triangle T3 5 7
+Rotate T3
 Triangle T4 4 7
-Triangle T5 5 6
-Rotate T5
-Triangle T6 6 5
-Rotate T6
-Triangle T7 7 4
+Rotate T4
+Rotate T4
+Triangle T5 7 6
+Triangle T6 7 4
+Triangle T7 7 3
 Rotate T7
 Rotate T7
-Triangle T8 6 3
+Triangle T8 7 5
 Rotate T8
-Rotate T8
-Triangle T9 5 2
-Rotate T9
-Triangle T10 5 4
+Triangle T9 6 3
+Triangle T10 5 3
 Rotate T10
+Rotate T10
+Rotate T10
+Triangle T11 4 3
+Rotate T11
+Rotate T11
+Rotate T11
+Triangle T12 3 5
+Triangle T13 3 6
+Triangle T14 3 3

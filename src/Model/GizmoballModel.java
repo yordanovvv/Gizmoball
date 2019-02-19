@@ -34,10 +34,6 @@ public class GizmoballModel extends Observable {
         RightFlipper rightFlipper = new RightFlipper("R1", 10, 10);
         gizmos.add(rightFlipper);
 
-        Triangle triangle = new Triangle("T1",6,7);
-        triangle.rotate();
-        gizmos.add(triangle);
-
         FlipperKeyListener rightFlipListener = new FlipperKeyListener("right", this, 'r', rightFlipper);//remove this in the long run
     }
 
