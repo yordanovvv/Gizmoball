@@ -187,6 +187,7 @@ public class RightFlipper implements iGizmo {
 
     }
 
+
     @Override
     public String toString() {
         return getGizmoType() + " " + getID() + " " + getXCoord() + " " + getYCoord();

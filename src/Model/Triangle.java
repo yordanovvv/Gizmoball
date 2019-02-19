@@ -13,11 +13,13 @@ public class Triangle implements iGizmo {
     private int XCoord;
     private int YCoord;
     private int height, width;
+    private int rotationCount=0; //rotation count is set to 0 initially
     private ArrayList<LineSegment> lines;
     private ArrayList<Circle> circles;
     private ArrayList<String> gizmoConnections;
     private ArrayList<String> keyConnections;
     private final double constant = 30;
+
 
 
     public Triangle(String id, int XCoord, int YCoord) {
@@ -79,8 +81,8 @@ public class Triangle implements iGizmo {
 
     @Override
     public void generateLines() {
-        LineSegment line2 = new LineSegment(XCoord*constant, YCoord*constant , (XCoord + 1)*constant, (YCoord + 1)*constant);
         LineSegment line1 = new LineSegment(XCoord*constant, YCoord*constant, (XCoord+1)*constant, (YCoord )*constant);
+        LineSegment line2 = new LineSegment(XCoord*constant, YCoord*constant , (XCoord + 1)*constant, (YCoord + 1)*constant);
         LineSegment line3 = new LineSegment((XCoord+1)*constant, (YCoord)*constant, (XCoord + 1)*constant, (YCoord+1)*constant);
 
         lines.add(line1);
@@ -101,9 +103,65 @@ public class Triangle implements iGizmo {
     }
 
 
-    //TODO needs done as triangles can be roated
+    //TODO needs done as triangles can be rotated
     @Override
     public void rotate() {
+
+        //we need to clear the arraylists as we are redrawing
+        lines.clear();
+        circles.clear();
+
+        if (rotationCount == 3) {
+
+
+
+
+
+            //set it back to the start
+            rotationCount=0;
+
+        } else if (rotationCount == 0) {
+
+            //if rotation is 0, we are back to start, so lines same as very start aka what we call in constructor???
+
+            LineSegment line1 = new LineSegment(XCoord*constant, YCoord*constant, (XCoord+1)*constant, (YCoord )*constant);
+            LineSegment line2 = new LineSegment(XCoord*constant, YCoord*constant , (XCoord + 1)*constant, (YCoord + 1)*constant);
+            LineSegment line3 = new LineSegment((XCoord+1)*constant, (YCoord)*constant, (XCoord + 1)*constant, (YCoord+1)*constant);
+
+            lines.add(line1);
+            lines.add(line2);
+            lines.add(line3);
+
+            rotationCount++;
+
+        } else if (rotationCount == 1) {
+
+            LineSegment line1 = new LineSegment(XCoord*constant, YCoord*constant, (XCoord+1)*constant, (YCoord )*constant);
+            LineSegment line2 = new LineSegment(XCoord*constant, YCoord*constant , (XCoord + 1)*constant, (YCoord + 1)*constant);
+            LineSegment line3 = new LineSegment((XCoord)*constant, (YCoord+1)*constant, (XCoord+1)*constant, (YCoord)*constant);
+
+            lines.add(line1);
+            lines.add(line2);
+            lines.add(line3);
+
+
+
+
+            rotationCount++;
+
+        } else if (rotationCount == 2) {
+
+
+
+
+
+
+            rotationCount++;
+
+        } else {
+            rotationCount = 3;
+        }
+
 
     }
 
@@ -172,6 +230,7 @@ public class Triangle implements iGizmo {
     public void addBall(Ball ball) {
 
     }
+
 
     @Override
     public String toString() {

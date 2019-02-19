@@ -157,6 +157,7 @@ public class GizmoCircle implements iGizmo {
 
     }
 
+
     @Override
     public String toString() {
         return getGizmoType() + " " + getID() + " " + getXCoord() + " " + getYCoord() + " " + radius;

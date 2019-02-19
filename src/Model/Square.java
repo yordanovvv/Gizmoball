@@ -179,6 +179,7 @@ public class Square implements iGizmo {
 
     }
 
+
     @Override
     public String toString() {
         return getGizmoType() + " " + getID() + " " + getXCoord() + " " + getYCoord();
