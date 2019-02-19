@@ -14,7 +14,6 @@ public class GizmoballModel extends Observable {
     private Ball ball;
     private ArrayList<iGizmo> gizmos;
     private Wall walls;
-    //TODO private List<Flipper>;
     private iGizmo absorber;
 
     private boolean absorberCollision = false;
@@ -22,14 +21,14 @@ public class GizmoballModel extends Observable {
 
     public GizmoballModel() {
 
-        ball = new Ball("B1", 6, 6, 2.5, 2.5); //2.5 = 50L/sec if moveTime is 0.05 (20 ticks/sec)
-        //ball = new Ball("B1" ,280, 303, 150, 150);
+        ball = new Ball("B1", 18, 19.5,  0, 33); //2.5 = 50L/sec if moveTime is 0.05 (20 ticks/sec)
         gizmos = new ArrayList<iGizmo>();
         walls = new Wall(0, 0, 20, 20);
 
         absorber = new Absorber("A1", 0, 18, 20, 20);
         gizmos.add(absorber);
-
+        absorber.addBall(ball);
+        ball.setStopped(true);
         }
 
 
@@ -37,9 +36,11 @@ public class GizmoballModel extends Observable {
         double moveTime = 0.05; //20 times per second
 
         if (ball != null && !ball.isStopped()) {
+            //System.out.println("Speed: " + ball.calculateSpeed(moveTime));
 
-            ball.setVelo(ball.applyGravity(gravity));
-            ball.setVelo(ball.applyFriction());
+
+            ball.applyGravity(gravity, moveTime);
+            ball.applyFriction();
 
             CollisionDetails cd = timeUntilCollision();
 

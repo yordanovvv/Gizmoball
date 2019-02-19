@@ -6,10 +6,12 @@ import Model.GizmoballModel;
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
-public class MainFrame extends JFrame implements iMainFrame, Observer {
+public class MainFrame extends JFrame implements iMainFrame, Observer{
 
     private JPanel upperMenu;
     private JMenuBar optionsMenu;
@@ -40,6 +42,7 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
     private JTextField output_Velocity;
 
     private GizmoballModel model;
+   // private Timer timer;
 
     private final int WIDTH = 1000, HEIGHT = 800;
 
@@ -53,6 +56,9 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
         BorderLayout layout = new BorderLayout();
         this.setLayout(layout);
         this.setFocusable(true); //Needed for keylistener to work
+       // timer = new Timer(50, this);
+       // timer.start();
+
 
         setUP();
 
@@ -137,10 +143,10 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
         label_Gravity = util.editLabel(label_Gravity, 12, Color.BLACK);
         label_Velocity = util.editLabel(label_Velocity, 12, Color.BLACK);
 
-        output_BallPosition = new JTextField("41.2");
-        output_Friction = new JTextField("26");
-        output_Gravity = new JTextField("54");
-        output_Velocity = new JTextField("10");
+        output_BallPosition = new JTextField("-");
+        output_Friction = new JTextField("-");
+        output_Gravity = new JTextField("25");
+        output_Velocity = new JTextField(String.valueOf(model.getBall().getSpeed()));
 
         output_BallPosition = util.styleTextField(output_BallPosition, 11);
         output_Friction = util.styleTextField(output_Friction, 11);
@@ -255,4 +261,18 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
     public void update(Observable o, Object arg) {
         this.repaint();
     }
+
+   /* @Override
+    public void actionPerformed(ActionEvent e) {
+
+        try
+        {
+            output_Velocity.setText(String.valueOf(model.getBall().getSpeed()));
+        }
+        catch (NullPointerException ex)
+        {
+
+        }
+        System.out.println("speed: " );
+    }*/
 }
