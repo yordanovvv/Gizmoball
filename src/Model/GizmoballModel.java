@@ -41,9 +41,11 @@ public class GizmoballModel extends Observable {
         FlipperKeyListener rightFlipListener = new FlipperKeyListener("right", this, 'r', rightFlipper);//remove this in the long run
     }
 
-
+    int collideSticky = 0; //TODO : Remove this after prototyping
     public void moveBall() {
         double moveTime = 0.05; //20 times per second
+
+
 
         if (ball != null && !ball.isStopped()) {
 
@@ -70,8 +72,19 @@ public class GizmoballModel extends Observable {
                     ball = moveBallForTime(ball, moveTime);
                 }
                 else {
+
+                    collideSticky ++;
+                    System.out.println("collide " + collideSticky);
+
+
                     ball = moveBallForTime(ball, tuc); //collision in time tuc
-                    ball.setVelo(cd.getVelo()); //velocity after the collision
+
+                    if (collideSticky > 10){
+                        ball.setVelo(cd.getVelo());
+                        collideSticky = 0;
+                    }
+
+                    // //velocity after the collision
                 }
             }
 
