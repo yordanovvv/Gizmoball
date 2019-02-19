@@ -244,7 +244,7 @@ public class GizmoballModel extends Observable {
                         Square square = new Square(inputStream[1], Integer.parseInt(inputStream[2]), Integer.parseInt(inputStream[3]));
                         gizmos.add(square);
                         break;
-                    case "Circle":
+                    case "GizmoCircle":
                         GizmoCircle circle = new GizmoCircle(inputStream[1], Integer.parseInt(inputStream[2]), Integer.parseInt(inputStream[3]), Double.parseDouble(inputStream[4]));
                         gizmos.add(circle);
                         break;

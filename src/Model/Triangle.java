@@ -126,23 +126,10 @@ public class Triangle implements iGizmo {
         }
 
         for (int i = 0; i < circles.size(); i++) {
-            Angle rotation = new Angle(rotationAngle);
+            Angle rotation = new Angle(Math.toRadians(rotationAngle));
             Circle currentCircle = circles.get(i);
             circles.set(i, Geometry.rotateAround(currentCircle,center.getCenter(),rotation));
         }
-
-        //System.out.println(Math.toDegrees( rotation.radians()));
-        //            System.out.println(center.getCenter().x());
-        //            System.out.println(center.getCenter().y());
-
-        /* for (int i = 0; i < circles.size(); i++) {
-            Angle rotation = new Angle(rotationAngle);
-            Circle currentCircle = circles.get(i);
-            //circles.set(i, Geometry.rotateAround(currentCircle,center.getCenter(),rotation));
-           // System.out.println(circles.get(i).getCenter().x());
-            //System.out.println(circles.get(i).getCenter().y());
-        }
-*/
     }
 
 
