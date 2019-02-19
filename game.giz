@@ -1,11 +1,6 @@
-Ball B1 6.0 6.0 75.0 75.0
+Ball B1 18.230867150799234 19.04683020376613 -13.806936599983542 26.936604075322624
 Absorber A1 0 18 20 20
 RightFlipper R1 10 10
 Triangle T1 6 7
-Rotate T1Square S1 6 7
-Square S2 5 7
-Square S3 7 7
-Square S4 8 7
-Square S5 8 6
-Square S6 8 5
-Square S7 8 4
+Rotate T1
+Square S1 2 1

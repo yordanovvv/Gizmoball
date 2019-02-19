@@ -65,6 +65,7 @@ public class GizmoballModel extends Observable {
                     ball = moveBallForTime(ball, tuc + moveTime);
                     absorber.addBall(ball);
                     ball.setStopped(true);
+                    ball.setVelo(new Vect(0,0));
                     absorberCollision = false;
                 }
                 else if(absorberCollision == true && ball.getVelo().y()<0) //ball is moving up so ignore absorber line
@@ -74,9 +75,7 @@ public class GizmoballModel extends Observable {
                 else {
 
                     collideSticky ++;
-                    System.out.println("collide " + collideSticky);
-
-
+                    
                     ball = moveBallForTime(ball, tuc); //collision in time tuc
 
                     if (collideSticky > 10){
@@ -216,11 +215,12 @@ public class GizmoballModel extends Observable {
         try {
             FileWriter fileWriter = new FileWriter("game.giz");
             fileWriter.write(ball.toString() + "\n");
+
             for(iGizmo gizmo : gizmos) {
                 fileWriter.write(gizmo.toString() + "\n");
                 if(gizmo.getRotationCount() > 0) {
                     for(int i = 0; i < gizmo.getRotationCount(); i++) {
-                        fileWriter.write("Rotate " + gizmo.getID());
+                        fileWriter.write("Rotate " + gizmo.getID() + "\n");
                     }
                 }
             }
