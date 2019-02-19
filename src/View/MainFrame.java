@@ -36,7 +36,7 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
     private JLabel label_Velocity;
 
     private JTextField output_Gravity;
-    private JTextField output_Friction;
+    public JTextField output_Friction;
     private JTextField output_BallPosition;
     public JTextField output_Velocity;
 

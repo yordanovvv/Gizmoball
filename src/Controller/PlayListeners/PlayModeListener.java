@@ -35,8 +35,8 @@ public class PlayModeListener implements ActionListener {
             gModel.moveBall();
        } else if (e.getSource() == statisticsTimer) {
 
-            int s = gModel.getBallSpeed();
-            String speed = Integer.toString(s);
+           double s= gModel.getBallSpeed();
+            String speed = Double.toString(s);
             mf.output_Velocity.setText(speed);
 
 

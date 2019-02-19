@@ -203,11 +203,13 @@ public class GizmoballModel extends Observable {
         ball.setVelo(v);
     }
 
-    public int getBallSpeed(){
-        double speed= ball.getVelo().x();
-        int roundedSpeed =(int) Math.round(speed);
-        return roundedSpeed;
+    public double getBallSpeed(){
+
+        System.out.println("Speed is" + ball.getSpeed());
+        return ball.getSpeed();
+
     }
+
     public Absorber getAbsorber() {
         return (Absorber) absorber;
     }
