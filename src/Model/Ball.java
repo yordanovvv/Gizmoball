@@ -82,7 +82,7 @@ public class Ball extends Observable {
 
     @Override
     public String toString() {
-        return "Ball " + getID() + " " + getExactX() + " " + getExactY() + " " + getVelo().x() + " " + getVelo().y();
+        return "Ball " + getID() + " " + getExactX()/30 + " " + getExactY()/30 + " " + getVelo().x() + " " + getVelo().y();
     }
 
     public Vect applyFriction()

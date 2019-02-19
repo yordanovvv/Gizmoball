@@ -32,7 +32,11 @@ public class GizmoballModel extends Observable {
         gizmos.add(absorber);
 
         RightFlipper rightFlipper = new RightFlipper("R1", 10, 10);
-       gizmos.add(rightFlipper);
+        gizmos.add(rightFlipper);
+
+        Triangle triangle = new Triangle("T1",6,7);
+        triangle.rotate();
+        gizmos.add(triangle);
 
         FlipperKeyListener rightFlipListener = new FlipperKeyListener("right", this, 'r', rightFlipper);//remove this in the long run
     }
@@ -220,35 +224,35 @@ public class GizmoballModel extends Observable {
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader("game.giz"));
             String line;
-            String[] array;
+            String[] inputStream;
             while((line = bufferedReader.readLine()) != null) {
-                array = line.split(" ");
-                switch(array[0]) {
+                inputStream = line.split(" ");
+                switch(inputStream[0]) {
                     case "Ball":
-                        ball = new Ball(array[1], Double.parseDouble(array[2]), Double.parseDouble(array[3]), Double.parseDouble(array[4]), Double.parseDouble(array[5]));
+                        ball = new Ball(inputStream[1], Double.parseDouble(inputStream[2]), Double.parseDouble(inputStream[3]), Double.parseDouble(inputStream[4]), Double.parseDouble(inputStream[5]));
                         break;
                     case "Absorber":
-                        Absorber abs = new Absorber(array[1], Integer.parseInt(array[2]), Integer.parseInt(array[3]), Integer.parseInt(array[4]), Integer.parseInt(array[5]));
+                        Absorber abs = new Absorber(inputStream[1], Integer.parseInt(inputStream[2]), Integer.parseInt(inputStream[3]), Integer.parseInt(inputStream[4]), Integer.parseInt(inputStream[5]));
                         gizmos.add(abs);
                         break;
                     case "Square":
-                        Square square = new Square(array[1], Integer.parseInt(array[2]), Integer.parseInt(array[3]));
+                        Square square = new Square(inputStream[1], Integer.parseInt(inputStream[2]), Integer.parseInt(inputStream[3]));
                         gizmos.add(square);
                         break;
                     case "Circle":
-                        GizmoCircle circle = new GizmoCircle(array[1], Integer.parseInt(array[2]), Integer.parseInt(array[3]), Double.parseDouble(array[4]));
+                        GizmoCircle circle = new GizmoCircle(inputStream[1], Integer.parseInt(inputStream[2]), Integer.parseInt(inputStream[3]), Double.parseDouble(inputStream[4]));
                         gizmos.add(circle);
                         break;
                     case "Triangle":
-                        Triangle triangle = new Triangle(array[1], Integer.parseInt(array[2]), Integer.parseInt(array[3]));
+                        Triangle triangle = new Triangle(inputStream[1], Integer.parseInt(inputStream[2]), Integer.parseInt(inputStream[3]));
                         gizmos.add(triangle);
                         break;
                     case "RightFlipper":
-                        RightFlipper rightFlipper = new RightFlipper(array[1], Integer.parseInt(array[2]), Integer.parseInt(array[3]));
+                        RightFlipper rightFlipper = new RightFlipper(inputStream[1], Integer.parseInt(inputStream[2]), Integer.parseInt(inputStream[3]));
                         gizmos.add(rightFlipper);
                         break;
                     case "LeftFlipper":
-                        LeftFlipper leftFlipper = new LeftFlipper(array[1], Integer.parseInt(array[2]), Integer.parseInt(array[3]));
+                        LeftFlipper leftFlipper = new LeftFlipper(inputStream[1], Integer.parseInt(inputStream[2]), Integer.parseInt(inputStream[3]));
                         gizmos.add(leftFlipper);
                         break;
                     default:

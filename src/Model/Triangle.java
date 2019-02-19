@@ -1,6 +1,8 @@
 package Model;
 
+import physics.Angle;
 import physics.Circle;
+import physics.Geometry;
 import physics.LineSegment;
 
 import java.awt.*;
@@ -19,7 +21,7 @@ public class Triangle implements iGizmo {
     private ArrayList<String> gizmoConnections;
     private ArrayList<String> keyConnections;
     private final double constant = 30;
-
+    private int rotationAngle;
 
 
     public Triangle(String id, int XCoord, int YCoord) {
@@ -106,17 +108,31 @@ public class Triangle implements iGizmo {
     //TODO needs done as triangles can be rotated
     @Override
     public void rotate() {
+        int rotationDegree = 90;
+        rotationCount++;
+        if(rotationCount > 4) rotationCount = 0;
+
+        System.out.println(rotationCount);
+        rotationAngle  = rotationDegree * rotationCount;
+
+        Circle  center = new Circle(XCoord*(constant), YCoord*(constant),0);
+        for (int i = 0; i < circles.size(); i++) {
+            Angle rotation = new Angle(rotationAngle);
+            Circle currentCircle = circles.get(i);
+            circles.set(i, Geometry.rotateAround(currentCircle,center.getCenter(),rotation));
+        }
+
+        for (int i = 0; i < lines.size(); i++) {
+            Angle rotation = new Angle(rotationAngle);
+            LineSegment currentLine = lines.get(i);
+            lines.set(i,Geometry.rotateAround(currentLine,center.getCenter(),rotation));
+        }
 
         //we need to clear the arraylists as we are redrawing
-        lines.clear();
+       /* lines.clear();
         circles.clear();
 
         if (rotationCount == 3) {
-
-
-
-
-
             //set it back to the start
             rotationCount=0;
 
@@ -145,16 +161,9 @@ public class Triangle implements iGizmo {
             lines.add(line3);
 
 
-
-
             rotationCount++;
 
         } else if (rotationCount == 2) {
-
-
-
-
-
 
             rotationCount++;
 
@@ -162,12 +171,15 @@ public class Triangle implements iGizmo {
             rotationCount = 3;
         }
 
+        System.out.println(rotationCount);
 
+*/
+        //rotationAngle = 45*rotationCount;
     }
 
     @Override
     public int getRotationAngle() {
-        return 0;
+        return rotationAngle;
     }
 
     @Override

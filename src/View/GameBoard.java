@@ -136,7 +136,7 @@ public class GameBoard extends JPanel implements Observer{
 
         AffineTransform transform = new AffineTransform();
         AffineTransform old = g2.getTransform();
-        transform.rotate(Math.toRadians(angle), x + (30/2) + 5, y + 5);
+        transform.rotate(Math.toRadians(angle), x + (30/2), y + (30/2));
         g2.transform(transform);
 
 
@@ -144,8 +144,8 @@ public class GameBoard extends JPanel implements Observer{
         int yPoly[] = {y, (y+30),y, y     , y      ,(y+30)};
 
         Polygon poly = new Polygon(xPoly, yPoly, xPoly.length);
-        g.setColor(new Color(59, 112, 170, 255));
-        g.fillPolygon(poly);
+        g2.setColor(new Color(59, 112, 170, 255));
+        g2.fillPolygon(poly);
 
         g2.setTransform(old);
         g2.dispose();
