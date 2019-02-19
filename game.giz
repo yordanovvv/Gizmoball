@@ -1,23 +1,11 @@
-Ball B1 3.713014127212155 6.363096851978868 -0.8888703663039685 -113.23833014673868
+Ball B1 6.0 6.0 75.0 75.0
 Absorber A1 0 18 20 20
 RightFlipper R1 10 10
 Triangle T1 6 7
-Rotate T1GizmoCircle C1 7 6 0.5
-GizmoCircle C2 7 5 0.5
-GizmoCircle C3 7 4 0.5
-GizmoCircle C4 5 8 0.5
-GizmoCircle C5 4 8 0.5
-GizmoCircle C6 3 8 0.5
-GizmoCircle C7 2 8 0.5
-GizmoCircle C8 2 7 0.5
-GizmoCircle C9 2 6 0.5
-GizmoCircle C10 1 5 0.5
-GizmoCircle C11 1 5 0.5
-GizmoCircle C12 1 5 0.5
-GizmoCircle C13 1 4 0.5
-GizmoCircle C14 2 3 0.5
-GizmoCircle C15 3 3 0.5
-GizmoCircle C16 4 3 0.5
-GizmoCircle C17 5 2 0.5
-GizmoCircle C18 6 2 0.5
-GizmoCircle C19 7 3 0.5
+Rotate T1Square S1 6 7
+Square S2 5 7
+Square S3 7 7
+Square S4 8 7
+Square S5 8 6
+Square S6 8 5
+Square S7 8 4

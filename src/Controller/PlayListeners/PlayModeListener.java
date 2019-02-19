@@ -33,9 +33,7 @@ public class PlayModeListener implements ActionListener {
 
         if (e.getSource() == timer) {
             gModel.moveBall();
-
-            System.out.println(gModel.getBall().getVelo());
-        } else if (e.getSource() == statisticsTimer) {
+       } else if (e.getSource() == statisticsTimer) {
 
             int s = gModel.getBallSpeed();
             String speed = Integer.toString(s);
