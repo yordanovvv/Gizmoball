@@ -117,7 +117,7 @@ public class Triangle implements iGizmo {
         System.out.println(rotationCount);
         rotationAngle  = rotationDegree * rotationCount;
 
-        Circle  center = new Circle((XCoord), (YCoord),.5*constant); //make a circle that fills that set square and get its center
+        Circle  center = new Circle((XCoord*constant+15), (YCoord*constant+15),.5*constant); //make a circle that fills that set square and get its center
 
         for (int i = 0; i < lines.size(); i++) {
             Angle rotation = new Angle(Math.toRadians(rotationAngle));
@@ -125,8 +125,17 @@ public class Triangle implements iGizmo {
             lines.set(i,Geometry.rotateAround(currentLine,center.getCenter(),rotation));
         }
 
+        for (int i = 0; i < circles.size(); i++) {
+            Angle rotation = new Angle(rotationAngle);
+            Circle currentCircle = circles.get(i);
+            circles.set(i, Geometry.rotateAround(currentCircle,center.getCenter(),rotation));
+        }
 
-       /* for (int i = 0; i < circles.size(); i++) {
+        //System.out.println(Math.toDegrees( rotation.radians()));
+        //            System.out.println(center.getCenter().x());
+        //            System.out.println(center.getCenter().y());
+
+        /* for (int i = 0; i < circles.size(); i++) {
             Angle rotation = new Angle(rotationAngle);
             Circle currentCircle = circles.get(i);
             //circles.set(i, Geometry.rotateAround(currentCircle,center.getCenter(),rotation));
@@ -134,6 +143,9 @@ public class Triangle implements iGizmo {
             //System.out.println(circles.get(i).getCenter().y());
         }
 */
+    }
+
+
 
         //we need to clear the arraylists as we are redrawing
        /* lines.clear();
@@ -182,7 +194,7 @@ public class Triangle implements iGizmo {
 
 */
         //rotationAngle = 45*rotationCount;
-    }
+
 
     @Override
     public int getRotationAngle() {

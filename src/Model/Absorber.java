@@ -79,6 +79,11 @@ public class Absorber implements iGizmo {
     }
 
     @Override
+    public int getRotationCount() {
+        return 0;
+    }
+
+    @Override
     public void setID (String id){
 
         this.ID = id;

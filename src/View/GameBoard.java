@@ -133,7 +133,6 @@ public class GameBoard extends JPanel implements Observer{
     private void paintTriangle(Graphics g,int x, int y, int angle){
         Graphics2D g2 =(Graphics2D) g.create();
 
-
         AffineTransform transform = new AffineTransform();
         AffineTransform old = g2.getTransform();
         transform.rotate(Math.toRadians(angle), x + (30/2), y + (30/2));
