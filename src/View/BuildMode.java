@@ -145,6 +145,7 @@ public class BuildMode extends JPanel{
         //Grid Listener only needs to be in BUILDMODE Class, as in PLAYMODE we are not clicking the grid.
         //GridClickListener board_listener = new GridClickListener(mainFrame.getGameBoard(), "square");
 
+        //TODO Refactor ADDBUTTONGIZMOLISTENER
         AddButtonGizmoListener ballButListener = new AddButtonGizmoListener("ball", mainFrame.getGameBoard().getListener());
         AddButtonGizmoListener squareButListener = new AddButtonGizmoListener("square", mainFrame.getGameBoard().getListener());
         AddButtonGizmoListener circleButListener = new AddButtonGizmoListener("circle", mainFrame.getGameBoard().getListener());
@@ -163,6 +164,12 @@ public class BuildMode extends JPanel{
         button_rightFlipper.addMouseListener(rightFlipButListener);
 
         button_ball.addMouseListener(ballButListener);
+
+        //-------------
+        //controls
+        AddButtonGizmoListener rotateListener = new AddButtonGizmoListener("rotate", mainFrame.getGameBoard().getListener());
+
+        button_rotate.addMouseListener(rotateListener);
 
         //mainFrame.getGameBoard().addMouseListener(board_listener);
         //---------------------------------------

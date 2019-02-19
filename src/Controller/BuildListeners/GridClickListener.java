@@ -41,14 +41,10 @@ public class GridClickListener implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        //System.out.println("Mouse clicked atX : " + e.getX() + " | " + e.getY());
-        //System.out.println("Currently selected : " + selected);
-
         gridX = e.getX()/GRID_SIZE;
         gridY = e.getY()/GRID_SIZE;
 
-
-        System.out.println("Placing a " +  selected + " at grid position " + gridX + " | " + gridY);
+        //System.out.println("Placing a " +  selected + " at grid position " + gridX + " | " + gridY);
 
         iGizmo giz;
 
@@ -88,6 +84,21 @@ public class GridClickListener implements MouseListener {
                 giz = new Triangle("T"+idNo,gridX, gridY);
                 m.addGizmo(giz);
                 break;
+
+                //---------------------------------
+
+            case "rotate":
+
+                for (iGizmo g : m.getGizmos()){
+                    if (g.getXCoord() == gridX && g.getYCoord()==gridY){
+                        if (g.getGizmoType() == "Triangle"){
+                            g.rotate();
+                        }
+                    }
+                }
+
+                break;
+
         }
     }
 
