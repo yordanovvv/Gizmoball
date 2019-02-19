@@ -60,4 +60,6 @@ public interface iGizmo {
     void addBall(Ball ball);
 
     String toString();
+
+    int getRotationCount();
 }

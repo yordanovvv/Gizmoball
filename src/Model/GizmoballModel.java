@@ -205,6 +205,11 @@ public class GizmoballModel extends Observable {
             fileWriter.write(ball.toString() + "\n");
             for(iGizmo gizmo : gizmos) {
                 fileWriter.write(gizmo.toString() + "\n");
+                if(gizmo.getRotationCount() > 0) {
+                    for(int i = 0; i < gizmo.getRotationCount(); i++) {
+                        fileWriter.write("Rotate " + gizmo.getID());
+                    }
+                }
             }
             fileWriter.flush();
 
@@ -254,6 +259,13 @@ public class GizmoballModel extends Observable {
                     case "LeftFlipper":
                         LeftFlipper leftFlipper = new LeftFlipper(inputStream[1], Integer.parseInt(inputStream[2]), Integer.parseInt(inputStream[3]));
                         gizmos.add(leftFlipper);
+                        break;
+                    case "Rotate":
+                        for(iGizmo gizmo : gizmos) {
+                            if(gizmo.getID().equals(inputStream[1])) {
+                                gizmo.rotate();
+                            }
+                        }
                         break;
                     default:
                         break;

@@ -17,6 +17,7 @@ public class LeftFlipper implements iGizmo {
     private ArrayList<Circle> circles;
     private ArrayList<String> gizmoConnections;
     private ArrayList<String> keyConnections;
+    private int rotationCount;
     private final double constant = 30;
 
     private int rotationAngle = 0;
@@ -35,6 +36,7 @@ public class LeftFlipper implements iGizmo {
         circles = new ArrayList<>();
         gizmoConnections = new ArrayList<>();
         keyConnections = new ArrayList<>();
+        rotationCount = 0;
 
         generateCircles();
         generateLines();
@@ -180,6 +182,9 @@ public class LeftFlipper implements iGizmo {
 
     }
 
+    public int getRotationCount() {
+        return rotationCount;
+    }
 
     @Override
     public String toString() {

@@ -15,7 +15,7 @@ public class Triangle implements iGizmo {
     private int XCoord;
     private int YCoord;
     private int height, width;
-    private int rotationCount=0; //rotation count is set to 0 initially
+    private int rotationCount; //rotation count is set to 0 initially
     private ArrayList<LineSegment> lines;
     private ArrayList<Circle> circles;
     private ArrayList<String> gizmoConnections;
@@ -34,6 +34,8 @@ public class Triangle implements iGizmo {
         circles = new ArrayList<>();
         gizmoConnections = new ArrayList<>();
         keyConnections = new ArrayList<>();
+
+        rotationCount = 0;
 
         generateCircles();
         generateLines();
@@ -247,5 +249,9 @@ public class Triangle implements iGizmo {
     @Override
     public String toString() {
         return getGizmoType() + " " + getID() + " " + getXCoord() + " " + getYCoord();
+    }
+
+    public int getRotationCount() {
+        return rotationCount;
     }
 }
