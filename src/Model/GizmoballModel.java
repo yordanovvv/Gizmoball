@@ -28,6 +28,8 @@ public class GizmoballModel extends Observable {
 
         absorber = new Absorber("A1", 0, 18, 20, 20);
         gizmos.add(absorber);
+        //absorber.addBall(ball);
+        //ball.setStopped(true);
 
         RightFlipper rightFlipper = new RightFlipper("R1", 10, 10);
         gizmos.add(rightFlipper);
@@ -45,8 +47,10 @@ public class GizmoballModel extends Observable {
 
         if (ball != null && !ball.isStopped()) {
 
-            ball.setVelo(ball.applyGravity(gravity));
-            ball.setVelo(ball.applyFriction());
+            //System.out.println("Speed: " + ball.calculateSpeed(moveTime));
+
+            ball.applyGravity(gravity, moveTime);
+            ball.applyFriction();
 
             CollisionDetails cd = timeUntilCollision();
 
@@ -73,7 +77,7 @@ public class GizmoballModel extends Observable {
                 else {
 
                     collideSticky ++;
-                    
+
                     ball = moveBallForTime(ball, tuc); //collision in time tuc
 
                     if (collideSticky > 10){

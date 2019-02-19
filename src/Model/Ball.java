@@ -5,6 +5,7 @@ import physics.Vect;
 
 import java.util.Observable;
 import static java.lang.Math.abs;
+import static java.lang.Math.sqrt;
 
 public class Ball extends Observable {
 
