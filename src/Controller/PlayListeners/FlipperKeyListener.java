@@ -4,6 +4,8 @@ import Model.GizmoballModel;
 import Model.iGizmo;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -90,22 +92,6 @@ public class FlipperKeyListener implements KeyListener {
 
     private void moveFlipper() {
 
-        /*tickFlipper();
-        if(counter==4) {
-            timer1.stop();
-            counter=0;
-        }
-        counter++;
-        timer1.start();
-
-
-
-        }*/
-        //counter++;
-
-        //need to rotate at an angular velocity of 1080 per second
-        //as we are only doing it 1/2 the way so 540 one way
-        //it changes is via 18 degrees so 30???
         //todo check my math, i am dead -Nells
         final Timer timer = new Timer(50 , e -> {
             tickFlipper();
@@ -114,6 +100,7 @@ public class FlipperKeyListener implements KeyListener {
             counter++;
         });
         timer.start();
+
     }
 }
 
