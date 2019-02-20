@@ -74,22 +74,28 @@ public class RightFlipper implements iGizmo {
 
         Circle bigTopCircle = new Circle(XCoord*constant + 22.6,YCoord*constant + 7.5,7.4);
         Circle bigBottomCircle = new Circle(XCoord*constant + 22.6,YCoord*constant +7.51+47.5,6);
-        Circle topLeft;
-        Circle topRight;
-        Circle bottomLeft;
-        Circle bottomRight;
+        Circle topLeft = new Circle(XCoord*constant + 30,YCoord*constant +7,0);
+        Circle topRight = new Circle((XCoord + .9) * constant,YCoord*constant +7.5+48,0);
+        Circle bottomLeft = new Circle(XCoord*constant + 17.5,YCoord*constant +7,0);
+        Circle bottomRight = new Circle((XCoord) * constant + 15.8,YCoord*constant +7.5+48,0);
 
         circles.add(bigTopCircle);
         circles.add(bigBottomCircle);
+        circles.add(topLeft);
+        circles.add(topRight);
+        circles.add(bottomLeft);
+        circles.add(bottomRight);
+
     }
 
     @Override
     public void generateLines() {
 
         //todo fix me
-        LineSegment rightL = new LineSegment(XCoord*constant + 30,YCoord*constant +7,(XCoord + .9) * constant,YCoord*constant +7.5+48);
-        LineSegment leftL = new LineSegment(XCoord*constant + 17.5,YCoord*constant +7,(XCoord) * constant + 15.8,YCoord*constant +7.5+48);
+        LineSegment rightL = new LineSegment(XCoord*constant + 30 ,YCoord*constant +7,(XCoord + .9) * constant   ,YCoord*constant +8+48);
+        LineSegment leftL = new LineSegment(XCoord*constant + 17.5,YCoord*constant +7,(XCoord) * constant + 15.8 ,YCoord*constant +8+48);
 
+        System.out.println();
         lines.add(rightL);
         lines.add(leftL);
     }

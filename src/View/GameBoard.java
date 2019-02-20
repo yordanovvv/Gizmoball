@@ -80,7 +80,7 @@ public class GameBoard extends JPanel implements Observer{
             x = gizmo.getXCoord() * 30;
             y = gizmo.getYCoord() * 30;
             switch (gizmo.getGizmoType()){
-                case "GizmoCircle":
+                case "Circle":
                     paintCircle(g2, x,y);
                     break;
                 case "Square":

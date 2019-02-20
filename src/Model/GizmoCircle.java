@@ -40,7 +40,7 @@ public class GizmoCircle implements iGizmo {
 
     @Override
     public String getGizmoType() {
-        return "GizmoCircle";
+        return "Circle";
     }
 
     @Override

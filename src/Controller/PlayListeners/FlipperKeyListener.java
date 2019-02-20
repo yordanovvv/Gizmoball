@@ -94,6 +94,7 @@ public class FlipperKeyListener implements KeyListener {
 
     private void tickFlipper(int index){
         flipper.get(index).rotate();
+        model.setiGizmo(flipper.get(index));
         model.hasChanged();
         model.notifyObservers();
     }
@@ -101,8 +102,7 @@ public class FlipperKeyListener implements KeyListener {
 
     private void moveFlipper(int index) {
 
-        //todo check my math, i am dead -Nells
-        final Timer timer = new Timer(40 , e -> {
+        final Timer timer = new Timer(30 , e -> {
             tickFlipper(index);
             Timer t = (Timer) e.getSource();
             if (counter == 4) t.stop();

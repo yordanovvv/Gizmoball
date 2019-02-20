@@ -53,6 +53,14 @@ public class GizmoballModel extends Observable {
         //FlipperKeyListener leftFlipListener = new FlipperKeyListener("left", this, 't', leftFlipper);//remove this in the long run
     }
 
+    public void setiGizmo(iGizmo gizmo){
+        int i = 0;
+        for (iGizmo giz:gizmos) {
+            if(giz.getID().equals(gizmo.getID())) gizmos.set(i,gizmo);
+            i++;
+        }
+    }
+
     public ArrayList<Character> getKeys(){return keys;}
 
     public ArrayList<iGizmo> getFlippers(){return flippers;}
@@ -63,7 +71,7 @@ public class GizmoballModel extends Observable {
 
         if (ball != null && !ball.isStopped()) {
 
-            //System.out.println("Speed: " + ball.calculateSpeed(moveTime));
+           // System.out.println("n11 Speed: " + ball.calculateSpeed(moveTime));
 
 
             ball.applyGravity(gravity, moveTime);
@@ -279,7 +287,7 @@ public class GizmoballModel extends Observable {
                         Square square = new Square(inputStream[1], Integer.parseInt(inputStream[2]), Integer.parseInt(inputStream[3]));
                         gizmos.add(square);
                         break;
-                    case "GizmoCircle":
+                    case "Circle":
                         GizmoCircle circle = new GizmoCircle(inputStream[1], Integer.parseInt(inputStream[2]), Integer.parseInt(inputStream[3]), Double.parseDouble(inputStream[4]));
                         gizmos.add(circle);
                         break;
