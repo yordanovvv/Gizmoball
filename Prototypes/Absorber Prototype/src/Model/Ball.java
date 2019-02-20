@@ -15,7 +15,7 @@ public class Ball extends Observable {
     private String ID;
     private boolean stopped;
     private double constant = 30;
-    private double speed;
+    private double speed = 0;
     private double friction;
 
 

@@ -36,7 +36,7 @@ public class GizmoballModel extends Observable {
         double moveTime = 0.05; //20 times per second
 
         if (ball != null && !ball.isStopped()) {
-            //System.out.println("Speed: " + ball.calculateSpeed(moveTime));
+            System.out.println("Speed: " + ball.calculateSpeed(moveTime));
 
 
             ball.applyGravity(gravity, moveTime);
@@ -52,7 +52,7 @@ public class GizmoballModel extends Observable {
             } else {
                 if (absorberCollision == true && ball.getVelo().y()>0) //collision with an absorber
                 {
-                    ball = moveBallForTime(ball, tuc + moveTime);
+                    ball = moveBallForTime(ball, tuc + moveTime*0.7);
                     absorber.addBall(ball);
                     ball.setStopped(true);
                     absorberCollision = false;
