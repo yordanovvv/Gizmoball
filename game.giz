@@ -1,32 +1,49 @@
-Ball B1 4 4 0 0
+Ball B1 7 5 0 0
 Absorber A1 0 18 20 20
-RightFlipper R1 10 10
-Triangle T1 2 4
+RightFlipper R1 6 7
+Square S1 5 3
+Square S2 6 3
+Square S3 7 3
+Square S4 7 10
+Square S5 6 10
+Square S6 6 10
+Square S7 8 9
+Square S8 9 8
+Square S9 8 4
+Square S10 9 5
+Square S11 4 4
+Square S12 3 5
+Square S13 5 10
+Square S14 4 9
+Square S15 3 8
+Square S16 2 6
+Square S17 2 7
+Square S18 10 6
+Square S19 10 7
+Triangle T1 3 6
 Rotate T1
 Rotate T1
 Rotate T1
-Triangle T2 2 5
+Triangle T2 3 7
 Rotate T2
 Rotate T2
-Triangle T3 6 4
-Triangle T4 6 5
+Triangle T3 9 6
+Triangle T4 9 7
 Rotate T4
-Triangle T5 5 6
+Triangle T5 3 7
 Rotate T5
-Triangle T6 4 6
+Rotate T5
+Triangle T6 7 9
 Rotate T6
-Rotate T6
-Triangle T7 3 6
+Triangle T7 5 9
 Rotate T7
 Rotate T7
-Triangle T8 3 3
-Rotate T8
-Triangle T9 4 3
+Triangle T8 7 4
+Triangle T9 5 4
 Rotate T9
 Rotate T9
 Rotate T9
-Triangle T10 5 3
-Triangle T11 5 4
-Rotate T11
-Rotate T11
-Rotate T11
+GizmoCircle C1 8 5 0.5
+GizmoCircle C2 4 5 0.5
+GizmoCircle C3 4 8 0.5
+GizmoCircle C4 8 8 0.5

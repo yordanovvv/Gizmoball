@@ -71,8 +71,9 @@ public class RightFlipper implements iGizmo {
         //todo fix me
         //XCoord*constant + 20.9
        // the radius is in pixels as we are graphing it to the screen.
-        Circle bigTopCircle = new Circle(XCoord*constant + 20.91,YCoord*constant +7.51,7);
-        Circle bigBottomCircle = new Circle(XCoord*constant + 20,YCoord*constant +7.5+48,6);
+
+        Circle bigTopCircle = new Circle(XCoord*constant + 22.6,YCoord*constant + 7.5,7.4);
+        Circle bigBottomCircle = new Circle(XCoord*constant + 22.6,YCoord*constant +7.51+47.5,6);
         Circle topLeft;
         Circle topRight;
         Circle bottomLeft;
@@ -86,11 +87,11 @@ public class RightFlipper implements iGizmo {
     public void generateLines() {
 
         //todo fix me
-        LineSegment rightL = new LineSegment((XCoord+.9)*constant,YCoord*constant +7.51,(XCoord + .9) * constant,YCoord*constant +7.5+48);
-        LineSegment leftL = new LineSegment((XCoord+.516)*constant,YCoord*constant +7.51,(YCoord + .6)*constant,YCoord*constant +7.5+48);
+        LineSegment rightL = new LineSegment(XCoord*constant + 30,YCoord*constant +7,(XCoord + .9) * constant,YCoord*constant +7.5+48);
+        LineSegment leftL = new LineSegment(XCoord*constant + 17.5,YCoord*constant +7,(XCoord) * constant + 15.8,YCoord*constant +7.5+48);
 
-       // lines.add(rightL);
-        //lines.add(leftL);
+        lines.add(rightL);
+        lines.add(leftL);
     }
 
     @Override
@@ -104,16 +105,21 @@ public class RightFlipper implements iGizmo {
     }
 
     private void updateLinePositions(){
+        int rotationDegree = 18;
+        if(rotationAngle == 90) rotationDegree = +18;
+        else if(rotationAngle ==  0) rotationDegree = -18;
+        else if(down) rotationDegree = -rotationDegree;
         // transform.rotate(Math.toRadians(angle), x + (30/2) + 5, y + 5);
+
         Circle  center = circles.get(0);
         for (int i = 0; i < lines.size(); i++) {
-            Angle rotation = new Angle(Math.toRadians(rotationAngle));
+            Angle rotation = new Angle(Math.toRadians(rotationDegree));
             LineSegment currentLine = lines.get(i);
             lines.set(i,Geometry.rotateAround(currentLine,center.getCenter(),rotation));
         }
 
         for (int i = 0; i < circles.size(); i++) {
-            Angle rotation = new Angle(Math.toRadians(rotationAngle));
+            Angle rotation = new Angle(Math.toRadians(rotationDegree));
             Circle currentCircle = circles.get(i);
             circles.set(i, Geometry.rotateAround(currentCircle,center.getCenter(),rotation));
         }

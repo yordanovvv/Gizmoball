@@ -1,6 +1,8 @@
 package Model;
 
+import physics.Angle;
 import physics.Circle;
+import physics.Geometry;
 import physics.LineSegment;
 
 import java.awt.*;
@@ -103,9 +105,28 @@ public class LeftFlipper implements iGizmo {
 
     }
 
+    private void updateLinePositions(){
+        // transform.rotate(Math.toRadians(angle), x + (30/2) + 5, y + 5);
+        int rotationDegree = -18;
+        if(down) rotationDegree = -rotationDegree;
+
+        Circle  center = circles.get(0);
+        for (int i = 0; i < lines.size(); i++) {
+            Angle rotation = new Angle(Math.toRadians(rotationDegree));
+            LineSegment currentLine = lines.get(i);
+            lines.set(i, Geometry.rotateAround(currentLine,center.getCenter(),rotation));
+        }
+
+        for (int i = 0; i < circles.size(); i++) {
+            Angle rotation = new Angle(Math.toRadians(rotationDegree));
+            Circle currentCircle = circles.get(i);
+            circles.set(i, Geometry.rotateAround(currentCircle,center.getCenter(),rotation));
+        }
+    }
+
     @Override
     public void rotate() {
-        int rotation = -18;
+        int rotation = 18;
         if(rotationAngle==-72 && down == false)
             down = true;
         else if(rotationAngle == 0)
@@ -113,8 +134,8 @@ public class LeftFlipper implements iGizmo {
         else if (down == true)
             rotation = -rotation;
 
-
-        rotationAngle+=rotation;
+        rotationAngle-=rotation;
+        //updateLinePositions();
     }
 
     @Override

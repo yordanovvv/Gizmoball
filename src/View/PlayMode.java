@@ -9,6 +9,7 @@ import Model.iGizmo;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 public class PlayMode extends JPanel {
 
@@ -42,16 +43,17 @@ public class PlayMode extends JPanel {
         GizmoballModel model = mainFrame.getGameBoard().getGizModel();
         AbsorberKeyListener absorberListener = new AbsorberKeyListener(model.getAbsorber().getID(),
                 model, 'f', model.getAbsorber());
-
+/*
+        ArrayList<iGizmo> flippers = new ArrayList<>(); //todo check
         for (iGizmo g : model.getGizmos()){
-            if (g.getGizmoType().equals("RightFlipper")){
-                FlipperKeyListener flipperListener = new FlipperKeyListener("right", model, 'r', g);
-                mainFrame.addKeyListener(flipperListener);
+            if (g.getGizmoType().equals("RightFlipper") | g.getGizmoType().equals("LeftFlipper")){
+                flippers.add(g);
             }
         }
-
-
-
+*/
+        //todo check
+        FlipperKeyListener flipperListener = new FlipperKeyListener("right", model, model.getKeys(), model.getFlippers());
+        mainFrame.addKeyListener(flipperListener);
 
         mainFrame.addKeyListener(absorberListener);
         mainFrame.requestFocus();

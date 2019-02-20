@@ -14,7 +14,8 @@ public class GizmoballModel extends Observable {
     private Wall walls;
     //TODO private List<Flipper>;
     private iGizmo absorber;
-
+    private ArrayList<Character> keys;//todo remove!!
+    private ArrayList<iGizmo> flippers;
     private boolean absorberCollision = false;
     private double gravity = 25; //25L/sec^2
 
@@ -31,19 +32,39 @@ public class GizmoballModel extends Observable {
         //absorber.addBall(ball);
         //ball.setStopped(true);
 
-        RightFlipper rightFlipper = new RightFlipper("R1", 10, 10);
+        RightFlipper rightFlipper = new RightFlipper("R1", 6, 7);
         gizmos.add(rightFlipper);
 
-        FlipperKeyListener rightFlipListener = new FlipperKeyListener("right", this, 'r', rightFlipper);//remove this in the long run
+        /*LeftFlipper leftFlipper = new LeftFlipper("L1", 10, 12);
+        gizmos.add(leftFlipper);*/
+
+        flippers = new ArrayList<>();
+        keys = new ArrayList<>();
+
+        flippers.add(rightFlipper);
+        //flippers.add(leftFlipper);
+
+        keys.add('r');
+       // keys.add('t');
+
+        FlipperKeyListener flipperListener = new FlipperKeyListener("right", this, keys, flippers);//remove this in the long run
+
+
+        //FlipperKeyListener leftFlipListener = new FlipperKeyListener("left", this, 't', leftFlipper);//remove this in the long run
     }
 
-    int collideSticky = 0; //TODO : Remove this after prototyping
+    public ArrayList<Character> getKeys(){return keys;}
+
+    public ArrayList<iGizmo> getFlippers(){return flippers;}
+
+    //int collideSticky = 0; //TODO : Remove this after prototyping
     public void moveBall() {
         double moveTime = 0.05; //20 times per second
 
         if (ball != null && !ball.isStopped()) {
 
             //System.out.println("Speed: " + ball.calculateSpeed(moveTime));
+
 
             ball.applyGravity(gravity, moveTime);
             ball.applyFriction();
@@ -72,14 +93,15 @@ public class GizmoballModel extends Observable {
                 }
                 else {
 
-                    collideSticky ++;
+                  //  collideSticky ++;
 
                     ball = moveBallForTime(ball, tuc); //collision in time tuc
 
-                    if (collideSticky > 10){
-                        ball.setVelo(cd.getVelo());
-                        collideSticky = 0;
-                    }
+                    //if (collideSticky > 10){
+                     //   ball.setVelo(cd.getVelo());
+                       // collideSticky = 0;
+                   // }
+                    ball.setVelo(cd.getVelo());
 
                     // //velocity after the collision
                 }
