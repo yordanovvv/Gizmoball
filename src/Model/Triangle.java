@@ -112,7 +112,7 @@ public class Triangle implements iGizmo {
     public void rotate() {
         int rotationDegree = 90;
         rotationCount++;
-        if(rotationCount > 3) rotationCount = 0;
+        if(rotationCount > 3) rotationCount = 1;
 
         rotationAngle  = rotationDegree * rotationCount;
         //ransform.rotate(Math.toRadians(angle), x + (30/2), y + (30/2));
