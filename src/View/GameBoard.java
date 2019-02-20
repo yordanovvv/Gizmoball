@@ -17,10 +17,10 @@ public class GameBoard extends JPanel implements Observer{
 
     private final int WIDTH = 600, HEIGTH = 600;
     private String mode;
-    GizmoballModel m;
+    iModel m;
     Ball b;
     GridClickListener gameBoardListener;
-    public GameBoard(String mode, GizmoballModel m) {
+    public GameBoard(String mode, iModel m) {
         this.m = m;
         b = m.getBall();
         this.mode = mode;
@@ -29,7 +29,7 @@ public class GameBoard extends JPanel implements Observer{
 
     //TODO Check if this is in right place -C
     //TODO Continue this
-    public GizmoballModel getGizModel(){
+    public iModel getGizModel(){
         return m;
     }
 

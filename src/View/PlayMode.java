@@ -5,6 +5,7 @@ import Controller.PlayListeners.PlayModeListener;
 import Controller.PlayListeners.AbsorberKeyListener;
 import Model.GizmoballModel;
 import Model.iGizmo;
+import Model.iModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,7 +41,7 @@ public class PlayMode extends JPanel {
 
         //AbsorberKeyListener kl = new AbsorberKeyListener("play", mainFrame);
 
-        GizmoballModel model = mainFrame.getGameBoard().getGizModel();
+        iModel model = mainFrame.getGameBoard().getGizModel();
         AbsorberKeyListener absorberListener = new AbsorberKeyListener(model.getAbsorber().getID(),
                 model, 'f', model.getAbsorber());
 /*

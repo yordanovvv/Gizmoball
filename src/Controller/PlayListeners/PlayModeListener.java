@@ -1,6 +1,7 @@
 package Controller.PlayListeners;
 
 import Model.GizmoballModel;
+import Model.iModel;
 import View.MainFrame;
 
 import javax.swing.*;
@@ -15,7 +16,7 @@ public class PlayModeListener implements ActionListener {
 
     private Timer timer;
     private Timer statisticsTimer;
-    private GizmoballModel gModel;
+    private iModel gModel;
 
     public PlayModeListener(MainFrame mainframe, String id) {
         this.id = id;

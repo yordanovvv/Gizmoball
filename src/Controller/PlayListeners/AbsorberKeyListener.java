@@ -3,6 +3,7 @@ package Controller.PlayListeners;
 import Model.Ball;
 import Model.GizmoballModel;
 import Model.iGizmo;
+import Model.iModel;
 import physics.Vect;
 
 import java.awt.event.KeyEvent;
@@ -13,11 +14,11 @@ public class AbsorberKeyListener implements KeyListener {
 
     //TODO Link with connections
 
-    GizmoballModel model;
+    iModel model;
     char key;
     iGizmo giz; //not used
 
-    public AbsorberKeyListener(String id, GizmoballModel model, char key, iGizmo giz){
+    public AbsorberKeyListener(String id, iModel model, char key, iGizmo giz){
         System.out.println("Init KeyListener for gizmo id : " + id);
 
         this.model = model;

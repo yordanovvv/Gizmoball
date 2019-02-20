@@ -2,6 +2,7 @@ package Controller.PlayListeners;
 
 import Model.GizmoballModel;
 import Model.iGizmo;
+import Model.iModel;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 public class FlipperKeyListener implements KeyListener {
 
     String rot;
-    GizmoballModel model;
+    iModel model;
     ArrayList<Character> keys;
     ArrayList<iGizmo>  flipper;
     boolean isStopped;
@@ -20,7 +21,7 @@ public class FlipperKeyListener implements KeyListener {
 
 
     //todo fix me. I did a basic, do they move together (KIND OF THING). - Nell
-    public FlipperKeyListener(String rot, GizmoballModel model, ArrayList<Character> key, ArrayList<iGizmo> flipper){
+    public FlipperKeyListener(String rot, iModel model, ArrayList<Character> key, ArrayList<iGizmo> flipper){
         this.rot = rot;
         this.model = model;
         this.keys = key;

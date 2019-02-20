@@ -23,7 +23,7 @@ public class GridClickListener implements MouseListener {
 
 
 
-    GizmoballModel m;
+    iModel m;
 
     public GridClickListener(GameBoard board, String selected){
         this.selected = selected;

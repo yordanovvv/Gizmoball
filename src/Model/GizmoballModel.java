@@ -7,7 +7,7 @@ import java.util.Observable;
 import Controller.PlayListeners.FlipperKeyListener;
 import physics.*;
 
-public class GizmoballModel extends Observable {
+public class GizmoballModel extends iModel {
 
     private Ball ball;
     private ArrayList<iGizmo> gizmos;
@@ -53,6 +53,7 @@ public class GizmoballModel extends Observable {
         //FlipperKeyListener leftFlipListener = new FlipperKeyListener("left", this, 't', leftFlipper);//remove this in the long run
     }
 
+    @Override
     public void setiGizmo(iGizmo gizmo){
         int i = 0;
         for (iGizmo giz:gizmos) {
@@ -61,11 +62,13 @@ public class GizmoballModel extends Observable {
         }
     }
 
+    @Override
     public ArrayList<Character> getKeys(){return keys;}
 
+    @Override
     public ArrayList<iGizmo> getFlippers(){return flippers;}
 
-    //int collideSticky = 0; //TODO : Remove this after prototyping
+    @Override
     public void moveBall() {
         double moveTime = 0.05; //20 times per second
 
@@ -120,6 +123,7 @@ public class GizmoballModel extends Observable {
         this.notifyObservers();
     }
 
+    @Override
     public Ball moveBallForTime(Ball ball, double time) {
         double xVel = ball.getVelo().x();
         double yVel = ball.getVelo().y();
@@ -198,48 +202,48 @@ public class GizmoballModel extends Observable {
 
     //TODO these need to be done
     private void addBall(Ball ball) {
-
     }
 
+    @Override
     public void addGizmo(iGizmo gizmo) {
         gizmos.add(gizmo);
     }
 
-    //craig testing stuff
+    @Override
     public void removeGizmo(iGizmo gizmo) {
         gizmos.remove(gizmo);
     }
 
     //todo fix this. I have done this in order to make the view work -N
-
+    @Override
     public Ball getBall() {
         return ball;
     }
-
+    @Override
     public ArrayList<iGizmo> getGizmos() {
         return gizmos;
     }
-
+    @Override
     public Wall getWalls() {
         return walls;
     }
-
+    @Override
     public void setBallSpeed(int x, int y) {
         Vect v = new Vect(x, y);
         ball.setVelo(v);
     }
-
+    @Override
     public double getBallSpeed(){
 
         System.out.println("Speed is" + ball.getSpeed());
         return ball.getSpeed();
 
     }
-
+    @Override
     public Absorber getAbsorber() {
         return (Absorber) absorber;
     }
-
+    @Override
     public void saveGame() {
         System.out.println("SAVING GAME\n\n");
         try {
@@ -265,7 +269,7 @@ public class GizmoballModel extends Observable {
             System.out.println(gizmo);
         }
     }
-
+    @Override
     public void loadGame() {
         System.out.println("loading game\n\n");
         gizmos = new ArrayList<>();

@@ -17,7 +17,7 @@ public class GizmoBall {
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-        GizmoballModel model = new GizmoballModel();
+        iModel model = new GizmoballModel();
         MainFrame view = new MainFrame(model);
         model.addObserver(view.getGameBoard());
 

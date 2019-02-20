@@ -1,6 +1,7 @@
 package Controller.MainFrameListeners;
 
 import Model.GizmoballModel;
+import Model.iModel;
 import View.BuildMode;
 import View.MainFrame;
 import View.PlayMode;
@@ -13,9 +14,9 @@ import java.awt.event.ActionListener;
 public class ChangeModeListener implements ActionListener {
 
     private iMainFrame view;
-    private GizmoballModel model;
+    private iModel model;
 
-    public ChangeModeListener(iMainFrame view, GizmoballModel model){
+    public ChangeModeListener(iMainFrame view, iModel model){
         this.view = view;
         this.model = model;
     }

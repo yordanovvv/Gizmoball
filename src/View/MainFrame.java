@@ -1,7 +1,7 @@
 package View;
 import Controller.MainFrameListeners.ChangeModeListener;
 import Controller.MainFrameListeners.ControlListener;
-import Model.GizmoballModel;
+import Model.iModel;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -40,11 +40,11 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
     private JTextField output_BallPosition;
     public JTextField output_Velocity;
 
-    private GizmoballModel model;
+    private iModel model;
 
     private final int WIDTH = 1000, HEIGHT = 800;
 
-    public MainFrame(GizmoballModel model) {
+    public MainFrame(iModel model) {
 
         this.model = model;
         this.pack();
@@ -62,7 +62,7 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
 
     }
 
-    public GizmoballModel getModel(){
+    public iModel getModel(){
         return model;
     }
 
