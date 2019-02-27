@@ -1,6 +1,7 @@
 package View;
 
 import Controller.BuildListeners.AddButtonGizmoListener;
+import Controller.BuildListeners.GridClickListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -134,26 +135,17 @@ public class BuildMode extends JPanel{
 
         //------- Craigs Testing -------------
 
-        /*
-        AddBallListener addBallListener = new AddBallListener(mainFrame);
-        AddSquareGizmoListener addSquareGizmoListener = new AddSquareGizmoListener(mainFrame);
-        AddCircleGizmoListener addCircleGizmoListener = new AddCircleGizmoListener(mainFrame);
-        AddTriangleGizmoListener addTriangleGizmoListener = new AddTriangleGizmoListener(mainFrame);
-        AddAbsorberGizmoListener addAbsorberGizmoListener = new AddAbsorberGizmoListener(mainFrame);
-        */
-
-        //Grid Listener only needs to be in BUILDMODE Class, as in PLAYMODE we are not clicking the grid.
-        //GridClickListener board_listener = new GridClickListener(mainFrame.getGameBoard(), "square");
+        GridClickListener lis = mainFrame.getGameBoard().getListener();
 
         //TODO Refactor ADDBUTTONGIZMOLISTENER
-        AddButtonGizmoListener ballButListener = new AddButtonGizmoListener("ball", mainFrame.getGameBoard().getListener());
-        AddButtonGizmoListener squareButListener = new AddButtonGizmoListener("square", mainFrame.getGameBoard().getListener());
-        AddButtonGizmoListener circleButListener = new AddButtonGizmoListener("circle", mainFrame.getGameBoard().getListener());
-        AddButtonGizmoListener triangleButListener = new AddButtonGizmoListener("triangle", mainFrame.getGameBoard().getListener());
-        AddButtonGizmoListener absorbButListener = new AddButtonGizmoListener("absorber", mainFrame.getGameBoard().getListener());
+        AddButtonGizmoListener ballButListener = new AddButtonGizmoListener("ball", lis);
+        AddButtonGizmoListener squareButListener = new AddButtonGizmoListener("square", lis);
+        AddButtonGizmoListener circleButListener = new AddButtonGizmoListener("circle", lis);
+        AddButtonGizmoListener triangleButListener = new AddButtonGizmoListener("triangle", lis);
+        AddButtonGizmoListener absorbButListener = new AddButtonGizmoListener("absorber", lis);
 
-        AddButtonGizmoListener leftFlipButListener = new AddButtonGizmoListener("leftFlipper", mainFrame.getGameBoard().getListener());
-        AddButtonGizmoListener rightFlipButListener = new AddButtonGizmoListener("rightFlipper", mainFrame.getGameBoard().getListener());
+        AddButtonGizmoListener leftFlipButListener = new AddButtonGizmoListener("leftFlipper", lis);
+        AddButtonGizmoListener rightFlipButListener = new AddButtonGizmoListener("rightFlipper", lis);
 
         button_square.addMouseListener(squareButListener);
         button_triangle.addMouseListener(triangleButListener);
@@ -167,9 +159,21 @@ public class BuildMode extends JPanel{
 
         //-------------
         //controls
-        AddButtonGizmoListener rotateListener = new AddButtonGizmoListener("rotate", mainFrame.getGameBoard().getListener());
+        AddButtonGizmoListener rotateListener = new AddButtonGizmoListener("rotate", lis);
+        AddButtonGizmoListener connectListener = new AddButtonGizmoListener("connect", lis);
+        AddButtonGizmoListener disconnectListener = new AddButtonGizmoListener("disconnect", lis);
+        AddButtonGizmoListener deleteListener = new AddButtonGizmoListener("delete", lis);
+        AddButtonGizmoListener clearListener = new AddButtonGizmoListener("clear", lis);
+        AddButtonGizmoListener moveListener = new AddButtonGizmoListener("move", lis);
+        AddButtonGizmoListener connectKeyListener = new AddButtonGizmoListener("connectKey", lis);
 
         button_rotate.addMouseListener(rotateListener);
+        button_delete.addMouseListener(deleteListener);
+        button_connectButton.addMouseListener(connectListener);
+        button_disconnect.addMouseListener(disconnectListener);
+        button_clear.addMouseListener(clearListener);
+        button_move.addMouseListener(moveListener);
+        button_keypressConnect.addMouseListener(connectKeyListener);
 
         //mainFrame.getGameBoard().addMouseListener(board_listener);
         //---------------------------------------

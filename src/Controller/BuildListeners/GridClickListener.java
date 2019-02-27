@@ -21,8 +21,6 @@ public class GridClickListener implements MouseListener {
     int gridY;
     double rad = 0.5 ;
 
-
-
     iModel m;
 
     public GridClickListener(GameBoard board, String selected){
@@ -41,65 +39,147 @@ public class GridClickListener implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
+
         gridX = e.getX()/GRID_SIZE;
         gridY = e.getY()/GRID_SIZE;
 
-        //System.out.println("Placing a " +  selected + " at grid position " + gridX + " | " + gridY);
+        boolean canPlace = checkSpace();
+        if (gridX>=20 || gridY>=20){
+            canPlace = false;
+        }
+
+        System.out.println(gridX + " | " + gridY);
 
         iGizmo giz;
 
-        //TODO ; Check gizmo position for overlapping gizmos
+        //TODO : Change id thingy to get maximum id instead of counting ids
+        //Prevents bugs!
+
         int idNo=1;
-        switch(selected){
-            case "ball":
-                //Would prefer this here, but can also have it when BALL button clicked - C
-                ComponentPopup compPop = new ComponentPopup(); //Not doing anything with this yet,  don't have multiple ball support
-                break;
-            case "circle":
-                //Used to get next unique idNumber
-                for (iGizmo g : m.getGizmos()){
-                    if (g.getGizmoType().equals("GizmoCircle")){
-                        idNo++;
+
+        if (canPlace) {
+            switch (selected) {
+                case "ball":
+                    //Would prefer this here, but can also have it when BALL button clicked - C
+                    ComponentPopup compPop = new ComponentPopup(); //Not doing anything with this yet,  don't have multiple ball support
+                    break;
+                case "circle":
+                    //Used to get next unique idNumber
+                    for (iGizmo g : m.getGizmos()) {
+                        if (g.getGizmoType().equals("GizmoCircle")) {
+                            idNo++;
+                        }
                     }
-                }
-                //TODO : Update this when GizmoCircle is defined.
-                giz = new GizmoCircle("C"+idNo, gridX, gridY, rad); //GizmoCircle has not yet been defined
-                m.addGizmo(giz);
-                break;
-            case "square":
-                for (iGizmo g : m.getGizmos()){
-                    if (g.getGizmoType().equals("Square")){
-                        idNo++;
+                    //TODO : Update this when GizmoCircle is defined.
+                    giz = new GizmoCircle("C" + idNo, gridX, gridY, rad); //GizmoCircle has not yet been defined
+                    m.addGizmo(giz);
+                    break;
+                case "square":
+                    for (iGizmo g : m.getGizmos()) {
+                        if (g.getGizmoType().equals("Square")) {
+                            idNo++;
+                        }
                     }
-                }
-                giz = new Square("S"+idNo, gridX, gridY);
-                m.addGizmo(giz);
-                break;
-            case "triangle":
-                for (iGizmo g : m.getGizmos()){
-                    if (g.getGizmoType().equals("Triangle")){
-                        idNo++;
+                    giz = new Square("S" + idNo, gridX, gridY);
+                    m.addGizmo(giz);
+                    break;
+                case "triangle":
+                    for (iGizmo g : m.getGizmos()) {
+                        if (g.getGizmoType().equals("Triangle")) {
+                            idNo++;
+                        }
                     }
-                }
-                giz = new Triangle("T"+idNo,gridX, gridY);
-                m.addGizmo(giz);
-                break;
+                    giz = new Triangle("T" + idNo, gridX, gridY);
+                    m.addGizmo(giz);
+                    break;
+                case "rightFlipper":
+                    for (iGizmo g : m.getGizmos()) {
+                        if (g.getGizmoType().equals("RightFlipper")) {
+                            idNo++;
+                        }
+                    }
+                    giz = new RightFlipper("RF" + idNo, gridX, gridY);
+                    m.addGizmo(giz);
+                    break;
+                case "leftFlipper":
+                    for (iGizmo g : m.getGizmos()) {
+                        if (g.getGizmoType().equals("LeftFlipper")) {
+                            idNo++;
+                        }
+                    }
+                    giz = new LeftFlipper("LF" + idNo, gridX, gridY);
+                    m.addGizmo(giz);
+                    break;
 
                 //---------------------------------
 
-            case "rotate":
 
-                for (iGizmo g : m.getGizmos()){
-                    if (g.getXCoord() == gridX && g.getYCoord()==gridY){
-                        if (g.getGizmoType() == "Triangle"){
-                            g.rotate();
+
+            }
+        } else {
+            //TODO : Move this code into a seperate class???
+            switch (selected) {
+                case "rotate":
+                    for (iGizmo g : m.getGizmos()) {
+                        if (g.getXCoord() == gridX && g.getYCoord() == gridY) {
+                            if (g.getGizmoType() == "Triangle") {
+                                g.rotate();
+                            }
                         }
                     }
-                }
+                    break;
+                case "connect":
+                    break;
+                case "disconnect":
+                    break;
+                case "delete":
+                    break;
+                case "clear":
+                    
+                    break;
+                case "move":
+                    break;
+                case "connectKey":
+                    break;
 
-                break;
-
+                //disconnect
+                //delete
+                //clear
+                //move
+                ///connectKet
+            }
         }
+
+    }
+
+    public boolean checkSpace(){
+        for (iGizmo g : m.getGizmos()){
+
+            //Check area of right flipper
+            if (g.getGizmoType() == "RightFlipper"){
+                if ((g.getXCoord()==gridX && g.getYCoord()==gridY)
+                        || (g.getXCoord()==gridX+1 && g.getYCoord()==gridY)
+                        || (g.getXCoord()==gridX && g.getYCoord()==gridY-1)
+                        || (g.getXCoord()==gridX+1 && g.getYCoord()==gridY-1)){
+                    return false;
+                }
+            }
+            //Check area of left flipper
+            if (g.getGizmoType() == "LeftFlipper"){
+                if ((g.getXCoord()==gridX && g.getYCoord()==gridY)
+                        || (g.getXCoord()==gridX-1 && g.getYCoord()==gridY)
+                        || (g.getXCoord()==gridX && g.getYCoord()==gridY-1)
+                        || (g.getXCoord()==gridX-1 && g.getYCoord()==gridY-1)){
+                    return false;
+                }
+            }
+
+            //Check for any other 1 tile sized gizmo
+            if (g.getXCoord() == gridX && g.getYCoord()==gridY){
+              return false;
+            }
+        }
+        return true;
     }
 
     @Override
