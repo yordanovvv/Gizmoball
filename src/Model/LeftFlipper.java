@@ -178,6 +178,11 @@ public class LeftFlipper implements iGizmo {
     }
 
     @Override
+    public boolean getHit() {
+        return hit;
+    }
+
+    @Override
     public ArrayList<Circle> getCircles() {
         return circles;
     }

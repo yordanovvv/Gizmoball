@@ -48,6 +48,7 @@ public interface iGizmo {
 
     int getYCoord();
 
+    boolean getHit();
     ArrayList<Circle> getCircles();
 
     ArrayList<LineSegment> getLines();

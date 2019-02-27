@@ -103,7 +103,7 @@ public class GizmoballModel extends iModel {
 
                     ball = moveBallForTime(ball, tuc); //collision in time tuc
                     ball.setVelo(cd.getVelo());
-                    collisionGizmo.setHit(true);
+                    collisionGizmo.setHit(!collisionGizmo.getHit());
                     if(collisionGizmo != null)
                     {
                         switch (collisionGizmo.getID().charAt(0))

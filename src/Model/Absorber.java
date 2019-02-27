@@ -184,6 +184,11 @@ public class Absorber implements iGizmo {
         return YCoord;
     }
 
+    @Override
+    public boolean getHit() {
+        return hit;
+    }
+
     public int getXCoord2 () {
         return XCoord2;
     }
