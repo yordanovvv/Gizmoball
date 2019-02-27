@@ -17,7 +17,7 @@ public class GizmoballModel extends iModel {
     private ArrayList<Character> keys;//todo remove!!
     private ArrayList<iGizmo> flippers;
     private boolean absorberCollision = false;
-    private String collisionGizmoID = " "; //to find which gizmo we will collide with
+    private iGizmo collisionGizmo; //to find which gizmo we will collide with
     private double gravity = 25; //25L/sec^2
 
     public GizmoballModel() {
@@ -103,21 +103,29 @@ public class GizmoballModel extends iModel {
 
                     ball = moveBallForTime(ball, tuc); //collision in time tuc
                     ball.setVelo(cd.getVelo());
-                    switch (collisionGizmoID.charAt(0))
+                    collisionGizmo.setHit(true);
+                    if(collisionGizmo != null)
                     {
-                        case 'C':
-                            System.out.println("Circle collision " + collisionGizmoID); break;
-                        case 'R':
-                            System.out.println("Flipper collision " + collisionGizmoID); break;
-                        default: break;
+                        switch (collisionGizmo.getID().charAt(0))
+                        {
+                            case 'C':
+                                System.out.println("Circle collision " + collisionGizmo.getID());
+
+                                break;
+                            case 'R':
+                                System.out.println("Flipper collision " + collisionGizmo.getID()); break;
+                            default: break;
+                        }
+
                     }
+
                 }
             }
 
         }
         this.setChanged(); //notify observers, redraw updated view
         this.notifyObservers();
-        collisionGizmoID = " ";
+        collisionGizmo = null;
     }
 
     @Override
@@ -171,7 +179,7 @@ public class GizmoballModel extends iModel {
                     timeL = Geometry.timeUntilWallCollision(ls, ballCircle, ballVelocity);
                     if (timeL < shortestTime) {
                         shortestTime = timeL; //we are hitting a line segment
-                        collisionGizmoID = gizmo.getID();
+                        collisionGizmo = gizmo;
                         if (gizmo.getGizmoType().equals("Absorber")) {
                             absorberCollision = true;
                         } else absorberCollision = false;
@@ -187,7 +195,7 @@ public class GizmoballModel extends iModel {
                     if (timeC < shortestTime) {
                         shortestTime = timeC; //we are hitting a circle
                         absorberCollision = false;
-                        collisionGizmoID = gizmo.getID();
+                        collisionGizmo = gizmo;
                         newVelo = Geometry.reflectCircle(c.getCenter(), ball.getCircle().getCenter(), ball.getVelo(), 1.0);
                     }
                 }
