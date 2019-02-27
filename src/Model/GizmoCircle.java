@@ -46,8 +46,8 @@ public class GizmoCircle implements iGizmo {
 
     @Override
     public Color getColor(){
-        Color hitColor =  new Color(80, 170, 44, 255),
-                nonHitColor =  new Color(98, 209, 54, 255);
+        Color nonHitColor =  new Color(80, 170, 44, 255),
+                hitColor =  new Color(35, 255, 15, 255);
         if(hit) return hitColor;
         else return nonHitColor;
     }

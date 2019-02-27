@@ -50,8 +50,8 @@ public class Triangle implements iGizmo {
 
     @Override
     public Color getColor(){
-        Color hitColor =  new Color(59, 112, 170, 255),
-                nonHitColor = new Color(72, 137, 208, 255);
+        Color nonHitColor =  new Color(59, 112, 170, 255),
+                hitColor = new Color(3, 148, 255, 255);
         if(hit) return hitColor;
         else return nonHitColor;
     }

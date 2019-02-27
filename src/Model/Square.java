@@ -49,7 +49,7 @@ public class Square implements iGizmo {
     @Override
     public Color getColor(){
         Color nonHitColor = new Color(170, 10, 21, 255),
-                hitColor = new Color(214, 13, 26, 255);
+                hitColor = new Color(255, 0, 36, 255);
 
         if(hit) return hitColor;
         else return nonHitColor;
