@@ -76,27 +76,29 @@ public class GameBoard extends JPanel implements Observer{
 
         Graphics2D g2 = (Graphics2D) g;
         int x , y;
+        Color c;
         for(iGizmo gizmo : m.getGizmos()){
             x = gizmo.getXCoord() * 30;
             y = gizmo.getYCoord() * 30;
+            c = gizmo.getColor();
             switch (gizmo.getGizmoType()){
                 case "Circle":
-                    paintCircle(g2, x,y);
+                    paintCircle(g2, x,y,c);
                     break;
                 case "Square":
-                    paintSquare(g2,x,y);
+                    paintSquare(g2,x,y,c);
                     break;
                 case "Triangle":
-                    paintTriangle(g2,x,y,gizmo.getRotationAngle());
+                    paintTriangle(g2,x,y,gizmo.getRotationAngle(),c);
                     break;
                 case "Absorber":
-                    paintAbsorber(g2,x,y,gizmo.getWidth()*30,gizmo.getHeight()*30);
+                    paintAbsorber(g2,x,y,gizmo.getWidth()*30,gizmo.getHeight()*30,c);
                     break;
                 case "LeftFlipper":
-                    paintLeftFlipper(g2,x,y,gizmo.getRotationAngle());
+                    paintLeftFlipper(g2,x,y,gizmo.getRotationAngle(),c);
                     break;
                 case "RightFlipper":
-                    paintRightFlipper(g2,x,y,gizmo.getRotationAngle());
+                    paintRightFlipper(g2,x,y,gizmo.getRotationAngle(),c);
                     break;
             }
         }
@@ -119,8 +121,8 @@ public class GameBoard extends JPanel implements Observer{
 
     //--------------------------------------------------------
     //                    PAINTING COMPONENTS
-    private void paintCircle(Graphics g,int x, int y){
-        g.setColor(new Color(80, 170, 44, 255));
+    private void paintCircle(Graphics g,int x, int y,Color c){
+        g.setColor(c);
         g.fillOval(x,y,30,30);
     }
 
@@ -130,7 +132,7 @@ public class GameBoard extends JPanel implements Observer{
         g.fillOval(x, y, width, width);
     }
 
-    private void paintTriangle(Graphics g,int x, int y, int angle){
+    private void paintTriangle(Graphics g,int x, int y, int angle,Color c){
         Graphics2D g2 =(Graphics2D) g.create();
 
         AffineTransform transform = new AffineTransform();
@@ -143,14 +145,14 @@ public class GameBoard extends JPanel implements Observer{
         int yPoly[] = {y, (y+30),y, y     , y      ,(y+30)};
 
         Polygon poly = new Polygon(xPoly, yPoly, xPoly.length);
-        g2.setColor(new Color(59, 112, 170, 255));
+        g2.setColor(c);
         g2.fillPolygon(poly);
 
         g2.setTransform(old);
         g2.dispose();
     }
 
-    private void paintLeftFlipper(Graphics g,int x, int y, int angle){
+    private void paintLeftFlipper(Graphics g,int x, int y, int angle,Color c){
         Graphics2D g2 =(Graphics2D) g.create();
 
 
@@ -166,7 +168,7 @@ public class GameBoard extends JPanel implements Observer{
         g2.fillPolygon(poly1);
         g2.fillOval(x,y,15,15);
         g2.fillOval(x+1,y+48,12,12);
-        g2.setColor(new Color(0, 0, 0, 255));
+        g2.setColor(c);
         g2.fillOval(x+5,y+6,5,5);
 
 
@@ -174,7 +176,7 @@ public class GameBoard extends JPanel implements Observer{
         g2.dispose();
     }
 
-    private void paintRightFlipper(Graphics g,int x, int y, int angle){
+    private void paintRightFlipper(Graphics g,int x, int y, int angle,Color c){
         Graphics2D g2 =(Graphics2D) g.create();
 
         AffineTransform transform = new AffineTransform();
@@ -182,7 +184,7 @@ public class GameBoard extends JPanel implements Observer{
         transform.rotate(Math.toRadians(angle), x + (30/2) + 8, y + 6);
         g2.transform(transform);
 
-        g2.setColor(new Color(170, 169, 50, 255));
+        g2.setColor(c);
 
         int[] pxFR = {x+15,x+15+15 ,x+13+15 ,x+1+15};
         int[] pyFR = {y+5 ,y+5     ,y+56    ,y+56};
@@ -191,19 +193,19 @@ public class GameBoard extends JPanel implements Observer{
 
         g2.fillOval(x+15,y,15,15);
         g2.fillOval(x+1+15,y+48,12,12);
-        g2.setColor(new Color(0, 0, 0, 255));
+        g2.setColor(c);
         g2.fillOval(x+5+15,y+6,5,5);
 
         g2.setTransform(old);
         g2.dispose();
     }
 
-    private void paintAbsorber(Graphics g, int x, int y, int width,int height){
-        g.setColor(new Color(170, 71, 144, 255));
+    private void paintAbsorber(Graphics g, int x, int y, int width,int height,Color c){
+        g.setColor(c);
         g.fillRect(x,y,width,height);
     }
-    private void paintSquare(Graphics g,int x, int y){
-        g.setColor(new Color(170, 10, 21, 255));
+    private void paintSquare(Graphics g,int x, int y,Color c){
+        g.setColor(c);
         g.fillRect(x,y,30,30);
     }
 

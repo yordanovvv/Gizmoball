@@ -19,8 +19,6 @@ public interface iGizmo {
 
     void setYCoord(int y);
 
-    void setColour(Color colour);
-
     void generateCircles();
 
     void generateLines();
@@ -34,6 +32,11 @@ public interface iGizmo {
     int getRotationAngle();
 
     String getID();
+
+    //-------------------------
+    void setHit(boolean hit);
+
+    Color getColor();
     // ------------------------
     //todo check that these are okay.They are added for the absorber
     int getHeight();

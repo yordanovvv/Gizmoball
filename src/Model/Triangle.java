@@ -22,13 +22,14 @@ public class Triangle implements iGizmo {
     private ArrayList<String> keyConnections;
     private final double constant = 30;
     private int rotationAngle;
+    private boolean hit;
 
 
     public Triangle(String id, int XCoord, int YCoord) {
         this.ID = id;
         this.XCoord = XCoord;
         this.YCoord = YCoord;
-
+        this.hit = false;
 
         lines = new ArrayList<>();
         circles = new ArrayList<>();
@@ -40,6 +41,19 @@ public class Triangle implements iGizmo {
         generateCircles();
         generateLines();
 
+    }
+
+    @Override
+    public void setHit(boolean hit){
+        this.hit = hit;
+    }
+
+    @Override
+    public Color getColor(){
+        Color hitColor =  new Color(59, 112, 170, 255),
+                nonHitColor = new Color(72, 137, 208, 255);
+        if(hit) return hitColor;
+        else return nonHitColor;
     }
 
     @Override
@@ -63,11 +77,6 @@ public class Triangle implements iGizmo {
     public void setYCoord(int y) {
         this.YCoord = y;
 
-    }
-
-    @Override
-    public void setColour(Color colour) {
-        this.colour = colour;
     }
 
     @Override
@@ -138,57 +147,6 @@ public class Triangle implements iGizmo {
         }
     }
 
-
-
-        //we need to clear the arraylists as we are redrawing
-       /* lines.clear();
-        circles.clear();
-
-        if (rotationCount == 3) {
-            //set it back to the start
-            rotationCount=0;
-
-        } else if (rotationCount == 0) {
-
-            //if rotation is 0, we are back to start, so lines same as very start aka what we call in constructor???
-
-            LineSegment line1 = new LineSegment(XCoord*constant, YCoord*constant, (XCoord+1)*constant, (YCoord )*constant);
-            LineSegment line2 = new LineSegment(XCoord*constant, YCoord*constant , (XCoord + 1)*constant, (YCoord + 1)*constant);
-            LineSegment line3 = new LineSegment((XCoord+1)*constant, (YCoord)*constant, (XCoord + 1)*constant, (YCoord+1)*constant);
-
-            lines.add(line1);
-            lines.add(line2);
-            lines.add(line3);
-
-            rotationCount++;
-
-        } else if (rotationCount == 1) {
-
-            LineSegment line1 = new LineSegment(XCoord*constant, YCoord*constant, (XCoord+1)*constant, (YCoord )*constant);
-            LineSegment line2 = new LineSegment(XCoord*constant, YCoord*constant , (XCoord + 1)*constant, (YCoord + 1)*constant);
-            LineSegment line3 = new LineSegment((XCoord)*constant, (YCoord+1)*constant, (XCoord+1)*constant, (YCoord)*constant);
-
-            lines.add(line1);
-            lines.add(line2);
-            lines.add(line3);
-
-
-            rotationCount++;
-
-        } else if (rotationCount == 2) {
-
-            rotationCount++;
-
-        } else {
-            rotationCount = 3;
-        }
-
-        System.out.println(rotationCount);
-
-*/
-        //rotationAngle = 45*rotationCount;
-
-
     @Override
     public int getRotationAngle() {
         return rotationAngle;
@@ -218,7 +176,6 @@ public class Triangle implements iGizmo {
     public int getYCoord() {
         return YCoord;
     }
-
 
     @Override
     public ArrayList<Circle> getCircles() {

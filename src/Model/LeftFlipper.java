@@ -23,13 +23,15 @@ public class LeftFlipper implements iGizmo {
     private final double constant = 30;
 
     private int rotationAngle = 0;
-    private boolean down = false;
+    private boolean down = false, hit;
+
 
 
     public LeftFlipper(String id, int x, int y){
         this.ID = id;
         this.XCoord = x;
         this.YCoord = y;
+        this.hit = false;
 
         height = 2;
         width = 2;
@@ -44,7 +46,15 @@ public class LeftFlipper implements iGizmo {
         generateLines();
     }
 
+    @Override
+    public void setHit(boolean hit){
+        this.hit = hit;
+    }
 
+    @Override
+    public Color getColor(){
+        return new Color(0, 0, 0, 255);
+    }
 
     @Override
     public String getGizmoType() {
@@ -66,7 +76,6 @@ public class LeftFlipper implements iGizmo {
         this.YCoord = y;
     }
 
-    @Override
     public void setColour(Color colour) {
             this.colour = colour;
     }

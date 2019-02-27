@@ -19,6 +19,7 @@ public class GizmoCircle implements iGizmo {
     private ArrayList<String> keyConnections;
     private final double constant = 30;
     private int rotationCount;
+    private boolean hit;
 
 
     public GizmoCircle(String id, int XCoord, int YCoord, double radius){
@@ -26,6 +27,7 @@ public class GizmoCircle implements iGizmo {
         this.XCoord=XCoord;
         this.YCoord=YCoord;
         this.radius=radius;
+        this.hit = false;
 
         gizmoConnections = new ArrayList<>();
         keyConnections = new ArrayList<>();
@@ -37,6 +39,18 @@ public class GizmoCircle implements iGizmo {
 
     }
 
+    @Override
+    public void setHit(boolean hit){
+        this.hit = hit;
+    }
+
+    @Override
+    public Color getColor(){
+        Color hitColor =  new Color(80, 170, 44, 255),
+                nonHitColor =  new Color(98, 209, 54, 255);
+        if(hit) return hitColor;
+        else return nonHitColor;
+    }
 
     @Override
     public String getGizmoType() {
@@ -60,13 +74,6 @@ public class GizmoCircle implements iGizmo {
 
         this.YCoord=YCoord;
     }
-
-    @Override
-    public void setColour(Color colour) {
-        this.colour=colour;
-
-    }
-
     @Override
     public void generateCircles() {
         Circle circle= new Circle((XCoord + radius)*constant,(YCoord+radius)*constant,radius*constant);

@@ -20,6 +20,7 @@ public class Square implements iGizmo {
     private ArrayList<String> keyConnections;
     private int constant = 30;
     public int rotationCount;
+    private boolean  hit;
 
     //Constructor for creating squares
 
@@ -27,6 +28,7 @@ public class Square implements iGizmo {
         this.ID = id;
         this.XCoord = XCoord;
         this.YCoord = YCoord;
+        this.hit = false;
 
         lines = new ArrayList<>();
         circles = new ArrayList<>();
@@ -37,6 +39,20 @@ public class Square implements iGizmo {
 
         generateCircles();
         generateLines();
+    }
+
+    @Override
+    public void setHit(boolean hit){
+        this.hit = hit;
+    }
+
+    @Override
+    public Color getColor(){
+        Color nonHitColor = new Color(170, 10, 21, 255),
+                hitColor = new Color(214, 13, 26, 255);
+
+        if(hit) return hitColor;
+        else return nonHitColor;
     }
 
     @Override
@@ -61,12 +77,6 @@ public class Square implements iGizmo {
     public void setYCoord(int y) {
 
         this.YCoord = y;
-    }
-
-    @Override
-    public void setColour(Color colour) {
-
-        this.colour = colour;
     }
 
     @Override

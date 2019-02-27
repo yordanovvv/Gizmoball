@@ -74,9 +74,6 @@ public class GizmoballModel extends iModel {
 
         if (ball != null && !ball.isStopped()) {
 
-           // System.out.println("n11 Speed: " + ball.calculateSpeed(moveTime));
-
-
             ball.applyGravity(gravity, moveTime);
             ball.applyFriction();
 
@@ -102,19 +99,13 @@ public class GizmoballModel extends iModel {
                 {
                     ball = moveBallForTime(ball, moveTime);
                 }
-                else {
-
-                  //  collideSticky ++;
+                else { //collision
 
                     ball = moveBallForTime(ball, tuc); //collision in time tuc
 
-                    //if (collideSticky > 10){
-                     //   ball.setVelo(cd.getVelo());
-                       // collideSticky = 0;
-                   // }
+
                     ball.setVelo(cd.getVelo());
 
-                    // //velocity after the collision
                 }
             }
 
@@ -138,7 +129,7 @@ public class GizmoballModel extends iModel {
 
     private CollisionDetails timeUntilCollision() {
         //finding time until collision
-        //if collision occurs, finding the new velo
+        //if collision occurs, finding the new velocity
         Circle ballCircle = ball.getCircle();
         Vect ballVelocity = ball.getVelo();
         Vect newVelo = new Vect(0, 0);

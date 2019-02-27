@@ -23,6 +23,7 @@ public class Absorber implements iGizmo {
     private ArrayList<String> keyConnections;
     private ArrayList<Ball> balls;
     private final int constant = 30;
+    private boolean hit;
 
     //Constructor for creating absorber
     public Absorber(String id, int XCoord, int YCoord, int XCoord2, int YCoord2) {
@@ -31,7 +32,7 @@ public class Absorber implements iGizmo {
         this.YCoord = YCoord;
         this.XCoord2 = XCoord2;
         this.YCoord2 = YCoord2;
-
+        this.hit = false;
 
         lines = new ArrayList<>();
         circles = new ArrayList<>();
@@ -53,7 +54,10 @@ public class Absorber implements iGizmo {
 
     public ArrayList<Ball> getBalls() {
         return balls;
+    }
 
+    public Color getColor(){
+        return new Color(170, 71, 144, 255);
     }
 
     public Ball activateAbsorber() {
@@ -102,6 +106,10 @@ public class Absorber implements iGizmo {
         this.YCoord = y;
 
     }
+    @Override
+    public void setHit(boolean hit){
+        this.hit = hit;
+    }
 
     public void setXcoord2 ( int x2){
         this.XCoord2 = x2;
@@ -109,12 +117,6 @@ public class Absorber implements iGizmo {
 
     public void setYCoord2 ( int y2){
         this.YCoord2 = y2;
-    }
-
-    @Override
-    public void setColour (Color colour){
-        this.colour = colour;
-
     }
 
     @Override
