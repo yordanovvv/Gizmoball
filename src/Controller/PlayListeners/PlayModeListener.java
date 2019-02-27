@@ -58,7 +58,7 @@ public class PlayModeListener implements ActionListener {
                     break;
                 case "Tick":
                     //gModel.getRightFlipListener().setIsStopped(false);
-                    //gModel.getRightFlipListener().triggerFlipper("TICK");
+                    //gModel.getRightFlipListener().moveFlipper("TICK");
 
                     gModel.getBall().setStopped(false);
                     gModel.moveBall();

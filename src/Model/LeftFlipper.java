@@ -100,8 +100,8 @@ public class LeftFlipper implements iGizmo {
         LineSegment rightL = new LineSegment((XCoord+.9)*constant,YCoord*constant +7.51,(XCoord + .9) * constant,YCoord*constant +7.5+48);
         LineSegment leftL = new LineSegment((XCoord+.516)*constant,YCoord*constant +7.51,(YCoord + .6)*constant,YCoord*constant +7.5+48);
 
-        // lines.add(rightL);
-        //lines.add(leftL);
+         //lines.add(rightL);
+         //lines.add(leftL);
     }
 
     @Override

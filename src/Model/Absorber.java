@@ -63,7 +63,7 @@ public class Absorber implements iGizmo {
     public Ball activateAbsorber() {
         if (!balls.isEmpty()) {
             Ball fireBall = balls.remove(0);
-            Vect shootUp = new Vect(0, -1000);
+            Vect shootUp = new Vect(0, -1000);//new Vect(new Angle(0, -180), 50*30);
             fireBall.setVelo(shootUp);
             fireBall.setStopped(false);
 

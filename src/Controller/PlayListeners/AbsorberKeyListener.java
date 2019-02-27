@@ -35,7 +35,7 @@ public class AbsorberKeyListener implements KeyListener {
     public void keyPressed(KeyEvent e) {
         if (e.getKeyChar() == key ){
             System.out.println("Absorber fire!");
-            //model.getBall().setStopped(false);
+            model.getBall().setStopped(false);
 
             Ball b = model.getAbsorber().activateAbsorber();
             if (b != null){

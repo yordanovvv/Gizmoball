@@ -34,7 +34,7 @@ public class GizmoCircle implements iGizmo {
         rotationCount = 0;
 
         circles = new ArrayList<>();
-        lines=new ArrayList<>();
+        lines = new ArrayList<>();
         generateCircles();
 
     }
