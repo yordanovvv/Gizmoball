@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -18,11 +19,11 @@ public class GameBoard extends JPanel implements Observer{
     private final int WIDTH = 600, HEIGTH = 600;
     private String mode;
     iModel m;
-    Ball b;
+    ArrayList<Ball> b;
     GridClickListener gameBoardListener;
     public GameBoard(String mode, iModel m) {
         this.m = m;
-        b = m.getBall();
+        b = m.getBalls();
         this.mode = mode;
         init();
     }
@@ -107,14 +108,17 @@ public class GameBoard extends JPanel implements Observer{
             paintGrid(g2);
         }
         //todo please check this
-       Ball b = m.getBall();
+       ArrayList<Ball> balls = m.getBalls();
        // paintBall(g2,toIntExact(Math.round(b.getExactX())),toIntExact(Math.round(b.getExactY())));
        //paintBall(g2,b.getExactX(),b.getExactY());
 
-       int p = (int) (b.getExactX() - b.getRadius());
-       int q = (int) (b.getExactY() - b.getRadius());
-       int width = (int) (2 * b.getRadius());
-       paintBall(g,p, q, width);
+       for (Ball b : balls)
+       {
+           int p = (int) (b.getExactX() - b.getRadius());
+           int q = (int) (b.getExactY() - b.getRadius());
+           int width = (int) (2 * b.getRadius());
+           paintBall(g,p, q, width);
+       }
 
        repaint();
     }

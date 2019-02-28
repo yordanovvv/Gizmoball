@@ -1,5 +1,6 @@
 package Controller.MainFrameListeners;
 
+import Model.Ball;
 import Model.GizmoballModel;
 import Model.iModel;
 import View.BuildMode;
@@ -10,6 +11,7 @@ import View.iMainFrame;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ChangeModeListener implements ActionListener {
 
@@ -25,7 +27,8 @@ public class ChangeModeListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("PLAY")){
             view.switchModes(2);
-            model.getBall().setStopped(true);
+            ArrayList<Ball> balls = model.getBalls();
+            for(Ball b : balls) b.setStopped(true);
         }else{
             view.switchModes(1);
         }

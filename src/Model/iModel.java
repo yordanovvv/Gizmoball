@@ -19,15 +19,15 @@ public abstract class iModel extends Observable {
     //craig testing stuff
     public abstract void removeGizmo(iGizmo gizmo);
 
-    public abstract Ball getBall();
+    public abstract ArrayList<Ball> getBalls();
 
     public abstract ArrayList<iGizmo> getGizmos();
 
     public abstract Wall getWalls();
 
-    public abstract void setBallSpeed(int x, int y) ;
+    public abstract void setBallSpeed(Ball b, int x, int y) ;
 
-    public abstract double getBallSpeed();
+    public abstract double getBallSpeed(Ball b);
 
     public abstract Absorber getAbsorber();
 

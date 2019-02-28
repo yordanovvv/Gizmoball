@@ -33,7 +33,8 @@ public class AbsorberKeyListener implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyChar() == key ){
+        //TODO make it support multiple balls
+       /* if (e.getKeyChar() == key ){
             System.out.println("Absorber fire!");
             model.getBall().setStopped(false);
 
@@ -46,7 +47,7 @@ public class AbsorberKeyListener implements KeyListener {
             model.getBall().setStopped(false);
             }
             //model.setBall() = b;
-        }
+        }*/
     }
 
     @Override

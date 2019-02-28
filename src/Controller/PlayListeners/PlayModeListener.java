@@ -1,5 +1,6 @@
 package Controller.PlayListeners;
 
+import Model.Ball;
 import Model.GizmoballModel;
 import Model.iModel;
 import View.MainFrame;
@@ -7,6 +8,7 @@ import View.MainFrame;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class PlayModeListener implements ActionListener {
 
@@ -36,33 +38,39 @@ public class PlayModeListener implements ActionListener {
             gModel.moveBall();
        } else if (e.getSource() == statisticsTimer) {
 
-           double s= gModel.getBallSpeed();
-            String speed = Double.toString(s);
-            mf.output_Velocity.setText(speed);
+            //TODO display balls speed ?
+          // double s = gModel.getBallSpeed(Ball b);
+          // String speed = Double.toString(s);
+          // mf.output_Velocity.setText(speed);
 
 
         } else {
             //System.out.println(e.getActionCommand());
+            ArrayList<Ball> balls = gModel.getBalls();
             switch (e.getActionCommand()) {
-
                 case "Play":
                     //gModel.getRightFlipListener().setIsStopped(false);
-                    gModel.getBall().setStopped(false);
+
+                    for (Ball b : balls) b.setStopped(false);
                     timer.restart();
                     statisticsTimer.start();
                     break;
                 case "Pause":
                     //gModel.getRightFlipListener().setIsStopped(true);
-                    gModel.getBall().setStopped(true);
+                    for (Ball b : balls) b.setStopped(true);
                     timer.stop();
                     break;
                 case "Tick":
                     //gModel.getRightFlipListener().setIsStopped(false);
                     //gModel.getRightFlipListener().moveFlipper("TICK");
 
-                    gModel.getBall().setStopped(false);
-                    gModel.moveBall();
-                    gModel.getBall().setStopped(true);
+                    for (Ball b : balls)
+                    {
+                        b.setStopped(false);
+                        gModel.moveBall();
+                        b.setStopped(true);
+                    }
+
                     break;
                 case "Restart":
                     //Reload file?

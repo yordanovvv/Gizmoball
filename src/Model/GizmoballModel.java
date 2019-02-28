@@ -9,21 +9,25 @@ import physics.*;
 
 public class GizmoballModel extends iModel {
 
-    private Ball ball;
+    private ArrayList<Ball> balls;
+    //private Ball ball;
     private ArrayList<iGizmo> gizmos;
     private Wall walls;
-    //TODO private List<Flipper>;
     private iGizmo absorber;
     private ArrayList<Character> keys;//todo remove!!
     private ArrayList<iGizmo> flippers;
     private boolean absorberCollision = false;
-    private iGizmo collisionGizmo; //to find which gizmo we will collide with
+    private iGizmo collisionGizmo = null; //to find which gizmo we will collide with
+    private boolean wallCollision = false;
     private double gravity = 25; //25L/sec^2
 
     public GizmoballModel() {
 
-        ball = new Ball("B1", 5, 5,  7.5, 7.5); //2.5 = 50L/sec if moveTime is 0.05 (20 ticks/sec)
-        //  ball.setVelo(new Vect(new Angle(200, 200), 8*30));
+        //ball = new Ball("B1", 5, 5,  7.5, 7.5);
+        balls = new ArrayList<>();
+        balls.add(new Ball("B1", 5, 5,  7.5, 7.5)); //2.5 = 50L/sec if moveTime is 0.05 (20 ticks/sec)
+        balls.add(new Ball("B2", 6, 7,  7.5, 7.5));
+        //ball.setVelo(new Vect(new Angle(200, 200), 8*30));
 
         gizmos = new ArrayList<iGizmo>();
         walls = new Wall(0, 0, 20, 20);
@@ -73,59 +77,68 @@ public class GizmoballModel extends iModel {
     public void moveBall() {
         double moveTime = 0.05; //20 times per second
 
-        if (ball != null && !ball.isStopped()) {
+        for (Ball ball : balls)
+        {
+            if (ball != null && !ball.isStopped()) {
 
-            ball.applyGravity(gravity, moveTime);
-            ball.applyFriction();
+                ball.applyGravity(gravity, moveTime);
+                ball.applyFriction();
 
-            CollisionDetails cd = timeUntilCollision();
-            double tuc = cd.getTuc();
+                CollisionDetails cd = timeUntilCollision(ball);
+                double tuc = cd.getTuc();
 
-            if (tuc > moveTime) //no collision
-            {
-                ball = moveBallForTime(ball, moveTime);
-            } else {
-                if (absorberCollision == true && ball.getVelo().y()>0) //collision with an absorber
-                {
-                    ball = moveBallForTime(ball, tuc + moveTime);
-                    absorber.addBall(ball);
-                    ball.setExactX((((Absorber)absorber).getXCoord2()-.5)*30);
-                    ball.setExactY((((Absorber)absorber).getYCoord2()-.5)*30);
-                    ball.setStopped(true);
-                    ball.setVelo(new Vect(0,0));
-                    absorberCollision = false;
-                }
-                else if(absorberCollision == true && ball.getVelo().y()<0) //ball is moving up so ignore absorber line
+                if (tuc > moveTime) //no collision
                 {
                     ball = moveBallForTime(ball, moveTime);
-                }
-                else { //collision
-
-                    ball = moveBallForTime(ball, tuc); //collision in time tuc
-                    ball.setVelo(cd.getVelo());
-                    collisionGizmo.setHit(!collisionGizmo.getHit());
-                    if(collisionGizmo != null)
+                } else {
+                    if (absorberCollision == true && ball.getVelo().y()>0) //collision with an absorber
                     {
-                        switch (collisionGizmo.getID().charAt(0))
-                        {
-                            case 'C':
-                                System.out.println("Circle collision " + collisionGizmo.getID());
+                        ball = moveBallForTime(ball, tuc + moveTime);
+                        absorber.addBall(ball);
+                        ball.setExactX((((Absorber)absorber).getXCoord2()-.5)*30);
+                        ball.setExactY((((Absorber)absorber).getYCoord2()-.5)*30);
+                        ball.setStopped(true);
+                        ball.setVelo(new Vect(0,0));
+                        absorberCollision = false;
+                    }
+                    else if(absorberCollision == true && ball.getVelo().y()<0) //ball is moving up so ignore absorber line
+                    {
+                        ball = moveBallForTime(ball, moveTime);
+                    }
+                    else { //collision
 
-                                break;
-                            case 'R':
-                                System.out.println("Flipper collision " + collisionGizmo.getID()); break;
-                            default: break;
+                        ball = moveBallForTime(ball, tuc); //collision in time tuc
+                        ball.setVelo(cd.getVelo());
+
+                        if(collisionGizmo != null && wallCollision == false)
+                        {
+                            collisionGizmo.setHit(!collisionGizmo.getHit());
+                            switch (collisionGizmo.getID().charAt(0))
+                            {
+                                case 'C':
+                                    System.out.println("Circle collision " + collisionGizmo.getID());
+
+                                    break;
+                                case 'R':
+                                    System.out.println("Flipper collision " + collisionGizmo.getID()); break;
+                                default: break;
+                            }
+
+                        }
+                        if(wallCollision == true)
+                        {
+                            //System.out.println("Wall collision");
                         }
 
                     }
-
                 }
-            }
 
+            }
+            this.setChanged(); //notify observers, redraw updated view
+            this.notifyObservers();
+            collisionGizmo = null;
+            wallCollision = false;
         }
-        this.setChanged(); //notify observers, redraw updated view
-        this.notifyObservers();
-        collisionGizmo = null;
     }
 
     @Override
@@ -141,7 +154,8 @@ public class GizmoballModel extends iModel {
         return ball;
     }
 
-    private CollisionDetails timeUntilCollision() {
+    private CollisionDetails timeUntilCollision(Ball ball) {
+
         //finding time until collision
         //if collision occurs, finding the new velocity
         Circle ballCircle = ball.getCircle();
@@ -155,6 +169,7 @@ public class GizmoballModel extends iModel {
         double timeW = 0.0; //                            wall
 
         absorberCollision = false;
+        wallCollision = false;
 
         //iterating through walls
         ArrayList<LineSegment> lines = walls.getWalls();
@@ -164,6 +179,7 @@ public class GizmoballModel extends iModel {
             if (timeW < shortestTime) {
                 shortestTime = timeW; //we are hitting a line segment
                 absorberCollision = false;
+                wallCollision = true;
                 newVelo = Geometry.reflectWall(ls, ball.getVelo(), 1.0);
             }
         }
@@ -183,6 +199,7 @@ public class GizmoballModel extends iModel {
                         if (gizmo.getGizmoType().equals("Absorber")) {
                             absorberCollision = true;
                         } else absorberCollision = false;
+                        wallCollision = false; //we found a gizmo that is closer to the ball than a wall
                         newVelo = Geometry.reflectWall(ls, ball.getVelo(), 1.0);
                     }
                 }
@@ -202,13 +219,12 @@ public class GizmoballModel extends iModel {
             }
         }
 
-
         CollisionDetails cd = new CollisionDetails(shortestTime, newVelo); //possibly add ID of the gizmo it will collide with
         return cd;
     }
 
-    //TODO these need to be done
-    private void addBall(Ball ball) {
+    private void addBall(Ball b) {
+        balls.add(b);
     }
 
     @Override
@@ -221,10 +237,9 @@ public class GizmoballModel extends iModel {
         gizmos.remove(gizmo);
     }
 
-    //todo fix this. I have done this in order to make the view work -N
     @Override
-    public Ball getBall() {
-        return ball;
+    public ArrayList<Ball> getBalls() {
+        return balls;
     }
     @Override
     public ArrayList<iGizmo> getGizmos() {
@@ -235,15 +250,15 @@ public class GizmoballModel extends iModel {
         return walls;
     }
     @Override
-    public void setBallSpeed(int x, int y) {
+    public void setBallSpeed(Ball ball, int x, int y) {
         Vect v = new Vect(x, y);
         ball.setVelo(v);
     }
     @Override
-    public double getBallSpeed(){
+    public double getBallSpeed(Ball b){
 
         //System.out.println("Speed is" + ball.getSpeed());
-        return ball.getSpeed();
+        return b.getSpeed();
 
     }
     @Override
@@ -252,7 +267,7 @@ public class GizmoballModel extends iModel {
     }
     @Override
     public void saveGame() {
-        System.out.println("SAVING GAME\n\n");
+ /*       System.out.println("SAVING GAME\n\n");
         try {
             FileWriter fileWriter = new FileWriter("game.giz");
             fileWriter.write(ball.toString() + "\n");
@@ -274,11 +289,11 @@ public class GizmoballModel extends iModel {
         System.out.println("printing model on save");
         for(iGizmo gizmo : gizmos) {
             System.out.println(gizmo);
-        }
+        }*/
     }
     @Override
     public void loadGame() {
-        System.out.println("loading game\n\n");
+    /*    System.out.println("loading game\n\n");
         gizmos = new ArrayList<>();
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader("game.giz"));
@@ -337,6 +352,6 @@ public class GizmoballModel extends iModel {
         }
 
         this.hasChanged();
-        this.notifyObservers();
+        this.notifyObservers();*/
     }
 }

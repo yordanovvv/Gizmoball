@@ -115,8 +115,6 @@ public class Triangle implements iGizmo {
 
     }
 
-
-    //TODO needs done as triangles can be rotated
     @Override
     public void rotate() {
         int rotationDegree = 90;
