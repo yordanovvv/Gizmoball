@@ -31,7 +31,7 @@ public class FlipperKeyListener implements KeyListener {
         this.timer = new Timer(30 , e -> {
             tickFlipper(index);
             Timer t = (Timer) e.getSource();
-            if(flipper.get(index).getRotationAngle() == 90 | flipper.get(index).getRotationAngle() == 0) {
+            if(flipper.get(index).getRotationAngle() == 90 | flipper.get(index).getRotationAngle() == 0 |  flipper.get(index).getRotationAngle() == -90) {
                 runningTimer = false;
                 t.stop();
             }
@@ -68,11 +68,10 @@ public class FlipperKeyListener implements KeyListener {
                    long gap = System.currentTimeMillis() - time;
                    System.out.println(gap);
                    index = i;
-                   if(gap <= 120 ) {
-                       //here we have a fast tap
-                       Runnable waiting_runnable = () -> {
+                   if(gap <= 120 ) {  //here we have a fast tap
+                       Runnable waiting_runnable = () -> {//wait till we have stopped running
                            int i1 = 0;
-                           while(runningTimer){//we check that the thread has stopped & etc
+                           while(runningTimer){
                                if(i1 == 500){
                                    return;
                                }
@@ -84,8 +83,10 @@ public class FlipperKeyListener implements KeyListener {
                                }
                                i1++;
                            }
-                           System.out.println("DONE");
-                           triggerFlipper("DOWN");
+
+                           if(flipper.get(index).getRotationAngle()!=0){
+                               triggerFlipper("DOWN");
+                           }
                        };
 
                        Thread waiting_thread = new Thread(waiting_runnable);
