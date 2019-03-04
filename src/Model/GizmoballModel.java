@@ -14,29 +14,23 @@ public class GizmoballModel extends iModel {
     private ArrayList<iGizmo> gizmos;
     private Wall walls;
     private iGizmo absorber;
-    private ArrayList<Character> keys;//todo remove!!
+    private ArrayList<Character> keys;
     private ArrayList<iGizmo> flippers;
     private boolean absorberCollision = false;
-    private iGizmo collisionGizmo = null; //to find which gizmo we will collide with
+    private iGizmo collisionGizmo = null;
     private boolean wallCollision = false;
     private double gravity = 25; //25L/sec^2
 
     public GizmoballModel() {
 
-        //ball = new Ball("B1", 5, 5,  7.5, 7.5);
         balls = new ArrayList<>();
         balls.add(new Ball("B1", 5, 5,  7.5, 7.5)); //2.5 = 50L/sec if moveTime is 0.05 (20 ticks/sec)
-        balls.add(new Ball("B2", 6, 7,  7.5, 7.5));
-        //ball.setVelo(new Vect(new Angle(200, 200), 8*30));
-
+        //balls.add(new Ball("B2", 6, 7,  7.5, 7.5));
         gizmos = new ArrayList<iGizmo>();
         walls = new Wall(0, 0, 20, 20);
 
         absorber = new Absorber("A1", 0, 18, 20, 20);
         gizmos.add(absorber);
-        //absorber.addBall(ball);
-        //ball.setStopped(true);
-
         RightFlipper rightFlipper = new RightFlipper("R1", 6, 7);
         gizmos.add(rightFlipper);
 
@@ -53,7 +47,6 @@ public class GizmoballModel extends iModel {
        // keys.add('t');
 
         FlipperKeyListener flipperListener = new FlipperKeyListener("right", this, keys, flippers);//remove this in the long run
-
 
         //FlipperKeyListener leftFlipListener = new FlipperKeyListener("left", this, 't', leftFlipper);//remove this in the long run
     }
@@ -76,6 +69,11 @@ public class GizmoballModel extends iModel {
     @Override
     public void moveBall() {
         double moveTime = 0.05; //20 times per second
+
+        //reset the hit values
+        for (iGizmo g:gizmos) {
+            g.setHit(false);
+        }
 
         for (Ball ball : balls)
         {
@@ -190,6 +188,7 @@ public class GizmoballModel extends iModel {
             ArrayList<LineSegment> lineSegs = gizmo.getLines();
             ArrayList<Circle> circls = gizmo.getCircles();
 
+
             if (lineSegs.size() > 0) {
                 for (LineSegment ls : lineSegs) {
                     timeL = Geometry.timeUntilWallCollision(ls, ballCircle, ballVelocity);
@@ -204,8 +203,6 @@ public class GizmoballModel extends iModel {
                     }
                 }
             }
-
-
             if (circls.size() > 0) {
                 for (Circle c : circls) {
                     timeC = Geometry.timeUntilCircleCollision(c, ballCircle, ballVelocity);
@@ -267,10 +264,13 @@ public class GizmoballModel extends iModel {
     }
     @Override
     public void saveGame() {
- /*       System.out.println("SAVING GAME\n\n");
+       System.out.println("SAVING GAME\n\n");
         try {
             FileWriter fileWriter = new FileWriter("game.giz");
-            fileWriter.write(ball.toString() + "\n");
+
+            for(Ball ball: balls){
+                fileWriter.write(ball.toString() + "\n");
+            }
 
             for(iGizmo gizmo : gizmos) {
                 fileWriter.write(gizmo.toString() + "\n");
@@ -289,11 +289,11 @@ public class GizmoballModel extends iModel {
         System.out.println("printing model on save");
         for(iGizmo gizmo : gizmos) {
             System.out.println(gizmo);
-        }*/
+        }
     }
     @Override
     public void loadGame() {
-    /*    System.out.println("loading game\n\n");
+       System.out.println("loading game\n\n");
         gizmos = new ArrayList<>();
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader("game.giz"));
@@ -303,7 +303,8 @@ public class GizmoballModel extends iModel {
                 inputStream = line.split(" ");
                 switch(inputStream[0]) {
                     case "Ball":
-                        ball = new Ball(inputStream[1], Double.parseDouble(inputStream[2]), Double.parseDouble(inputStream[3]), Double.parseDouble(inputStream[4]), Double.parseDouble(inputStream[5]));
+                        Ball ball = new Ball(inputStream[1], Double.parseDouble(inputStream[2]), Double.parseDouble(inputStream[3]), Double.parseDouble(inputStream[4]), Double.parseDouble(inputStream[5]));
+                        balls.add(ball);
                         break;
                     case "Absorber":
                         Absorber abs = new Absorber(inputStream[1], Integer.parseInt(inputStream[2]), Integer.parseInt(inputStream[3]), Integer.parseInt(inputStream[4]), Integer.parseInt(inputStream[5]));
@@ -352,6 +353,6 @@ public class GizmoballModel extends iModel {
         }
 
         this.hasChanged();
-        this.notifyObservers();*/
+        this.notifyObservers();
     }
 }

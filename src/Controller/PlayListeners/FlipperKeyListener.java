@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class FlipperKeyListener implements KeyListener {
 
@@ -15,10 +17,10 @@ public class FlipperKeyListener implements KeyListener {
     iModel model;
     ArrayList<Character> keys;
     ArrayList<iGizmo>  flipper;
-    boolean isStopped;
-    private int counter ;
-    Timer timer1;
-
+    boolean isStopped, timerHasStarted = false,keypressed = false;
+    private Timer timer;
+    int index = 0, estimateTime = 60;
+    long time = 0;
 
     //todo fix me. I did a basic, do they move together (KIND OF THING). - Nell
     public FlipperKeyListener(String rot, iModel model, ArrayList<Character> key, ArrayList<iGizmo> flipper){
@@ -27,44 +29,53 @@ public class FlipperKeyListener implements KeyListener {
         this.keys = key;
         this.flipper = flipper;
         this.isStopped = false;
+        this.keypressed = false;
 
-        counter = 0;
-
-        //Stuff for flipper animation
-     /*   ActionListener actListener = new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                triggerFlipper();
-            }
-        };
-        this.timer1=new Timer(50,actListener);
-        timer1.start();*/
-
+        this.timer = new Timer(30 , e -> {
+            tickFlipper(index);
+            Timer t = (Timer) e.getSource();
+            if(flipper.get(index).getRotationAngle() == 90 | flipper.get(index).getRotationAngle() == 0)
+                t.stop();
+        });
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
-
+        //nothing
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        for (int index = 0; index < keys.size(); index++) {
-            char key = keys.get(index);
-            if (e.getKeyChar() == key) {
-                triggerFlipper("UP",index);
+        if(!keypressed) {
+            for (int index = 0; index < keys.size(); index++) {
+                char key = keys.get(index);
+                if (e.getKeyChar() == key) {
+                    this.index = index;
+                    keypressed=true;
+                    triggerFlipper("UP");
+                }
             }
         }
+
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-
-        for (int index = 0; index < keys.size(); index++) {
+        keypressed=false;
+       for (int index = 0; index < keys.size(); index++) {
             char key = keys.get(index);
-            if (e.getKeyChar() == key) {
-                triggerFlipper("DOWN",index);
+           if (e.getKeyChar() == key) {
+               long gap = System.currentTimeMillis() - time;
+               System.out.println(gap);
+               if(gap <= 300) {
+                   try {
+                       Thread.sleep(120*10);
+                   } catch (InterruptedException e1) {
+                       e1.printStackTrace();
+                   }
+               }
+               this.index = index;
+               triggerFlipper("DOWN");
             }
             index++;
         }
@@ -74,43 +85,23 @@ public class FlipperKeyListener implements KeyListener {
         this.isStopped = isStopped;
     }
 
-
-    public void triggerFlipper(String direction, int index){
+    public void triggerFlipper(String direction){
         if(!isStopped) {
-            if (direction.equals("UP") && flipper.get(index).getRotationAngle() == 0) {
-                counter = 0;
-                moveFlipper(index);
-            } else if (direction.equals("DOWN") && flipper.get(index).getRotationAngle() == 90) {
-                counter = 0;
-                moveFlipper(index);
+            if (direction.equals("UP") | direction.equals("DOWN") ) {
+                timerHasStarted = true;
+                timer.start();
+                timerHasStarted = false;
             } else if (direction.equals("TICK")) {
                 tickFlipper(index);
-            } else if(direction.equals("RESET")) {
-              //undefined
-            }
             }
         }
-
-
+    }
 
     private void tickFlipper(int index){
         flipper.get(index).rotate();
         model.setiGizmo(flipper.get(index));
         model.hasChanged();
         model.notifyObservers();
-    }
-
-
-    private void moveFlipper(int index) {
-
-        final Timer timer = new Timer(30 , e -> {
-            tickFlipper(index);
-            Timer t = (Timer) e.getSource();
-            if (counter == 4) t.stop();
-            counter++;
-        });
-        timer.start();
-
     }
 }
 
