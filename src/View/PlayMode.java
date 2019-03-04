@@ -43,10 +43,21 @@ public class PlayMode extends JPanel {
         AbsorberKeyListener absorberListener = new AbsorberKeyListener(model.getAbsorber().getID(),
                 model, 'f', model.getAbsorber());
 
-        for (Character key: model.getKeys()) {
-            for (iGizmo giz: model.getGizmos()) {
-                mainFrame.addKeyListener(new FlipperKeyListener( model,key, giz));
+        ArrayList<iGizmo> flippers = new ArrayList<>();
+        for (iGizmo giz: model.getGizmos()) {
+            if(giz.getGizmoType().equals("RightFlipper") || giz.getGizmoType().equals("LeftFlipper")){
+                flippers.add(giz);
             }
+        }
+
+
+        for (int i = 0; i < flippers.size(); i++) {
+            iGizmo giz = flippers.get(i);
+            Character key = model.getKeys().get(i);
+
+            System.out.println(giz.getID());
+
+            mainFrame.addKeyListener(new FlipperKeyListener(model, key, giz));
         }
 
         mainFrame.addKeyListener(absorberListener);
@@ -57,11 +68,11 @@ public class PlayMode extends JPanel {
 
     private void init(){
 
-        //--------------------
+        //------------------------------------------------------------
 
         Color panel_colour = new Color(0, 55, 77, 255);
         Utils utils = new Utils();
-        //--------------------------------------------------------
+        //------------------------------------------------------------
         //                    CONTROL PANEL
 
         controlPanel = new JPanel();

@@ -162,7 +162,7 @@ public class GameBoard extends JPanel implements Observer{
 
         AffineTransform transform = new AffineTransform();
         AffineTransform old = g2.getTransform();
-        transform.rotate(Math.toRadians(angle), x + 5, y + 5);
+        transform.rotate(Math.toRadians(angle), x + 8, y + 7);
         g2.transform(transform);
 
         g2.setColor(new Color(170, 169, 50, 255));

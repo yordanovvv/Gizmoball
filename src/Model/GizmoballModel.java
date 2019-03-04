@@ -31,17 +31,17 @@ public class GizmoballModel extends iModel {
         RightFlipper rightFlipper = new RightFlipper("R1", 6, 7);
         gizmos.add(rightFlipper);
 
-        LeftFlipper leftFlipper = new LeftFlipper("L1", 10, 12);
+        LeftFlipper leftFlipper = new LeftFlipper("L1", 8, 7);
         gizmos.add(leftFlipper);
 
         flippers = new ArrayList<>();
         keys = new ArrayList<>();
 
-        flippers.add(leftFlipper);
         flippers.add(rightFlipper);
+        flippers.add(leftFlipper);
 
-        keys.add('t');
         keys.add('r');
+        keys.add('t');
 
     }
 
