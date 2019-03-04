@@ -34,21 +34,19 @@ public class GizmoballModel extends iModel {
         RightFlipper rightFlipper = new RightFlipper("R1", 6, 7);
         gizmos.add(rightFlipper);
 
-        /*LeftFlipper leftFlipper = new LeftFlipper("L1", 10, 12);
-        gizmos.add(leftFlipper);*/
+        LeftFlipper leftFlipper = new LeftFlipper("L1", 10, 12);
+        gizmos.add(leftFlipper);
 
         flippers = new ArrayList<>();
         keys = new ArrayList<>();
 
         flippers.add(rightFlipper);
-        //flippers.add(leftFlipper);
+        flippers.add(leftFlipper);
 
         keys.add('r');
-       // keys.add('t');
+        keys.add('t');
 
         FlipperKeyListener flipperListener = new FlipperKeyListener("right", this, keys, flippers);//remove this in the long run
-
-        //FlipperKeyListener leftFlipListener = new FlipperKeyListener("left", this, 't', leftFlipper);//remove this in the long run
     }
 
     @Override

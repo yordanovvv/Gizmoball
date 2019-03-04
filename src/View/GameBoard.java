@@ -172,7 +172,7 @@ public class GameBoard extends JPanel implements Observer{
         g2.fillPolygon(poly1);
         g2.fillOval(x,y,15,15);
         g2.fillOval(x+1,y+48,12,12);
-        g2.setColor(c);
+        g2.setColor(Color.BLACK);
         g2.fillOval(x+5,y+6,5,5);
 
 
@@ -197,7 +197,7 @@ public class GameBoard extends JPanel implements Observer{
 
         g2.fillOval(x+15,y,15,15);
         g2.fillOval(x+1+15,y+48,12,12);
-        g2.setColor(c);
+        g2.setColor(Color.BLACK);
         g2.fillOval(x+5+15,y+6,5,5);
 
         g2.setTransform(old);
