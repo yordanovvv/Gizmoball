@@ -1,6 +1,5 @@
 package Controller.PlayListeners;
 
-import Model.GizmoballModel;
 import Model.iGizmo;
 import Model.iModel;
 
@@ -8,8 +7,6 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ThreadPoolExecutor;
 
 public class FlipperKeyListener implements KeyListener {
 
@@ -17,9 +14,9 @@ public class FlipperKeyListener implements KeyListener {
     iModel model;
     ArrayList<Character> keys;
     ArrayList<iGizmo>  flipper;
-    boolean isStopped, timerHasStarted = false,keypressed = false;
+    boolean isStopped, runningTimer = false,keypressed = false;
     private Timer timer;
-    int index = 0, estimateTime = 60;
+    int index = 0;
     long time = 0;
 
     //todo fix me. I did a basic, do they move together (KIND OF THING). - Nell
@@ -34,8 +31,10 @@ public class FlipperKeyListener implements KeyListener {
         this.timer = new Timer(30 , e -> {
             tickFlipper(index);
             Timer t = (Timer) e.getSource();
-            if(flipper.get(index).getRotationAngle() == 90 | flipper.get(index).getRotationAngle() == 0)
+            if(flipper.get(index).getRotationAngle() == 90 | flipper.get(index).getRotationAngle() == 0) {
+                runningTimer = false;
                 t.stop();
+            }
         });
     }
 
@@ -47,11 +46,12 @@ public class FlipperKeyListener implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if(!keypressed) {
-            for (int index = 0; index < keys.size(); index++) {
-                char key = keys.get(index);
+            for (int i = 0; i < keys.size(); i++) {
+                char key = keys.get(i);
                 if (e.getKeyChar() == key) {
-                    this.index = index;
+                    index = i;
                     keypressed=true;
+                    time = System.currentTimeMillis();
                     triggerFlipper("UP");
                 }
             }
@@ -62,22 +62,40 @@ public class FlipperKeyListener implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         keypressed=false;
-       for (int index = 0; index < keys.size(); index++) {
-            char key = keys.get(index);
-           if (e.getKeyChar() == key) {
-               long gap = System.currentTimeMillis() - time;
-               System.out.println(gap);
-               if(gap <= 300) {
-                   try {
-                       Thread.sleep(120*10);
-                   } catch (InterruptedException e1) {
-                       e1.printStackTrace();
+        for (int i = 0; i < keys.size(); i++) {
+            char key = keys.get(i);
+               if (e.getKeyChar() == key) {
+                   long gap = System.currentTimeMillis() - time;
+                   System.out.println(gap);
+                   index = i;
+                   if(gap <= 120 ) {
+                       //here we have a fast tap
+                       Runnable waiting_runnable = () -> {
+                           int i1 = 0;
+                           while(runningTimer){//we check that the thread has stopped & etc
+                               if(i1 == 500){
+                                   return;
+                               }
+                               try {
+                                   Thread.sleep(30);
+                                   System.out.println(":)");
+                               } catch (InterruptedException e1) {
+                                   e1.printStackTrace();
+                               }
+                               i1++;
+                           }
+                           System.out.println("DONE");
+                           triggerFlipper("DOWN");
+                       };
+
+                       Thread waiting_thread = new Thread(waiting_runnable);
+                       waiting_thread.start();
+
+                   }else{
+                       triggerFlipper("DOWN");
                    }
-               }
-               this.index = index;
-               triggerFlipper("DOWN");
-            }
-            index++;
+                }
+            i++;
         }
     }
 
@@ -88,9 +106,8 @@ public class FlipperKeyListener implements KeyListener {
     public void triggerFlipper(String direction){
         if(!isStopped) {
             if (direction.equals("UP") | direction.equals("DOWN") ) {
-                timerHasStarted = true;
+                runningTimer = true;
                 timer.start();
-                timerHasStarted = false;
             } else if (direction.equals("TICK")) {
                 tickFlipper(index);
             }
