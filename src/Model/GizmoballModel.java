@@ -223,7 +223,7 @@ public class GizmoballModel extends iModel {
         return cd;
     }
 
-    private void addBall(Ball b) {
+    public void addBall(Ball b) {
         balls.add(b);
     }
 

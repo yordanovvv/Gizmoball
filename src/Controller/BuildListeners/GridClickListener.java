@@ -61,7 +61,14 @@ public class GridClickListener implements MouseListener {
             switch (selected) {
                 case "ball":
                     //Would prefer this here, but can also have it when BALL button clicked - C
+                    //Hope adding ball works fine like that -L
                     ComponentPopup compPop = new ComponentPopup(); //Not doing anything with this yet,  don't have multiple ball support
+                    for (Ball b : m.getBalls()) {
+                            idNo++;
+                    }
+                    Ball b = new Ball("B" + idNo, gridX, gridY, 8 , 8); //TODO get velocity from the pop up
+                    m.addBall(b);
+                    //break;
                     break;
                 case "circle":
                     //Used to get next unique idNumber

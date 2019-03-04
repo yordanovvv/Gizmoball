@@ -34,4 +34,7 @@ public abstract class iModel extends Observable {
     public abstract void saveGame() ;
 
     public abstract void loadGame() ;
+
+    public void addBall(Ball b) {
+    }
 }
