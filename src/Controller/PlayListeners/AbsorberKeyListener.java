@@ -1,10 +1,8 @@
 package Controller.PlayListeners;
 
 import Model.Ball;
-import Model.GizmoballModel;
 import Model.iGizmo;
 import Model.iModel;
-import physics.Vect;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -33,21 +31,21 @@ public class AbsorberKeyListener implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        //TODO make it support multiple balls
-       /* if (e.getKeyChar() == key ){
+        if (e.getKeyChar() == key ){
             System.out.println("Absorber fire!");
-            model.getBall().setStopped(false);
-
+            //model.getBall().setStopped(false);
             Ball b = model.getAbsorber().activateAbsorber();
+
             if (b != null){
             //Trigger the absorber!
             System.out.println(b);
-            Vect velo = b.getVelo();
-            model.getBall().setVelo(velo);
-            model.getBall().setStopped(false);
-            }
+            //Vect velo = b.getVelo();
+            //model.getBall().setVelo(velo);
+            //model.getBall().setStopped(false);
+
+           }
             //model.setBall() = b;
-        }*/
+        }
     }
 
     @Override

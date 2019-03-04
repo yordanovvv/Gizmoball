@@ -67,7 +67,6 @@ public class Absorber implements iGizmo {
             fireBall.setVelo(shootUp);
             fireBall.setStopped(false);
 
-
             return fireBall;
         }
         return null;
