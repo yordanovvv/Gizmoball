@@ -2,9 +2,6 @@ package Model;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Observable;
-
-import Controller.PlayListeners.FlipperKeyListener;
 import physics.*;
 
 public class GizmoballModel extends iModel {
@@ -40,13 +37,12 @@ public class GizmoballModel extends iModel {
         flippers = new ArrayList<>();
         keys = new ArrayList<>();
 
-        flippers.add(rightFlipper);
         flippers.add(leftFlipper);
+        flippers.add(rightFlipper);
 
-        keys.add('r');
         keys.add('t');
+        keys.add('r');
 
-        FlipperKeyListener flipperListener = new FlipperKeyListener("right", this, keys, flippers);//remove this in the long run
     }
 
     @Override

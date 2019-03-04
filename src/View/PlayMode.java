@@ -39,22 +39,15 @@ public class PlayMode extends JPanel {
 
         this.mainFrame = mainFrame;
 
-        //AbsorberKeyListener kl = new AbsorberKeyListener("play", mainFrame);
-
         iModel model = mainFrame.getGameBoard().getGizModel();
         AbsorberKeyListener absorberListener = new AbsorberKeyListener(model.getAbsorber().getID(),
                 model, 'f', model.getAbsorber());
-/*
-        ArrayList<iGizmo> flippers = new ArrayList<>(); //todo check
-        for (iGizmo g : model.getGizmos()){
-            if (g.getGizmoType().equals("RightFlipper") | g.getGizmoType().equals("LeftFlipper")){
-                flippers.add(g);
+
+        for (Character key: model.getKeys()) {
+            for (iGizmo giz: model.getGizmos()) {
+                mainFrame.addKeyListener(new FlipperKeyListener( model,key, giz));
             }
         }
-*/
-        //todo check
-        FlipperKeyListener flipperListener = new FlipperKeyListener("right", model, model.getKeys(), model.getFlippers());
-        mainFrame.addKeyListener(flipperListener);
 
         mainFrame.addKeyListener(absorberListener);
         mainFrame.requestFocus();
