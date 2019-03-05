@@ -21,6 +21,7 @@ public class GameBoard extends JPanel implements Observer{
     iModel m;
     ArrayList<Ball> b;
     GridClickListener gameBoardListener;
+
     public GameBoard(String mode, iModel m) {
         this.m = m;
         b = m.getBalls();

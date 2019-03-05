@@ -84,8 +84,8 @@ public class LeftFlipper implements iGizmo {
     public void generateCircles() {
 
         //todo fix me
-        Circle bigTopCircle = new Circle(XCoord*constant + 20.91,YCoord*constant +7.51,7);
-        Circle bigBottomCircle = new Circle(XCoord*constant + 20,YCoord*constant +7.5+48,6);
+        Circle bigTopCircle = new Circle(XCoord*constant + 7,YCoord*constant+ 8,8);
+        Circle bigBottomCircle = new Circle(XCoord*constant + 6.9,(YCoord+2)*constant - 6,7);
         Circle topLeft;
         Circle topRight;
         Circle bottomLeft;
@@ -97,11 +97,11 @@ public class LeftFlipper implements iGizmo {
     @Override
     public void generateLines() {
         //todo fix me
-        LineSegment rightL = new LineSegment((XCoord+.9)*constant,YCoord*constant +7.51,(XCoord + .9) * constant,YCoord*constant +7.5+48);
-        LineSegment leftL = new LineSegment((XCoord+.516)*constant,YCoord*constant +7.51,(YCoord + .6)*constant,YCoord*constant +7.5+48);
+        LineSegment rightL = new LineSegment((XCoord)*constant + 7 + 8 + 2,YCoord*constant +8,XCoord * constant + 1 + 7 + 2,(YCoord + 2)*constant + 6);
+        LineSegment leftL = new LineSegment((XCoord)*constant + 7 - 8 + 4,YCoord*constant -8,XCoord * constant + 1 - 7 + 5,(YCoord + 2)*constant + 6);
 
-         //lines.add(rightL);
-         //lines.add(leftL);
+         lines.add(rightL);
+         lines.add(leftL);
     }
 
     @Override
@@ -115,9 +115,10 @@ public class LeftFlipper implements iGizmo {
     }
 
     private void updateLinePositions(){
-        // transform.rotate(Math.toRadians(angle), x + (30/2) + 5, y + 5);
-        int rotationDegree = -18;
-        if(down) rotationDegree = -rotationDegree;
+       int rotationDegree = -18;
+        if(rotationAngle == -90) rotationDegree = -18;
+        else if(rotationAngle ==  0) rotationDegree = 18;
+        else if(down) rotationDegree = -rotationDegree;
 
         Circle  center = circles.get(0);
         for (int i = 0; i < lines.size(); i++) {
@@ -144,7 +145,7 @@ public class LeftFlipper implements iGizmo {
             rotation = -rotation;
 
         rotationAngle-=rotation;
-        //updateLinePositions();
+        updateLinePositions();
     }
 
     @Override

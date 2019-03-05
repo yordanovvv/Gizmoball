@@ -124,7 +124,6 @@ public class RightFlipper implements iGizmo {
         if(rotationAngle == 90) rotationDegree = +18;
         else if(rotationAngle ==  0) rotationDegree = -18;
         else if(down) rotationDegree = -rotationDegree;
-        // transform.rotate(Math.toRadians(angle), x + (30/2) + 5, y + 5);
 
         Circle  center = circles.get(0);
         for (int i = 0; i < lines.size(); i++) {

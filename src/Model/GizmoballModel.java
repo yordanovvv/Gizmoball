@@ -21,26 +21,26 @@ public class GizmoballModel extends iModel {
     public GizmoballModel() {
 
         balls = new ArrayList<>();
-        balls.add(new Ball("B1", 5, 5,  7.5, 7.5)); //2.5 = 50L/sec if moveTime is 0.05 (20 ticks/sec)
+        balls.add(new Ball("B1", 2, 3,  7.5, 7.5)); //2.5 = 50L/sec if moveTime is 0.05 (20 ticks/sec)
         //balls.add(new Ball("B2", 6, 7,  7.5, 7.5));
         gizmos = new ArrayList<iGizmo>();
         walls = new Wall(0, 0, 20, 20);
 
         absorber = new Absorber("A1", 0, 18, 20, 20);
         gizmos.add(absorber);
-        RightFlipper rightFlipper = new RightFlipper("R1", 6, 7);
-        gizmos.add(rightFlipper);
+       // RightFlipper rightFlipper = new RightFlipper("R1", 6, 7);
+        //gizmos.add(rightFlipper);
 
-        LeftFlipper leftFlipper = new LeftFlipper("L1", 8, 7);
+        LeftFlipper leftFlipper = new LeftFlipper("L1", 3, 5);
         gizmos.add(leftFlipper);
 
         flippers = new ArrayList<>();
         keys = new ArrayList<>();
 
-        flippers.add(rightFlipper);
+        //flippers.add(rightFlipper);
         flippers.add(leftFlipper);
 
-        keys.add('r');
+       // keys.add('r');
         keys.add('t');
 
     }
@@ -105,6 +105,7 @@ public class GizmoballModel extends iModel {
                         if(collisionGizmo != null && wallCollision == false)
                         {
                             collisionGizmo.setHit(!collisionGizmo.getHit());
+
                             switch (collisionGizmo.getID().charAt(0))
                             {
                                 case 'C':
@@ -289,6 +290,7 @@ public class GizmoballModel extends iModel {
     public void loadGame() {
        System.out.println("loading game\n\n");
         gizmos = new ArrayList<>();
+        balls = new ArrayList<>();
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader("game.giz"));
             String line;
