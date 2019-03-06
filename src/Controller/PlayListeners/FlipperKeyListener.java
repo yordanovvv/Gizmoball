@@ -23,7 +23,6 @@ public class FlipperKeyListener implements KeyListener {
     private Boolean runningTimer;
     private ThreadPoolExecutor executor ;
 
-
     public FlipperKeyListener(iModel model, Character key, iGizmo flipper){
         this.model = model;
         this.keys = key;
@@ -35,7 +34,7 @@ public class FlipperKeyListener implements KeyListener {
         this.executor =(ThreadPoolExecutor) Executors.newFixedThreadPool(3);
 
         //timer event for flipper rotation
-        this.timer = new Timer(30 , e -> {
+        this.timer = new Timer(13 , e -> {
             synchronized (this) {
                 tickFlipper();
                 Timer t = (Timer) e.getSource();
@@ -94,7 +93,7 @@ public class FlipperKeyListener implements KeyListener {
                             return;
                         }
                         try {
-                            Thread.sleep(30);
+                            Thread.sleep(13);
                         } catch (InterruptedException e1) {
                             e1.printStackTrace();
                         }

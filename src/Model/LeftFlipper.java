@@ -86,12 +86,17 @@ public class LeftFlipper implements iGizmo {
         //todo fix me
         Circle bigTopCircle = new Circle(XCoord*constant + 7,YCoord*constant+ 8,8);
         Circle bigBottomCircle = new Circle(XCoord*constant + 6.9,(YCoord+2)*constant - 6,7);
-        Circle topLeft;
-        Circle topRight;
-        Circle bottomLeft;
-        Circle bottomRight;
+        Circle topLeft  = new Circle(XCoord*constant + 17, YCoord*constant + 8,0);
+        Circle topRight  = new Circle(XCoord * constant + 10,(YCoord + 2)*constant + 6,0);
+        Circle bottomLeft = new Circle((XCoord)*constant + 3,YCoord*constant -8,0);
+        Circle bottomRight = new Circle(XCoord * constant - 1,(YCoord + 2)*constant + 6,0);
+
         circles.add(bigTopCircle);
         circles.add(bigBottomCircle);
+        circles.add(topLeft);
+        circles.add(topRight);
+        circles.add(bottomLeft);
+        circles.add(bottomRight);
     }
 
     @Override
