@@ -91,6 +91,7 @@ public class GizmoballModel extends iModel {
                 } else {
                     if (absorberCollision == true && ball.getVelo().y()>0) //collision with an absorber
                     {
+                        playSound(collisionGizmo);
                         ball = moveBallForTime(ball, tuc + moveTime);
                         absorber.addBall(ball);
                         ball.setExactX((((Absorber)absorber).getXCoord2()-.5)*30);
