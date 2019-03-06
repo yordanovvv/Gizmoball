@@ -1,8 +1,14 @@
 package Model;
 
+import physics.Circle;
+import physics.Geometry;
+import physics.LineSegment;
+import physics.Vect;
+
+import javax.print.attribute.standard.Media;
+import javax.sound.sampled.*;
 import java.io.*;
 import java.util.ArrayList;
-import physics.*;
 
 public class GizmoballModel extends iModel {
 
@@ -21,7 +27,7 @@ public class GizmoballModel extends iModel {
     public GizmoballModel() {
 
         balls = new ArrayList<>();
-        balls.add(new Ball("B1", 5, 5,  7.5, 7.5)); //2.5 = 50L/sec if moveTime is 0.05 (20 ticks/sec)
+        balls.add(new Ball("B1", 8, 5,  7.5, 7.5)); //2.5 = 50L/sec if moveTime is 0.05 (20 ticks/sec)
         //balls.add(new Ball("B2", 6, 7,  7.5, 7.5));
         gizmos = new ArrayList<iGizmo>();
         walls = new Wall(0, 0, 20, 20);
@@ -29,19 +35,19 @@ public class GizmoballModel extends iModel {
         absorber = new Absorber("A1", 0, 18, 20, 20);
         gizmos.add(absorber);
         RightFlipper rightFlipper = new RightFlipper("R1", 6, 7);
-        gizmos.add(rightFlipper);
+       gizmos.add(rightFlipper);
 
-      //  LeftFlipper leftFlipper = new LeftFlipper("L1", 3, 5);
-       // gizmos.add(leftFlipper);
+        LeftFlipper leftFlipper = new LeftFlipper("L1", 8, 7);
+        gizmos.add(leftFlipper);
 
         flippers = new ArrayList<>();
         keys = new ArrayList<>();
 
-        flippers.add(rightFlipper);
-       // flippers.add(leftFlipper);
+       flippers.add(rightFlipper);
+        flippers.add(leftFlipper);
 
-       // keys.add('r');
-        keys.add('t');
+       keys.add('r');
+       keys.add('t');
 
     }
 
@@ -105,6 +111,8 @@ public class GizmoballModel extends iModel {
                         if(collisionGizmo != null && wallCollision == false)
                         {
                             collisionGizmo.setHit(!collisionGizmo.getHit());
+
+                            playSound(collisionGizmo);
 
                             switch (collisionGizmo.getID().charAt(0))
                             {
@@ -214,6 +222,49 @@ public class GizmoballModel extends iModel {
         return cd;
     }
 
+    private void getAudio(String path){
+        try {
+            File file = new File(path);
+            AudioInputStream stream;
+            AudioFormat format;
+            DataLine.Info info;
+            Clip clip;
+
+            stream = AudioSystem.getAudioInputStream(file);
+            format = stream.getFormat();
+            info = new DataLine.Info(Clip.class, format);
+            clip = (Clip)  AudioSystem.getLine(info);
+            clip.open(stream);
+            clip.start();
+        }catch (Exception e) {
+
+        }
+    }
+
+    private void playSound(iGizmo giz){
+        switch (giz.getGizmoType()){
+            case "Absorber":
+                getAudio("res/clips/laser_cannon.wav");
+                break;
+            case "Square":
+                getAudio("res/clips/jump.wav");
+                break;
+            case "Circle":
+                getAudio("res/clips/jump.wav");
+                break;
+            case "Triangle":
+                getAudio("res/clips/jump.wav");
+                break;
+            case "RightFlipper":
+                getAudio("res/clips/slap.wav");
+                break;
+            case "LeftFlipper":
+                getAudio("res/clips/slap.wav");
+                break;
+
+        }
+    }
+
     public void addBall(Ball b) {
         balls.add(b);
     }
@@ -256,6 +307,7 @@ public class GizmoballModel extends iModel {
     public Absorber getAbsorber() {
         return (Absorber) absorber;
     }
+
     @Override
     public void saveGame(File file) {
        System.out.println("SAVING GAME\n\n");
