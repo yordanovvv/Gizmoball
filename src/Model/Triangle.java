@@ -111,7 +111,7 @@ public class Triangle implements iGizmo {
     }
 
     @Override
-    public void setKeyConnection(String key, String keyboard, String action) {
+    public void setKeyConnection(String key, String action) {
 
     }
 

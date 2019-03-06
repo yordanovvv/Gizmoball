@@ -92,7 +92,7 @@ public class GizmoCircle implements iGizmo {
     }
 
     @Override
-    public void setKeyConnection(String key, String keyboard, String action) {
+    public void setKeyConnection(String key, String action) {
 
     }
 
@@ -164,6 +164,7 @@ public class GizmoCircle implements iGizmo {
 
     @Override
     public void removeKeyConnection() {
+
 
     }
 

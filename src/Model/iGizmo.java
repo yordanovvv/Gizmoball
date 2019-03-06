@@ -25,7 +25,7 @@ public interface iGizmo {
 
     void setGizmoConnection(String id);
 
-    void setKeyConnection(String key, String keyboard, String action);
+    void setKeyConnection(String key, String action);
 
     void rotate();
 

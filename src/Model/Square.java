@@ -20,7 +20,7 @@ public class Square implements iGizmo {
     private ArrayList<String> keyConnections;
     private int constant = 30;
     public int rotationCount;
-    private boolean  hit;
+    private boolean hit;
 
     //Constructor for creating squares
 
@@ -119,9 +119,9 @@ public class Square implements iGizmo {
     }
 
     @Override
-    public void setKeyConnection(String key, String keyboard, String action) {
+    public void setKeyConnection(String key, String action) {
 
-        keyConnections.add(key + " " + keyboard + " " + action);
+        keyConnections.add(key + " " + action);
     }
 
     @Override
