@@ -1,11 +1,14 @@
 package View;
 
+import Model.Ball;
+import Model.iModel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ComponentPopup {
+public class PlaceBallPopup {
 
     JFrame pop_upFrame;
     JLabel description;
@@ -17,7 +20,16 @@ public class ComponentPopup {
     JTextField yVelocity;
 
     JButton button_done, button_cancel;
-    public ComponentPopup(){
+
+    iModel m;
+    int gridX;
+    int gridY;
+
+    public PlaceBallPopup(iModel m, int gridX, int gridY){
+
+        this.m = m;
+        this.gridX = gridX;
+        this.gridY = gridY;
 
         Utils utils = new Utils();
         Color bg_color = (new Color(0, 41, 57, 255));
@@ -100,13 +112,28 @@ public class ComponentPopup {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-           if (e.getActionCommand().equals("Done")){
+
+            try {
                 xVelo = Double.parseDouble(xVelocity.getText());
                 yVelo = Double.parseDouble(yVelocity.getText());
-            } else {
-                //don't place the ball!
-
+            } catch (NumberFormatException nfe){
+                System.out.println("Must enter text, cancelling addition");
+                pop_upFrame.setVisible(false);
+                pop_upFrame.dispose();
+                return;
             }
+
+            //todo : make this do that thing i mentioned in another class - c
+            int idNo = 0;
+            for (Ball b: m.getBalls()){
+                idNo ++;
+            }
+
+           if (e.getActionCommand().equals("Done")){
+                Ball b = new Ball("B"+idNo, gridX, gridY, xVelo, yVelo);
+                m.addBall(b);
+            }
+
             pop_upFrame.setVisible(false);
             pop_upFrame.dispose();
 
