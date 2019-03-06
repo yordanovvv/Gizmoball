@@ -387,12 +387,12 @@ public class GizmoballModel extends iModel {
 
     }
 
-    public void keyConnectGizmo(String id, String key, String action) {
+    public void keyConnectGizmo(String id, String key) {
         if (gizmoFound(id)) {
             //get the gizmo
             iGizmo gizmo = getGizmoByID(id);
             //set the key connection
-            gizmo.setKeyConnection(key, action);
+            gizmo.setKeyConnection(key);
 
         }
 
