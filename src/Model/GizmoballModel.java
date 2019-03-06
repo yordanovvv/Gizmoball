@@ -257,7 +257,7 @@ public class GizmoballModel extends iModel {
         return (Absorber) absorber;
     }
     @Override
-    public void saveGame() {
+    public void saveGame(File file) {
        System.out.println("SAVING GAME\n\n");
         try {
             FileWriter fileWriter = new FileWriter("game.giz");
@@ -286,7 +286,7 @@ public class GizmoballModel extends iModel {
         }
     }
     @Override
-    public void loadGame() {
+    public void loadGame(File file) {
        System.out.println("loading game\n\n");
         gizmos = new ArrayList<>();
         balls = new ArrayList<>();
