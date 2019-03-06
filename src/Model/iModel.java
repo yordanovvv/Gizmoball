@@ -32,9 +32,9 @@ public abstract class iModel extends Observable {
 
     public abstract Absorber getAbsorber();
 
-    public abstract void saveGame() ;
+    public abstract void saveGame(File file) ;
 
-    public abstract void loadGame() ;
+    public abstract void loadGame(File file) ;
 
     public void addBall(Ball b) {
     }
