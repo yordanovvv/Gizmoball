@@ -4,8 +4,10 @@ import View.MainFrame;
 import View.iMainFrame;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class ControlListener implements ActionListener {
 
@@ -20,45 +22,61 @@ public class ControlListener implements ActionListener {
         String actionCMD =  e.getActionCommand();
         //todo check that the file loaders actually follow MVC
         if(actionCMD.equals("Save")){
-            /*JFrame f = new JFrame();
+            JFrame f = new JFrame();
             JFileChooser fileLoader = new JFileChooser();
             fileLoader.setDialogTitle("Save Gizmo");
-
-            String filename = "";
+            fileLoader.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            fileLoader.setFileFilter(new FileNameExtensionFilter("GizmoBall files", "giz"));
+            String filename = "",
+                    filePath = "";
 
             int rVal = fileLoader.showSaveDialog(f);
             if (rVal == JFileChooser.APPROVE_OPTION) {
 
                 //todo file saving for controller
+                filename = fileLoader.getSelectedFile().getName();
+                filePath = fileLoader.getSelectedFile().getPath();
+                System.out.println("filename: "  + filename);
+                System.out.println("filePath: " + fileLoader.getSelectedFile().getAbsolutePath());
+                if(filePath.endsWith(".giz")) {
+                    view.getModel().saveGame(new File(filePath));
+                } else {
+                    view.getModel().saveGame(new File(filePath + ".giz"));
+                }
 
-                view.getModel().saveGame();
 
             }
             if (rVal == JFileChooser.CANCEL_OPTION) {
                //todo cancel file loading
-            }*/view.getModel().saveGame();
+                return;
+            };
         }else if(actionCMD.equals("Quit")){
             int choice = view.generatePopUp("Quit?","Are you sure you want to quit?");
             if(choice == 0){
                 view.quit();
             }
         }else if(actionCMD.equals("Load")){
-           /* JFrame f = new JFrame();
+            JFrame f = new JFrame();
             JFileChooser fileLoader = new JFileChooser();
             fileLoader.setDialogTitle("Load Gizmo");
-
-            String filename = "";
+            fileLoader.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            fileLoader.setFileFilter(new FileNameExtensionFilter("GizmoBall files", "giz"));
+            String filename = "", filePath = "";
 
             int rVal = fileLoader.showOpenDialog(f);
             if (rVal == JFileChooser.APPROVE_OPTION) {
                 //todo file loading for controller
-
-                view.getModel().loadGame();
+                filePath = fileLoader.getSelectedFile().getPath();
+                if(filePath.endsWith(".giz")) {
+                    view.getModel().loadGame(new File(filePath));
+                } else {
+                    view.getModel().loadGame(new File(filePath + ".giz"));
+                }
             }
             if (rVal == JFileChooser.CANCEL_OPTION) {
                 //todo cancel file loading
-            }*/
-            view.getModel().loadGame();
+                return;
+            }
         }
 
     }

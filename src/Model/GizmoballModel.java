@@ -1,6 +1,8 @@
 package Model;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import physics.*;
 
@@ -264,10 +266,12 @@ public class GizmoballModel extends iModel {
     }
 
     @Override
-    public void saveGame() {
+    public void saveGame(File file) {
         System.out.println("SAVING GAME\n\n");
         try {
-            FileWriter fileWriter = new FileWriter("game.giz");
+            System.out.println("file:" + file.getName());
+            System.out.println("exists: " + Files.exists(Paths.get(file.getName())));
+            FileWriter fileWriter = new FileWriter(file);
 
             for (Ball ball : balls) {
                 fileWriter.write(ball.toString() + "\n");
@@ -288,18 +292,21 @@ public class GizmoballModel extends iModel {
             e.printStackTrace();
         }
         System.out.println("printing model on save");
+        for (Ball b : balls) {
+            System.out.println(b);
+        }
         for (iGizmo gizmo : gizmos) {
             System.out.println(gizmo);
         }
     }
 
     @Override
-    public void loadGame() {
+    public void loadGame(File file) {
         System.out.println("loading game\n\n");
         gizmos = new ArrayList<>();
         balls = new ArrayList<>();
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("game.giz"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             String line;
             String[] inputStream;
             while ((line = bufferedReader.readLine()) != null) {
