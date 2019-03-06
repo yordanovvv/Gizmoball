@@ -256,6 +256,7 @@ public class GizmoballModel extends iModel {
     public Absorber getAbsorber() {
         return (Absorber) absorber;
     }
+
     @Override
     public void saveGame() {
        System.out.println("SAVING GAME\n\n");
