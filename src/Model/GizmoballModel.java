@@ -260,7 +260,7 @@ public class GizmoballModel extends iModel {
     public void saveGame(File file) {
        System.out.println("SAVING GAME\n\n");
         try {
-            FileWriter fileWriter = new FileWriter("game.giz");
+            FileWriter fileWriter = new FileWriter(file);
 
             for(Ball ball: balls){
                 fileWriter.write(ball.toString() + "\n");
@@ -280,10 +280,6 @@ public class GizmoballModel extends iModel {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("printing model on save");
-        for(iGizmo gizmo : gizmos) {
-            System.out.println(gizmo);
-        }
     }
     @Override
     public void loadGame(File file) {
@@ -291,7 +287,7 @@ public class GizmoballModel extends iModel {
         gizmos = new ArrayList<>();
         balls = new ArrayList<>();
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("game.giz"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             String line;
             String[] inputStream;
             while((line = bufferedReader.readLine()) != null) {
@@ -350,4 +346,111 @@ public class GizmoballModel extends iModel {
         this.hasChanged();
         this.notifyObservers();
     }
+
+    //helper method to find if gizmo is in array
+    public boolean gizmoFound(String id) {
+        for (iGizmo gizmo : gizmos) {
+
+            if (gizmo.getID().equals(id)) {
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+
+    //helper method to get gizmo by id, needed for connections
+    public iGizmo getGizmoByID(String id) {
+
+        if (gizmoFound(id)) {
+            for (iGizmo gizmo : gizmos) {
+                if (gizmo.getID().equals(id)) {
+                    return gizmo;
+                }
+            }
+        }
+        return null;
+    }
+
+
+    public void connectGizmos(String id, String id2) {
+        //checking gizmos are actually on board
+        if (gizmoFound(id) && gizmoFound(id2)) {
+            //actually getting the gizmo to add connection to
+            iGizmo gizmo1 = getGizmoByID(id);
+
+            //adding gizmo2 to gizmo1 list of connections
+            gizmo1.setGizmoConnection(id2);
+
+        }
+
+    }
+
+    public void keyConnectGizmo(String id, String key, String action) {
+        if (gizmoFound(id)) {
+            //get the gizmo
+            iGizmo gizmo = getGizmoByID(id);
+            //set the key connection
+            gizmo.setKeyConnection(key, action);
+
+        }
+
+
+    }
+
+
+    //TODO needs to be called in collision details?
+    public void checkConnections(iGizmo gizmo) {
+        //get the collided gizmos id
+        if (!collisionGizmo.getID().equals("")) {
+
+            //get the triggers
+            for (int i = 0; i < gizmo.getGizmoConnections().size(); i++) {
+                //set hit to true i.e activate colour
+                getGizmoByID(gizmo.getGizmoConnections().get(i)).setHit(true);
+
+            }
+
+
+        }
+    }
+
+    public void checkKeyConnections(iGizmo gizmo) {
+        //only check if key press list isn't empty
+        if (!keys.isEmpty()) {
+            for (int i = 0; i < gizmo.getKeyConnections().size(); i++) {
+                if (keys.get(i).equals(gizmo.getKeyConnections().get(i))) {
+                    //get the type of gizmo
+                    String gizmoType = gizmo.getGizmoType();
+
+                    if (gizmoType.equals("LeftFlipper")) {
+                        //activate left flipper, need direction
+
+
+
+                    }
+                    if (gizmoType.equals("RightFlipper")){
+                        //activate right flipper, need direction
+
+
+                    }
+
+                }
+            }
+        }
+    }
+
+
+    //TODO need to decide if player can remove all connections or specific ones
+
+    public void removeConnections(String id){
+
+
+    }
+
+    public void removeKeyConnections(String id){
+
+    }
+
 }
