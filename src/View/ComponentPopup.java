@@ -82,16 +82,34 @@ public class ComponentPopup {
 
         pop_upFrame.setVisible(true);
         pop_upFrame.pack();
+
+    }
+
+    public double xVelo = 0.0;
+    public double yVelo = 0.0;
+
+    public double get_X_Velocity(){
+        return xVelo;
+    }
+    public double get_Y_Velocity(){
+        return yVelo;
     }
 
 
     class tempActionListener implements ActionListener{
 
-
         @Override
         public void actionPerformed(ActionEvent e) {
+           if (e.getActionCommand().equals("Done")){
+                xVelo = Double.parseDouble(xVelocity.getText());
+                yVelo = Double.parseDouble(yVelocity.getText());
+            } else {
+                //don't place the ball!
+
+            }
             pop_upFrame.setVisible(false);
             pop_upFrame.dispose();
+
         }
     }
 }
