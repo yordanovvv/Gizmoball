@@ -122,10 +122,12 @@ public class PlayMode extends JPanel {
         PlayModeListener startClickListener = new PlayModeListener(mainFrame, "start");
         PlayModeListener stopClickListener = new PlayModeListener(mainFrame, "stop");
         PlayModeListener tickClickListener = new PlayModeListener(mainFrame, "tick");
+        PlayModeListener restartClickListener = new PlayModeListener(mainFrame, "restart");
 
         button_start.addActionListener(startClickListener);
         button_stop.addActionListener(stopClickListener);
         button_tick.addActionListener(tickClickListener);
+        button_restart.addActionListener(restartClickListener);
 
         button_start.setFocusable(false);
         button_stop.setFocusable(false);

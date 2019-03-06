@@ -119,9 +119,8 @@ public class Square implements iGizmo {
     }
 
     @Override
-    public void setKeyConnection(String key, String action) {
+    public void setKeyConnection(String key) {
 
-        keyConnections.add(key + " " + action);
     }
 
     @Override

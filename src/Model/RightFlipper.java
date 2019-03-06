@@ -115,7 +115,7 @@ public class RightFlipper implements iGizmo {
     }
 
     @Override
-    public void setKeyConnection(String key, String action) {
+    public void setKeyConnection(String key) {
 
     }
 
