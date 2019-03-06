@@ -64,8 +64,6 @@ public class GridClickListener implements MouseListener {
                     //Hope adding ball works fine like that -L
                     ComponentPopup compPop = new ComponentPopup(); //Not doing anything with this yet,  don't have multiple ball support
 
-
-
                     for (Ball b : m.getBalls()) {
                             idNo++;
                     }

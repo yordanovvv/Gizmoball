@@ -153,6 +153,11 @@ public class LeftFlipper implements iGizmo {
         updateLinePositions();
     }
 
+    public boolean isMoving(){
+        return (rotationAngle!=0 && rotationAngle!=-90);
+    }
+
+
     @Override
     public int getRotationAngle() {
         return rotationAngle;

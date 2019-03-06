@@ -222,6 +222,9 @@ public class RightFlipper implements iGizmo {
 
     }
 
+    public boolean isMoving(){
+        return (rotationAngle!=0 && rotationAngle!=90);
+    }
 
     public int getRotationCount() {
         return rotationCount;

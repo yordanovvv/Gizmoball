@@ -257,10 +257,18 @@ public class GizmoballModel extends iModel {
                 getAudio("res/clips/jump.wav");
                 break;
             case "RightFlipper":
-                getAudio("res/clips/slap.wav");
+                if(((RightFlipper) giz).isMoving()){
+                    getAudio("res/clips/slap.wav");
+                }else {
+                    getAudio("res/clips/jump.wav");
+                }
                 break;
             case "LeftFlipper":
-                getAudio("res/clips/slap.wav");
+                if(((LeftFlipper) giz).isMoving()){
+                    getAudio("res/clips/slap.wav");
+                }else {
+                    getAudio("res/clips/jump.wav");
+                }
                 break;
 
         }
