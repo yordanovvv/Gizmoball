@@ -1,50 +1,43 @@
 Ball B1 5 5 0 0
 Absorber A1 0 18 20 20
 RightFlipper R1 6 7
-LeftFlipper L1 8 7
-Circle C1 7 7 0.5
-Circle C1 7 9 0.5
-Circle C1 7 8 0.5
-Circle C1 7 6 0.5
-Square S1 8 10
-Square S2 6 10
-Square S3 5 10
-Square S4 4 10
-Square S5 3 10
-Square S6 2 10
-Square S7 9 10
-Square S8 11 10
-Square S9 10 10
-Square S10 12 10
-Square S11 12 9
-Square S12 12 8
-Square S13 12 7
-Square S14 12 6
-Square S15 12 5
-Square S16 2 9
-Square S17 2 8
-Square S18 2 7
-Square S19 2 6
-Square S20 2 5
-Square S21 2 4
-Square S22 12 4
-Triangle T1 3 3
+Square S1 3 3
+Square S2 4 3
+Square S3 5 3
+Square S4 6 3
+Square S5 7 3
+Square S6 7 4
+Square S7 7 5
+Square S8 7 6
+Square S9 7 7
+Square S10 7 8
+Square S11 7 9
+Square S12 7 10
+Square S13 6 10
+Square S14 5 10
+Square S15 4 10
+Square S16 2 10
+Square S17 3 9
+Square S18 3 10
+Square S19 2 8
+Square S20 2 9
+Square S21 2 7
+Square S22 2 6
+Square S23 2 5
+Square S24 2 4
+Square S25 2 3
+Triangle T1 3 4
 Rotate T1
 Rotate T1
 Rotate T1
-Triangle T2 4 2
-Rotate T2
-Rotate T2
-Rotate T2
-Triangle T3 5 1
+Triangle T2 6 4
+Triangle T3 6 9
 Rotate T3
-Rotate T3
-Rotate T3
-Triangle T4 11 3
-Triangle T5 10 2
-Triangle T6 9 1
-Circle C1 8 0 0.5
-Circle C1 6 0 0.5
-Circle C1 7 0 0.5
-Circle C1 3 9 0.5
-Circle C1 11 9 0.5
+Triangle T4 3 8
+Rotate T4
+Rotate T4
+Triangle T5 5 9
+Rotate T5
+Triangle T6 4 9
+Rotate T6
+Rotate T6

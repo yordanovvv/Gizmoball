@@ -34,12 +34,6 @@ public class FlipperKeyListener implements KeyListener {
         this.time = Integer.toUnsignedLong(0);
         this.executor =(ThreadPoolExecutor) Executors.newFixedThreadPool(3);
 
-        /*for (int i = 0; i < keys.size(); i++) {//populate
-            time.add(Integer.toUnsignedLong(0));
-            runningTimer.add(false);
-            keypressed.add(false);
-        }
-*/
         //timer event for flipper rotation
         this.timer = new Timer(30 , e -> {
             synchronized (this) {
@@ -61,44 +55,24 @@ public class FlipperKeyListener implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if(!keypressed) { //if key not pressed
-           // for (int i = 0; i < keys.size(); i++) {
                 char key = keys;
                 if (e.getKeyChar() == key) { //matches character
                     int finalI = 0;
                     Runnable r = () -> key_press_code(finalI);
                     executor.execute(r);
                 }
-
-                /* key = keys.get(1);
-                if (e.getKeyChar() == key) { //matches character
-                    int finalI = 1;
-                    Runnable r = () -> key_press_code(finalI);
-                    executor.execute(r);
-                }*/
-            }
-       // }
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         keypressed = false;// longer pressed
-       // for (int i = 0; i < keys.size(); i++) {
             char key = keys;
             if (e.getKeyChar() == key) { //keys match
                    int finalI = 0;
                    Runnable r = () -> key_release_code(finalI);
                    executor.execute(r);
             }
-
-
-           /* if (e.getKeyChar() == key1) { //keys match
-                int finalI = 1;
-                Runnable r = () -> key_release_code(finalI);
-                executor.execute(r);
-            }*/
-
-           // i++;
-        //}
     }
 
     private void key_press_code(int i){
@@ -153,10 +127,10 @@ public class FlipperKeyListener implements KeyListener {
     //where the flipper is moved
     public synchronized void triggerFlipper(String direction){
         if(!isStopped) {
-            if (direction.equals("UP") | direction.equals("DOWN") ) {
+            if(direction.equals("UP") | direction.equals("DOWN") ) {
                 runningTimer = true;
                timer.start();
-            } else if (direction.equals("TICK")) {
+            }else if (direction.equals("TICK")) {
                 tickFlipper();
             }
         }

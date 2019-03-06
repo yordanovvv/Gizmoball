@@ -50,7 +50,6 @@ public class PlayMode extends JPanel {
             }
         }
 
-
         for (int i = 0; i < flippers.size(); i++) {
             iGizmo giz = flippers.get(i);
             Character key = model.getKeys().get(i);
