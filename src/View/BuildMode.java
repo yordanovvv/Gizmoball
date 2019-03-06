@@ -1,6 +1,7 @@
 package View;
 
 import Controller.BuildListeners.AddButtonGizmoListener;
+import Controller.BuildListeners.ClearClickListener;
 import Controller.BuildListeners.GridClickListener;
 
 import javax.swing.*;
@@ -163,15 +164,16 @@ public class BuildMode extends JPanel{
         AddButtonGizmoListener connectListener = new AddButtonGizmoListener("connect", lis);
         AddButtonGizmoListener disconnectListener = new AddButtonGizmoListener("disconnect", lis);
         AddButtonGizmoListener deleteListener = new AddButtonGizmoListener("delete", lis);
-        AddButtonGizmoListener clearListener = new AddButtonGizmoListener("clear", lis);
         AddButtonGizmoListener moveListener = new AddButtonGizmoListener("move", lis);
         AddButtonGizmoListener connectKeyListener = new AddButtonGizmoListener("connectKey", lis);
+
+        ClearClickListener clearClickListener = new ClearClickListener(mainFrame.getModel());
 
         button_rotate.addMouseListener(rotateListener);
         button_delete.addMouseListener(deleteListener);
         button_connectButton.addMouseListener(connectListener);
         button_disconnect.addMouseListener(disconnectListener);
-        button_clear.addMouseListener(clearListener);
+        button_clear.addMouseListener(clearClickListener);
         button_move.addMouseListener(moveListener);
         button_keypressConnect.addMouseListener(connectKeyListener);
 

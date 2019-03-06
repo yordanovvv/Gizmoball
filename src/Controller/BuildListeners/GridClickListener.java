@@ -63,12 +63,17 @@ public class GridClickListener implements MouseListener {
                     //Would prefer this here, but can also have it when BALL button clicked - C
                     //Hope adding ball works fine like that -L
                     ComponentPopup compPop = new ComponentPopup(); //Not doing anything with this yet,  don't have multiple ball support
+
+
+
                     for (Ball b : m.getBalls()) {
                             idNo++;
                     }
-                    Ball b = new Ball("B" + idNo, gridX, gridY, 8 , 8); //TODO get velocity from the pop up
+                    double ballXVelo = compPop.get_X_Velocity();
+                    double ballYVelo = compPop.get_Y_Velocity();
+
+                    Ball b = new Ball("B" + idNo, gridX, gridY, ballXVelo, ballYVelo); //TODO get velocity from the pop up
                     m.addBall(b);
-                    //break;
                     break;
                 case "circle":
                     //Used to get next unique idNumber
@@ -140,28 +145,27 @@ public class GridClickListener implements MouseListener {
                 case "disconnect":
                     break;
                 case "delete":
-                    break;
-                case "clear":
-                    
+                    iGizmo removeGimzo = null;
+                    for (iGizmo g : m.getGizmos()) {
+                        if (g.getXCoord() == gridX && g.getYCoord() == gridY) {
+                            System.out.println("clicked on a thing");
+                            removeGimzo = g;
+                        }
+                    }
+                    m.removeGizmo(removeGimzo);
                     break;
                 case "move":
                     break;
                 case "connectKey":
                     break;
-
-                //disconnect
-                //delete
-                //clear
-                //move
-                ///connectKet
             }
         }
 
     }
 
+    //TODO : Move this to the model ????
     public boolean checkSpace(){
         for (iGizmo g : m.getGizmos()){
-
             //Check area of right flipper
             if (g.getGizmoType() == "RightFlipper"){
                 if ((g.getXCoord()==gridX && g.getYCoord()==gridY)
@@ -180,7 +184,13 @@ public class GridClickListener implements MouseListener {
                     return false;
                 }
             }
-
+            //Check area of the absorber
+            if (g.getGizmoType() == "Absorber"){
+                if (gridX>=g.getXCoord() && gridX<=g.getXCoord()+g.getWidth()
+                        && (gridY>=g.getYCoord() && gridY<=g.getYCoord()+g.getHeight())){
+                    return false;
+                }
+            }
             //Check for any other 1 tile sized gizmo
             if (g.getXCoord() == gridX && g.getYCoord()==gridY){
               return false;
@@ -204,12 +214,12 @@ public class GridClickListener implements MouseListener {
             //create absorber here!
             //TODO : Check overlap
             //Functionality for more than one absorber??
-            if (m.getAbsorber()==null) {
+            //if (m.getAbsorber()==null) {
                 Absorber abs = new Absorber("A", start_gridX, start_gridY, end_gridX+1, end_gridY+1);
                 m.addGizmo(abs);
-            } else {
-                System.out.println("Absorber already exists");
-            }
+            //} else {
+            //    System.out.println("Absorber already exists");
+            //}
         }
 
 

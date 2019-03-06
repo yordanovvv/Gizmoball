@@ -26,7 +26,7 @@ public class Ball extends Observable {
         ypos = y;
         velocity = new Vect(xv, yv);
         radius = 0.3;//todo adjust all of the sizing to L's because spec.
-        stopped = false;
+        stopped = true;
     }
 
     public Vect getVelo() {
