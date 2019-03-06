@@ -1,7 +1,7 @@
 package Controller.BuildListeners;
 
 import Model.*;
-import View.ComponentPopup;
+import View.PlaceBallPopup;
 import View.GameBoard;
 
 import java.awt.event.MouseEvent;
@@ -28,7 +28,7 @@ public class GridClickListener implements MouseListener {
         this.board = board;
 
         m = board.getGizModel();
-        
+
     }
 
     @Override
@@ -62,16 +62,7 @@ public class GridClickListener implements MouseListener {
                 case "ball":
                     //Would prefer this here, but can also have it when BALL button clicked - C
                     //Hope adding ball works fine like that -L
-                    ComponentPopup compPop = new ComponentPopup(); //Not doing anything with this yet,  don't have multiple ball support
-
-                    for (Ball b : m.getBalls()) {
-                            idNo++;
-                    }
-                    double ballXVelo = compPop.get_X_Velocity();
-                    double ballYVelo = compPop.get_Y_Velocity();
-
-                    Ball b = new Ball("B" + idNo, gridX, gridY, ballXVelo, ballYVelo); //TODO get velocity from the pop up
-                    m.addBall(b);
+                    PlaceBallPopup compPop = new PlaceBallPopup(m, gridX, gridY); //Not doing anything with this yet,  don't have multiple ball support
                     break;
                 case "circle":
                     //Used to get next unique idNumber
