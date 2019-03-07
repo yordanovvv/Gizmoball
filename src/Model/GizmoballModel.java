@@ -4,8 +4,6 @@ import physics.Circle;
 import physics.Geometry;
 import physics.LineSegment;
 import physics.Vect;
-
-import javax.print.attribute.standard.Media;
 import javax.sound.sampled.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -24,30 +22,36 @@ public class GizmoballModel extends iModel {
     private boolean wallCollision = false;
     private double gravity = 25; //25L/sec^2
 
+    Star star;
     public GizmoballModel() {
 
         balls = new ArrayList<>();
+        flippers = new ArrayList<>();
+        keys = new ArrayList<>();
+        gizmos = new ArrayList<iGizmo>();
+
         balls.add(new Ball("B1", 8, 5,  7.5, 7.5)); //2.5 = 50L/sec if moveTime is 0.05 (20 ticks/sec)
         //balls.add(new Ball("B2", 6, 7,  7.5, 7.5));
-        gizmos = new ArrayList<iGizmo>();
+
         walls = new Wall(0, 0, 20, 20);
 
         absorber = new Absorber("A1", 0, 18, 20, 20);
         gizmos.add(absorber);
-        RightFlipper rightFlipper = new RightFlipper("R1", 6, 7);
-       gizmos.add(rightFlipper);
+
+        star = new Star("S1",5,5);
+        gizmos.add(star);
+
+        star.startStarRotation();
+       /* RightFlipper rightFlipper = new RightFlipper("R1", 6, 7);
+        gizmos.add(rightFlipper);
 
         LeftFlipper leftFlipper = new LeftFlipper("L1", 8, 7);
         gizmos.add(leftFlipper);
-
-        flippers = new ArrayList<>();
-        keys = new ArrayList<>();
-
-       flippers.add(rightFlipper);
+        flippers.add(rightFlipper);
         flippers.add(leftFlipper);
 
-       keys.add('r');
-       keys.add('t');
+        keys.add('r');
+        keys.add('t');*/
 
     }
 
@@ -69,7 +73,6 @@ public class GizmoballModel extends iModel {
     @Override
     public void moveBall() {
         double moveTime = 0.05; //20 times per second
-
         //reset the hit values
         for (iGizmo g:gizmos) {
             g.setHit(false);
@@ -114,7 +117,7 @@ public class GizmoballModel extends iModel {
                             collisionGizmo.setHit(!collisionGizmo.getHit());
 
                             playSound(collisionGizmo);
-
+                            star.setHit(true);
                             switch (collisionGizmo.getID().charAt(0))
                             {
                                 case 'C':

@@ -42,7 +42,7 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
 
     private iModel model;
 
-    private final int WIDTH = 1000, HEIGHT = 800;
+    private final int WIDTH = 1000, HEIGHT = 900;
 
     public MainFrame(iModel model) {
 

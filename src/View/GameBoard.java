@@ -102,6 +102,9 @@ public class GameBoard extends JPanel implements Observer{
                 case "RightFlipper":
                     paintRightFlipper(g2,x,y,gizmo.getRotationAngle(),c);
                     break;
+                case"Star":
+                    paintStar(g,x,y,gizmo.getRotationAngle(),c);
+                    break;
             }
         }
 
@@ -157,6 +160,45 @@ public class GameBoard extends JPanel implements Observer{
         g2.dispose();
     }
 
+
+    private void paintStar(Graphics g,int x, int y, int angle,Color c){
+        Graphics2D g2 =(Graphics2D) g.create();
+
+        AffineTransform transform = new AffineTransform();
+        AffineTransform old = g2.getTransform();
+        transform.rotate(Math.toRadians(angle), x + 30, y + 30);
+        g2.transform(transform);
+        g2.setColor(new Color(114, 57, 187, 255));
+
+        /*
+        A stars points are in a polygon:
+
+                           (1)
+                     (2)         (5)
+
+                       (3)    (4)
+            from the points, we can draw lines from:
+            (1)-  (3),(3) - (5), (5) - (2), (2) - (4), (4) - (1)
+         */
+
+        int polyPoint1_x = x+30, polyPoint1_y = y;
+        int polyPoint2_x = x, polyPoint2_y = y+22;
+        int polyPoint3_x = x+10, polyPoint3_y = y+60;
+        int polyPoint4_x =x+50, polyPoint4_y = y+60;
+        int polyPoint5_x = x+60, polyPoint5_y = y+22;
+
+        int[] px = {polyPoint1_x,polyPoint3_x,polyPoint5_x,polyPoint2_x,polyPoint4_x,polyPoint1_x};
+        int[] py = {polyPoint1_y,polyPoint3_y,polyPoint5_y,polyPoint2_y,polyPoint4_y,polyPoint1_y};
+        Polygon poly1 = new Polygon(px, py, px.length);
+        g2.fillPolygon(poly1);
+
+        g2.setColor(new Color(226, 219, 49, 255));
+        g2.drawLine(polyPoint1_x,polyPoint1_y,polyPoint5_x-22,polyPoint2_y);
+        g2.drawLine(polyPoint5_x-22,polyPoint2_y,polyPoint5_x,polyPoint5_y);
+
+        g2.setTransform(old);
+        g2.dispose();
+    }
     private void paintLeftFlipper(Graphics g,int x, int y, int angle,Color c){
         Graphics2D g2 =(Graphics2D) g.create();
 
