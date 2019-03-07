@@ -1,13 +1,12 @@
 package Controller.PlayListeners;
 
-import Model.Ball;
-import Model.GizmoballModel;
-import Model.iModel;
+import Model.*;
 import View.MainFrame;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class PlayModeListener implements ActionListener {
@@ -47,22 +46,37 @@ public class PlayModeListener implements ActionListener {
         } else {
             //System.out.println(e.getActionCommand());
             ArrayList<Ball> balls = gModel.getBalls();
+            ArrayList<iGizmo> stars = gModel.getAllStars();
             switch (e.getActionCommand()) {
                 case "Play":
                     //gModel.getRightFlipListener().setIsStopped(false);
-
+                    for(iGizmo g:stars){
+                        Star star = (Star) g;
+                        star.startStarRotation();
+                    }
                     for (Ball b : balls) b.setStopped(false);
                     timer.restart();
                     statisticsTimer.start();
                     break;
                 case "Pause":
                     //gModel.getRightFlipListener().setIsStopped(true);
+
+                    for(iGizmo g:stars){
+                        Star star = (Star) g;
+                        star.stopRotation();
+                    }
+
                     for (Ball b : balls) b.setStopped(true);
                     timer.stop();
                     break;
                 case "Tick":
                     //gModel.getRightFlipListener().setIsStopped(false);
                     //gModel.getRightFlipListener().moveFlipper("TICK");
+                    for(iGizmo g:stars){
+                        Star star = (Star) g;
+                        if(star.isRoating()) star.stopRotation();
+                        star.rotate();
+                    }
 
                     for (Ball b : balls)
                     {

@@ -75,16 +75,16 @@ public class Star implements iGizmo{
 
         int polyPoint1_x = x+30, polyPoint1_y = y;
         int polyPoint2_x = x, polyPoint2_y = y+22;
-        int polyPoint3_x = x+10, polyPoint3_y = y+60;
-        int polyPoint4_x =x+50, polyPoint4_y = y+60;
-        int polyPoint5_x = x+60, polyPoint5_y = y+22;
+        int polyPoint3_x = x+12, polyPoint3_y = y+56;
+        int polyPoint4_x =x+48, polyPoint4_y = y+56;
+        int polyPoint5_x = x+58, polyPoint5_y = y+22;
 
 
-        Circle poly1 = new Circle(polyPoint1_x,polyPoint1_y,0);
+        Circle poly1 = new Circle(polyPoint1_x,polyPoint1_y,1);
         Circle poly2 = new Circle(polyPoint2_x,polyPoint2_y,0);
         Circle poly3 = new Circle(polyPoint3_x,polyPoint3_y,0);
         Circle poly4 = new Circle(polyPoint4_x,polyPoint4_y,0);
-        Circle poly5 = new Circle(polyPoint5_x,polyPoint5_y,0);
+        Circle poly5 = new Circle(polyPoint5_x,polyPoint5_y,1);
 
         circles.addAll(Arrays.asList(new Circle[]{poly1,poly2,poly3,poly4,poly5}));
     }
@@ -93,11 +93,12 @@ public class Star implements iGizmo{
     public void generateLines() {
         int x = XCoord * 30;
         int y = YCoord * 30 ;
+
         int polyPoint1_x = x+30, polyPoint1_y = y;
         int polyPoint2_x = x, polyPoint2_y = y+22;
-        int polyPoint3_x = x+10, polyPoint3_y = y+60;
-        int polyPoint4_x =x+50, polyPoint4_y = y+60;
-        int polyPoint5_x = x+60, polyPoint5_y = y+22;
+        int polyPoint3_x = x+12, polyPoint3_y = y+56;
+        int polyPoint4_x =x+48, polyPoint4_y = y+56;
+        int polyPoint5_x = x+58, polyPoint5_y = y+22;
 
         LineSegment line1 = new LineSegment(polyPoint1_x,polyPoint1_y,polyPoint3_x,polyPoint3_y);
         LineSegment line2 = new LineSegment(polyPoint3_x,polyPoint3_y,polyPoint5_x,polyPoint5_y);
@@ -139,9 +140,13 @@ public class Star implements iGizmo{
         stopped = true;
     }
 
+    public Boolean isRoating(){
+        return stopped;
+    }
+
     public void startStarRotation(){
         stopped = false;
-        Timer t = new Timer(80, e -> {
+        Timer t = new Timer(100, e -> {
             Timer clone = (Timer) e.getSource();
             if(stopped)clone.stop();
             rotate();
@@ -249,4 +254,10 @@ public class Star implements iGizmo{
     public int getRotationCount() {
         return rotationCount;
     }
+
+    @Override
+    public String toString() {
+        return getGizmoType() + " " + getID() + " " + getXCoord() + " " + getYCoord();
+    }
+
 }

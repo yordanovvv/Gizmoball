@@ -7,6 +7,7 @@ import physics.Vect;
 import javax.sound.sampled.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GizmoballModel extends iModel {
 
@@ -22,7 +23,6 @@ public class GizmoballModel extends iModel {
     private boolean wallCollision = false;
     private double gravity = 25; //25L/sec^2
 
-    Star star;
     public GizmoballModel() {
 
         balls = new ArrayList<>();
@@ -38,10 +38,8 @@ public class GizmoballModel extends iModel {
         absorber = new Absorber("A1", 0, 18, 20, 20);
         gizmos.add(absorber);
 
-        star = new Star("S1",5,5);
+        Star star = new Star("S1",5,5);
         gizmos.add(star);
-
-        star.startStarRotation();
        /* RightFlipper rightFlipper = new RightFlipper("R1", 6, 7);
         gizmos.add(rightFlipper);
 
@@ -53,6 +51,17 @@ public class GizmoballModel extends iModel {
         keys.add('r');
         keys.add('t');*/
 
+    }
+    @Override
+    public ArrayList<iGizmo> getAllStars(){
+        ArrayList<iGizmo> stars = new ArrayList<>();
+
+        for (iGizmo giz:gizmos) {
+            if(giz.getGizmoType().equals("Star")){
+                stars.add(giz);
+            }
+        }
+        return stars;
     }
 
     @Override
@@ -77,6 +86,7 @@ public class GizmoballModel extends iModel {
         for (iGizmo g:gizmos) {
             g.setHit(false);
         }
+
 
         for (Ball ball : balls)
         {
@@ -116,8 +126,7 @@ public class GizmoballModel extends iModel {
                         {
                             collisionGizmo.setHit(!collisionGizmo.getHit());
 
-                            playSound(collisionGizmo);
-                            star.setHit(true);
+                            if(ball.getSpeed()!=0) playSound(collisionGizmo);
                             switch (collisionGizmo.getID().charAt(0))
                             {
                                 case 'C':
@@ -387,6 +396,10 @@ public class GizmoballModel extends iModel {
                     case "LeftFlipper":
                         LeftFlipper leftFlipper = new LeftFlipper(inputStream[1], Integer.parseInt(inputStream[2]), Integer.parseInt(inputStream[3]));
                         gizmos.add(leftFlipper);
+                        break;
+                    case "Star":
+                        Star star = new Star(inputStream[1], Integer.parseInt(inputStream[2]), Integer.parseInt(inputStream[3]));
+                        gizmos.add(star);
                         break;
                     case "Rotate":
                         for(iGizmo gizmo : gizmos) {

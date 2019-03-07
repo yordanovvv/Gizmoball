@@ -33,6 +33,7 @@ public interface iGizmo {
 
     String getID();
 
+    //------------------------
     //-------------------------
     void setHit(boolean hit);
 
