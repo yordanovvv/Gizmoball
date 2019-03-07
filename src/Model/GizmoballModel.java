@@ -223,26 +223,29 @@ public class GizmoballModel extends iModel {
         return cd;
     }
 
-    private void getAudio(String path){
+    private void getAudio(String path) {
         try {
-            File file = new File(path);
             AudioInputStream stream;
             AudioFormat format;
             DataLine.Info info;
             Clip clip;
 
-            stream = AudioSystem.getAudioInputStream(file);
+            stream = AudioSystem.getAudioInputStream(new File(path));
             format = stream.getFormat();
             info = new DataLine.Info(Clip.class, format);
-            clip = (Clip)  AudioSystem.getLine(info);
+            clip = (Clip) AudioSystem.getLine(info);
             clip.open(stream);
             clip.start();
-        }catch (Exception e) {
-
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
         }
     }
 
-    private void playSound(iGizmo giz){
+        private void playSound(iGizmo giz){
         switch (giz.getGizmoType()){
             case "Absorber":
                 getAudio("res/clips/laser_cannon.wav");
