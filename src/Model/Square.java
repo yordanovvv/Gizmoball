@@ -39,6 +39,9 @@ public class Square implements iGizmo {
 
         generateCircles();
         generateLines();
+
+
+        colour = getColor();
     }
 
     @Override
@@ -126,8 +129,6 @@ public class Square implements iGizmo {
     @Override
     public void rotate() {
 //TODO guess this will be empty as square looks same rotated
-        rotationCount++;
-        if(rotationCount > 3) rotationCount = 0;
     }
 
     @Override

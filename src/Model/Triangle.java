@@ -38,6 +38,8 @@ public class Triangle implements iGizmo {
 
         rotationCount = 0;
 
+        colour = getColor();
+
         generateCircles();
         generateLines();
 

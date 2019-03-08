@@ -143,6 +143,8 @@ public class GizmoballModel extends iModel {
                         if(collisionGizmo != null && wallCollision == false)
                         {
                             collisionGizmo.setHit(!collisionGizmo.getHit());
+                            checkConnections(collisionGizmo);
+
 
                             if(ball.getSpeed()!=0) playSound(collisionGizmo);
                             switch (collisionGizmo.getID().charAt(0))
@@ -333,6 +335,9 @@ public class GizmoballModel extends iModel {
     @Override
     public void addGizmo(iGizmo gizmo) {
         gizmos.add(gizmo);
+        for(String key : gizmo.getKeyConnections()) {
+            keys.add(key.charAt(0));
+        }
     }
 
     @Override
@@ -527,7 +532,7 @@ public class GizmoballModel extends iModel {
             for (int i = 0; i < gizmo.getGizmoConnections().size(); i++) {
                 //set hit to true i.e activate colour
                 getGizmoByID(gizmo.getGizmoConnections().get(i)).setHit(true);
-
+                checkKeyConnections(getGizmoByID(gizmo.getGizmoConnections().get(i)));
             }
 
 
@@ -538,22 +543,24 @@ public class GizmoballModel extends iModel {
         //only check if key press list isn't empty
         if (!keys.isEmpty()) {
             for (int i = 0; i < gizmo.getKeyConnections().size(); i++) {
-                if (keys.get(i).equals(gizmo.getKeyConnections().get(i))) {
+                if (keys.get(i).equals(gizmo.getKeyConnections().get(i).charAt(0))) {
                     //get the type of gizmo
                     String gizmoType = gizmo.getGizmoType();
 
-                    if (gizmoType.equals("LeftFlipper")) {
+                    if (gizmoType.equals("LeftFlipper") || gizmoType.equals("RightFlipper")) {
                         //activate left flipper, need direction
 
+                        //TODO: make the flipper fully rotate and go back, this code is copied from controller stuff and only makes it rotate upwards
+
+                        do {
+                            gizmo.rotate();
+                            this.setiGizmo(gizmo);
+                            this.hasChanged();
+                            this.notifyObservers();
+                        } while (gizmo.getRotationAngle() != 90 & gizmo.getRotationAngle() != 0 & gizmo.getRotationAngle() != -90);
 
 
                     }
-                    if (gizmoType.equals("RightFlipper")){
-                        //activate right flipper, need direction
-
-
-                    }
-
                 }
             }
         }

@@ -116,7 +116,7 @@ public class LeftFlipper implements iGizmo {
 
     @Override
     public void setKeyConnection(String key) {
-
+        keyConnections.add(key);
     }
 
     private void updateLinePositions(){

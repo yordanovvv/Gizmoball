@@ -37,6 +37,7 @@ public class GizmoCircle implements iGizmo {
         lines = new ArrayList<>();
         generateCircles();
 
+        colour = getColor();
     }
 
     @Override
