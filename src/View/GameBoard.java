@@ -192,26 +192,9 @@ public class GameBoard extends JPanel implements Observer{
         Polygon poly1 = new Polygon(px, py, px.length);
         g2.fillPolygon(poly1);
 
-       /* g2.setColor(new Color(226, 219, 49, 255));
+        g2.setColor(new Color(226, 219, 49, 255));
         g2.drawLine(polyPoint1_x,polyPoint1_y,polyPoint5_x-20,polyPoint2_y-1);
         g2.drawLine(polyPoint5_x-20,polyPoint2_y-1,polyPoint5_x,polyPoint5_y);
-*/
-
-        g2.setColor(Color.WHITE);
-        g2.drawLine(polyPoint1_x,polyPoint1_y,polyPoint3_x,polyPoint3_y);
-
-        g2.setColor(Color.MAGENTA);
-        g2.drawLine(polyPoint3_x,polyPoint3_y,polyPoint5_x,polyPoint5_y);
-
-        g2.setColor(Color.CYAN);
-        g2.drawLine(polyPoint5_x,polyPoint5_y,polyPoint2_x,polyPoint2_y);
-
-        g2.setColor(Color.RED);
-        g2.drawLine(polyPoint2_x,polyPoint2_y,polyPoint4_x,polyPoint4_y);
-
-        g2.setColor(Color.GREEN);
-        g2.drawLine(polyPoint4_x,polyPoint4_y,polyPoint1_x,polyPoint1_y);
-
 
         g2.setTransform(old);
         g2.dispose();
