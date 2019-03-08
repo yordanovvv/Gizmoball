@@ -77,7 +77,18 @@ public class GizmoballModel extends iModel {
     }
 
     @Override
-    public ArrayList<Character> getKeys(){return keys;}
+    public ArrayList<Character> getKeys(){
+        ArrayList<Character> newList = new ArrayList<>();
+        for(iGizmo gizmo : gizmos) {
+            for(String key : gizmo.getKeyConnections()) {
+                if(key != null) {
+                    newList.add(key.charAt(0));
+                }
+            }
+        }
+        keys = newList;
+        return keys;
+    }
 
     @Override
     public ArrayList<iGizmo> getFlippers(){return flippers;}
@@ -335,9 +346,6 @@ public class GizmoballModel extends iModel {
     @Override
     public void addGizmo(iGizmo gizmo) {
         gizmos.add(gizmo);
-        for(String key : gizmo.getKeyConnections()) {
-            keys.add(key.charAt(0));
-        }
     }
 
     @Override
