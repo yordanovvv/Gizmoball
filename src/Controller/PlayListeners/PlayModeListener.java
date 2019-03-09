@@ -50,10 +50,10 @@ public class PlayModeListener implements ActionListener {
             switch (e.getActionCommand()) {
                 case "Play":
                     //gModel.getRightFlipListener().setIsStopped(false);
-                    for(iGizmo g:stars){
+                   /* for(iGizmo g:stars){
                         Star star = (Star) g;
-                        if(!star.isRoating()) star.startStarRotation();
-                    }
+                        star.startStarRotation();
+                    }*/
                     for (Ball b : balls) b.setStopped(false);
                     timer.restart();
                     statisticsTimer.start();
@@ -61,10 +61,10 @@ public class PlayModeListener implements ActionListener {
                 case "Pause":
                     //gModel.getRightFlipListener().setIsStopped(true);
 
-                    for(iGizmo g:stars){
+                    /*for(iGizmo g:stars){
                         Star star = (Star) g;
                         star.stopRotation();
-                    }
+                    }*/
 
                     for (Ball b : balls) b.setStopped(true);
                     timer.stop();
@@ -72,11 +72,11 @@ public class PlayModeListener implements ActionListener {
                 case "Tick":
                     //gModel.getRightFlipListener().setIsStopped(false);
                     //gModel.getRightFlipListener().moveFlipper("TICK");
-                   for(iGizmo g:stars){
+                    /*for(iGizmo g:stars){
                         Star star = (Star) g;
                         if(star.isRoating()) star.stopRotation();
                         star.rotate();
-                    }
+                    }*/
 
                     for (Ball b : balls)
                     {

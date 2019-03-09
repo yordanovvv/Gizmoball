@@ -211,7 +211,6 @@ public class GridClickListener implements MouseListener {
             //}
         }
 
-
     }
 
     @Override

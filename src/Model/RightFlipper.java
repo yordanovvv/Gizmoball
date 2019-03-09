@@ -81,12 +81,27 @@ public class RightFlipper implements iGizmo {
         //XCoord*constant + 20.9
        // the radius is in pixels as we are graphing it to the screen.
 
-        Circle bigTopCircle = new Circle(XCoord*constant + 22.6,YCoord*constant + 7.5,7.4);
+        double topCircleRadius = 7.5; //in pixels
+        double bottomCircleRadius = 6;
+
+        double X = XCoord*constant;
+        double Y = YCoord*constant;
+
+        Circle bigTopCircle = new Circle(X + (constant - topCircleRadius),Y + topCircleRadius, topCircleRadius);
+        Circle bigBottomCircle = new Circle(X + (constant - bottomCircleRadius), Y + (2*constant - bottomCircleRadius), bottomCircleRadius);
+
+        Circle topLeft = new Circle(X + (constant - 2*topCircleRadius),Y + topCircleRadius,0);
+        Circle topRight = new Circle(X + constant,Y + topCircleRadius,0);
+        Circle bottomLeft = new Circle(X + (constant - 2*bottomCircleRadius),Y + (2*constant - bottomCircleRadius),0);
+        Circle bottomRight = new Circle(X + constant ,Y + (2*constant - bottomCircleRadius),0);
+
+
+       /* Circle bigTopCircle = new Circle(XCoord*constant + 22.6,YCoord*constant + 7.5,7.4);
         Circle bigBottomCircle = new Circle(XCoord*constant + 22.6,YCoord*constant +7.51+47.5,6);
         Circle topLeft = new Circle(XCoord*constant + 30,YCoord*constant +7,0);
         Circle topRight = new Circle((XCoord + .9) * constant,YCoord*constant +7.5+48,0);
         Circle bottomLeft = new Circle(XCoord*constant + 17.5,YCoord*constant +7,0);
-        Circle bottomRight = new Circle((XCoord) * constant + 15.8,YCoord*constant +7.5+48,0);
+        Circle bottomRight = new Circle((XCoord) * constant + 15.8,YCoord*constant +7.5+48,0);*/
 
         circles.add(bigTopCircle);
         circles.add(bigBottomCircle);
@@ -97,16 +112,51 @@ public class RightFlipper implements iGizmo {
 
     }
 
+    public Vect getBigTopCircleCentre()
+    {
+        return circles.get(0).getCenter();
+    }
+
+    public Vect getBigBottomCircleCentre()
+    {
+        return circles.get(1).getCenter();
+    }
+
+    public Vect getTopLeftCircleCentre()
+    {
+        return circles.get(2).getCenter();
+    }
+
+
     @Override
     public void generateLines() {
 
-        //todo fix me
-        LineSegment rightL = new LineSegment(XCoord*constant + 30 ,YCoord*constant +7,(XCoord + .9) * constant   ,YCoord*constant +8+48);
-        LineSegment leftL = new LineSegment(XCoord*constant + 17.5,YCoord*constant +7,(XCoord) * constant + 15.8 ,YCoord*constant +8+48);
+        double topCircleRadius = 7.5; //in pixels
+        double bottomCircleRadius = 6;
+
+        double X = XCoord*constant;
+        double Y = YCoord*constant;
+
+
+        LineSegment leftL = new LineSegment(X + (constant - 2*topCircleRadius), Y + topCircleRadius, X + (constant - 2*bottomCircleRadius),Y + (2*constant - bottomCircleRadius));
+        LineSegment rightL = new LineSegment(X + constant,Y + topCircleRadius, X + constant ,Y + (2*constant - bottomCircleRadius));
+
+        /*LineSegment rightL = new LineSegment(XCoord*constant + 30 ,YCoord*constant +7,(XCoord + .9) * constant   ,YCoord*constant +8+48);
+        LineSegment leftL = new LineSegment(XCoord*constant + 17.5,YCoord*constant +7,(XCoord) * constant + 15.8 ,YCoord*constant +8+48);*/
 
         System.out.println();
-        lines.add(rightL);
         lines.add(leftL);
+        lines.add(rightL);
+    }
+
+    public Vect getRightLineVectCentre()
+    {
+        return lines.get(0).p1();
+    }
+
+    public Vect getLeftLineVectCentre()
+    {
+        return lines.get(1).p1();
     }
 
     @Override
@@ -129,7 +179,7 @@ public class RightFlipper implements iGizmo {
         for (int i = 0; i < lines.size(); i++) {
             Angle rotation = new Angle(Math.toRadians(rotationDegree));
             LineSegment currentLine = lines.get(i);
-            lines.set(i,Geometry.rotateAround(currentLine,center.getCenter(),rotation));
+            lines.set(i,Geometry.rotateAround(currentLine, currentLine.p1()/*center.getCenter()*/,rotation));
         }
 
         for (int i = 0; i < circles.size(); i++) {
@@ -155,6 +205,13 @@ public class RightFlipper implements iGizmo {
     @Override
     public int getRotationAngle() {
         return rotationAngle;
+    }
+
+    public double getAngularVelo() {
+
+        //rad/sec
+
+        return rotationAngle * 0.05 * 3.14/180;
     }
 
     @Override
@@ -233,5 +290,13 @@ public class RightFlipper implements iGizmo {
     @Override
     public String toString() {
         return getGizmoType() + " " + getID() + " " + getXCoord() + " " + getYCoord();
+    }
+
+    public double getAngle() {
+        return rotationAngle;
+    }
+
+    public Vect getCentre(){
+        return circles.get(0).getCenter();
     }
 }

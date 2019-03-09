@@ -5,7 +5,6 @@ import physics.Vect;
 
 import java.util.Observable;
 import static java.lang.Math.abs;
-import static java.lang.Math.sqrt;
 
 public class Ball extends Observable {
 
@@ -25,7 +24,7 @@ public class Ball extends Observable {
         xpos = x;
         ypos = y;
         velocity = new Vect(xv, yv);
-        radius = 0.3;//todo adjust all of the sizing to L's because spec.
+        radius = 0.3;
         stopped = true;
     }
 
