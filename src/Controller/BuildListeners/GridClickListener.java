@@ -11,6 +11,7 @@ public class GridClickListener implements MouseListener {
 
     private String id;
     private String selected;
+    private iGizmo moveGizmo;
 
     GameBoard board;
     //private MainFrame mf;
@@ -28,6 +29,7 @@ public class GridClickListener implements MouseListener {
         this.board = board;
 
         m = board.getGizModel();
+        moveGizmo = null;
 
     }
 
@@ -111,7 +113,14 @@ public class GridClickListener implements MouseListener {
                     giz = new LeftFlipper("LF" + idNo, gridX, gridY);
                     m.addGizmo(giz);
                     break;
+                case "move":
+                    if(moveGizmo != null) {
+                        moveGizmo.setXCoord(gridX);
+                        moveGizmo.setYCoord(gridY);
+                        moveGizmo = null;
+                    }
 
+                    break;
                 //---------------------------------
 
 
@@ -144,6 +153,11 @@ public class GridClickListener implements MouseListener {
                     m.removeGizmo(removeGimzo);
                     break;
                 case "move":
+                    for (iGizmo g : m.getGizmos()) {
+                        if (g.getXCoord() == gridX && g.getYCoord() == gridY) {
+                            moveGizmo = g;
+                        }
+                    }
                     break;
                 case "connectKey":
                     break;
