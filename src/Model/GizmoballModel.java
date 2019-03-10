@@ -80,11 +80,14 @@ public class GizmoballModel extends iModel {
     public ArrayList<Character> getKeys(){
         ArrayList<Character> newList = new ArrayList<>();
         for(iGizmo gizmo : gizmos) {
-            for(String key : gizmo.getKeyConnections()) {
-                if(key != null) {
-                    newList.add(key.charAt(0));
+            if(gizmo.getKeyConnections() != null) {
+                for(String key : gizmo.getKeyConnections()) {
+                    if(key != null) {
+                        newList.add(key.charAt(0));
+                    }
                 }
             }
+
         }
         keys = newList;
         return keys;
