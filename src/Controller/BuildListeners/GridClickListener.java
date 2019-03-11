@@ -45,7 +45,7 @@ public class GridClickListener implements MouseListener {
         gridX = e.getX()/GRID_SIZE;
         gridY = e.getY()/GRID_SIZE;
 
-        boolean canPlace = checkSpace();
+        boolean canPlace = m.checkSpace(gridX, gridY);
         if (gridX>=20 || gridY>=20){
             canPlace = false;
         }
@@ -174,53 +174,6 @@ public class GridClickListener implements MouseListener {
             }
         }
 
-    }
-
-    //TODO : Move this to the model ????
-    public boolean checkSpace(){
-        for (iGizmo g : m.getGizmos()){
-            //Check area of right flipper
-            if (g.getGizmoType() == "RightFlipper"){
-                if ((g.getXCoord()==gridX && g.getYCoord()==gridY)
-                        || (g.getXCoord()==gridX+1 && g.getYCoord()==gridY)
-                        || (g.getXCoord()==gridX && g.getYCoord()==gridY-1)
-                        || (g.getXCoord()==gridX+1 && g.getYCoord()==gridY-1)){
-                    return false;
-                }
-            }
-            //Check area of left flipper
-            if (g.getGizmoType() == "LeftFlipper"){
-                if ((g.getXCoord()==gridX && g.getYCoord()==gridY)
-                        || (g.getXCoord()==gridX-1 && g.getYCoord()==gridY)
-                        || (g.getXCoord()==gridX && g.getYCoord()==gridY-1)
-                        || (g.getXCoord()==gridX-1 && g.getYCoord()==gridY-1)){
-                    return false;
-                }
-            }
-            //Check area of the absorber
-            if (g.getGizmoType() == "Absorber"){
-                if (gridX>=g.getXCoord() && gridX<=g.getXCoord()+g.getWidth()
-                        && (gridY>=g.getYCoord() && gridY<=g.getYCoord()+g.getHeight())){
-                    return false;
-                }
-            }
-
-            //Check area of the star
-            if (g.getGizmoType() == "Star"){
-                if ((g.getXCoord() == gridX && g.getYCoord()==gridY)
-                        || (g.getXCoord() == gridX-1 && g.getYCoord()==gridY)
-                        || (g.getXCoord() == gridX && g.getYCoord()==gridY-1)
-                        || (g.getXCoord() == gridX-1 && g.getYCoord()==gridY-1)){
-                    return false;
-                }
-            }
-
-            //Check for any other 1 tile sized gizmo
-            if (g.getXCoord() == gridX && g.getYCoord()==gridY){
-              return false;
-            }
-        }
-        return true;
     }
 
     @Override

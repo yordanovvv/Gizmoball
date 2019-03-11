@@ -35,6 +35,8 @@ public abstract class iModel extends Observable {
 
     public abstract Absorber getAbsorber();
 
+    public abstract boolean checkSpace(int gridX, int gridY);
+
     public abstract void saveGame(File file) ;
 
     public abstract void loadGame(File file) ;
