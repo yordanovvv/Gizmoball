@@ -574,7 +574,7 @@ public class GizmoballModel extends iModel {
             gizmo.setKeyConnection(key);
         }
     }
-    //TODO needs to be called in collision details?
+
     public void checkConnections(iGizmo gizmo) {
         //get the collided gizmos id
         if (!collisionGizmo.getID().equals("")) {
