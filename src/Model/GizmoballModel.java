@@ -157,7 +157,8 @@ public class GizmoballModel extends iModel {
                         if(collisionGizmo != null && wallCollision == false)
                         {
                             collisionGizmo.setHit(!collisionGizmo.getHit());
-                            checkConnections(collisionGizmo);
+                            if(!collisionGizmo.getGizmoType().equals("Star"))
+                                 checkConnections(collisionGizmo);
 
 
                             if(ball.getSpeed()!=0) playSound(collisionGizmo);
@@ -516,9 +517,7 @@ public class GizmoballModel extends iModel {
 
             //adding gizmo2 to gizmo1 list of connections
             gizmo1.setGizmoConnection(id2);
-
         }
-
     }
 
     public void keyConnectGizmo(String id, String key) {
@@ -527,19 +526,15 @@ public class GizmoballModel extends iModel {
             iGizmo gizmo = getGizmoByID(id);
             //set the key connection
             gizmo.setKeyConnection(key);
-
         }
-
-
     }
-
-
     //TODO needs to be called in collision details?
     public void checkConnections(iGizmo gizmo) {
         //get the collided gizmos id
         if (!collisionGizmo.getID().equals("")) {
 
             //get the triggers
+            if(gizmo.getGizmoConnections()==null) return;
             for (int i = 0; i < gizmo.getGizmoConnections().size(); i++) {
                 //set hit to true i.e activate colour
                 getGizmoByID(gizmo.getGizmoConnections().get(i)).setHit(true);

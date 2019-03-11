@@ -1,8 +1,6 @@
 package Controller.MainFrameListeners;
 
-import Model.Ball;
-import Model.GizmoballModel;
-import Model.iModel;
+import Model.*;
 import View.BuildMode;
 import View.MainFrame;
 import View.PlayMode;
@@ -29,9 +27,14 @@ public class ChangeModeListener implements ActionListener {
             view.switchModes(2);
             ArrayList<Ball> balls = model.getBalls();
             for(Ball b : balls) b.setStopped(true);
-        }else{
+            for (iGizmo giz:model.getGizmos()) {
+                if(giz.getGizmoType().equals("Star")){
+                    Star star = (Star) giz;
+                    star.stopRotation();
+                }
+            }
+        }else {
             view.switchModes(1);
         }
-
     }
 }

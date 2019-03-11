@@ -18,6 +18,7 @@ public class BuildMode extends JPanel{
     private JButton button_rightFlipper;
     private JButton button_ball;
     private JButton button_absorber;
+    private JButton button_star;
 
     private JPanel controlsPanel;
     private JLabel label_controls;
@@ -28,6 +29,7 @@ public class BuildMode extends JPanel{
     private JButton button_move;
     private JButton button_delete;
     private JButton button_clear;
+
 
     private MainFrame mainFrame;
 
@@ -74,6 +76,7 @@ public class BuildMode extends JPanel{
         button_leftFlipper = new JButton("Left flipper");
         button_rightFlipper = new JButton("Right flipper");
         button_ball= new JButton("Ball");
+        button_star = new JButton("Star");
 
         button_square = utils.addImgToBtn("square.png",button_square, Color.RED);
         button_triangle = utils.addImgToBtn("triangle.png",button_triangle,Color.CYAN);
@@ -82,6 +85,7 @@ public class BuildMode extends JPanel{
         button_leftFlipper = utils.addImgToBtn("leftFlipper.png",button_leftFlipper,Color.YELLOW);
         button_rightFlipper = utils.addImgToBtn("rightFlipper.png",button_rightFlipper, Color.ORANGE);
         button_ball = utils.addImgToBtn("football.png",button_ball, Color.BLACK);
+        button_star =  utils.addImgToBtn("star.png",button_star, new Color(102, 16, 193, 255));
 
         container_build.add(button_square);
         container_build.add(button_triangle);
@@ -90,6 +94,8 @@ public class BuildMode extends JPanel{
         container_build.add(button_leftFlipper);
         container_build.add(button_rightFlipper);
         container_build.add(button_ball);
+        container_build.add(button_star);
+
 
         buildPanel.add(label_components,BorderLayout.PAGE_START);
         buildPanel.add(container_build,BorderLayout.CENTER);

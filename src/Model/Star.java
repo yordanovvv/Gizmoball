@@ -113,6 +113,7 @@ public class Star implements iGizmo{
             rotate();
         });
         t.start();
+
     }
 
     private void spinStarWithLimiter(int delay, int i){
@@ -120,7 +121,10 @@ public class Star implements iGizmo{
         final int[] counter = {0};
         Timer t = new Timer(delay, e -> {
             Timer clone = (Timer) e.getSource();
-            if(counter[0] == i)clone.stop();
+            if(counter[0] == i){
+                clone.stop();
+                startStarRotation();
+            }
             rotate();
             counter[0]++;
         });
