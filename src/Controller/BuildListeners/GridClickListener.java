@@ -119,7 +119,17 @@ public class GridClickListener implements MouseListener {
                         moveGizmo.setYCoord(gridY);
                         moveGizmo = null;
                     }
-
+                    break;
+                case "star":
+                    for (iGizmo g : m.getGizmos()) {
+                        if (g.getGizmoType().equals("Star")) {
+                            idNo++;
+                        }
+                    }
+                    giz = new Star("ST" + idNo, gridX, gridY);
+                    m.addGizmo(giz);
+                    break;
+                default:
                     break;
                 //---------------------------------
 
@@ -194,6 +204,17 @@ public class GridClickListener implements MouseListener {
                     return false;
                 }
             }
+
+            //Check area of the star
+            if (g.getGizmoType() == "Star"){
+                if ((g.getXCoord() == gridX && g.getYCoord()==gridY)
+                        || (g.getXCoord() == gridX-1 && g.getYCoord()==gridY)
+                        || (g.getXCoord() == gridX && g.getYCoord()==gridY-1)
+                        || (g.getXCoord() == gridX-1 && g.getYCoord()==gridY-1)){
+                    return false;
+                }
+            }
+
             //Check for any other 1 tile sized gizmo
             if (g.getXCoord() == gridX && g.getYCoord()==gridY){
               return false;

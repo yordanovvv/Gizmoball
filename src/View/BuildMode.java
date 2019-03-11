@@ -150,6 +150,7 @@ public class BuildMode extends JPanel{
         AddButtonGizmoListener circleButListener = new AddButtonGizmoListener("circle", lis);
         AddButtonGizmoListener triangleButListener = new AddButtonGizmoListener("triangle", lis);
         AddButtonGizmoListener absorbButListener = new AddButtonGizmoListener("absorber", lis);
+        AddButtonGizmoListener starButListener = new AddButtonGizmoListener("star", lis);
 
         AddButtonGizmoListener leftFlipButListener = new AddButtonGizmoListener("leftFlipper", lis);
         AddButtonGizmoListener rightFlipButListener = new AddButtonGizmoListener("rightFlipper", lis);
@@ -158,6 +159,7 @@ public class BuildMode extends JPanel{
         button_triangle.addMouseListener(triangleButListener);
         button_circle.addMouseListener(circleButListener);
         button_absorber.addMouseListener(absorbButListener);
+        button_star.addMouseListener(starButListener);
 
         button_leftFlipper.addMouseListener(leftFlipButListener);
         button_rightFlipper.addMouseListener(rightFlipButListener);
