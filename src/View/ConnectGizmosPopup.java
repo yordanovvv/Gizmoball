@@ -40,10 +40,17 @@ public class ConnectGizmosPopup {
         frame.setTitle("Connect gizmos.");
         frame.setBackground(bg_color);
 
+        JPanel itsMakingMeDoThis = new JPanel(new BorderLayout());
+        itsMakingMeDoThis.setBackground(bg_color);
+
         description = new JLabel("Please select two gizmos to connect.");
         description = utils.editLabel(description, 12, Color.WHITE);
         description.setBackground(bg_color);
-        frame.add(description, BorderLayout.CENTER);
+
+        itsMakingMeDoThis.add(description,BorderLayout.CENTER);
+
+        frame.add(itsMakingMeDoThis,BorderLayout.PAGE_START);
+
 
 
 

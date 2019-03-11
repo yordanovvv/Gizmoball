@@ -1,6 +1,7 @@
 package Controller.BuildListeners;
 
 import Model.*;
+import View.ConnectGizmosPopup;
 import View.PlaceBallPopup;
 import View.GameBoard;
 
@@ -120,7 +121,7 @@ public class GridClickListener implements MouseListener {
                         moveGizmo = null;
                     }
                     break;
-                case "star":
+                    case "star":
                     for (iGizmo g : m.getGizmos()) {
                         if (g.getGizmoType().equals("Star")) {
                             idNo++;
@@ -149,6 +150,7 @@ public class GridClickListener implements MouseListener {
                     }
                     break;
                 case "connect":
+                    ConnectGizmosPopup connectpopUp= new ConnectGizmosPopup(m);
                     break;
                 case "disconnect":
                     break;
