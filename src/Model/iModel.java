@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 public abstract class iModel extends Observable {
+
+    boolean displayID=false;
+
     public abstract void setiGizmo(iGizmo gizmo);
 
     public abstract ArrayList<Character> getKeys();
@@ -45,4 +48,12 @@ public abstract class iModel extends Observable {
     }
 
     public abstract boolean connectGizmos(String id, String id2);
+
+    public boolean displayID(){
+        return displayID;
+    }
+
+    public void setDisplayID(Boolean display){
+        displayID = display;
+    }
 }

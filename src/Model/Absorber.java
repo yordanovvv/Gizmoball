@@ -24,7 +24,6 @@ public class Absorber implements iGizmo {
     private ArrayList<Ball> balls;
     private final int constant = 30;
     private boolean hit;
-
     //Constructor for creating absorber
     public Absorber(String id, int XCoord, int YCoord, int XCoord2, int YCoord2) {
         this.ID = id;

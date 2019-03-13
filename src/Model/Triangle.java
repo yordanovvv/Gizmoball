@@ -24,7 +24,6 @@ public class Triangle implements iGizmo {
     private int rotationAngle;
     private boolean hit;
 
-
     public Triangle(String id, int XCoord, int YCoord) {
         this.ID = id;
         this.XCoord = XCoord;

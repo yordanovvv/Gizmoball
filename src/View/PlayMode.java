@@ -52,12 +52,14 @@ public class PlayMode extends JPanel {
 
         for (int i = 0; i < flippers.size(); i++) {
             iGizmo giz = flippers.get(i);
-            if(model.getKeys() != null && model.getKeys().size() > 0) {
-                Character key = model.getKeys().get(i);
+            if( model.getKeys().size() > i) {
+                if(model.getKeys().get(i) != null) {
+                    Character key = model.getKeys().get(i);
 
-                System.out.println(giz.getID());
+                    System.out.println(giz.getID());
 
-                mainFrame.addKeyListener(new FlipperKeyListener(model, key, giz));
+                    mainFrame.addKeyListener(new FlipperKeyListener(model, key, giz));
+                }
             }
 
         }
