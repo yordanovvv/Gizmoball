@@ -116,6 +116,8 @@ public class GridClickListener implements MouseListener {
                     break;
                 case "move":
                     if(moveGizmo != null) {
+
+
                         moveGizmo.setXCoord(gridX);
                         moveGizmo.setYCoord(gridY);
                         moveGizmo = null;
@@ -164,7 +166,13 @@ public class GridClickListener implements MouseListener {
                 case "move":
                     for (iGizmo g : m.getGizmos()) {
                         if (g.getXCoord() == gridX && g.getYCoord() == gridY) {
+
+
                             moveGizmo = g;
+                            System.out.println("Clicked on : " + moveGizmo.getGizmoType());
+                            System.out.println("" + moveGizmo.getID());
+
+
                         }
                     }
                     break;
