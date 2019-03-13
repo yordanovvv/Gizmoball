@@ -555,7 +555,7 @@ public class GizmoballModel extends iModel {
     }
 
 
-    public void connectGizmos(String id, String id2) {
+    public boolean connectGizmos(String id, String id2) {
         //checking gizmos are actually on board
         if (gizmoFound(id) && gizmoFound(id2)) {
             //actually getting the gizmo to add connection to
@@ -563,7 +563,9 @@ public class GizmoballModel extends iModel {
 
             //adding gizmo2 to gizmo1 list of connections
             gizmo1.setGizmoConnection(id2);
+            return true;
         }
+        return false;
     }
 
     public void keyConnectGizmo(String id, String key) {

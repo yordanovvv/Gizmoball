@@ -149,9 +149,6 @@ public class GridClickListener implements MouseListener {
                         }
                     }
                     break;
-                case "connect":
-                    ConnectGizmosPopup connectpopUp= new ConnectGizmosPopup(m);
-                    break;
                 case "disconnect":
                     break;
                 case "delete":

@@ -43,4 +43,6 @@ public abstract class iModel extends Observable {
 
     public void addBall(Ball b) {
     }
+
+    public abstract boolean connectGizmos(String id, String id2);
 }

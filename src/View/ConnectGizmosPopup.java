@@ -7,6 +7,8 @@ import Model.iGizmo;
 import Model.iModel;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class ConnectGizmosPopup {
@@ -24,6 +26,7 @@ public class ConnectGizmosPopup {
     private JButton button_cancel;
 
     private iModel model;
+    private ArrayList<iGizmo> gizmos;
 
 
     //has an instance of model to access list of gizmos
@@ -74,17 +77,18 @@ public class ConnectGizmosPopup {
 
 
         //get all gizmos on board
-        ArrayList<iGizmo> gizmos = model.getGizmos();
+        gizmos = model.getGizmos();
 
         //get their id and type, so player can know whats what?
             for (iGizmo g : gizmos) {
-                combo_gizmo1.addItem("id " + g.getID() + " type " + g.getGizmoType());
+                //combo_gizmo1.addItem("id " + g.getID() + " type " + g.getGizmoType());
+                combo_gizmo1.addItem(g.getGizmoType() + "[" + g.getID() + "]: x = " + g.getXCoord() + "; y = " + g.getYCoord());
             }
 
         //do the same for combo box 2
         for (iGizmo g : gizmos) {
-
-            combo_gizmo2.addItem("id " + g.getID() + " type " + g.getGizmoType());
+            //combo_gizmo2.addItem("id " + g.getID() + " type " + g.getGizmoType());
+            combo_gizmo2.addItem(g.getGizmoType() + "[" + g.getID() + "]: x = " + g.getXCoord() + "; y = " + g.getYCoord());
         }
 
         container.add(connectLabel);
@@ -93,6 +97,7 @@ public class ConnectGizmosPopup {
         container.add(connectLabel2);
         container.add(combo_gizmo2);
 
+        frame.add(container, BorderLayout.CENTER);
         //done and cancel buttons
 
         JPanel buttonContainer = new JPanel();
@@ -101,7 +106,12 @@ public class ConnectGizmosPopup {
 
         button_done = new JButton("Done");
         button_cancel = new JButton("Cancel");
+
         //need to add action listeners to these?^^
+        button_done.setActionCommand("Done");
+        button_done.addActionListener(new SmallActionListener());
+        button_cancel.setActionCommand("Cancel");
+        button_cancel.addActionListener(new SmallActionListener());
 
         buttonContainer.add(button_done);
         buttonContainer.add(button_cancel);
@@ -112,7 +122,31 @@ public class ConnectGizmosPopup {
         frame.setVisible(true);
         frame.pack();
 
+    }
 
+    class SmallActionListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            switch(e.getActionCommand()) {
+                case "Done":
+                    iGizmo gizmo1 = gizmos.get(combo_gizmo1.getSelectedIndex());
+                    iGizmo gizmo2 = gizmos.get(combo_gizmo2.getSelectedIndex());
+                    boolean status = model.connectGizmos(gizmo1.getID(), gizmo2.getID());
+                    if(!status) {
+                        JOptionPane.showMessageDialog(null, "There is a problem connecting the selected gizmos. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null, "Gizmo " + gizmo1.getID() + " and " + gizmo2.getID() + " connected successfully!");
+                    }
+                    break;
+                case "Cancel":
+                    frame.setVisible(false);
+                    frame.dispose();
+                    break;
+            }
+
+        }
     }
 }
 

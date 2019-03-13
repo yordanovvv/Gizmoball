@@ -32,8 +32,8 @@ public class GizmoBall {
         LeftFlipper lf1 = new LeftFlipper("LF1", 8, 8);
         lf1.setKeyConnection("r");
         model.addGizmo(lf1);
-        ((GizmoballModel) model).connectGizmos("s1", "LF1");
-        ((GizmoballModel) model).connectGizmos("s1", "t1");
+//        ((GizmoballModel) model).connectGizmos("s1", "LF1");
+//        ((GizmoballModel) model).connectGizmos("s1", "t1");
 
 //        model.saveGame();
 //        model.loadGame();
