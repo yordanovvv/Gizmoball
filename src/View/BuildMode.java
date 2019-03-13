@@ -171,7 +171,7 @@ public class BuildMode extends JPanel{
         //controls
         AddButtonGizmoListener rotateListener = new AddButtonGizmoListener("rotate", lis);
         ConnectListener connectListener = new ConnectListener(mainFrame.getModel());
-        AddButtonGizmoListener disconnectListener = new AddButtonGizmoListener("disconnect", lis);
+        ConnectListener disconnectListener = new ConnectListener(mainFrame.getModel());
         AddButtonGizmoListener deleteListener = new AddButtonGizmoListener("delete", lis);
         AddButtonGizmoListener moveListener = new AddButtonGizmoListener("move", lis);
         AddButtonGizmoListener connectKeyListener = new AddButtonGizmoListener("connectKey", lis);
@@ -182,7 +182,8 @@ public class BuildMode extends JPanel{
         button_delete.addMouseListener(deleteListener);
         button_connectButton.addActionListener(connectListener);
         button_connectButton.setActionCommand("connect");
-        button_disconnect.addMouseListener(disconnectListener);
+        button_disconnect.addActionListener(disconnectListener);
+        button_disconnect.setActionCommand("disconnect");
         button_clear.addMouseListener(clearClickListener);
         button_move.addMouseListener(moveListener);
         button_keypressConnect.addMouseListener(connectKeyListener);

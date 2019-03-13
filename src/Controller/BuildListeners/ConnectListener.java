@@ -2,6 +2,7 @@ package Controller.BuildListeners;
 
 import Model.iModel;
 import View.ConnectGizmosPopup;
+import View.DisconnectGizmosPopup;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +21,8 @@ public class ConnectListener implements ActionListener {
             case "connect":
                 ConnectGizmosPopup connectpopUp= new ConnectGizmosPopup(model);
                 break;
+            case "disconnect":
+                DisconnectGizmosPopup disconnectGizmosPopup = new DisconnectGizmosPopup(model);
         }
     }
 }
