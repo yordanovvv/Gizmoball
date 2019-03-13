@@ -46,98 +46,119 @@ public class GridClickListener implements MouseListener {
         gridX = e.getX()/GRID_SIZE;
         gridY = e.getY()/GRID_SIZE;
 
-        boolean canPlace = m.checkSpace(gridX, gridY);
+        boolean canPlace = true; // = m.checkSpace(gridX, gridY);
         if (gridX>=20 || gridY>=20){
             canPlace = false;
         }
 
         System.out.println(gridX + " | " + gridY);
 
-        iGizmo giz;
+        iGizmo giz = null;
 
-        //TODO : Change id thingy to get maximum id instead of counting ids
-        //Prevents bugs!
-
+        //Variables to get maximum id of gizmo, avoids bugs
         int idNo=1;
+        int bigId=0;
 
         if (canPlace) {
             switch (selected) {
                 case "ball":
                     //Would prefer this here, but can also have it when BALL button clicked - C
                     //Hope adding ball works fine like that -L
-                    PlaceBallPopup compPop = new PlaceBallPopup(m, gridX, gridY); //Not doing anything with this yet,  don't have multiple ball support
+                    PlaceBallPopup compPop = new PlaceBallPopup(m, gridX, gridY);
                     break;
                 case "circle":
-                    //Used to get next unique idNumber
                     for (iGizmo g : m.getGizmos()) {
-                        if (g.getGizmoType().equals("GizmoCircle")) {
-                            idNo++;
+                        if (g.getGizmoType().equals("Circle")) {
+                            bigId = Integer.parseInt(g.getID().substring(1));
+                            System.out.println(bigId);
+                            if (idNo > bigId){
+                                bigId = idNo;
+                            }
                         }
                     }
-                    //TODO : Update this when GizmoCircle is defined.
-                    giz = new GizmoCircle("C" + idNo, gridX, gridY, rad); //GizmoCircle has not yet been defined
+                    giz = new GizmoCircle("C" + (bigId+1), gridX, gridY, rad);
                     m.addGizmo(giz);
                     break;
                 case "square":
                     for (iGizmo g : m.getGizmos()) {
                         if (g.getGizmoType().equals("Square")) {
-                            idNo++;
+                            bigId = Integer.parseInt(g.getID().substring(1));
+                            System.out.println(bigId);
+                            if (idNo > bigId){
+                                bigId = idNo;
+                            }
                         }
                     }
-                    giz = new Square("S" + idNo, gridX, gridY);
+                    giz = new Square("S" + (bigId+1), gridX, gridY);
                     m.addGizmo(giz);
                     break;
                 case "triangle":
                     for (iGizmo g : m.getGizmos()) {
                         if (g.getGizmoType().equals("Triangle")) {
-                            idNo++;
+                                bigId = Integer.parseInt(g.getID().substring(1));
+                                System.out.println(bigId);
+                                if (idNo > bigId){
+                                    bigId = idNo;
+                                }
                         }
                     }
-                    giz = new Triangle("T" + idNo, gridX, gridY);
+                    giz = new Triangle("T" + (bigId+1), gridX, gridY);
                     m.addGizmo(giz);
                     break;
                 case "rightFlipper":
                     for (iGizmo g : m.getGizmos()) {
                         if (g.getGizmoType().equals("RightFlipper")) {
-                            idNo++;
+                            if (g.getGizmoType().equals("Square")) {
+                                bigId = Integer.parseInt(g.getID().substring(2));
+                                System.out.println(bigId);
+                                if (idNo > bigId){
+                                    bigId = idNo;
+                                }
+                            }
                         }
                     }
-                    giz = new RightFlipper("RF" + idNo, gridX, gridY);
+                    giz = new RightFlipper("RF" + (bigId+1), gridX, gridY);
                     m.addGizmo(giz);
                     break;
                 case "leftFlipper":
                     for (iGizmo g : m.getGizmos()) {
                         if (g.getGizmoType().equals("LeftFlipper")) {
-                            idNo++;
+                                bigId = Integer.parseInt(g.getID().substring(2));
+                                System.out.println(bigId);
+                                if (idNo > bigId){
+                                    bigId = idNo;
+                                }
                         }
                     }
-                    giz = new LeftFlipper("LF" + idNo, gridX, gridY);
+                    giz = new LeftFlipper("LF" + (bigId+1), gridX, gridY);
+                    //m.addGizmo(giz);
+                    break;
+                case "star":
+                    for (iGizmo g : m.getGizmos()) {
+                        if (g.getGizmoType().equals("Star")) {
+                                bigId = Integer.parseInt(g.getID().substring(2));
+                                System.out.println(bigId);
+                                if (idNo > bigId){
+                                    bigId = idNo;
+                                }
+                        }
+                    }
+                    giz = new Star("ST" + (bigId+1), gridX, gridY);
                     m.addGizmo(giz);
                     break;
                 case "move":
                     if(moveGizmo != null) {
-
-
                         moveGizmo.setXCoord(gridX);
                         moveGizmo.setYCoord(gridY);
                         moveGizmo = null;
                     }
                     break;
-                    case "star":
-                    for (iGizmo g : m.getGizmos()) {
-                        if (g.getGizmoType().equals("Star")) {
-                            idNo++;
-                        }
-                    }
-                    giz = new Star("ST" + idNo, gridX, gridY);
-                    m.addGizmo(giz);
-                    break;
                 default:
                     break;
                 //---------------------------------
-
-
-
+            }
+            if (m.checkSpace(gridX, gridY) && giz != null){
+                m.addGizmo(giz);
             }
         } else {
             //TODO : Move this code into a seperate class???
@@ -150,6 +171,8 @@ public class GridClickListener implements MouseListener {
                             }
                         }
                     }
+                    break;
+                case "connect":
                     break;
                 case "disconnect":
                     break;
@@ -166,13 +189,7 @@ public class GridClickListener implements MouseListener {
                 case "move":
                     for (iGizmo g : m.getGizmos()) {
                         if (g.getXCoord() == gridX && g.getYCoord() == gridY) {
-
-
                             moveGizmo = g;
-                            System.out.println("Clicked on : " + moveGizmo.getGizmoType());
-                            System.out.println("" + moveGizmo.getID());
-
-
                         }
                     }
                     break;
@@ -199,6 +216,7 @@ public class GridClickListener implements MouseListener {
             //TODO : Check overlap
             //Functionality for more than one absorber??
             //if (m.getAbsorber()==null) {
+
                 Absorber abs = new Absorber("A", start_gridX, start_gridY, end_gridX+1, end_gridY+1);
                 m.addGizmo(abs);
             //} else {
