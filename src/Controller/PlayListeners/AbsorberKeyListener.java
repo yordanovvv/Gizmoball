@@ -35,7 +35,7 @@ public class AbsorberKeyListener implements KeyListener {
           //  System.out.println("Absorber fire!");
             //model.getBall().setStopped(false);
             Ball b = model.getAbsorber().activateAbsorber();
-
+            model.getAudio("res/clips/laser_cannon.wav");
             if (b != null){
             //Trigger the absorber!
           //  System.out.println(b);

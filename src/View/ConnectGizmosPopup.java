@@ -138,7 +138,6 @@ public class ConnectGizmosPopup {
                     }
                     else {
                         JOptionPane.showMessageDialog(null, "Gizmo " + gizmo1.getID() + " and " + gizmo2.getID() + " connected successfully!");
-                        model.setDisplayID(false);
                     }
                     break;
                 case "Cancel":

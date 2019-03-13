@@ -67,4 +67,5 @@ public interface iGizmo {
     String toString();
 
     int getRotationCount();
+
 }

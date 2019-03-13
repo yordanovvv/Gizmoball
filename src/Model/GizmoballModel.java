@@ -5,10 +5,10 @@ import physics.Geometry;
 import physics.LineSegment;
 import physics.Vect;
 import javax.sound.sampled.*;
-import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class GizmoballModel extends iModel {
 
@@ -40,20 +40,6 @@ public class GizmoballModel extends iModel {
         absorber = new Absorber("A1", 0, 18, 20, 20);
         star = new Star("init_star",0,0);
         gizmos.add(absorber);
-
-        Star star = new Star("St1",5,5);
-        gizmos.add(star);
-       /* RightFlipper rightFlipper = new RightFlipper("R1", 6, 7);
-        gizmos.add(rightFlipper);
-
-        LeftFlipper leftFlipper = new LeftFlipper("L1", 8, 7);
-        gizmos.add(leftFlipper);
-        flippers.add(rightFlipper);
-        flippers.add(leftFlipper);
-
-        keys.add('r');
-        keys.add('t');*/
-
     }
 
     @Override
@@ -115,14 +101,12 @@ public class GizmoballModel extends iModel {
 
                 CollisionDetails cd = timeUntilCollision(ball);
                 double tuc = cd.getTuc();
-
                 if (tuc > moveTime) //no collision
                 {
                     ball = moveBallForTime(ball, moveTime);
                 } else {
                     if (absorberCollision == true && ball.getVelo().y()>0) //collision with an absorber
                     {
-                        playSound(collisionGizmo);
                         ball = moveBallForTime(ball, tuc + moveTime);
                         absorber.addBall(ball);
                         ball.setExactX((((Absorber)absorber).getXCoord2()-.5)*30);
@@ -146,6 +130,7 @@ public class GizmoballModel extends iModel {
 
                         ball= ((Star) star).shootBallOut();
 
+                        ball.calculateSpeed(tuc + moveTime);
 
                         starCollision = false;
                         starShotOut = true;
@@ -158,14 +143,17 @@ public class GizmoballModel extends iModel {
 
                         if(collisionGizmo != null && wallCollision == false)
                         {
+                            ball.calculateSpeed(tuc);
+
                             collisionGizmo.setHit(!collisionGizmo.getHit());
                             if(collisionGizmo.getGizmoConnections()!=null) {
                                 if (!collisionGizmo.getGizmoType().equals("Star"))
-                                    checkConnections(collisionGizmo);
+                                    checkConnections(collisionGizmo, ball);
                             }
 
-
+                            System.out.println(ball.getSpeed());
                             if(ball.getSpeed()!=0) playSound(collisionGizmo);
+
                             switch (collisionGizmo.getID().charAt(0))
                             {
                                 case 'C':
@@ -338,7 +326,7 @@ public class GizmoballModel extends iModel {
         return cd;
     }
 
-    private void getAudio(String path) {
+    public void getAudio(String path) {
         try {
             AudioInputStream stream;
             AudioFormat format;
@@ -360,11 +348,8 @@ public class GizmoballModel extends iModel {
         }
     }
 
-        private void playSound(iGizmo giz){
+    private void playSound(iGizmo giz){
         switch (giz.getGizmoType()){
-            case "Absorber":
-                getAudio("res/clips/laser_cannon.wav");
-                break;
             case "Square":
                 getAudio("res/clips/jump.wav");
                 break;
@@ -581,43 +566,44 @@ public class GizmoballModel extends iModel {
         }
     }
 
-    public void checkConnections(iGizmo gizmo) {
+    public void checkConnections(iGizmo gizmo, Ball ball) {
         //get the collided gizmos id
         if (!collisionGizmo.getID().equals("")) {
-
             //get the triggers
             if(gizmo.getGizmoConnections()==null) return;
             for (int i = 0; i < gizmo.getGizmoConnections().size(); i++) {
                 //set hit to true i.e activate colour
                 getGizmoByID(gizmo.getGizmoConnections().get(i)).setHit(true);
-                checkKeyConnections(getGizmoByID(gizmo.getGizmoConnections().get(i)));
+                checkKeyConnections(getGizmoByID(gizmo.getGizmoConnections().get(i)),ball);
             }
 
 
         }
     }
 
-    public void checkKeyConnections(iGizmo gizmo) {
+    public void checkKeyConnections(iGizmo gizmo, Ball ball) {
         //only check if key press list isn't empty
         if (!keys.isEmpty()) {
             for (int i = 0; i < gizmo.getKeyConnections().size(); i++) {
                 if (keys.get(i).equals(gizmo.getKeyConnections().get(i).charAt(0))) {
                     //get the type of gizmo
                     String gizmoType = gizmo.getGizmoType();
+                    gizmo.setHit(true);
 
                     if (gizmoType.equals("LeftFlipper") || gizmoType.equals("RightFlipper")) {
                         //activate left flipper, need direction
-
-                        //TODO: make the flipper fully rotate and go back, this code is copied from controller stuff and only makes it rotate upwards
-
-                        do {
-                            gizmo.rotate();
-                            this.setiGizmo(gizmo);
-                            this.hasChanged();
-                            this.notifyObservers();
-                        } while (gizmo.getRotationAngle() != 90 & gizmo.getRotationAngle() != 0 & gizmo.getRotationAngle() != -90);
-
-
+                        try {
+                            //we are mimicking someone pressing the key
+                            //yes, it's cheeky
+                            Robot robot = new Robot();
+                            System.out.println(ball.getSpeed());
+                            if(ball.getSpeed()>0){
+                                robot.keyPress(KeyEvent.getExtendedKeyCodeForChar(keys.get(i)));
+                                robot.keyRelease(KeyEvent.getExtendedKeyCodeForChar(keys.get(i)));
+                            }
+                        } catch (AWTException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }

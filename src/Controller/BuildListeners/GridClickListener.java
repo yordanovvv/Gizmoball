@@ -179,6 +179,7 @@ public class GridClickListener implements MouseListener {
                 case "delete":
                     iGizmo removeGimzo = null;
                     for (iGizmo g : m.getGizmos()) {
+                        System.out.println(g.getID());
                         if (g.getXCoord() == gridX && g.getYCoord() == gridY) {
                             System.out.println("clicked on a thing");
                             removeGimzo = g;

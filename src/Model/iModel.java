@@ -47,6 +47,8 @@ public abstract class iModel extends Observable {
     public void addBall(Ball b) {
     }
 
+    public abstract void getAudio(String path);
+
     public abstract boolean connectGizmos(String id, String id2);
 
     public boolean displayID(){
