@@ -29,7 +29,7 @@ public class Star implements iGizmo{
     private final int constant = 30;
 
     private int rotationAngle = 0;
-    private boolean down = false, hit, stopped = false;
+    private boolean down = false, hit, stopped = true;
 
     private int
             polyPoint1_x ,polyPoint1_y ,
@@ -135,14 +135,17 @@ public class Star implements iGizmo{
         //this is where the star rotates for a random amount of times and shoots the ball out ;)
         if (!balls.isEmpty()) {
             Ball fireBall = balls.remove(0);
-
             Random rand = new Random(System.currentTimeMillis());
 
             stopRotation();
             spinStarWithLimiter(rand.nextInt((80-20)+1 + 20),20);
-
             Vect shootUp = new Vect(10, -500);
 
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             fireBall.setExactX((lines.get(0).p1().x() + lines.get(1).p2().x() + fireBall.getRadius()) / 2 );
             fireBall.setExactY((lines.get(0).p1().y() + lines.get(1).p2().y() + fireBall.getRadius()) / 2 - 5);
             fireBall.setVelo(shootUp);

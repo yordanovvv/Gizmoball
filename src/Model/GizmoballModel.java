@@ -5,6 +5,7 @@ import physics.Geometry;
 import physics.LineSegment;
 import physics.Vect;
 import javax.sound.sampled.*;
+import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -144,6 +145,7 @@ public class GizmoballModel extends iModel {
                         ball.setVelo(new Vect(0,0));
 
                         ball= ((Star) star).shootBallOut();
+
 
                         starCollision = false;
                         starShotOut = true;
