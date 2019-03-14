@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GizmoballModel extends iModel {
 
@@ -40,6 +41,20 @@ public class GizmoballModel extends iModel {
         absorber = new Absorber("A1", 0, 18, 20, 20);
         star = new Star("init_star",0,0);
         gizmos.add(absorber);
+
+        Star star = new Star("St1",5,5);
+        gizmos.add(star);
+       /* RightFlipper rightFlipper = new RightFlipper("R1", 6, 7);
+        gizmos.add(rightFlipper);
+
+        LeftFlipper leftFlipper = new LeftFlipper("L1", 8, 7);
+        gizmos.add(leftFlipper);
+        flippers.add(rightFlipper);
+        flippers.add(leftFlipper);
+
+        keys.add('r');
+        keys.add('t');*/
+
     }
 
     @Override
@@ -101,12 +116,14 @@ public class GizmoballModel extends iModel {
 
                 CollisionDetails cd = timeUntilCollision(ball);
                 double tuc = cd.getTuc();
+
                 if (tuc > moveTime) //no collision
                 {
                     ball = moveBallForTime(ball, moveTime);
                 } else {
                     if (absorberCollision == true && ball.getVelo().y()>0) //collision with an absorber
                     {
+                        //playSound(collisionGizmo);
                         ball = moveBallForTime(ball, tuc + moveTime);
                         absorber.addBall(ball);
                         ball.setExactX((((Absorber)absorber).getXCoord2()-.5)*30);
@@ -195,50 +212,101 @@ public class GizmoballModel extends iModel {
         return ball;
     }
 
+    boolean[][] spaces = new boolean[20][20];
+
+    public void setSpaces(int gridX, int gridY, boolean val, iGizmo g){
+        switch(g.getGizmoType()){
+            case "Square":
+                spaces[gridX][gridY] = val;
+                break;
+            case "Circle":
+                spaces[gridX][gridY] = val;
+                break;
+            case "Triangle":
+                spaces[gridX][gridY] = val;
+                break;
+            case "RightFlipper":
+                spaces[gridX][gridY] = val;
+                spaces[gridX][gridY+1] = val;
+                spaces[gridX-1][gridY] = val;
+                spaces[gridX-1][gridY+1] = val;
+                break;
+            case "LeftFlipper":
+                spaces[gridX][gridY] = val;
+                spaces[gridX][gridY+1] = val;
+                spaces[gridX+1][gridY] = val;
+                spaces[gridX+1][gridY+1] = val;
+                break;
+            case "Star":
+                spaces[gridX][gridY] = val;
+                spaces[gridX][gridY+1] = val;
+                spaces[gridX+1][gridY] = val;
+                spaces[gridX+1][gridY+1] = val;
+                break;
+            default:
+                spaces[gridX][gridY] = val; //this might break it?
+        }
+
+
+
+
+        spaces[gridX][gridY] = val;
+    }
+
     public boolean checkSpace(int gridX, int gridY){
+        return spaces[gridX][gridY];
+        /*if (spaces[gridX][gridY]){
+            return true;
+        }
+        return false;
+
+
+        /*
+
+
         for (iGizmo g : getGizmos()){
-            //Check area of right flipper
-            if (g.getGizmoType() == "RightFlipper"){
-                if ((g.getXCoord()==gridX && g.getYCoord()==gridY)
-                        || (g.getXCoord()==gridX+1 && g.getYCoord()==gridY)
-                        || (g.getXCoord()==gridX && g.getYCoord()==gridY-1)
-                        || (g.getXCoord()==gridX+1 && g.getYCoord()==gridY-1)){
-                    return false;
-                }
-            }
-            //Check area of left flipper
-            if (g.getGizmoType() == "LeftFlipper"){
-                if ((g.getXCoord()==gridX && g.getYCoord()==gridY)
-                        || (g.getXCoord()==gridX-1 && g.getYCoord()==gridY)
-                        || (g.getXCoord()==gridX && g.getYCoord()==gridY-1)
-                        || (g.getXCoord()==gridX-1 && g.getYCoord()==gridY-1)){
-                    return false;
-                }
-            }
-            //Check area of the absorber
-            if (g.getGizmoType() == "Absorber"){
-                if (gridX>=g.getXCoord() && gridX<=g.getXCoord()+g.getWidth()
-                        && (gridY>=g.getYCoord() && gridY<=g.getYCoord()+g.getHeight())){
-                    return false;
-                }
-            }
 
-            //Check area of the star
-            if (g.getGizmoType() == "Star"){
-                if ((g.getXCoord() == gridX && g.getYCoord()==gridY)
-                        || (g.getXCoord() == gridX-1 && g.getYCoord()==gridY)
-                        || (g.getXCoord() == gridX && g.getYCoord()==gridY-1)
-                        || (g.getXCoord() == gridX-1 && g.getYCoord()==gridY-1)){
-                    return false;
-                }
-            }
-
-            //Check for any other 1 tile sized gizmo
-            if (g.getXCoord() == gridX && g.getYCoord()==gridY){
+        //Check area of right flipper
+        if (g.getGizmoType() == "RightFlipper"){
+            if ((g.getXCoord()==gridX && g.getYCoord()==gridY)
+                    || (g.getXCoord()==gridX+1 && g.getYCoord()==gridY)
+                    || (g.getXCoord()==gridX && g.getYCoord()==gridY-1)
+                    || (g.getXCoord()==gridX+1 && g.getYCoord()==gridY-1)){
                 return false;
             }
         }
-        return true;
+        //Check area of left flipper
+        if (g.getGizmoType() == "LeftFlipper"){
+            if ((g.getXCoord()==gridX && g.getYCoord()==gridY)
+                    || (g.getXCoord()==gridX-1 && g.getYCoord()==gridY)
+                    || (g.getXCoord()==gridX && g.getYCoord()==gridY-1)
+                    || (g.getXCoord()==gridX-1 && g.getYCoord()==gridY-1)){
+                return false;
+            }
+        }
+        //Check area of the absorber
+        if (g.getGizmoType() == "Absorber"){
+            if (gridX>=g.getXCoord() && gridX<=g.getXCoord()+g.getWidth()
+                    && (gridY>=g.getYCoord() && gridY<=g.getYCoord()+g.getHeight())){
+                return false;
+            }
+        }
+        //Check area of the star
+        if (g.getGizmoType() == "Star"){
+            if ((g.getXCoord() == gridX && g.getYCoord()==gridY)
+                    || (g.getXCoord() == gridX-1 && g.getYCoord()==gridY)
+                    || (g.getXCoord() == gridX && g.getYCoord()==gridY-1)
+                    || (g.getXCoord() == gridX-1 && g.getYCoord()==gridY-1)){
+                return false;
+            }
+        }
+        //Check for any other 1 tile sized gizmo
+        if (g.getXCoord() == gridX && g.getYCoord()==gridY){
+            //return false;
+        }
+
+        }*/
+        //return true;
     }
 
     private CollisionDetails timeUntilCollision(Ball ball) {
@@ -348,7 +416,7 @@ public class GizmoballModel extends iModel {
         }
     }
 
-    private void playSound(iGizmo giz){
+        private void playSound(iGizmo giz){
         switch (giz.getGizmoType()){
             case "Square":
                 getAudio("res/clips/jump.wav");
@@ -458,6 +526,8 @@ public class GizmoballModel extends iModel {
             String[] inputStream;
             while((line = bufferedReader.readLine()) != null) {
                 inputStream = line.split(" ");
+                int gizXCoord =0;
+                int gizYCoord =0;
                 switch(inputStream[0]) {
                     case "Ball":
                         Ball ball = new Ball(inputStream[1], Double.parseDouble(inputStream[2]), Double.parseDouble(inputStream[3]), Double.parseDouble(inputStream[4]), Double.parseDouble(inputStream[5]));
@@ -468,28 +538,46 @@ public class GizmoballModel extends iModel {
                         gizmos.add(abs);
                         break;
                     case "Square":
-                        Square square = new Square(inputStream[1], Integer.parseInt(inputStream[2]), Integer.parseInt(inputStream[3]));
+                        gizXCoord = Integer.parseInt(inputStream[2]);
+                        gizYCoord = Integer.parseInt(inputStream[3]);
+                        Square square = new Square(inputStream[1], gizXCoord, gizYCoord);
                         gizmos.add(square);
+                        setSpaces(gizXCoord, gizYCoord, true, square);
                         break;
                     case "Circle":
-                        GizmoCircle circle = new GizmoCircle(inputStream[1], Integer.parseInt(inputStream[2]), Integer.parseInt(inputStream[3]), Double.parseDouble(inputStream[4]));
+                        gizXCoord = Integer.parseInt(inputStream[2]);
+                        gizYCoord = Integer.parseInt(inputStream[3]);
+                        GizmoCircle circle = new GizmoCircle(inputStream[1], gizXCoord, gizYCoord, Double.parseDouble(inputStream[4]));
                         gizmos.add(circle);
+                        setSpaces(gizXCoord, gizYCoord, true, circle);
                         break;
                     case "Triangle":
-                        Triangle triangle = new Triangle(inputStream[1], Integer.parseInt(inputStream[2]), Integer.parseInt(inputStream[3]));
+                        gizXCoord = Integer.parseInt(inputStream[2]);
+                        gizYCoord = Integer.parseInt(inputStream[3]);
+                        Triangle triangle = new Triangle(inputStream[1], gizXCoord, gizYCoord);
                         gizmos.add(triangle);
+                        setSpaces(gizXCoord, gizYCoord, true, triangle);
                         break;
                     case "RightFlipper":
-                        RightFlipper rightFlipper = new RightFlipper(inputStream[1], Integer.parseInt(inputStream[2]), Integer.parseInt(inputStream[3]));
+                        gizXCoord = Integer.parseInt(inputStream[2]);
+                        gizYCoord = Integer.parseInt(inputStream[3]);
+                        RightFlipper rightFlipper = new RightFlipper(inputStream[1], gizXCoord, gizYCoord);
                         gizmos.add(rightFlipper);
+                        setSpaces(gizXCoord, gizYCoord, true, rightFlipper);
                         break;
                     case "LeftFlipper":
-                        LeftFlipper leftFlipper = new LeftFlipper(inputStream[1], Integer.parseInt(inputStream[2]), Integer.parseInt(inputStream[3]));
+                        gizXCoord = Integer.parseInt(inputStream[2]);
+                        gizYCoord = Integer.parseInt(inputStream[3]);
+                        LeftFlipper leftFlipper = new LeftFlipper(inputStream[1], gizXCoord, gizYCoord);
                         gizmos.add(leftFlipper);
+                        setSpaces(gizXCoord, gizYCoord, true, leftFlipper);
                         break;
                     case "Star":
-                        Star star = new Star(inputStream[1], Integer.parseInt(inputStream[2]), Integer.parseInt(inputStream[3]));
+                        gizXCoord = Integer.parseInt(inputStream[2]);
+                        gizYCoord = Integer.parseInt(inputStream[3]);
+                        Star star = new Star(inputStream[1], gizXCoord, gizYCoord);
                         gizmos.add(star);
+                        setSpaces(gizXCoord, gizYCoord, true, star);
                         break;
                     case "Rotate":
                         for(iGizmo gizmo : gizmos) {

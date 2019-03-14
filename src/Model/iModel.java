@@ -58,4 +58,6 @@ public abstract class iModel extends Observable {
     public void setDisplayID(Boolean display){
         displayID = display;
     }
+
+    public abstract void setSpaces(int gridX, int gridY, boolean val, iGizmo g);
 }

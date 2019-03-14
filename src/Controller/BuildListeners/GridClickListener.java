@@ -46,12 +46,12 @@ public class GridClickListener implements MouseListener {
         gridX = e.getX()/GRID_SIZE;
         gridY = e.getY()/GRID_SIZE;
 
-        boolean canPlace = true; // = m.checkSpace(gridX, gridY);
+        boolean canPlace;
         if (gridX>=20 || gridY>=20){
             canPlace = false;
+        } else {
+            canPlace = !m.checkSpace(gridX, gridY);
         }
-
-        System.out.println(gridX + " | " + gridY);
 
         iGizmo giz = null;
 
@@ -77,7 +77,11 @@ public class GridClickListener implements MouseListener {
                         }
                     }
                     giz = new GizmoCircle("C" + (bigId+1), gridX, gridY, rad);
-                    m.addGizmo(giz);
+                    System.out.println("-" + m.checkSpace(gridX, gridY));
+                    if (!m.checkSpace(gridX, gridY)){
+                        m.setSpaces(gridX, gridY, true, giz);
+                        m.addGizmo(giz);
+                    }
                     break;
                 case "square":
                     for (iGizmo g : m.getGizmos()) {
@@ -90,7 +94,10 @@ public class GridClickListener implements MouseListener {
                         }
                     }
                     giz = new Square("S" + (bigId+1), gridX, gridY);
-                    m.addGizmo(giz);
+                    if (!m.checkSpace(gridX, gridY)){
+                        m.setSpaces(gridX, gridY, true, giz);
+                        m.addGizmo(giz);
+                    }
                     break;
                 case "triangle":
                     for (iGizmo g : m.getGizmos()) {
@@ -103,7 +110,10 @@ public class GridClickListener implements MouseListener {
                         }
                     }
                     giz = new Triangle("T" + (bigId+1), gridX, gridY);
-                    m.addGizmo(giz);
+                    if (!m.checkSpace(gridX, gridY)){
+                        m.setSpaces(gridX, gridY, true, giz);
+                        m.addGizmo(giz);
+                    }
                     break;
                 case "rightFlipper":
                     for (iGizmo g : m.getGizmos()) {
@@ -118,7 +128,11 @@ public class GridClickListener implements MouseListener {
                         }
                     }
                     giz = new RightFlipper("RF" + (bigId+1), gridX, gridY);
-                    m.addGizmo(giz);
+                    if (!m.checkSpace(gridX, gridY)  && (!m.checkSpace(gridX, gridY+1)
+                    &&(!m.checkSpace(gridX-1, gridY+1))&&(!m.checkSpace(gridX-1, gridY)))){
+                        m.setSpaces(gridX, gridY, true, giz);
+                        m.addGizmo(giz);
+                    }
                     break;
                 case "leftFlipper":
                     for (iGizmo g : m.getGizmos()) {
@@ -131,7 +145,11 @@ public class GridClickListener implements MouseListener {
                         }
                     }
                     giz = new LeftFlipper("LF" + (bigId+1), gridX, gridY);
-                    //m.addGizmo(giz);
+                    if (!m.checkSpace(gridX, gridY) && !m.checkSpace(gridX, gridY+1)
+                            && !m.checkSpace(gridX+1, gridY) && !m.checkSpace(gridX+1, gridY+1)){
+                        m.setSpaces(gridX, gridY, true, giz);
+                        m.addGizmo(giz);
+                    }
                     break;
                 case "star":
                     for (iGizmo g : m.getGizmos()) {
@@ -144,7 +162,11 @@ public class GridClickListener implements MouseListener {
                         }
                     }
                     giz = new Star("ST" + (bigId+1), gridX, gridY);
-                    m.addGizmo(giz);
+                    if (!m.checkSpace(gridX, gridY) && !m.checkSpace(gridX, gridY+1)
+                            && !m.checkSpace(gridX+1, gridY) && !m.checkSpace(gridX+1, gridY+1)){
+                        m.setSpaces(gridX, gridY, true, giz);
+                        m.addGizmo(giz);
+                    }
                     break;
                 case "move":
                     if(moveGizmo != null) {
@@ -156,9 +178,6 @@ public class GridClickListener implements MouseListener {
                 default:
                     break;
                 //---------------------------------
-            }
-            if (m.checkSpace(gridX, gridY) && giz != null){
-                m.addGizmo(giz);
             }
         } else {
             //TODO : Move this code into a seperate class???
@@ -179,10 +198,9 @@ public class GridClickListener implements MouseListener {
                 case "delete":
                     iGizmo removeGimzo = null;
                     for (iGizmo g : m.getGizmos()) {
-                        System.out.println(g.getID());
                         if (g.getXCoord() == gridX && g.getYCoord() == gridY) {
-                            System.out.println("clicked on a thing");
                             removeGimzo = g;
+                            m.setSpaces(gridX, gridY, false, g);
                         }
                     }
                     m.removeGizmo(removeGimzo);
@@ -214,10 +232,9 @@ public class GridClickListener implements MouseListener {
             System.out.println("Absorber start : " + start_gridX + " | " + start_gridY);
             System.out.println("Absorber end : " + end_gridX + " | " + end_gridY);
             //create absorber here!
-            //TODO : Check overlap
             //Functionality for more than one absorber??
             //if (m.getAbsorber()==null) {
-
+            //TODO : set spaces and check overlap  of other gizmos
                 Absorber abs = new Absorber("A", start_gridX, start_gridY, end_gridX+1, end_gridY+1);
                 m.addGizmo(abs);
             //} else {
