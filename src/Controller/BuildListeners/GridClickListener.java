@@ -30,7 +30,7 @@ public class GridClickListener implements MouseListener {
         this.board = board;
 
         m = board.getGizModel();
-        moveGizmo = null;
+      //  moveGizmo = null;
 
     }
 
@@ -46,7 +46,7 @@ public class GridClickListener implements MouseListener {
         gridX = e.getX()/GRID_SIZE;
         gridY = e.getY()/GRID_SIZE;
 
-        boolean canPlace = true; // = m.checkSpace(gridX, gridY);
+        boolean canPlace = m.checkSpace(gridX, gridY);
         if (gridX>=20 || gridY>=20){
             canPlace = false;
         }
@@ -167,6 +167,7 @@ public class GridClickListener implements MouseListener {
                     for (iGizmo g : m.getGizmos()) {
                         if (g.getXCoord() == gridX && g.getYCoord() == gridY) {
                             if (g.getGizmoType() == "Triangle") {
+                                System.out.println("hi");
                                 g.rotate();
                             }
                         }

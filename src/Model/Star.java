@@ -157,6 +157,13 @@ public class Star implements iGizmo{
     public int getmiddleXCoord(){return (XCoord+1);}
 
     public int getmiddleYCoord(){return (YCoord+1);}
+
+    public Vect getCenter(){
+
+        //Math.toRadians(angle), x + 30, y + 30);
+        return circles.get(0).getCenter();
+    }
+
     //--------------------------------------------------------
     //               INTERFACE METHODS
     @Override
