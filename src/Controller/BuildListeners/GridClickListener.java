@@ -62,8 +62,6 @@ public class GridClickListener implements MouseListener {
         if (canPlace) {
             switch (selected) {
                 case "ball":
-                    //Would prefer this here, but can also have it when BALL button clicked - C
-                    //Hope adding ball works fine like that -L
                     PlaceBallPopup compPop = new PlaceBallPopup(m, gridX, gridY);
                     break;
                 case "circle":
@@ -170,8 +168,13 @@ public class GridClickListener implements MouseListener {
                     break;
                 case "move":
                     if(moveGizmo != null) {
+                        //clear spaces gizmo was at
+                        m.setSpaces(moveGizmo.getXCoord(), moveGizmo.getYCoord(), false, moveGizmo);
+                        //move gizmo
                         moveGizmo.setXCoord(gridX);
                         moveGizmo.setYCoord(gridY);
+                        //set spaces of new position
+                        m.setSpaces(gridX, gridY, true, moveGizmo);
                         moveGizmo = null;
                     }
                     break;
@@ -191,10 +194,6 @@ public class GridClickListener implements MouseListener {
                         }
                     }
                     break;
-                case "connect":
-                    break;
-                case "disconnect":
-                    break;
                 case "delete":
                     iGizmo removeGimzo = null;
                     for (iGizmo g : m.getGizmos()) {
@@ -209,6 +208,7 @@ public class GridClickListener implements MouseListener {
                     for (iGizmo g : m.getGizmos()) {
                         if (g.getXCoord() == gridX && g.getYCoord() == gridY) {
                             moveGizmo = g;
+                            System.out.println("clicked on " + moveGizmo.getID());
                         }
                     }
                     break;
