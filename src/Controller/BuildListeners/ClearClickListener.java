@@ -17,6 +17,15 @@ public class ClearClickListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         m.getGizmos().removeAll(m.getGizmos());
+
+        for (int i=0; i<20; i++){
+            for (int j=0; j<20; j++){
+                try {
+                    m.setSpaces(i, j, false, null);
+                }catch(NullPointerException npe){} //this is fine
+            }
+        }
+
     }
 
     @Override
