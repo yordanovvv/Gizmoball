@@ -9,6 +9,7 @@ import View.iMainFrame;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 
 public class ChangeModeListener implements ActionListener {
@@ -35,6 +36,7 @@ public class ChangeModeListener implements ActionListener {
             }
         }else {
             view.switchModes(1);
+            model.saveGame((new File("game.giz")));
         }
     }
 }

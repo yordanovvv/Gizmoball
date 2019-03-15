@@ -6,6 +6,7 @@ import View.MainFrame;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -60,7 +61,6 @@ public class PlayModeListener implements ActionListener {
                     break;
                 case "Pause":
                     //gModel.getRightFlipListener().setIsStopped(true);
-
                     for(iGizmo g:stars){
                         Star star = (Star) g;
                         star.stopRotation();
@@ -88,6 +88,7 @@ public class PlayModeListener implements ActionListener {
                     break;
                 case "Restart":
                     //Reload file?
+                    gModel.loadGame((new File("game.giz")));
                     break;
             }
             mf.setFocusable(true);
