@@ -48,6 +48,7 @@ public class GizmoballModel extends iModel {
 
         LeftFlipper leftFlipper = new LeftFlipper("L1", 10, 10);
         gizmos.add(leftFlipper);
+
         flippers.add(rightFlipper);
         flippers.add(leftFlipper);
 
@@ -81,18 +82,6 @@ public class GizmoballModel extends iModel {
 
     @Override
     public ArrayList<Character> getKeys(){
-        ArrayList<Character> newList = new ArrayList<>();
-        for(iGizmo gizmo : gizmos) {
-            if(gizmo.getKeyConnections() != null) {
-                for(String key : gizmo.getKeyConnections()) {
-                    if(key != null) {
-                        newList.add(key.charAt(0));
-                    }
-                }
-            }
-
-        }
-        keys = newList;
         return keys;
     }
 
@@ -744,7 +733,7 @@ public class GizmoballModel extends iModel {
 
                     if (gizmoType.equals("LeftFlipper") || gizmoType.equals("RightFlipper")) {
                         //activate left flipper, need direction
-                        try {
+                        /*try {
                             //we are mimicking someone pressing the key
                             //yes, it's cheeky
                             Robot robot = new Robot();
@@ -755,7 +744,7 @@ public class GizmoballModel extends iModel {
                             }
                         } catch (AWTException e) {
                             e.printStackTrace();
-                        }
+                        }*/
                     }
                 }
             }
@@ -793,9 +782,10 @@ public class GizmoballModel extends iModel {
                     }else if(gizmo.getGizmoType().equals("LeftFlipper")){
                         grid[x + i][y + j] = false;
                     }else if(gizmo.getGizmoType().equals("Star")){
-                        //if(i>=height/2)i*=-1;
-                        //if(j>=width/2)j*=-1;
-                        grid[x + i][y + j] = false;
+                        int w = i, h = j;
+                        if(i>2)w=-1;
+                        if(j>2)h=-1;
+                        grid[x + w][y + h] = false;
                     }else{
                         grid[x + i][y + j] = false;
                     }

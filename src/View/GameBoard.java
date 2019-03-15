@@ -21,7 +21,7 @@ public class GameBoard extends JPanel implements Observer{
     iModel m;
     ArrayList<Ball> b;
     GridClickListener gameBoardListener;
-
+    private boolean displaySpace =false;
     public GameBoard(String mode, iModel m) {
         this.m = m;
         b = m.getBalls();
@@ -67,18 +67,20 @@ public class GameBoard extends JPanel implements Observer{
      */
    public void paintComponent (Graphics g) {
         super.paintComponent(g);
-        /*boolean[][] grid = m.getSpaceGrid();
-        for(int i = 0; i <20 ;i++){
-           for (int j = 0; j < 20; j++) {
-               boolean isFree = grid[i][j];
-               if(isFree){
-                   g.setColor(new Color(77, 104, 39));
-               }else {
-                   g.setColor(new Color(104, 17, 27));
-               }
-               g.fillRect(i*30, j*30,30,30);
-           }
-        }*/
+        if(displaySpace) {
+            boolean[][] grid = m.getSpaceGrid();
+            for (int i = 0; i < 20; i++) {
+                for (int j = 0; j < 20; j++) {
+                    boolean isFree = grid[i][j];
+                    if (isFree) {
+                        g.setColor(new Color(37, 52, 21));
+                    } else {
+                        g.setColor(new Color(52, 9, 14));
+                    }
+                    g.fillRect(i * 30, j * 30, 30, 30);
+                }
+            }
+        }
 
 
        Wall w = m.getWalls();
@@ -317,5 +319,9 @@ public class GameBoard extends JPanel implements Observer{
         for (int i = 0; i <=600; i=i+(30)) {
             g.drawLine(0,i,600,i);
         }
+    }
+
+    public void setDisplaySpace(boolean displaySpace) {
+        this.displaySpace = displaySpace;
     }
 }

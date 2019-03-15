@@ -53,7 +53,6 @@ public class FlipperKeyListener implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println("HI");
         if(!keypressed) { //if key not pressed
                 char key = keys;
                 if (e.getKeyChar() == key) { //matches character
