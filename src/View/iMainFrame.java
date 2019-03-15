@@ -9,4 +9,6 @@ public interface iMainFrame {
     public int generatePopUp(String title, String msg);
 
     public void quit();
+
+    public void setGridVisability(boolean visability);
 }

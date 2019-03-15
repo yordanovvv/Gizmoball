@@ -34,9 +34,11 @@ public class ChangeModeListener implements ActionListener {
                     star.stopRotation();
                 }
             }
+            view.setGridVisability(true);
         }else {
             view.switchModes(1);
             model.saveGame((new File("game.giz")));
+            view.setGridVisability(false);
         }
     }
 }
