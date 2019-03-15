@@ -61,4 +61,6 @@ public abstract class iModel extends Observable {
 
     public abstract void setSpaces(int gridX, int gridY, boolean val, iGizmo g);
 
+    public abstract boolean[][] getSpaceGrid();
+
 }

@@ -55,9 +55,7 @@ public class PlayMode extends JPanel {
             if( model.getKeys().size() > i) {
                 if(model.getKeys().get(i) != null) {
                     Character key = model.getKeys().get(i);
-
                     System.out.println(giz.getID());
-
                     mainFrame.addKeyListener(new FlipperKeyListener(model, key, giz));
                 }
             }

@@ -67,8 +67,21 @@ public class GameBoard extends JPanel implements Observer{
      */
    public void paintComponent (Graphics g) {
         super.paintComponent(g);
+        /*boolean[][] grid = m.getSpaceGrid();
+        for(int i = 0; i <20 ;i++){
+           for (int j = 0; j < 20; j++) {
+               boolean isFree = grid[i][j];
+               if(isFree){
+                   g.setColor(new Color(77, 104, 39));
+               }else {
+                   g.setColor(new Color(104, 17, 27));
+               }
+               g.fillRect(i*30, j*30,30,30);
+           }
+        }*/
 
-        Wall w = m.getWalls();
+
+       Wall w = m.getWalls();
         w.getXCoord();
         g.setColor(Color.MAGENTA);
         g.drawLine(w.getXCoord()*30,w.getYCoord()*30,w.getXCoord2()*30,w.getYCoord()*30);
@@ -124,7 +137,6 @@ public class GameBoard extends JPanel implements Observer{
            int width = (int) (2 * b.getRadius());
            paintBall(g,p, q, width);
        }
-
        repaint();
     }
 
