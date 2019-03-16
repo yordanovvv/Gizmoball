@@ -162,10 +162,12 @@ public class GridClickListener implements MouseListener {
                         }
                     }
                     giz = new Star("ST" + (bigId+1), gridX, gridY);
-                    if (!m.checkSpace(gridX, gridY) && !m.checkSpace(gridX, gridY+1)
-                            && !m.checkSpace(gridX+1, gridY) && !m.checkSpace(gridX+1, gridY+1)){
-                        m.setSpaces(gridX, gridY, true, giz);
-                        m.addGizmo(giz);
+                    if(gridX+2<20 && gridY+2<20 && gridX-1>=0 && gridY-1>=0) {
+                        if (!m.checkSpace(gridX, gridY) && !m.checkSpace(gridX, gridY + 1)
+                                && !m.checkSpace(gridX + 1, gridY) && !m.checkSpace(gridX + 1, gridY + 1)) {
+                            m.setSpaces(gridX, gridY, true, giz);
+                            m.addGizmo(giz);
+                        }
                     }
                     break;
                 case "move":

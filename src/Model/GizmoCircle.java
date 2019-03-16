@@ -149,23 +149,29 @@ public class GizmoCircle implements iGizmo {
 
     @Override
     public ArrayList<String> getGizmoConnections() {
-        return null;
+        return gizmoConnections;
     }
 
     @Override
     public ArrayList<String> getKeyConnections() {
-        return null;
+        return keyConnections;
     }
 
     @Override
     public void removeGizmoConnection(String id) {
+        int i =0;
+        for (String giz: gizmoConnections){
+            if(giz.equals(id)){
+                gizmoConnections.remove(i);
+            }
+            i++;
+        }
 
     }
 
     @Override
     public void removeKeyConnection() {
-
-
+        keyConnections = new ArrayList<>();
     }
 
     @Override

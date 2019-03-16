@@ -72,10 +72,10 @@ public class GameBoard extends JPanel implements Observer{
             for (int i = 0; i < 20; i++) {
                 for (int j = 0; j < 20; j++) {
                     boolean isFree = grid[i][j];
-                    if (isFree) {
-                        g.setColor(new Color(37, 52, 21));
+                    if (!isFree) {
+                        g.setColor(new Color(74, 99, 37, 188));
                     } else {
-                        g.setColor(new Color(52, 9, 14));
+                        g.setColor(new Color(81, 14, 22, 171));
                     }
                     g.fillRect(i * 30, j * 30, 30, 30);
                 }
@@ -312,7 +312,7 @@ public class GameBoard extends JPanel implements Observer{
     //--------------------------------------------------------
     //                    GRID CONTROLS
     public void paintGrid(Graphics g) {
-        g.setColor(new Color(118, 170, 170, 255));
+        g.setColor(new Color(140, 201, 201, 255));
         for (int i = 0; i <= 600; i=i+(30)) {
             g.drawLine(i,0,i,600);
         }
