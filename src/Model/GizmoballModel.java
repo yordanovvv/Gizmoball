@@ -45,7 +45,7 @@ public class GizmoballModel extends iModel {
         star = new Star("init_star",0,0);
         gizmos.add(absorber);
 
-        spaces = this.getSpaceGrid();
+        //spaces = this.getSpaceGrid();
 
        RightFlipper rightFlipper = new RightFlipper("R1", 5, 10);
         gizmos.add(rightFlipper);
@@ -212,6 +212,15 @@ public class GizmoballModel extends iModel {
         return ball;
     }
 
+    //Clears spaces, avoids NullPointer when clearing spaces
+    public void wipeSpaces(){
+        for (int i=0; i<20; i++){
+            for (int j=0; j<20; j++){
+               spaces[i][j] = false;
+            }
+        }
+    }
+
     public void setSpaces(int gridX, int gridY, boolean val, iGizmo g){
         if(gridX>=20)return;
         if(gridY>=20)return;
@@ -242,76 +251,44 @@ public class GizmoballModel extends iModel {
                 spaces[gridX+1][gridY+1] = val;
                 break;
             case "Star":
-                if(gridX>18)return;
-                if(gridY>18)return;
                 spaces[gridX][gridY] = val;
                 spaces[gridX][gridY+1] = val;
+                spaces[gridX][gridY+2] = val;
+
                 spaces[gridX+1][gridY] = val;
+                spaces[gridX+2][gridY] = val;
+
                 spaces[gridX+1][gridY+1] = val;
+                spaces[gridX+2][gridY+1] = val;
+                spaces[gridX+1][gridY+2] = val;
+                spaces[gridX+2][gridY+2] = val;
+
+                spaces[gridX-1][gridY-1] = val;
+                spaces[gridX-1][gridY] = val;
+                spaces[gridX-1][gridY+1] = val;
+                spaces[gridX-1][gridY+2] = val;
+
+                spaces[gridX][gridY-1] = val;
+                spaces[gridX+1][gridY-1] = val;
+                spaces[gridX+2][gridY-1] = val;
+                //if(gridX>18)return;
+                //if(gridY>18)return;
+                break;
+            case "Absorber":
+
                 break;
             default:
                 spaces[gridX][gridY] = val; //this might break it?
         }
+    }
 
-
-        spaces[gridX][gridY] = val;
+    public boolean[][] getSpaces(){
+        return spaces;
     }
 
     public boolean checkSpace(int gridX, int gridY){
         if(gridX>=20|gridY>=20)return false;
         return spaces[gridX][gridY];
-        /*if (spaces[gridX][gridY]){
-            return true;
-        }
-        return false;
-
-
-        /*
-
-
-        for (iGizmo g : getGizmos()){
-
-        //Check area of right flipper
-        if (g.getGizmoType() == "RightFlipper"){
-            if ((g.getXCoord()==gridX && g.getYCoord()==gridY)
-                    || (g.getXCoord()==gridX+1 && g.getYCoord()==gridY)
-                    || (g.getXCoord()==gridX && g.getYCoord()==gridY-1)
-                    || (g.getXCoord()==gridX+1 && g.getYCoord()==gridY-1)){
-                return false;
-            }
-        }
-        //Check area of left flipper
-        if (g.getGizmoType() == "LeftFlipper"){
-            if ((g.getXCoord()==gridX && g.getYCoord()==gridY)
-                    || (g.getXCoord()==gridX-1 && g.getYCoord()==gridY)
-                    || (g.getXCoord()==gridX && g.getYCoord()==gridY-1)
-                    || (g.getXCoord()==gridX-1 && g.getYCoord()==gridY-1)){
-                return false;
-            }
-        }
-        //Check area of the absorber
-        if (g.getGizmoType() == "Absorber"){
-            if (gridX>=g.getXCoord() && gridX<=g.getXCoord()+g.getWidth()
-                    && (gridY>=g.getYCoord() && gridY<=g.getYCoord()+g.getHeight())){
-                return false;
-            }
-        }
-        //Check area of the star
-        if (g.getGizmoType() == "Star"){
-            if ((g.getXCoord() == gridX && g.getYCoord()==gridY)
-                    || (g.getXCoord() == gridX-1 && g.getYCoord()==gridY)
-                    || (g.getXCoord() == gridX && g.getYCoord()==gridY-1)
-                    || (g.getXCoord() == gridX-1 && g.getYCoord()==gridY-1)){
-                return false;
-            }
-        }
-        //Check for any other 1 tile sized gizmo
-        if (g.getXCoord() == gridX && g.getYCoord()==gridY){
-            //return false;
-        }
-
-        }*/
-        //return true;
     }
 
     private CollisionDetails timeUntilCollision(Ball ball) {
@@ -606,6 +583,8 @@ public class GizmoballModel extends iModel {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             String line;
             String[] inputStream;
+            //wipe all previous tiles
+            wipeSpaces();
             while((line = bufferedReader.readLine()) != null) {
                 inputStream = line.split(" ");
                 int gizXCoord =0;
@@ -694,7 +673,7 @@ public class GizmoballModel extends iModel {
             System.out.println(gizmo);
         }
 
-        spaces = getSpaceGrid();
+        //spaces = getSpaceGrid();
 
         this.hasChanged();
         this.notifyObservers();
@@ -793,6 +772,7 @@ public class GizmoballModel extends iModel {
         }
     }
 
+    /*
     public boolean[][] getSpaceGrid(){
         boolean[][] grid = new boolean[20][20];
 
@@ -836,9 +816,7 @@ public class GizmoballModel extends iModel {
                                 grid[x + w][y + h] = true;
                             }
                         } else {
-
                             grid[x + i][y + j] = true;
-
                         }
                     }
                 }
@@ -847,6 +825,7 @@ public class GizmoballModel extends iModel {
         }
         return grid;
     }
+    */
 
     //TODO need to decide if player can remove all connections or specific ones
 

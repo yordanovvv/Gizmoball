@@ -66,14 +66,14 @@ public class GizmoCircle implements iGizmo {
 
     @Override
     public void setXCoord(int x) {
-        this.XCoord=XCoord;
+        this.XCoord=x;
 
     }
 
     @Override
     public void setYCoord(int y) {
 
-        this.YCoord=YCoord;
+        this.YCoord=y;
     }
     @Override
     public void generateCircles() {
