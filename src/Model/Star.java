@@ -99,7 +99,7 @@ public class Star implements iGizmo{
     }
 
     public void startStarRotation(){
-        spinStar(1000/5);
+        spinStar(200);
     }
 
     private void spinStar(int delay){
@@ -194,17 +194,17 @@ public class Star implements iGizmo{
     public void generateCircles() {
 
 
-        Circle poly1 = new Circle(polyPoint1_x ,polyPoint1_y,1);
-        Circle poly2 = new Circle(polyPoint2_x,polyPoint2_y,1);
-        Circle poly3 = new Circle(polyPoint3_x,polyPoint3_y,1);
-        Circle poly4 = new Circle(polyPoint4_x,polyPoint4_y,1);
-        Circle poly5 = new Circle(polyPoint5_x,polyPoint5_y,1);
+        Circle poly1 = new Circle(polyPoint1_x ,polyPoint1_y,0);
+        Circle poly2 = new Circle(polyPoint2_x,polyPoint2_y,0);
+        Circle poly3 = new Circle(polyPoint3_x,polyPoint3_y,0);
+        Circle poly4 = new Circle(polyPoint4_x,polyPoint4_y,0);
+        Circle poly5 = new Circle(polyPoint5_x,polyPoint5_y,0);
 
-        Circle c1 = new Circle(polyPoint5_x-20,polyPoint2_y,0);
-        Circle c2 = new Circle(polyPoint2_x+22,polyPoint2_y,0);
-        Circle c3 = new Circle(polyPoint3_x+6,polyPoint3_y-20,0);
-        Circle c4 = new Circle(polyPoint4_x-18,polyPoint4_y-12,0);
-        Circle c5 = new Circle(polyPoint5_x-16,polyPoint5_y+13,0);
+        Circle c1 = new Circle(polyPoint5_x-20,polyPoint2_y,1);
+        Circle c2 = new Circle(polyPoint2_x+22,polyPoint2_y,1);
+        Circle c3 = new Circle(polyPoint3_x+6,polyPoint3_y-20,1);
+        Circle c4 = new Circle(polyPoint4_x-18,polyPoint4_y-12,1);
+        Circle c5 = new Circle(polyPoint5_x-16,polyPoint5_y+13,1);
 
         circles.addAll(Arrays.asList(new Circle[]{poly1,poly2,poly3,poly4,poly5,c1,c2,c3,c4,c5}));
     }
@@ -270,7 +270,7 @@ public class Star implements iGizmo{
     @Override
     public Color getColor() {
         if(hit){
-            return new Color(74, 0, 129, 255);
+            return new Color(183, 97, 255, 255);
         }else {
             return new Color(119, 0, 211, 255);
         }

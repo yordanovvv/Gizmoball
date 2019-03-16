@@ -54,13 +54,6 @@ public class GizmoballModel extends iModel {
 
         keyTriggers.put(rightFlipper,'r');
         keyTriggers.put(leftFlipper,'t');
-
-      /*  flippers.add(rightFlipper);
-        flippers.add(leftFlipper);
-
-        keys.add('r');
-        keys.add('t');
-*/
     }
 
 
@@ -84,11 +77,6 @@ public class GizmoballModel extends iModel {
             i++;
         }
     }
-
-  /*  @Override
-    public ArrayList<Character> getKeys(){
-        return keys;
-    }*/
 
     @Override
     public HashMap<iGizmo,Character> getKeyTriggers(){return keyTriggers;}
@@ -326,18 +314,15 @@ public class GizmoballModel extends iModel {
             ArrayList<LineSegment> lineSegs = gizmo.getLines();
             ArrayList<Circle> circls = gizmo.getCircles();
 
-            double star_time = 1;
-            int degree_incrementor = 18*4;
+            double star_rotation_degree =(18*4);
+            double time_passed = 1;
+
             if (lineSegs.size() > 0) {
                 for (LineSegment ls : lineSegs) {
                         if(gizmo.getGizmoType().equals("Star")) {
 
                             Star star = (Star) gizmo;
-                                /*double rotationA = star.getRotationAngle();
-                                if(rotationA==360)rotationA=0;
-                              //    rotationA+=18;
-                                rotationA = rotationA+ degree_incrementor;*/
-                            double angular_velocity = Math.toRadians(degree_incrementor)*star_time;
+                            double angular_velocity = Math.toRadians(star_rotation_degree) * time_passed;
                             double time = Geometry.timeUntilRotatingWallCollision(
                                     ls,
                                     star.getCenter(),
@@ -396,11 +381,11 @@ public class GizmoballModel extends iModel {
                         if (rotationA == 360) rotationA = 0;
                         rotationA = rotationA + degree_incrementor;*/
 
-                        double angulat_velocity = Math.toRadians(degree_incrementor)*star_time;
+                        double angular_velocity = Math.toRadians(star_rotation_degree)* time_passed;
                         double time = Geometry.timeUntilRotatingCircleCollision(
                                 c,
                                 star.getCenter(),
-                                angulat_velocity,
+                                angular_velocity,
                                 ballCircle,
                                 ballVelocity);
 
@@ -413,7 +398,7 @@ public class GizmoballModel extends iModel {
                             newVelo = Geometry.reflectRotatingCircle(
                                     c,
                                     star.getCenter(),
-                                    angulat_velocity,
+                                    angular_velocity,
                                     ballCircle,
                                     ballVelocity, 1);
                         }
