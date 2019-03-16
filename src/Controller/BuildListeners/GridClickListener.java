@@ -15,7 +15,6 @@ public class GridClickListener implements MouseListener {
     private iGizmo moveGizmo;
 
     GameBoard board;
-    //private MainFrame mf;
 
     private final int GRID_SIZE = 30;
 
@@ -161,8 +160,25 @@ public class GridClickListener implements MouseListener {
                     }
                     giz = new Star("ST" + (bigId+1), gridX, gridY);
                     if(gridX+2<20 && gridY+2<20 && gridX-1>=0 && gridY-1>=0) {
-                        if (!m.checkSpace(gridX, gridY) && !m.checkSpace(gridX, gridY + 1)
-                                && !m.checkSpace(gridX + 1, gridY) && !m.checkSpace(gridX + 1, gridY + 1)) {
+                        //Hefty IF here ...
+                        if (!m.checkSpace(gridX, gridY) &&
+                                !m.checkSpace(gridX, gridY+1) &&
+                                !m.checkSpace(gridX, gridY+2) &&
+                                !m.checkSpace(gridX+1, gridY) &&
+                                !m.checkSpace(gridX+2, gridY) &&
+                                !m.checkSpace(gridX+1, gridY+1) &&
+                                !m.checkSpace(gridX+2, gridY+1) &&
+                                !m.checkSpace(gridX+1, gridY+2) &&
+                                !m.checkSpace(gridX+2, gridY+2) &&
+                                !m.checkSpace(gridX-1, gridY-1) &&
+                                !m.checkSpace(gridX-1, gridY-1) &&
+                                !m.checkSpace(gridX-1, gridY) &&
+                                !m.checkSpace(gridX-1, gridY+1) &&
+                                !m.checkSpace(gridX-1, gridY+2) &&
+                                !m.checkSpace(gridX, gridY-1) &&
+                                !m.checkSpace(gridX+1, gridY-1) &&
+                                !m.checkSpace(gridX+2, gridY-1)){
+
                             m.setSpaces(gridX, gridY, true, giz);
                             m.addGizmo(giz);
                         }

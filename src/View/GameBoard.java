@@ -68,7 +68,7 @@ public class GameBoard extends JPanel implements Observer{
    public void paintComponent (Graphics g) {
         super.paintComponent(g);
         if(displaySpace) {
-            boolean[][] grid = m.getSpaceGrid();
+            boolean[][] grid = m.getSpaces();
             for (int i = 0; i < 20; i++) {
                 for (int j = 0; j < 20; j++) {
                     boolean isFree = grid[i][j];
