@@ -51,7 +51,7 @@ public class PlayModeListener implements ActionListener {
             switch (e.getActionCommand()) {
                 case "Play":
                     //gModel.getRightFlipListener().setIsStopped(false);
-                    for(iGizmo g:stars){
+                   for(iGizmo g:stars){
                         Star star = (Star) g;
                         if(star.isRoating()) star.startStarRotation();
                     }
@@ -76,7 +76,6 @@ public class PlayModeListener implements ActionListener {
                         Star star = (Star) g;
                         star.stopRotation();
                         star.rotate();
-                        star.stopRotation();
                     }
 
                     for (Ball b : balls)

@@ -76,17 +76,17 @@ public class Star implements iGizmo{
     private void updateLinePositions(){
         int rotationDegree = 18;
 
-        Circle  center =new Circle((XCoord+1)*constant,(YCoord+1)*constant,0);
+        Vect pivet = new Vect((1 + XCoord)*constant, (1 + YCoord)*constant);
         for (int i = 0; i < lines.size(); i++) {
             Angle rotation = new Angle(Math.toRadians(rotationDegree));
             LineSegment currentLine = lines.get(i);
-            lines.set(i, Geometry.rotateAround(currentLine,center.getCenter(),rotation));
+            lines.set(i, Geometry.rotateAround(currentLine,pivet,rotation));
         }
 
         for (int i = 0; i < circles.size(); i++) {
             Angle rotation = new Angle(Math.toRadians(rotationDegree));
             Circle currentCircle = circles.get(i);
-            circles.set(i, Geometry.rotateAround(currentCircle,center.getCenter(),rotation));
+            circles.set(i, Geometry.rotateAround(currentCircle,pivet,rotation));
         }
     }
 
@@ -99,12 +99,18 @@ public class Star implements iGizmo{
     }
 
     public void startStarRotation(){
-        spinStar(100);
+        spinStar(1000/5);
     }
 
     private void spinStar(int delay){
         stopped = false;
+        long start = System.currentTimeMillis();
+        final int[] totalRotation = {0};
         Timer t = new Timer(delay, e -> {
+            long rn = System.currentTimeMillis()-start;
+            System.out.println("TIME PASSED : " + rn);
+            totalRotation[0] +=18;
+            System.out.println(totalRotation[0]);
             Timer clone = (Timer) e.getSource();
             if(stopped)clone.stop();
             rotate();
@@ -159,9 +165,7 @@ public class Star implements iGizmo{
     public int getmiddleYCoord(){return (YCoord+1);}
 
     public Vect getCenter(){
-
-        //Math.toRadians(angle), x + 30, y + 30);
-        return new Circle((XCoord+1)*constant,(YCoord+1)*constant,0).getCenter();
+        return new Vect((1 + XCoord)*constant, (1 + YCoord)*constant);
     }
 
     //--------------------------------------------------------
@@ -190,28 +194,42 @@ public class Star implements iGizmo{
     public void generateCircles() {
 
 
-        Circle poly1 = new Circle(polyPoint1_x ,polyPoint1_y,0);
-        Circle poly2 = new Circle(polyPoint2_x,polyPoint2_y,0);
-        Circle poly3 = new Circle(polyPoint3_x,polyPoint3_y,0);
-        Circle poly4 = new Circle(polyPoint4_x,polyPoint4_y,0);
-        Circle poly5 = new Circle(polyPoint5_x,polyPoint5_y,0);
+        Circle poly1 = new Circle(polyPoint1_x ,polyPoint1_y,1);
+        Circle poly2 = new Circle(polyPoint2_x,polyPoint2_y,1);
+        Circle poly3 = new Circle(polyPoint3_x,polyPoint3_y,1);
+        Circle poly4 = new Circle(polyPoint4_x,polyPoint4_y,1);
+        Circle poly5 = new Circle(polyPoint5_x,polyPoint5_y,1);
 
-        circles.addAll(Arrays.asList(new Circle[]{poly1,poly2,poly3,poly4,poly5}));
+        Circle c1 = new Circle(polyPoint5_x-20,polyPoint2_y,0);
+        Circle c2 = new Circle(polyPoint2_x+22,polyPoint2_y,0);
+        Circle c3 = new Circle(polyPoint3_x+6,polyPoint3_y-20,0);
+        Circle c4 = new Circle(polyPoint4_x-18,polyPoint4_y-12,0);
+        Circle c5 = new Circle(polyPoint5_x-16,polyPoint5_y+13,0);
+
+        circles.addAll(Arrays.asList(new Circle[]{poly1,poly2,poly3,poly4,poly5,c1,c2,c3,c4,c5}));
     }
 
     @Override
     public void generateLines() {
 
-        LineSegment line1 = new LineSegment(polyPoint1_x,polyPoint1_y-1,polyPoint3_x,polyPoint3_y);
-        LineSegment line2 = new LineSegment(polyPoint3_x,polyPoint3_y+1,polyPoint5_x,polyPoint5_y);//!!
-        LineSegment line3 = new LineSegment(polyPoint5_x,polyPoint5_y+1,polyPoint2_x,polyPoint2_y+1);
-        LineSegment line4 = new LineSegment(polyPoint2_x,polyPoint2_y,polyPoint4_x,polyPoint4_y);//!!
-        LineSegment line5 = new LineSegment(polyPoint4_x,polyPoint4_y,polyPoint1_x,polyPoint1_y);
+        LineSegment line11 = new LineSegment(polyPoint1_x,polyPoint1_y-1,polyPoint3_x,polyPoint3_y);
+        LineSegment line12 = new LineSegment(polyPoint3_x,polyPoint3_y+1,polyPoint5_x,polyPoint5_y);//!!
+        LineSegment line13 = new LineSegment(polyPoint5_x,polyPoint5_y+1,polyPoint2_x,polyPoint2_y+1);
+        LineSegment line14 = new LineSegment(polyPoint2_x,polyPoint2_y,polyPoint4_x,polyPoint4_y);//!!
+        LineSegment line15 = new LineSegment(polyPoint4_x,polyPoint4_y,polyPoint1_x,polyPoint1_y);
 
-        LineSegment feeder_line1 = new LineSegment(polyPoint1_x,polyPoint1_y,polyPoint5_x-20,polyPoint2_y-1);
-        LineSegment feeder_line2 = new LineSegment(polyPoint5_x-20,polyPoint2_y-1,polyPoint5_x,polyPoint5_y);
+        LineSegment line1 = new LineSegment(polyPoint1_x,polyPoint1_y,polyPoint5_x-20,polyPoint2_y);
+        LineSegment line2 = new LineSegment(polyPoint5_x-20,polyPoint2_y,polyPoint5_x,polyPoint5_y);
+        LineSegment line3 = new LineSegment(polyPoint1_x,polyPoint1_y,polyPoint2_x+22,polyPoint2_y);
+        LineSegment line4 = new LineSegment(polyPoint2_x+22,polyPoint2_y,polyPoint2_x,polyPoint2_y);
+        LineSegment line5 = new LineSegment(polyPoint2_x,polyPoint2_y,polyPoint3_x+6,polyPoint3_y-20);
+        LineSegment line6 = new LineSegment(polyPoint3_x+6,polyPoint3_y-20,polyPoint3_x,polyPoint3_y);
+        LineSegment line7 = new LineSegment(polyPoint3_x,polyPoint3_y,polyPoint4_x-18,polyPoint4_y-12);
+        LineSegment line8 = new LineSegment(polyPoint4_x-18,polyPoint4_y-12,polyPoint4_x,polyPoint4_y);
+        LineSegment line9 = new LineSegment(polyPoint4_x,polyPoint4_y,polyPoint5_x-16,polyPoint5_y+13);
+        LineSegment line10 = new LineSegment(polyPoint5_x-16,polyPoint5_y+13,polyPoint5_x,polyPoint5_y);
 
-        lines.addAll(Arrays.asList(new LineSegment[]{line1,line2,line3,line4,line5,feeder_line1,feeder_line2}));
+        lines.addAll(Arrays.asList(new LineSegment[]{line1,line2,line3,line4,line5,line6,line7,line8,line9,line10,line11,line12,line13,line14,line15}));
     }
 
     @Override
@@ -230,7 +248,6 @@ public class Star implements iGizmo{
         rotationAngle+=rotation;
         rotationCount++;
         if(rotationAngle==360){rotationAngle=0;rotationCount=0; }
-
 
         updateLinePositions();
     }
@@ -253,9 +270,9 @@ public class Star implements iGizmo{
     @Override
     public Color getColor() {
         if(hit){
-            return new Color(114, 57, 187, 255);
+            return new Color(74, 0, 129, 255);
         }else {
-            return new Color(143, 101, 187, 255);
+            return new Color(119, 0, 211, 255);
         }
     }
 

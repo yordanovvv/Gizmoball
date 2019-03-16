@@ -194,7 +194,7 @@ public class GameBoard extends JPanel implements Observer{
         AffineTransform old = g2.getTransform();
         transform.rotate(Math.toRadians(angle), x + 30, y + 30);
         g2.transform(transform);
-        g2.setColor(new Color(114, 57, 187, 255));
+        g2.setColor(c);
 
         /*
         A stars points are in a polygon:
@@ -218,9 +218,23 @@ public class GameBoard extends JPanel implements Observer{
         Polygon poly1 = new Polygon(px, py, px.length);
         g2.fillPolygon(poly1);
 
-        g2.setColor(new Color(226, 219, 49, 255));
-        g2.drawLine(polyPoint1_x,polyPoint1_y,polyPoint5_x-20,polyPoint2_y-1);
-        g2.drawLine(polyPoint5_x-20,polyPoint2_y-1,polyPoint5_x,polyPoint5_y);
+        g2.setColor(new Color(114, 0, 191));
+        g2.drawLine(polyPoint1_x,polyPoint1_y,polyPoint5_x-20,polyPoint2_y);
+        g2.drawLine(polyPoint5_x-20,polyPoint2_y,polyPoint5_x,polyPoint5_y);
+
+        g2.drawLine(polyPoint1_x,polyPoint1_y,polyPoint2_x+22,polyPoint2_y);
+        g2.drawLine(polyPoint2_x+22,polyPoint2_y,polyPoint2_x,polyPoint2_y);
+
+        g2.drawLine(polyPoint2_x,polyPoint2_y,polyPoint3_x+6,polyPoint3_y-20);
+
+        g2.drawLine(polyPoint3_x+6,polyPoint3_y-20,polyPoint3_x,polyPoint3_y);
+        g2.drawLine(polyPoint3_x,polyPoint3_y,polyPoint4_x-18,polyPoint4_y-12);
+
+        g2.drawLine(polyPoint4_x-18,polyPoint4_y-12,polyPoint4_x,polyPoint4_y);
+        g2.drawLine(polyPoint4_x,polyPoint4_y,polyPoint5_x-16,polyPoint5_y+13);
+
+        g2.drawLine(polyPoint5_x-16,polyPoint5_y+13,polyPoint5_x,polyPoint5_y);
+
 
         if(displayID) {
             g2.setColor(Color.WHITE);
