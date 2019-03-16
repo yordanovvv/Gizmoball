@@ -1,9 +1,6 @@
 package View;
 
-import Controller.BuildListeners.AddButtonGizmoListener;
-import Controller.BuildListeners.ClearClickListener;
-import Controller.BuildListeners.ConnectListener;
-import Controller.BuildListeners.GridClickListener;
+import Controller.BuildListeners.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -166,6 +163,7 @@ public class BuildMode extends JPanel{
         button_rightFlipper.addMouseListener(rightFlipButListener);
 
         button_ball.addMouseListener(ballButListener);
+
 
         //-------------
         //controls

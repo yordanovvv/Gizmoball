@@ -161,7 +161,7 @@ public class Star implements iGizmo{
     public Vect getCenter(){
 
         //Math.toRadians(angle), x + 30, y + 30);
-        return circles.get(0).getCenter();
+        return new Circle((XCoord+1)*constant,(YCoord+1)*constant,0).getCenter();
     }
 
     //--------------------------------------------------------

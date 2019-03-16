@@ -1,14 +1,13 @@
 package Model;
 
-import physics.Circle;
-import physics.Geometry;
-import physics.LineSegment;
-import physics.Vect;
+import physics.*;
+
 import javax.sound.sampled.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class GizmoballModel extends iModel {
@@ -19,19 +18,23 @@ public class GizmoballModel extends iModel {
     private Wall walls;
     private iGizmo absorber;
     private iGizmo star;
-    private ArrayList<Character> keys;
-    private ArrayList<iGizmo> flippers;
+ //   private ArrayList<Character> keys;
+ //   private ArrayList<iGizmo> flippers;
     private boolean absorberCollision = false, starCollision = false, starShotOut = false;
     private iGizmo collisionGizmo = null;
     private boolean wallCollision = false;
     private double gravity = 25; //25L/sec^2
+    boolean[][] spaces = new boolean[20][20];
+    HashMap<iGizmo,Character> keyTriggers;
+
 
     public GizmoballModel() {
 
         balls = new ArrayList<>();
-        flippers = new ArrayList<>();
-        keys = new ArrayList<>();
+       // flippers = new ArrayList<>();
+      //  keys = new ArrayList<>();
         gizmos = new ArrayList<iGizmo>();
+        keyTriggers = new HashMap<>();
 
         balls.add(new Ball("B1", 8, 5,  7.5, 7.5)); //2.5 = 50L/sec if moveTime is 0.05 (20 ticks/sec)
         //balls.add(new Ball("B2", 6, 7,  7.5, 7.5));
@@ -42,20 +45,26 @@ public class GizmoballModel extends iModel {
         star = new Star("init_star",0,0);
         gizmos.add(absorber);
 
-        Star star = new Star("St1",5,5);
-        gizmos.add(star);
-       /* RightFlipper rightFlipper = new RightFlipper("R1", 6, 7);
+        spaces = this.getSpaceGrid();
+
+       RightFlipper rightFlipper = new RightFlipper("R1", 5, 10);
         gizmos.add(rightFlipper);
 
-        LeftFlipper leftFlipper = new LeftFlipper("L1", 8, 7);
+        LeftFlipper leftFlipper = new LeftFlipper("L1", 10, 10);
         gizmos.add(leftFlipper);
-        flippers.add(rightFlipper);
+
+        keyTriggers.put(rightFlipper,'r');
+        keyTriggers.put(leftFlipper,'t');
+
+      /*  flippers.add(rightFlipper);
         flippers.add(leftFlipper);
 
         keys.add('r');
-        keys.add('t');*/
-
+        keys.add('t');
+*/
     }
+
+
 
     @Override
     public ArrayList<iGizmo> getAllStars(){
@@ -78,25 +87,13 @@ public class GizmoballModel extends iModel {
         }
     }
 
-    @Override
+  /*  @Override
     public ArrayList<Character> getKeys(){
-        ArrayList<Character> newList = new ArrayList<>();
-        for(iGizmo gizmo : gizmos) {
-            if(gizmo.getKeyConnections() != null) {
-                for(String key : gizmo.getKeyConnections()) {
-                    if(key != null) {
-                        newList.add(key.charAt(0));
-                    }
-                }
-            }
-
-        }
-        keys = newList;
         return keys;
-    }
+    }*/
 
     @Override
-    public ArrayList<iGizmo> getFlippers(){return flippers;}
+    public HashMap<iGizmo,Character> getKeyTriggers(){return keyTriggers;}
 
     @Override
     public void moveBall() {
@@ -163,10 +160,13 @@ public class GizmoballModel extends iModel {
                             ball.calculateSpeed(tuc);
 
                             collisionGizmo.setHit(!collisionGizmo.getHit());
-                            if(collisionGizmo.getGizmoConnections()!=null) {
+                           // System.out.println("checking connecyions");
+                            //if(collisionGizmo.getGizmoConnections()!=null) {
+                              //  System.out.println("connections not null");
                                 if (!collisionGizmo.getGizmoType().equals("Star"))
+                                    System.out.println("connections not a star");
                                     checkConnections(collisionGizmo, ball);
-                            }
+                           //}
 
                             System.out.println(ball.getSpeed());
                             if(ball.getSpeed()!=0) playSound(collisionGizmo);
@@ -212,9 +212,9 @@ public class GizmoballModel extends iModel {
         return ball;
     }
 
-    boolean[][] spaces = new boolean[20][20];
-
     public void setSpaces(int gridX, int gridY, boolean val, iGizmo g){
+        if(gridX>=20)return;
+        if(gridY>=20)return;
         switch(g.getGizmoType()){
             case "Square":
                 spaces[gridX][gridY] = val;
@@ -226,18 +226,24 @@ public class GizmoballModel extends iModel {
                 spaces[gridX][gridY] = val;
                 break;
             case "RightFlipper":
+                if(gridX>18)return;
+                if(gridY>18)return;
                 spaces[gridX][gridY] = val;
                 spaces[gridX][gridY+1] = val;
                 spaces[gridX-1][gridY] = val;
                 spaces[gridX-1][gridY+1] = val;
                 break;
             case "LeftFlipper":
+                if(gridX>18)return;
+                if(gridY>18)return;
                 spaces[gridX][gridY] = val;
                 spaces[gridX][gridY+1] = val;
                 spaces[gridX+1][gridY] = val;
                 spaces[gridX+1][gridY+1] = val;
                 break;
             case "Star":
+                if(gridX>18)return;
+                if(gridY>18)return;
                 spaces[gridX][gridY] = val;
                 spaces[gridX][gridY+1] = val;
                 spaces[gridX+1][gridY] = val;
@@ -248,12 +254,11 @@ public class GizmoballModel extends iModel {
         }
 
 
-
-
         spaces[gridX][gridY] = val;
     }
 
     public boolean checkSpace(int gridX, int gridY){
+        if(gridX>=20|gridY>=20)return false;
         return spaces[gridX][gridY];
         /*if (spaces[gridX][gridY]){
             return true;
@@ -349,43 +354,6 @@ public class GizmoballModel extends iModel {
 
             if (lineSegs.size() > 0) {
                 for (LineSegment ls : lineSegs) {
-
-                    if (gizmo.getGizmoType().equals("Star")) {//star collisions
-
-                        System.out.println("star");
-                        absorberCollision = false;
-                        wallCollision = false;
-                        starCollision = true;
-                        Star star = (Star) gizmo;
-
-                        double time = Geometry.timeUntilRotatingWallCollision(
-                                ls,
-                                star.getCenter(),
-                                Math.toRadians(star.getRotationAngle()+18)/ 1000,
-                                ballCircle,
-                                ballVelocity);
-
-                        if (time < shortestTime) {
-                            shortestTime = time;
-                            System.out.println("star line collision");
-                            newVelo = Geometry.reflectRotatingWall(
-                                    ls,
-                                    star.getCenter(),
-                                    Math.toRadians(star.getRotationAngle()+18)/ 1000,
-                                    ballCircle,
-                                    ballVelocity,1);
-                       }
-
-                        if (starShotOut != true) {
-                               /* for (LineSegment feeder : star.getFeederLines()) {
-                                    if (ls.equals(feeder)) {
-                                        starCollision = true;
-                                        this.star = star;
-                                    }
-                                }*/
-                        }
-
-                    } else {
                         starCollision = false;
                         timeL = Geometry.timeUntilWallCollision(ls, ballCircle, ballVelocity);
                         if (timeL < shortestTime) {
@@ -398,36 +366,57 @@ public class GizmoballModel extends iModel {
                             wallCollision = false; //we found a gizmo that is closer to the ball than a wall
                             if (!gizmo.getGizmoType().equals("Star"))
                                 newVelo = Geometry.reflectWall(ls, ball.getVelo(), 1.0);
+
+
+                            if (gizmo.getGizmoType().equals("Star")) {//star collisions
+                                Star star = (Star) gizmo;
+                                double rotationA = star.getRotationAngle();
+                                if(rotationA==360)rotationA=0;
+                                //  rotationA+=18;
+                                rotationA = rotationA+ 18;
+                                double time = Geometry.timeUntilRotatingWallCollision(
+                                        ls,
+                                        star.getCenter(),
+                                        Math.toRadians(rotationA)*.05,
+                                        ballCircle,
+                                        ballVelocity);
+
+                                if (time < shortestTime) {
+                                    absorberCollision = false;
+                                    wallCollision = false;
+                                    starCollision = true;
+                                    collisionGizmo = gizmo;
+                                    shortestTime = time;
+                                    System.out.println("star line collision");
+                                    newVelo = Geometry.reflectRotatingWall(
+                                            ls,
+                                            star.getCenter(),
+                                            Math.toRadians(rotationA)*.05,
+                                            ballCircle,
+                                            ballVelocity, 1);
+                                }
+
+                                if (starShotOut != true) {
+                               /* for (LineSegment feeder : star.getFeederLines()) {
+                                    if (ls.equals(feeder)) {
+                                        starCollision = true;
+                                        this.star = star;
+                                    }
+                                }*/
+                                }
+
+
+                            }
+
                         }
-                    }
+
                 }
             }
             if (circls.size() > 0) {
                 for (Circle c : circls) {
-                    if (gizmo.getGizmoType().equals("Star")) { //star collisions
-                        absorberCollision = false;
-                        wallCollision = false;
-                        starCollision = true;
-                        Star star = (Star) gizmo;
-                        double time = Geometry.timeUntilRotatingCircleCollision(
-                                c,
-                                star.getCenter(),
-                                Math.toRadians(star.getRotationAngle()+18)/ 1000,
-                                ballCircle,
-                                ballVelocity);
-
-                        if (time < shortestTime) {
-                            shortestTime = time;
-                            newVelo = Geometry.reflectRotatingCircle(
-                                    c,
-                                    star.getCenter(),
-                                    Math.toRadians(star.getRotationAngle()+18)/ 1000,
-                                    ballCircle,
-                                    ballVelocity,1);
-                        }
-                    } else {
                         timeC = Geometry.timeUntilCircleCollision(c, ballCircle, ballVelocity);
                         if (timeC < shortestTime) {
+                            collisionGizmo = gizmo;
                             shortestTime = timeC; //we are hitting a circle
                             absorberCollision = false;
                             starCollision = false;
@@ -435,9 +424,40 @@ public class GizmoballModel extends iModel {
                             collisionGizmo = gizmo;
                             newVelo = Geometry.reflectCircle(c.getCenter(), ball.getCircle().getCenter(), ball.getVelo(), 1.0);
                         }
+
+
+                    if (gizmo.getGizmoType().equals("Star")) { //star collisions
+                        Star star = (Star) gizmo;
+                        double rotationA = star.getRotationAngle();
+                        if (rotationA == 360) rotationA = 0;
+                        rotationA = rotationA + 18;
+                        //moves 20 times a second(ball)
+                        //the star moves 18 degrees per 0.1 second
+                        // the ball moves at a rate of 0.5 per second
+                        double time = Geometry.timeUntilRotatingCircleCollision(
+                                c,
+                                star.getCenter(),
+                                Math.toRadians(rotationA) * .05,
+                                ballCircle,
+                                ballVelocity);
+
+                        if (time < shortestTime) {
+                            absorberCollision = false;
+                            wallCollision = false;
+                            starCollision = true;
+                            shortestTime = time;
+                            newVelo = Geometry.reflectRotatingCircle(
+                                    c,
+                                    star.getCenter(),
+                                    Math.toRadians(rotationA) * .05,
+                                    ballCircle,
+                                    ballVelocity, 1);
+                        }
                     }
+
                 }
-            }
+                }
+            //}
         }
 
         CollisionDetails cd = new CollisionDetails(shortestTime, newVelo); //possibly add ID of the gizmo it will collide with
@@ -557,6 +577,18 @@ public class GizmoballModel extends iModel {
                     }
                 }
             }
+            for(iGizmo gizmo : gizmos) {
+           //     fileWriter.write(gizmo.toString() + "\n");
+                if(gizmo.getGizmoConnections()!=null){
+                    if(gizmo.getGizmoConnections().size() > 0) {
+                        for(String giz : gizmo.getGizmoConnections()) {
+                            fileWriter.write("Connect " + gizmo.getID() +" "+ giz +"\n");
+                        }
+                    }
+                }
+            }
+
+
             fileWriter.flush();
 
             fileWriter.close();
@@ -635,6 +667,17 @@ public class GizmoballModel extends iModel {
                                 gizmo.rotate();
                             }
                         }
+                    case "Connect":
+                        iGizmo giz1 = null, giz2 = null;
+                        for(iGizmo gizmo : gizmos) {
+                            if(gizmo.getID().equals(inputStream[1])) {
+                                giz1 = gizmo;
+                            }
+                            if(gizmo.getID().equals(inputStream[2])) {
+                                giz2 = gizmo;
+                            }
+                        }
+                        this.connectGizmos(giz1.getID(),giz2.getID());
                         break;
                     default:
                         break;
@@ -650,6 +693,8 @@ public class GizmoballModel extends iModel {
         for(iGizmo gizmo : gizmos) {
             System.out.println(gizmo);
         }
+
+        spaces = getSpaceGrid();
 
         this.hasChanged();
         this.notifyObservers();
@@ -681,7 +726,6 @@ public class GizmoballModel extends iModel {
         return null;
     }
 
-
     public boolean connectGizmos(String id, String id2) {
         //checking gizmos are actually on board
         if (gizmoFound(id) && gizmoFound(id2)) {
@@ -690,7 +734,15 @@ public class GizmoballModel extends iModel {
 
             //adding gizmo2 to gizmo1 list of connections
             gizmo1.setGizmoConnection(id2);
-            return true;
+
+            int index = 0;
+            for (iGizmo giz:gizmos) {
+                if(giz.getID().equals(id)){
+                    gizmos.set(index,gizmo1);
+                    return true;
+                }
+                 index ++;
+            }
         }
         return false;
     }
@@ -701,6 +753,7 @@ public class GizmoballModel extends iModel {
             iGizmo gizmo = getGizmoByID(id);
             //set the key connection
             gizmo.setKeyConnection(key);
+
         }
     }
 
@@ -719,33 +772,81 @@ public class GizmoballModel extends iModel {
 
     public void checkKeyConnections(iGizmo gizmo, Ball ball) {
         //only check if key press list isn't empty
-        if (!keys.isEmpty()) {
-            for (int i = 0; i < gizmo.getKeyConnections().size(); i++) {
-                if (keys.get(i).equals(gizmo.getKeyConnections().get(i).charAt(0))) {
-                    //get the type of gizmo
-                    String gizmoType = gizmo.getGizmoType();
-                    gizmo.setHit(true);
+        if (gizmo.getGizmoType().equals("LeftFlipper") || gizmo.getGizmoType().equals("RightFlipper")) {
+            if (!keyTriggers.isEmpty()) {
 
-                    if (gizmoType.equals("LeftFlipper") || gizmoType.equals("RightFlipper")) {
-                        //activate left flipper, need direction
-                        try {
-                            //we are mimicking someone pressing the key
-                            //yes, it's cheeky
-                            Robot robot = new Robot();
-                            System.out.println(ball.getSpeed());
-                            if(ball.getSpeed()>0){
-                                robot.keyPress(KeyEvent.getExtendedKeyCodeForChar(keys.get(i)));
-                                robot.keyRelease(KeyEvent.getExtendedKeyCodeForChar(keys.get(i)));
-                            }
-                        } catch (AWTException e) {
-                            e.printStackTrace();
+                if(keyTriggers.containsKey(gizmo)) {
+
+                    char keyChar = keyTriggers.get(gizmo);
+                    try {
+                        Robot robot = new Robot();
+                        if (ball.getSpeed() > 0) {
+                            System.out.println(keyChar);
+                            robot.keyPress(KeyEvent.getExtendedKeyCodeForChar(keyChar));
+                            robot.keyRelease(KeyEvent.getExtendedKeyCodeForChar(keyChar));
                         }
+                    } catch (AWTException e) {
+                        e.printStackTrace();
                     }
                 }
             }
         }
     }
 
+    public boolean[][] getSpaceGrid(){
+        boolean[][] grid = new boolean[20][20];
+
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
+                grid[i][j] = false;
+            }
+        }
+
+        for (iGizmo gizmo:gizmos) {
+           int x =  gizmo.getXCoord();
+           int y = gizmo.getYCoord();
+           int width = 1;
+           int height = 1;
+           if(gizmo.getGizmoType().equals("Star")){
+               width = 4;
+               height = 4;
+           }else if(gizmo.getGizmoType().equals("RightFlipper")){
+               width= 2;
+               height = 2;
+           }else if(gizmo.getGizmoType().equals("LeftFlipper")){
+               width= 2;
+               height = 2;
+           }
+
+            for (int i = 0; i < height; i++) {
+                for (int j = 0; j < width; j++) {
+                    if(x + i < 20 && y + j<20&& x + i >=0 &&  y + j>=0  ) {
+                        if (gizmo.getGizmoType().equals("RightFlipper")) {
+
+                            grid[x - i][y + j] = true;
+
+                        } else if (gizmo.getGizmoType().equals("LeftFlipper")) {
+                            grid[x + i][y + j] = true;
+
+                        } else if (gizmo.getGizmoType().equals("Star")) {
+                            int w = i, h = j;
+                            if (i > 2) w = -1;
+                            if (j > 2) h = -1;
+                            if (x + w < 20 && y + h < 20 && x + w >= 0 && y + h >= 0) {
+                                grid[x + w][y + h] = true;
+                            }
+                        } else {
+
+                            grid[x + i][y + j] = true;
+
+                        }
+                    }
+                }
+            }
+
+        }
+        return grid;
+    }
 
     //TODO need to decide if player can remove all connections or specific ones
 

@@ -21,7 +21,7 @@ public class GameBoard extends JPanel implements Observer{
     iModel m;
     ArrayList<Ball> b;
     GridClickListener gameBoardListener;
-
+    private boolean displaySpace =true;
     public GameBoard(String mode, iModel m) {
         this.m = m;
         b = m.getBalls();
@@ -67,8 +67,23 @@ public class GameBoard extends JPanel implements Observer{
      */
    public void paintComponent (Graphics g) {
         super.paintComponent(g);
+        if(displaySpace) {
+            boolean[][] grid = m.getSpaceGrid();
+            for (int i = 0; i < 20; i++) {
+                for (int j = 0; j < 20; j++) {
+                    boolean isFree = grid[i][j];
+                    if (!isFree) {
+                        g.setColor(new Color(74, 99, 37, 188));
+                    } else {
+                        g.setColor(new Color(81, 14, 22, 171));
+                    }
+                    g.fillRect(i * 30, j * 30, 30, 30);
+                }
+            }
+        }
 
-        Wall w = m.getWalls();
+
+       Wall w = m.getWalls();
         w.getXCoord();
         g.setColor(Color.MAGENTA);
         g.drawLine(w.getXCoord()*30,w.getYCoord()*30,w.getXCoord2()*30,w.getYCoord()*30);
@@ -124,7 +139,6 @@ public class GameBoard extends JPanel implements Observer{
            int width = (int) (2 * b.getRadius());
            paintBall(g,p, q, width);
        }
-
        repaint();
     }
 
@@ -298,12 +312,16 @@ public class GameBoard extends JPanel implements Observer{
     //--------------------------------------------------------
     //                    GRID CONTROLS
     public void paintGrid(Graphics g) {
-        g.setColor(new Color(118, 170, 170, 255));
+        g.setColor(new Color(140, 201, 201, 255));
         for (int i = 0; i <= 600; i=i+(30)) {
             g.drawLine(i,0,i,600);
         }
         for (int i = 0; i <=600; i=i+(30)) {
             g.drawLine(0,i,600,i);
         }
+    }
+
+    public void setDisplaySpace(boolean displaySpace) {
+        this.displaySpace = displaySpace;
     }
 }

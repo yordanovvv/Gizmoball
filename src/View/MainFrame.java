@@ -291,6 +291,11 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
         System.exit(0);
     }
 
+    @Override
+    public void setGridVisability(boolean visability) {
+        gameBoard.setDisplaySpace(visability);
+    }
+
 
     @Override
     public void update(Observable o, Object arg) {
