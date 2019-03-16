@@ -111,5 +111,7 @@ public class GizmoTest {
         assertEquals("Circle", circle.getGizmoType());
     }
 
+
+
    //TODO need to test equals method for gizmos
 }
