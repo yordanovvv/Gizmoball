@@ -5,11 +5,10 @@ LeftFlipper L1 10 10
 Circle C1 8 6 0.5
 Circle C2 7 6 0.5
 Circle C3 9 4 0.5
-Circle C4 9 5 0.5
-Circle C5 5 4 0.5
-Circle C6 6 4 0.5
-Circle C7 6 5 0.5
-Circle C8 8 3 0.5
-Circle C9 7 3 0.5
-Connect C2 R1
-Connect C2 L1
+Circle C4 9 6 0.5
+Circle C5 8 3 0.5
+Circle C6 7 3 0.5
+Circle C7 9 5 0.5
+Circle C8 6 5 0.5
+Circle C9 6 4 0.5
+Connect C1 L1

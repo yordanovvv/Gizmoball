@@ -3,6 +3,7 @@ package Model;
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Observable;
 
 public abstract class iModel extends Observable {
@@ -11,11 +12,11 @@ public abstract class iModel extends Observable {
 
     public abstract void setiGizmo(iGizmo gizmo);
 
-    public abstract ArrayList<Character> getKeys();
+    public abstract HashMap<iGizmo,Character> getKeyTriggers();
 
     public abstract ArrayList<iGizmo> getAllStars();
 
-    public abstract ArrayList<iGizmo> getFlippers();
+    //public abstract ArrayList<iGizmo> getFlippers();
 
     public abstract void moveBall() ;
 

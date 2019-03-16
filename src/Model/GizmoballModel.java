@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class GizmoballModel extends iModel {
@@ -17,20 +18,23 @@ public class GizmoballModel extends iModel {
     private Wall walls;
     private iGizmo absorber;
     private iGizmo star;
-    private ArrayList<Character> keys;
-    private ArrayList<iGizmo> flippers;
+ //   private ArrayList<Character> keys;
+ //   private ArrayList<iGizmo> flippers;
     private boolean absorberCollision = false, starCollision = false, starShotOut = false;
     private iGizmo collisionGizmo = null;
     private boolean wallCollision = false;
     private double gravity = 25; //25L/sec^2
+    boolean[][] spaces = new boolean[20][20];
+    HashMap<iGizmo,Character> keyTriggers;
 
 
     public GizmoballModel() {
 
         balls = new ArrayList<>();
-        flippers = new ArrayList<>();
-        keys = new ArrayList<>();
+       // flippers = new ArrayList<>();
+      //  keys = new ArrayList<>();
         gizmos = new ArrayList<iGizmo>();
+        keyTriggers = new HashMap<>();
 
         balls.add(new Ball("B1", 8, 5,  7.5, 7.5)); //2.5 = 50L/sec if moveTime is 0.05 (20 ticks/sec)
         //balls.add(new Ball("B2", 6, 7,  7.5, 7.5));
@@ -41,20 +45,23 @@ public class GizmoballModel extends iModel {
         star = new Star("init_star",0,0);
         gizmos.add(absorber);
 
-        RightFlipper rightFlipper = new RightFlipper("R1", 5, 10);
-        rightFlipper.setKeyConnection("t");
+        spaces = this.getSpaceGrid();
+
+       RightFlipper rightFlipper = new RightFlipper("R1", 5, 10);
         gizmos.add(rightFlipper);
 
         LeftFlipper leftFlipper = new LeftFlipper("L1", 10, 10);
-        leftFlipper.setKeyConnection("r");
         gizmos.add(leftFlipper);
 
-        flippers.add(rightFlipper);
+        keyTriggers.put(rightFlipper,'r');
+        keyTriggers.put(leftFlipper,'t');
+
+      /*  flippers.add(rightFlipper);
         flippers.add(leftFlipper);
 
         keys.add('r');
         keys.add('t');
-
+*/
     }
 
 
@@ -80,13 +87,13 @@ public class GizmoballModel extends iModel {
         }
     }
 
-    @Override
+  /*  @Override
     public ArrayList<Character> getKeys(){
         return keys;
-    }
+    }*/
 
     @Override
-    public ArrayList<iGizmo> getFlippers(){return flippers;}
+    public HashMap<iGizmo,Character> getKeyTriggers(){return keyTriggers;}
 
     @Override
     public void moveBall() {
@@ -204,8 +211,6 @@ public class GizmoballModel extends iModel {
 
         return ball;
     }
-
-    boolean[][] spaces = new boolean[20][20];
 
     public void setSpaces(int gridX, int gridY, boolean val, iGizmo g){
         if(gridX>=20)return;
@@ -748,6 +753,7 @@ public class GizmoballModel extends iModel {
             iGizmo gizmo = getGizmoByID(id);
             //set the key connection
             gizmo.setKeyConnection(key);
+
         }
     }
 
@@ -767,30 +773,26 @@ public class GizmoballModel extends iModel {
     public void checkKeyConnections(iGizmo gizmo, Ball ball) {
         //only check if key press list isn't empty
         if (gizmo.getGizmoType().equals("LeftFlipper") || gizmo.getGizmoType().equals("RightFlipper")) {
-            if (!keys.isEmpty()) {
-                int loc = -1;
-                for (int i = 0; i <flippers.size() ; i++) {
-                    if(gizmo.getID().equals(flippers.get(i).getID())){
-                        loc = i;
+            if (!keyTriggers.isEmpty()) {
+
+                if(keyTriggers.containsKey(gizmo)) {
+
+                    char keyChar = keyTriggers.get(gizmo);
+                    try {
+                        Robot robot = new Robot();
+                        if (ball.getSpeed() > 0) {
+                            System.out.println(keyChar);
+                            robot.keyPress(KeyEvent.getExtendedKeyCodeForChar(keyChar));
+                            robot.keyRelease(KeyEvent.getExtendedKeyCodeForChar(keyChar));
+                        }
+                    } catch (AWTException e) {
+                        e.printStackTrace();
                     }
-                }
-                if(loc==-1)return;
-                //    if ((gizmo.getKeyConnections().get(i).charAt(0))) {
-                        //activate left flipper, need direction
-                char keyChar =keys.get(loc);
-                try {
-                    Robot robot = new Robot();
-                    if(ball.getSpeed()>0){
-                        System.out.println(keyChar);
-                        robot.keyPress(KeyEvent.getExtendedKeyCodeForChar(keyChar));
-                        robot.keyRelease(KeyEvent.getExtendedKeyCodeForChar(keyChar));
-                    }
-                } catch (AWTException e) {
-                    e.printStackTrace();
                 }
             }
         }
     }
+
     public boolean[][] getSpaceGrid(){
         boolean[][] grid = new boolean[20][20];
 
