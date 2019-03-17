@@ -31,15 +31,15 @@ public class FlipperKeyListener implements KeyListener {
         this.executor =(ThreadPoolExecutor) Executors.newFixedThreadPool(3);
 
         //timer event for flipper rotation
-        this.timer = new Timer(13 , e -> {
-            synchronized (this) {
+       this.timer = new Timer(13 , e -> {
+     //       synchronized (this) {
                 tickFlipper();
                 Timer t = (Timer) e.getSource();
                 if (flipper.getRotationAngle() == 90 | flipper.getRotationAngle() == 0 | flipper.getRotationAngle() == -90) {
                     runningTimer = false;
                     t.stop();
                 }
-            }
+            //}
         });
     }
 
@@ -54,8 +54,8 @@ public class FlipperKeyListener implements KeyListener {
                 char key = keys;
                 if (e.getKeyChar() == key) { //matches character
                     int finalI = 0;
-                    Runnable r = () -> key_press_code(finalI);
-                    executor.execute(r);
+                    key_press_code(finalI);
+                  //  executor.execute(r);
                 }
         }
     }
@@ -66,8 +66,8 @@ public class FlipperKeyListener implements KeyListener {
             char key = keys;
             if (e.getKeyChar() == key) { //keys match
                    int finalI = 0;
-                   Runnable r = () -> key_release_code(finalI);
-                   executor.execute(r);
+                   key_release_code(finalI);
+                   //executor.execute(r);
             }
     }
 

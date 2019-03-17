@@ -7,6 +7,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.function.Consumer;
 
 
 public class Star implements iGizmo{
@@ -70,10 +71,10 @@ public class Star implements iGizmo{
     //--------------------------------------------------------
     //              CLASS SPECIFIC METHODS
     public ArrayList<LineSegment> getFeederLines(){
-        return new ArrayList<>(Arrays.asList(new LineSegment[] {lines.get(5), lines.get(6)}));
+        return new ArrayList<>(Arrays.asList(new LineSegment[] {lines.get(0), lines.get(1)}));
     }
 
-    private void updateLinePositions(){
+    private synchronized void updateLinePositions(){
         int rotationDegree = 18;
 
         Vect pivet = new Vect((1 + XCoord)*constant, (1 + YCoord)*constant);
@@ -104,32 +105,10 @@ public class Star implements iGizmo{
 
     private void spinStar(int delay){
         stopped = false;
-        long start = System.currentTimeMillis();
-        final int[] totalRotation = {0};
         Timer t = new Timer(delay, e -> {
-            long rn = System.currentTimeMillis()-start;
-            System.out.println("TIME PASSED : " + rn);
-            totalRotation[0] +=18;
-            System.out.println(totalRotation[0]);
             Timer clone = (Timer) e.getSource();
             if(stopped)clone.stop();
             rotate();
-        });
-        t.start();
-
-    }
-
-    private void spinStarWithLimiter(int delay, int i){
-        stopped = false;
-        final int[] counter = {0};
-        Timer t = new Timer(delay, e -> {
-            Timer clone = (Timer) e.getSource();
-            if(counter[0] == i){
-                clone.stop();
-                startStarRotation();
-            }
-            rotate();
-            counter[0]++;
         });
         t.start();
     }
@@ -137,24 +116,32 @@ public class Star implements iGizmo{
     public Ball shootBallOut(){
         //this is where the star rotates for a random amount of times and shoots the ball out ;)
         if (!balls.isEmpty()) {
-            Ball fireBall = balls.remove(0);
-            Random rand = new Random(System.currentTimeMillis());
+            final Ball[] fireBall = {balls.remove(0)};
 
             stopRotation();
-            spinStarWithLimiter(rand.nextInt((80-20)+1 + 20),20);
             Vect shootUp = new Vect(10, -500);
 
-            try {
-                Thread.sleep(20);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            fireBall.setExactX((lines.get(0).p1().x() + lines.get(1).p2().x() + fireBall.getRadius()) / 2 );
-            fireBall.setExactY((lines.get(0).p1().y() + lines.get(1).p2().y() + fireBall.getRadius()) / 2 - 5);
-            fireBall.setVelo(shootUp);
-            fireBall.setStopped(false);
+            stopped = false;
+            final int[] counter = {0};
+            Consumer<Ball> callback = i-> fireBall[0] = i;
 
-            return fireBall;
+            Timer t = new Timer(50, e -> {
+                Ball ball = fireBall[0];
+                Timer clone = (Timer) e.getSource();
+                if(stopped | counter[0] == 20){
+                    clone.stop();
+                    startStarRotation();
+                    ball.setExactX((getXCoord())*30);
+                    ball.setExactY((getYCoord())*30);
+                    ball.setVelo(shootUp);
+                    ball.setStopped(false);
+                    callback.accept(ball);
+                }
+                rotate();
+                counter[0]++;
+            });
+            t.start();
+            return fireBall[0];
             }
        // }
         return null;
@@ -243,7 +230,7 @@ public class Star implements iGizmo{
     }
 
     @Override
-    public void rotate() {
+    public synchronized void rotate() {
         int rotation = 18;
         rotationAngle+=rotation;
         rotationCount++;
