@@ -220,16 +220,12 @@ public class GizmoballModel extends iModel {
                 spaces[gridX][gridY] = val;
                 break;
             case "RightFlipper":
-                if(gridX>18)return;
-                if(gridY>18)return;
                 spaces[gridX][gridY] = val;
                 spaces[gridX][gridY+1] = val;
                 spaces[gridX-1][gridY] = val;
                 spaces[gridX-1][gridY+1] = val;
                 break;
             case "LeftFlipper":
-                if(gridX>18)return;
-                if(gridY>18)return;
                 spaces[gridX][gridY] = val;
                 spaces[gridX][gridY+1] = val;
                 spaces[gridX+1][gridY] = val;
@@ -256,11 +252,13 @@ public class GizmoballModel extends iModel {
                 spaces[gridX][gridY-1] = val;
                 spaces[gridX+1][gridY-1] = val;
                 spaces[gridX+2][gridY-1] = val;
-                //if(gridX>18)return;
-                //if(gridY>18)return;
                 break;
             case "Absorber":
-
+                for (int x=0; x<g.getWidth(); x++){
+                    for (int y=0; y<g.getHeight(); y++){
+                        spaces[gridX+x][gridY+y] = val;
+                    }
+                }
                 break;
             default:
                 spaces[gridX][gridY] = val; //this might break it?
@@ -579,8 +577,11 @@ public class GizmoballModel extends iModel {
                         balls.add(ball);
                         break;
                     case "Absorber":
-                        Absorber abs = new Absorber(inputStream[1], Integer.parseInt(inputStream[2]), Integer.parseInt(inputStream[3]), Integer.parseInt(inputStream[4]), Integer.parseInt(inputStream[5]));
+                        gizXCoord = Integer.parseInt(inputStream[2]);
+                        gizYCoord = Integer.parseInt(inputStream[3]);
+                        Absorber abs = new Absorber(inputStream[1], gizXCoord, gizYCoord, Integer.parseInt(inputStream[4]), Integer.parseInt(inputStream[5]));
                         gizmos.add(abs);
+                        setSpaces(gizXCoord, gizYCoord, true, abs);
                         break;
                     case "Square":
                         gizXCoord = Integer.parseInt(inputStream[2]);
