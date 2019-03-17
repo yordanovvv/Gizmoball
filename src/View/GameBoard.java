@@ -21,7 +21,7 @@ public class GameBoard extends JPanel implements Observer{
     iModel m;
     ArrayList<Ball> b;
     GridClickListener gameBoardListener;
-
+    private boolean displaySpace =true;
     public GameBoard(String mode, iModel m) {
         this.m = m;
         b = m.getBalls();
@@ -67,8 +67,23 @@ public class GameBoard extends JPanel implements Observer{
      */
    public void paintComponent (Graphics g) {
         super.paintComponent(g);
+        if(displaySpace) {
+            boolean[][] grid = m.getSpaces();
+            for (int i = 0; i < 20; i++) {
+                for (int j = 0; j < 20; j++) {
+                    boolean isFree = grid[i][j];
+                    if (!isFree) {
+                        g.setColor(new Color(74, 99, 37, 188));
+                    } else {
+                        g.setColor(new Color(81, 14, 22, 171));
+                    }
+                    g.fillRect(i * 30, j * 30, 30, 30);
+                }
+            }
+        }
 
-        Wall w = m.getWalls();
+
+       Wall w = m.getWalls();
         w.getXCoord();
         g.setColor(Color.MAGENTA);
         g.drawLine(w.getXCoord()*30,w.getYCoord()*30,w.getXCoord2()*30,w.getYCoord()*30);
@@ -83,27 +98,28 @@ public class GameBoard extends JPanel implements Observer{
             x = gizmo.getXCoord() * 30;
             y = gizmo.getYCoord() * 30;
             c = gizmo.getColor();
+            Boolean displayID = m.displayID();
             switch (gizmo.getGizmoType()){
                 case "Circle":
-                    paintCircle(g2, x,y,c);
+                    paintCircle(g2, x,y,c,gizmo.getID(),displayID);
                     break;
                 case "Square":
-                    paintSquare(g2,x,y,c);
+                    paintSquare(g2,x,y,c,gizmo.getID(),displayID);
                     break;
                 case "Triangle":
-                    paintTriangle(g2,x,y,gizmo.getRotationAngle(),c);
+                    paintTriangle(g2,x,y,gizmo.getRotationAngle(),c,gizmo.getID(),displayID);
                     break;
                 case "Absorber":
-                    paintAbsorber(g2,x,y,gizmo.getWidth()*30,gizmo.getHeight()*30,c);
+                    paintAbsorber(g2,x,y,gizmo.getWidth()*30,gizmo.getHeight()*30,c,gizmo.getID(),displayID);
                     break;
                 case "LeftFlipper":
-                    paintLeftFlipper(g2,x,y,gizmo.getRotationAngle(),c);
+                    paintLeftFlipper(g2,x,y,gizmo.getRotationAngle(),c,gizmo.getID(),displayID);
                     break;
                 case "RightFlipper":
-                    paintRightFlipper(g2,x,y,gizmo.getRotationAngle(),c);
+                    paintRightFlipper(g2,x,y,gizmo.getRotationAngle(),c,gizmo.getID(),displayID);
                     break;
                 case"Star":
-                    paintStar(g,x,y,gizmo.getRotationAngle(),c);
+                    paintStar(g,x,y,gizmo.getRotationAngle(),c,gizmo.getID(),displayID);
                     break;
             }
         }
@@ -123,15 +139,20 @@ public class GameBoard extends JPanel implements Observer{
            int width = (int) (2 * b.getRadius());
            paintBall(g,p, q, width);
        }
-
        repaint();
     }
 
     //--------------------------------------------------------
     //                    PAINTING COMPONENTS
-    private void paintCircle(Graphics g,int x, int y,Color c){
+    private void paintCircle(Graphics g,int x, int y,Color c,String id,Boolean displayID){
         g.setColor(c);
+
         g.fillOval(x,y,30,30);
+
+        if(displayID) {
+            g.setColor(Color.WHITE);
+            g.drawString(id.toUpperCase(), x + 7, y + 21);
+        }
     }
 
     private void paintBall(Graphics g,int x, int y, int width){
@@ -140,7 +161,7 @@ public class GameBoard extends JPanel implements Observer{
         g.fillOval(x, y, width, width);
     }
 
-    private void paintTriangle(Graphics g,int x, int y, int angle,Color c){
+    private void paintTriangle(Graphics g,int x, int y, int angle,Color c,String id,Boolean displayID){
         Graphics2D g2 =(Graphics2D) g.create();
 
         AffineTransform transform = new AffineTransform();
@@ -156,19 +177,24 @@ public class GameBoard extends JPanel implements Observer{
         g2.setColor(c);
         g2.fillPolygon(poly);
 
+        if(displayID) {
+            g2.setColor(Color.WHITE);
+            g2.drawString(id.toUpperCase(), x + 15, y + 16);
+        }
+
         g2.setTransform(old);
         g2.dispose();
     }
 
 
-    private void paintStar(Graphics g,int x, int y, int angle,Color c){
+    private void paintStar(Graphics g,int x, int y, int angle,Color c,String id,Boolean displayID){
         Graphics2D g2 =(Graphics2D) g.create();
 
         AffineTransform transform = new AffineTransform();
         AffineTransform old = g2.getTransform();
         transform.rotate(Math.toRadians(angle), x + 30, y + 30);
         g2.transform(transform);
-        g2.setColor(new Color(114, 57, 187, 255));
+        g2.setColor(c);
 
         /*
         A stars points are in a polygon:
@@ -192,14 +218,33 @@ public class GameBoard extends JPanel implements Observer{
         Polygon poly1 = new Polygon(px, py, px.length);
         g2.fillPolygon(poly1);
 
-        g2.setColor(new Color(226, 219, 49, 255));
-        g2.drawLine(polyPoint1_x,polyPoint1_y,polyPoint5_x-20,polyPoint2_y-1);
-        g2.drawLine(polyPoint5_x-20,polyPoint2_y-1,polyPoint5_x,polyPoint5_y);
+        g2.setColor(new Color(250, 215, 0));
+        g2.drawLine(polyPoint1_x,polyPoint1_y,polyPoint5_x-20,polyPoint2_y);
+        g2.drawLine(polyPoint5_x-20,polyPoint2_y,polyPoint5_x,polyPoint5_y);
+
+       /* g2.drawLine(polyPoint1_x,polyPoint1_y,polyPoint2_x+22,polyPoint2_y);
+        g2.drawLine(polyPoint2_x+22,polyPoint2_y,polyPoint2_x,polyPoint2_y);
+
+        g2.drawLine(polyPoint2_x,polyPoint2_y,polyPoint3_x+6,polyPoint3_y-20);
+
+        g2.drawLine(polyPoint3_x+6,polyPoint3_y-20,polyPoint3_x,polyPoint3_y);
+        g2.drawLine(polyPoint3_x,polyPoint3_y,polyPoint4_x-18,polyPoint4_y-12);
+
+        g2.drawLine(polyPoint4_x-18,polyPoint4_y-12,polyPoint4_x,polyPoint4_y);
+        g2.drawLine(polyPoint4_x,polyPoint4_y,polyPoint5_x-16,polyPoint5_y+13);
+
+        g2.drawLine(polyPoint5_x-16,polyPoint5_y+13,polyPoint5_x,polyPoint5_y);*/
+
+
+        if(displayID) {
+            g2.setColor(Color.WHITE);
+            g2.drawString(id.toUpperCase(), x + 20, y + 30 + 6);
+        }
 
         g2.setTransform(old);
         g2.dispose();
     }
-    private void paintLeftFlipper(Graphics g,int x, int y, int angle,Color c){
+    private void paintLeftFlipper(Graphics g,int x, int y, int angle,Color c,String id,Boolean displayID){
         Graphics2D g2 =(Graphics2D) g.create();
 
 
@@ -218,12 +263,16 @@ public class GameBoard extends JPanel implements Observer{
         g2.setColor(Color.BLACK);
         g2.fillOval(x+5,y+6,5,5);
 
+        if(displayID) {
+            g2.setColor(Color.WHITE);
+            g2.drawString(id.toUpperCase(), x, y + 30);
+        }
 
         g2.setTransform(old);
         g2.dispose();
     }
 
-    private void paintRightFlipper(Graphics g,int x, int y, int angle,Color c){
+    private void paintRightFlipper(Graphics g,int x, int y, int angle,Color c,String id,Boolean displayID){
         Graphics2D g2 =(Graphics2D) g.create();
 
         AffineTransform transform = new AffineTransform();
@@ -243,17 +292,29 @@ public class GameBoard extends JPanel implements Observer{
         g2.setColor(Color.BLACK);
         g2.fillOval(x+5+15,y+6,5,5);
 
+        if(displayID) {
+            g2.setColor(Color.WHITE);
+            g2.drawString(id.toUpperCase(), x + 15, y + 30);
+        }
         g2.setTransform(old);
         g2.dispose();
     }
 
-    private void paintAbsorber(Graphics g, int x, int y, int width,int height,Color c){
+    private void paintAbsorber(Graphics g, int x, int y, int width,int height,Color c, String id,Boolean displayID){
         g.setColor(c);
         g.fillRect(x,y,width,height);
+        if(displayID) {
+            g.setColor(Color.WHITE);
+            g.drawString(id.toUpperCase(), x + 15, y + 30);
+        }
     }
-    private void paintSquare(Graphics g,int x, int y,Color c){
+    private void paintSquare(Graphics g,int x, int y,Color c,String id,Boolean displayID){
         g.setColor(c);
         g.fillRect(x,y,30,30);
+        if(displayID) {
+            g.setColor(Color.WHITE);
+            g.drawString(id.toUpperCase(), x + 15, y + 30);
+        }
     }
 
     //--------------------------------------------------------
@@ -265,12 +326,16 @@ public class GameBoard extends JPanel implements Observer{
     //--------------------------------------------------------
     //                    GRID CONTROLS
     public void paintGrid(Graphics g) {
-        g.setColor(new Color(118, 170, 170, 255));
+        g.setColor(new Color(140, 201, 201, 255));
         for (int i = 0; i <= 600; i=i+(30)) {
             g.drawLine(i,0,i,600);
         }
         for (int i = 0; i <=600; i=i+(30)) {
             g.drawLine(0,i,600,i);
         }
+    }
+
+    public void setDisplaySpace(boolean displaySpace) {
+        this.displaySpace = displaySpace;
     }
 }

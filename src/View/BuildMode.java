@@ -1,8 +1,6 @@
 package View;
 
-import Controller.BuildListeners.AddButtonGizmoListener;
-import Controller.BuildListeners.ClearClickListener;
-import Controller.BuildListeners.GridClickListener;
+import Controller.BuildListeners.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +16,7 @@ public class BuildMode extends JPanel{
     private JButton button_rightFlipper;
     private JButton button_ball;
     private JButton button_absorber;
+    private JButton button_star;
 
     private JPanel controlsPanel;
     private JLabel label_controls;
@@ -28,6 +27,7 @@ public class BuildMode extends JPanel{
     private JButton button_move;
     private JButton button_delete;
     private JButton button_clear;
+
 
     private MainFrame mainFrame;
 
@@ -74,6 +74,7 @@ public class BuildMode extends JPanel{
         button_leftFlipper = new JButton("Left flipper");
         button_rightFlipper = new JButton("Right flipper");
         button_ball= new JButton("Ball");
+        button_star = new JButton("Star");
 
         button_square = utils.addImgToBtn("square.png",button_square, Color.RED);
         button_triangle = utils.addImgToBtn("triangle.png",button_triangle,Color.CYAN);
@@ -82,6 +83,7 @@ public class BuildMode extends JPanel{
         button_leftFlipper = utils.addImgToBtn("leftFlipper.png",button_leftFlipper,Color.YELLOW);
         button_rightFlipper = utils.addImgToBtn("rightFlipper.png",button_rightFlipper, Color.ORANGE);
         button_ball = utils.addImgToBtn("football.png",button_ball, Color.BLACK);
+        button_star =  utils.addImgToBtn("star.png",button_star, new Color(102, 16, 193, 255));
 
         container_build.add(button_square);
         container_build.add(button_triangle);
@@ -90,6 +92,8 @@ public class BuildMode extends JPanel{
         container_build.add(button_leftFlipper);
         container_build.add(button_rightFlipper);
         container_build.add(button_ball);
+        container_build.add(button_star);
+
 
         buildPanel.add(label_components,BorderLayout.PAGE_START);
         buildPanel.add(container_build,BorderLayout.CENTER);
@@ -144,6 +148,7 @@ public class BuildMode extends JPanel{
         AddButtonGizmoListener circleButListener = new AddButtonGizmoListener("circle", lis);
         AddButtonGizmoListener triangleButListener = new AddButtonGizmoListener("triangle", lis);
         AddButtonGizmoListener absorbButListener = new AddButtonGizmoListener("absorber", lis);
+        AddButtonGizmoListener starButListener = new AddButtonGizmoListener("star", lis);
 
         AddButtonGizmoListener leftFlipButListener = new AddButtonGizmoListener("leftFlipper", lis);
         AddButtonGizmoListener rightFlipButListener = new AddButtonGizmoListener("rightFlipper", lis);
@@ -152,17 +157,19 @@ public class BuildMode extends JPanel{
         button_triangle.addMouseListener(triangleButListener);
         button_circle.addMouseListener(circleButListener);
         button_absorber.addMouseListener(absorbButListener);
+        button_star.addMouseListener(starButListener);
 
         button_leftFlipper.addMouseListener(leftFlipButListener);
         button_rightFlipper.addMouseListener(rightFlipButListener);
 
         button_ball.addMouseListener(ballButListener);
 
+
         //-------------
         //controls
         AddButtonGizmoListener rotateListener = new AddButtonGizmoListener("rotate", lis);
-        AddButtonGizmoListener connectListener = new AddButtonGizmoListener("connect", lis);
-        AddButtonGizmoListener disconnectListener = new AddButtonGizmoListener("disconnect", lis);
+        ConnectListener connectListener = new ConnectListener(mainFrame.getModel());
+        ConnectListener disconnectListener = new ConnectListener(mainFrame.getModel());
         AddButtonGizmoListener deleteListener = new AddButtonGizmoListener("delete", lis);
         AddButtonGizmoListener moveListener = new AddButtonGizmoListener("move", lis);
         AddButtonGizmoListener connectKeyListener = new AddButtonGizmoListener("connectKey", lis);
@@ -171,8 +178,10 @@ public class BuildMode extends JPanel{
 
         button_rotate.addMouseListener(rotateListener);
         button_delete.addMouseListener(deleteListener);
-        button_connectButton.addMouseListener(connectListener);
-        button_disconnect.addMouseListener(disconnectListener);
+        button_connectButton.addActionListener(connectListener);
+        button_connectButton.setActionCommand("connect");
+        button_disconnect.addActionListener(disconnectListener);
+        button_disconnect.setActionCommand("disconnect");
         button_clear.addMouseListener(clearClickListener);
         button_move.addMouseListener(moveListener);
         button_keypressConnect.addMouseListener(connectKeyListener);

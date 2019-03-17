@@ -1,22 +1,27 @@
 Ball B1 8 5 0 0
-Absorber A1 0 18 20 20
-LeftFlipper L1 8 7
-Circle C1 8 3 0.5
-Circle C1 7 3 0.5
-Circle C1 6 4 0.5
-Circle C1 9 4 0.5
-Circle C1 10 4 0.5
-Circle C1 11 5 0.5
-Circle C1 11 6 0.5
-Circle C1 11 7 0.5
-Circle C1 11 8 0.5
-Circle C1 11 9 0.5
-Circle C1 10 10 0.5
-Circle C1 9 10 0.5
-Circle C1 8 10 0.5
-Circle C1 7 10 0.5
-Circle C1 6 9 0.5
-Circle C1 5 8 0.5
-Circle C1 5 6 0.5
-Circle C1 5 5 0.5
-Circle C1 5 7 0.5
+Circle C1 8 11 0.5
+Circle C2 7 8 0.5
+Circle C3 6 6 0.5
+Circle C4 6 5 0.5
+Circle C5 6 4 0.5
+Circle C6 7 3 0.5
+Circle C7 10 3 0.5
+Circle C8 11 6 0.5
+Square S1 10 10
+Square S2 2 0
+Square S3 1 0
+Square S4 0 0
+Square S5 0 1
+Square S6 0 2
+Square S7 0 3
+Square S8 0 4
+Square S9 3 0
+Square S10 4 0
+Square S11 5 0
+Triangle T1 1 1
+Rotate T1
+Star ST1 15 15
+Star ST2 6 15
+Star ST3 10 15
+Star ST4 17 7
+Star ST5 8 5

@@ -2,8 +2,11 @@ package Model;
 
 import physics.*;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class RightFlipper implements iGizmo {
     private int rotationAngle = 0;
@@ -39,6 +42,7 @@ public class RightFlipper implements iGizmo {
 
         generateCircles();
         generateLines();
+
     }
 
     @Override
@@ -179,7 +183,7 @@ public class RightFlipper implements iGizmo {
         for (int i = 0; i < lines.size(); i++) {
             Angle rotation = new Angle(Math.toRadians(rotationDegree));
             LineSegment currentLine = lines.get(i);
-            lines.set(i,Geometry.rotateAround(currentLine, currentLine.p1()/*center.getCenter()*/,rotation));
+            lines.set(i,Geometry.rotateAround(currentLine, center.getCenter(),rotation));
         }
 
         for (int i = 0; i < circles.size(); i++) {
@@ -211,7 +215,7 @@ public class RightFlipper implements iGizmo {
 
         //rad/sec
 
-        return rotationAngle * 0.05 * 3.14/180;
+        return Math.toRadians(rotationAngle) * 0.05;
     }
 
     @Override
@@ -271,12 +275,10 @@ public class RightFlipper implements iGizmo {
 
     @Override
     public void removeKeyConnection() {
-
     }
 
     @Override
     public void addBall(Ball ball) {
-
     }
 
     public boolean isMoving(){

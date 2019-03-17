@@ -3,16 +3,20 @@ package Model;
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Observable;
 
 public abstract class iModel extends Observable {
+
+    boolean displayID=false;
+
     public abstract void setiGizmo(iGizmo gizmo);
 
-    public abstract ArrayList<Character> getKeys();
+    public abstract HashMap<iGizmo,Character> getKeyTriggers();
 
     public abstract ArrayList<iGizmo> getAllStars();
 
-    public abstract ArrayList<iGizmo> getFlippers();
+    //public abstract ArrayList<iGizmo> getFlippers();
 
     public abstract void moveBall() ;
 
@@ -35,10 +39,33 @@ public abstract class iModel extends Observable {
 
     public abstract Absorber getAbsorber();
 
+    public abstract boolean checkSpace(int gridX, int gridY);
+
+    public abstract void wipeSpaces();
+
     public abstract void saveGame(File file) ;
 
     public abstract void loadGame(File file) ;
 
     public void addBall(Ball b) {
     }
+
+    public abstract void getAudio(String path);
+
+    public abstract boolean connectGizmos(String id, String id2);
+
+    public boolean displayID(){
+        return displayID;
+    }
+
+    public void setDisplayID(Boolean display){
+        displayID = display;
+    }
+
+    public abstract void setSpaces(int gridX, int gridY, boolean val, iGizmo g);
+
+    //public abstract boolean[][] getSpaceGrid();
+
+    public abstract boolean[][] getSpaces();
+
 }

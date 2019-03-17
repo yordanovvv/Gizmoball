@@ -66,14 +66,14 @@ public class GizmoCircle implements iGizmo {
 
     @Override
     public void setXCoord(int x) {
-        this.XCoord=XCoord;
+        this.XCoord=x;
 
     }
 
     @Override
     public void setYCoord(int y) {
 
-        this.YCoord=YCoord;
+        this.YCoord=y;
     }
     @Override
     public void generateCircles() {
@@ -149,23 +149,29 @@ public class GizmoCircle implements iGizmo {
 
     @Override
     public ArrayList<String> getGizmoConnections() {
-        return null;
+        return gizmoConnections;
     }
 
     @Override
     public ArrayList<String> getKeyConnections() {
-        return null;
+        return keyConnections;
     }
 
     @Override
     public void removeGizmoConnection(String id) {
+        int i =0;
+        for (String giz: gizmoConnections){
+            if(giz.equals(id)){
+                gizmoConnections.remove(i);
+            }
+            i++;
+        }
 
     }
 
     @Override
     public void removeKeyConnection() {
-
-
+        keyConnections = new ArrayList<>();
     }
 
     @Override

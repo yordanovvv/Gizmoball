@@ -1,23 +1,20 @@
 package Controller.BuildListeners;
 
-import Model.iModel;
+import View.GameBoard;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class ClearClickListener implements MouseListener {
+public class DisplayVacancyGridListener implements MouseListener {
 
-    iModel m;
-
-    public ClearClickListener(iModel m){
-        this.m = m;
+    GameBoard board;
+    public DisplayVacancyGridListener(GameBoard board){
+        this.board = board;
     }
-
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        m.getGizmos().removeAll(m.getGizmos());
-        m.wipeSpaces();
+
     }
 
     @Override
@@ -32,11 +29,11 @@ public class ClearClickListener implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        board.setDisplaySpace(true);
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        board.setDisplaySpace(false);
     }
 }

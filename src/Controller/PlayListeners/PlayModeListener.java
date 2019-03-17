@@ -6,6 +6,7 @@ import View.MainFrame;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -50,21 +51,20 @@ public class PlayModeListener implements ActionListener {
             switch (e.getActionCommand()) {
                 case "Play":
                     //gModel.getRightFlipListener().setIsStopped(false);
-                   /* for(iGizmo g:stars){
+                   for(iGizmo g:stars){
                         Star star = (Star) g;
-                        star.startStarRotation();
-                    }*/
+                        if(star.isRoating()) star.startStarRotation();
+                    }
                     for (Ball b : balls) b.setStopped(false);
                     timer.restart();
                     statisticsTimer.start();
                     break;
                 case "Pause":
                     //gModel.getRightFlipListener().setIsStopped(true);
-
-                    /*for(iGizmo g:stars){
+                    for(iGizmo g:stars){
                         Star star = (Star) g;
                         star.stopRotation();
-                    }*/
+                    }
 
                     for (Ball b : balls) b.setStopped(true);
                     timer.stop();
@@ -72,11 +72,11 @@ public class PlayModeListener implements ActionListener {
                 case "Tick":
                     //gModel.getRightFlipListener().setIsStopped(false);
                     //gModel.getRightFlipListener().moveFlipper("TICK");
-                    /*for(iGizmo g:stars){
+                   for(iGizmo g:stars){
                         Star star = (Star) g;
-                        if(star.isRoating()) star.stopRotation();
+                        star.stopRotation();
                         star.rotate();
-                    }*/
+                    }
 
                     for (Ball b : balls)
                     {
@@ -88,6 +88,7 @@ public class PlayModeListener implements ActionListener {
                     break;
                 case "Restart":
                     //Reload file?
+                    gModel.loadGame((new File("game.giz")));
                     break;
             }
             mf.setFocusable(true);

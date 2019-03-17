@@ -26,7 +26,6 @@ public class LeftFlipper implements iGizmo {
     private boolean down = false, hit;
 
 
-
     public LeftFlipper(String id, int x, int y){
         this.ID = id;
         this.XCoord = x;

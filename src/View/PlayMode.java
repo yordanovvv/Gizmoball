@@ -49,17 +49,8 @@ public class PlayMode extends JPanel {
                 flippers.add(giz);
             }
         }
-
-        for (int i = 0; i < flippers.size(); i++) {
-            iGizmo giz = flippers.get(i);
-            if(model.getKeys() != null && model.getKeys().size() > 0) {
-                Character key = model.getKeys().get(i);
-
-                System.out.println(giz.getID());
-
-                mainFrame.addKeyListener(new FlipperKeyListener(model, key, giz));
-            }
-
+        for (iGizmo key:model.getKeyTriggers().keySet()) {
+            mainFrame.addKeyListener(new FlipperKeyListener(model, model.getKeyTriggers().get(key), key));
         }
 
         mainFrame.addKeyListener(absorberListener);

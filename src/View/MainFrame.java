@@ -170,11 +170,11 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
         physicsBoard.add(label_Friction);
         physicsBoard.add(output_Friction);
 
-        physicsBoard.add(label_Gravity);
-        physicsBoard.add(output_Gravity);
-
         physicsBoard.add(label_Velocity);
         physicsBoard.add(output_Velocity);
+
+        physicsBoard.add(label_Gravity);
+        physicsBoard.add(output_Gravity);
 
         //--------------------------------------------------------
         //                    gameContainer
@@ -289,6 +289,11 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
     public void quit() {
         this.setVisible(false);
         System.exit(0);
+    }
+
+    @Override
+    public void setGridVisability(boolean visability) {
+        gameBoard.setDisplaySpace(visability);
     }
 
 

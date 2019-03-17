@@ -125,7 +125,7 @@ public class FlipperKeyListener implements KeyListener {
         if(!isStopped) {
             if(direction.equals("UP") | direction.equals("DOWN") ) {
                 runningTimer = true;
-               timer.start();
+                timer.start();
             }else if (direction.equals("TICK")) {
                 tickFlipper();
             }
