@@ -26,6 +26,7 @@ public class GizmoballModel extends iModel {
     private double gravity = 25; //25L/sec^2
     boolean[][] spaces = new boolean[20][20];
     HashMap<iGizmo,Character> keyTriggers;
+    private int wait = 0;
 
     public GizmoballModel() {
 
@@ -118,24 +119,27 @@ public class GizmoballModel extends iModel {
                     {
                         ball = moveBallForTime(ball, moveTime);
                     }
-                  /*  else if(starCollision == true && starShotOut == false){
-                        playSound(collisionGizmo);
-                        ball = moveBallForTime(ball, tuc + moveTime);
-                        star.addBall(ball);
-                        ball.setExactX((((Star) star).getmiddleXCoord())*30);
-                        ball.setExactY((((Star) star).getmiddleYCoord())*30);
-                        ball.setStopped(true);
-                        ball.setVelo(new Vect(0,0));
+                    else if(starCollision == true && starShotOut == false){
+                       // playSound(collisionGizmo);
+                       // if(wait == 0) {
+                            ball = moveBallForTime(ball, tuc + moveTime);
+                            star.addBall(ball);
+                            ball.setExactX((((Star) star).getmiddleXCoord()) * 30);
+                            ball.setExactY((((Star) star).getmiddleYCoord()) * 30);
+                            ball.setStopped(true);
+                            ball.setVelo(new Vect(0, 0));
+                       // }
+                      //  else if(wait == 1) {
+                            ball = ((Star) star).shootBallOut();
 
-                        ball= ((Star) star).shootBallOut();
+                            ball.calculateSpeed(tuc + moveTime);
 
-                        ball.calculateSpeed(tuc + moveTime);
-
-                        starCollision = false;
-                        starShotOut = true;
-
-                    }*/
-                    else { //collision
+                            wait = 0;
+                            starCollision = false;
+                            starShotOut = true;
+                        //}
+                        wait++;
+                    } else { //collision
 
                         ball = moveBallForTime(ball, tuc); //collision in time tuc
                         ball.setVelo(cd.getVelo());
@@ -312,8 +316,11 @@ public class GizmoballModel extends iModel {
             ArrayList<LineSegment> lineSegs = gizmo.getLines();
             ArrayList<Circle> circls = gizmo.getCircles();
 
-            double star_rotation_degree =(18*4);
+            double star_rotation_degree =(18*5);
             double time_passed = 1;
+            if(starShotOut){
+                star_rotation_degree=18*20;
+            }
 
             if (lineSegs.size() > 0) {
                 for (LineSegment ls : lineSegs) {
@@ -330,8 +337,8 @@ public class GizmoballModel extends iModel {
 
                             if (time < shortestTime) {
                                 absorberCollision = false;
+                                starCollision = false;
                                 wallCollision = false;
-                                starCollision = true;
                                 collisionGizmo = gizmo;
                                 shortestTime = time;
 
@@ -340,16 +347,16 @@ public class GizmoballModel extends iModel {
                                         star.getCenter(),
                                         angular_velocity,
                                         ballCircle,
-                                        ballVelocity, 1);
+                                        ballVelocity, 1.0);
                             }
 
                             if (starShotOut != true) {
-                               /* for (LineSegment feeder : star.getFeederLines()) {
+                               for (LineSegment feeder : star.getFeederLines()) {
                                     if (ls.equals(feeder)) {
                                         starCollision = true;
                                         this.star = star;
                                     }
-                                }*/
+                                }
                             }
                         }else {//star collisions
                                 starCollision = false;
@@ -390,7 +397,7 @@ public class GizmoballModel extends iModel {
                         if (time < shortestTime) {
                             absorberCollision = false;
                             wallCollision = false;
-                            starCollision = true;
+                            starCollision = false;
                             shortestTime = time;
 
                             newVelo = Geometry.reflectRotatingCircle(
