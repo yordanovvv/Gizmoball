@@ -116,7 +116,7 @@ public class GameBoard extends JPanel implements Observer{
                     paintLeftFlipper(g2,x,y,gizmo.getRotationAngle(),c,gizmo.getID(),displayID);
                     break;
                 case "RightFlipper":
-                    paintRightFlipper(g2,x,y,gizmo.getRotationAngle(),c,gizmo.getID(),displayID);
+                    paintRightFlipper(g2,x,y,gizmo.getRotationAngle(),7.5, 6, c,gizmo.getID(),displayID);
                     break;
                 case"Star":
                     paintStar(g,x,y,gizmo.getRotationAngle(),c,gizmo.getID(),displayID);
@@ -272,17 +272,28 @@ public class GameBoard extends JPanel implements Observer{
         g2.dispose();
     }
 
-    private void paintRightFlipper(Graphics g,int x, int y, int angle,Color c,String id,Boolean displayID){
+    private void paintRightFlipper(Graphics g,int x, int y, int angle, double bigR, double smallR, Color c, String id,Boolean displayID){
         Graphics2D g2 =(Graphics2D) g.create();
 
         AffineTransform transform = new AffineTransform();
         AffineTransform old = g2.getTransform();
-        transform.rotate(Math.toRadians(angle), x + (30/2) + 8, y + 6);
+        //transform.rotate(Math.toRadians(angle), x + (30/2) + 8, y + 6);
+        transform.rotate(Math.toRadians(angle), x + 30 - bigR, y + smallR);
         g2.transform(transform);
 
         g2.setColor(c);
 
-        int[] pxFR = {x+15,x+15+15 ,x+13+15 ,x+1+15};
+        int[] pxFR = {x + 30, (int)(x + (30 - 2*bigR)), (int) (x + (30 - 2*smallR)), x+30};
+        int[] pyFR = {(int) (y + bigR), (int) (y + bigR),(int) (y + 2*30 - smallR), (int)(y+2*30-smallR)};
+        Polygon polyFR= new Polygon(pxFR, pyFR, pyFR.length);
+        g2.fillPolygon(polyFR);
+
+        g2.fillOval((int) (x+30 - 2*bigR), (int) (y),15,15);
+        g2.fillOval((int) (x + 30 - 2*smallR),(int) (y+2*30 - 2*smallR),12,12);
+        g2.setColor(Color.BLACK);
+        g2.fillOval(x+5+15,y+6,5,5);
+
+       /* int[] pxFR = {x+15,x+15+15 ,x+13+15 ,x+1+15};
         int[] pyFR = {y+5 ,y+5     ,y+56    ,y+56};
         Polygon polyFR= new Polygon(pxFR, pyFR, pyFR.length);
         g2.fillPolygon(polyFR);
@@ -290,7 +301,7 @@ public class GameBoard extends JPanel implements Observer{
         g2.fillOval(x+15,y,15,15);
         g2.fillOval(x+1+15,y+48,12,12);
         g2.setColor(Color.BLACK);
-        g2.fillOval(x+5+15,y+6,5,5);
+        g2.fillOval(x+5+15,y+6,5,5); */
 
         if(displayID) {
             g2.setColor(Color.WHITE);

@@ -81,9 +81,6 @@ public class RightFlipper implements iGizmo {
 
     @Override
     public void generateCircles() {
-        //todo fix me
-        //XCoord*constant + 20.9
-       // the radius is in pixels as we are graphing it to the screen.
 
         double topCircleRadius = 7.5; //in pixels
         double bottomCircleRadius = 6;
@@ -212,9 +209,7 @@ public class RightFlipper implements iGizmo {
     }
 
     public double getAngularVelo() {
-
         //rad/sec
-
         return Math.toRadians(rotationAngle) * 0.05;
     }
 
