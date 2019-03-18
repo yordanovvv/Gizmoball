@@ -97,8 +97,8 @@ public class GizmoballModel extends iModel {
         {
             if (ball != null && !ball.isStopped()) {
 
-                //ball.applyGravity(gravity, moveTime);
-                //ball.applyFriction();
+                ball.applyGravity(gravity, moveTime);
+                ball.applyFriction();
 
                 CollisionDetails cd = timeUntilCollision(ball);
                 double tuc = cd.getTuc();
