@@ -52,7 +52,6 @@ public abstract class iModel extends Observable {
 
     public abstract void getAudio(String path);
 
-    public abstract boolean connectGizmos(String id, String id2);
 
     public boolean displayID(){
         return displayID;
@@ -69,6 +68,10 @@ public abstract class iModel extends Observable {
     public abstract boolean[][] getSpaces();
 
     public abstract iGizmo getGizmoByID(String id);
+
+    public abstract boolean gizmoFound(String id);
+
+    public abstract boolean connectGizmos(String id, String id2);
 
     public abstract boolean removeConnection(iGizmo gizmo, String id);
 
