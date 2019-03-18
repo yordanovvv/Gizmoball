@@ -68,9 +68,18 @@ public class GravityandFrictionPopup {
         frictionSlider= new JSlider(0,100,5);
 
 
+        gravitySlider.setPaintTicks(true);
+     gravitySlider.setPaintLabels(true);
+      gravitySlider.setMajorTickSpacing(10);
+       gravitySlider.setMinorTickSpacing(5);
 
         container.add(gravityLabel);
         container.add(gravitySlider);
+
+        frictionSlider.setPaintTicks(true);
+        frictionSlider.setPaintLabels(true);
+       frictionSlider.setMajorTickSpacing(10);
+       frictionSlider.setMinorTickSpacing(5);
 
         container.add(frictionLabel);
         container.add(frictionSlider);
