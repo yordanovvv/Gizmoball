@@ -53,6 +53,7 @@ public class PlayModeListener implements ActionListener {
                     //gModel.getRightFlipListener().setIsStopped(false);
                    for(iGizmo g:stars){
                         Star star = (Star) g;
+                        star.setTick(false);
                         if(star.isRoating()) star.startStarRotation();
                     }
                     for (Ball b : balls) b.setStopped(false);
@@ -63,6 +64,7 @@ public class PlayModeListener implements ActionListener {
                     //gModel.getRightFlipListener().setIsStopped(true);
                     for(iGizmo g:stars){
                         Star star = (Star) g;
+                        star.setTick(false);
                         star.stopRotation();
                     }
 
@@ -73,9 +75,14 @@ public class PlayModeListener implements ActionListener {
                     //gModel.getRightFlipListener().setIsStopped(false);
                     //gModel.getRightFlipListener().moveFlipper("TICK");
                    for(iGizmo g:stars){
-                        Star star = (Star) g;
+                        /*Star star = (Star) g;
                         star.stopRotation();
                         star.rotate();
+                        star.stopRotation();*/
+                       Star star = (Star) g;
+                       star.stopRotation();
+                       star.setTick(true);
+                       star.rotate();
                     }
 
                     for (Ball b : balls)
