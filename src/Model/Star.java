@@ -130,12 +130,13 @@ public class Star implements iGizmo{
                 Timer clone = (Timer) e.getSource();
                 if(stopped | counter[0] == 20){
                     clone.stop();
-                    startStarRotation();
                     ball.setExactX((getXCoord())*30);
                     ball.setExactY((getYCoord())*30);
                     ball.setVelo(shootUp);
                     ball.setStopped(false);
                     callback.accept(ball);
+                    stopRotation();
+                    startStarRotation();
                 }
                 rotate();
                 counter[0]++;
@@ -198,25 +199,28 @@ public class Star implements iGizmo{
 
     @Override
     public void generateLines() {
+        /*
 
-        LineSegment line11 = new LineSegment(polyPoint1_x,polyPoint1_y-1,polyPoint3_x,polyPoint3_y);
-        LineSegment line12 = new LineSegment(polyPoint3_x,polyPoint3_y+1,polyPoint5_x,polyPoint5_y);//!!
-        LineSegment line13 = new LineSegment(polyPoint5_x,polyPoint5_y+1,polyPoint2_x,polyPoint2_y+1);
-        LineSegment line14 = new LineSegment(polyPoint2_x,polyPoint2_y,polyPoint4_x,polyPoint4_y);//!!
-        LineSegment line15 = new LineSegment(polyPoint4_x,polyPoint4_y,polyPoint1_x,polyPoint1_y);
-
+            g2.drawLine(polyPoint1_x,polyPoint1_y,polyPoint5_x-20,polyPoint2_y);
+        g2.drawLine(polyPoint5_x-20,polyPoint2_y,polyPoint5_x,polyPoint5_y);
+         */
         LineSegment line1 = new LineSegment(polyPoint1_x,polyPoint1_y,polyPoint5_x-20,polyPoint2_y);
         LineSegment line2 = new LineSegment(polyPoint5_x-20,polyPoint2_y,polyPoint5_x,polyPoint5_y);
-        LineSegment line3 = new LineSegment(polyPoint1_x,polyPoint1_y,polyPoint2_x+22,polyPoint2_y);
+       /* LineSegment line3 = new LineSegment(polyPoint1_x,polyPoint1_y,polyPoint2_x+22,polyPoint2_y);
         LineSegment line4 = new LineSegment(polyPoint2_x+22,polyPoint2_y,polyPoint2_x,polyPoint2_y);
         LineSegment line5 = new LineSegment(polyPoint2_x,polyPoint2_y,polyPoint3_x+6,polyPoint3_y-20);
         LineSegment line6 = new LineSegment(polyPoint3_x+6,polyPoint3_y-20,polyPoint3_x,polyPoint3_y);
         LineSegment line7 = new LineSegment(polyPoint3_x,polyPoint3_y,polyPoint4_x-18,polyPoint4_y-12);
         LineSegment line8 = new LineSegment(polyPoint4_x-18,polyPoint4_y-12,polyPoint4_x,polyPoint4_y);
         LineSegment line9 = new LineSegment(polyPoint4_x,polyPoint4_y,polyPoint5_x-16,polyPoint5_y+13);
-        LineSegment line10 = new LineSegment(polyPoint5_x-16,polyPoint5_y+13,polyPoint5_x,polyPoint5_y);
+        LineSegment line10 = new LineSegment(polyPoint5_x-16,polyPoint5_y+13,polyPoint5_x,polyPoint5_y);*/
+        LineSegment line11 = new LineSegment(polyPoint1_x,polyPoint1_y-1,polyPoint3_x,polyPoint3_y);
+        LineSegment line12 = new LineSegment(polyPoint3_x,polyPoint3_y+1,polyPoint5_x,polyPoint5_y);//!!
+        LineSegment line13 = new LineSegment(polyPoint5_x,polyPoint5_y+1,polyPoint2_x,polyPoint2_y+1);
+        LineSegment line14 = new LineSegment(polyPoint2_x,polyPoint2_y,polyPoint4_x,polyPoint4_y);//!!
+        LineSegment line15 = new LineSegment(polyPoint4_x,polyPoint4_y,polyPoint1_x,polyPoint1_y);
 
-        lines.addAll(Arrays.asList(new LineSegment[]{line1,line2,line3,line4,line5,line6,line7,line8,line9,line10,line11,line12,line13,line14,line15}));
+        lines.addAll(Arrays.asList(new LineSegment[]{line1,line2/*,line3,line4,line5,line6,line7,line8,line9,line10*/,line11,line12,line13,line14,line15}));
     }
 
     @Override

@@ -90,7 +90,7 @@ public class FlipperKeyListener implements KeyListener {
                             return;
                         }
                         try {
-                            Thread.sleep(13);
+                            Thread.sleep(13);//sleep for duration of 1 tick
                         } catch (InterruptedException e1) {
                             e1.printStackTrace();
                         }

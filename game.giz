@@ -1,55 +1,15 @@
-Ball B1 17 16 0 0
-Triangle T1 1 1
-Rotate T1
-Rotate T1
-Rotate T1
-Triangle T2 19 0
-Square S1 0 2
-Square S2 2 2
-Square S3 18 2
-Square S4 17 2
-Square S5 16 2
-Square S6 15 2
-Circle C1 18 3 0.5
-Circle C2 17 4 0.5
-Circle C3 16 5 0.5
-Circle C4 15 6 0.5
-RightFlipper RF1 14 7
-Circle C5 13 9 0.5
-Circle C6 12 9 0.5
-Circle C7 11 10 0.5
-Square S7 1 2
-Square S8 3 2
-Square S9 4 2
-Circle C12 9 9 0.5
-Circle C13 10 9 0.5
-Circle C14 4 3 0.5
-Circle C15 5 4 0.5
-Circle C16 6 5 0.5
-Circle C17 7 6 0.5
-LeftFlipper LF1 8 7
-Square S10 8 2
-Square S11 7 2
-Square S12 6 2
-Square S13 5 2
-Square S14 13 2
-Square S15 14 2
-LeftFlipper LF2 9 2
-RightFlipper RF1 12 2
-Star ST1 10 13
-Rotate ST1
-Rotate ST1
-Rotate ST1
-Rotate ST1
-Rotate ST1
-Rotate ST1
-Rotate ST1
-Rotate ST1
-Rotate ST1
-Rotate ST1
-Rotate ST1
-Rotate ST1
-Rotate ST1
-Rotate ST1
-Rotate ST1
-Absorber A 0 19 20 20
+Ball B1 9 4 0 0
+Absorber A1 0 18 20 20
+RightFlipper R1 5 10
+Triangle T1 9 4
+Triangle T2 6 4
+Rotate T2
+Rotate T2
+Rotate T2
+Triangle T3 6 6
+Rotate T3
+Rotate T3
+Circle C4 5 5 0.5
+Square S1 8 3
+Square S2 7 3
+Triangle T5 19 0

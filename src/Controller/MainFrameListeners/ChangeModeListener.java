@@ -35,10 +35,12 @@ public class ChangeModeListener implements ActionListener {
                 }
             }
             view.setGridVisability(true);
+            model.setDisplayID(true);
         }else {
             view.switchModes(1);
             model.saveGame((new File("game.giz")));
             view.setGridVisability(false);
+            model.setDisplayID(false);
         }
     }
 }

@@ -151,7 +151,7 @@ public class GameBoard extends JPanel implements Observer{
 
         if(displayID) {
             g.setColor(Color.WHITE);
-            g.drawString(id.toUpperCase(), x + 7, y + 21);
+            g.drawString(id.toUpperCase(), x + 5, y + 21);
         }
     }
 
@@ -179,7 +179,7 @@ public class GameBoard extends JPanel implements Observer{
 
         if(displayID) {
             g2.setColor(Color.WHITE);
-            g2.drawString(id.toUpperCase(), x + 15, y + 16);
+            g2.drawString(id.toUpperCase(), x + 5, y + 16);
         }
 
         g2.setTransform(old);
@@ -324,7 +324,7 @@ public class GameBoard extends JPanel implements Observer{
         g.fillRect(x,y,30,30);
         if(displayID) {
             g.setColor(Color.WHITE);
-            g.drawString(id.toUpperCase(), x + 15, y + 30);
+            g.drawString(id.toUpperCase(), x + 5, y + 30);
         }
     }
 

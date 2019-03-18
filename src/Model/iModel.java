@@ -8,7 +8,7 @@ import java.util.Observable;
 
 public abstract class iModel extends Observable {
 
-    boolean displayID=false;
+    boolean displayID=true;
 
     public abstract void setiGizmo(iGizmo gizmo);
 

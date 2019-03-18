@@ -32,7 +32,6 @@ public class ConnectGizmosPopup {
     //has an instance of model to access list of gizmos
     public ConnectGizmosPopup(iModel m) {
         this.model = m;
-        model.setDisplayID(true);
 
         Utils utils = new Utils();
         Color bg_color = (new Color(0, 41, 57, 255));
@@ -143,7 +142,6 @@ public class ConnectGizmosPopup {
                 case "Cancel":
                     frame.setVisible(false);
                     frame.dispose();
-                    model.setDisplayID(false);
                     break;
             }
 

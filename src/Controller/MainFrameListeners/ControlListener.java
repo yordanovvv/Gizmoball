@@ -69,8 +69,10 @@ public class ControlListener implements ActionListener {
                 filePath = fileLoader.getSelectedFile().getPath();
                 if(filePath.endsWith(".giz")) {
                     view.getModel().loadGame(new File(filePath));
+                    view.getModel().saveGame(new File("game.giz"));
                 } else {
                     view.getModel().loadGame(new File(filePath + ".giz"));
+                    view.getModel().saveGame(new File("game.giz"));
                 }
             }
             if (rVal == JFileChooser.CANCEL_OPTION) {
