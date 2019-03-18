@@ -448,7 +448,7 @@ public class GizmoballModel extends iModel {
                             collisionGizmo = gizmo;
                             shortestTime = timeC; //we are hitting a circle
                             absorberCollision = false;
-                            starCollision = true;
+                            starCollision = false;
                             starShotOut = false;
                             collisionGizmo = gizmo;
                             newVelo = Geometry.reflectCircle(c.getCenter(), ball.getCircle().getCenter(), ball.getVelo(), 1);

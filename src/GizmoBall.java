@@ -9,6 +9,6 @@ public class GizmoBall {
         iModel model = new GizmoballModel();
         MainFrame view = new MainFrame(model);
         model.addObserver(view.getGameBoard());
-       // model.loadGame(new File("default.giz"));
+        model.loadGame(new File("default.giz"));
     }
 }
