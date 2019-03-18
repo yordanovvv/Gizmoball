@@ -125,10 +125,12 @@ public class GridClickListener implements MouseListener {
                         }
                     }
                     giz = new RightFlipper("RF" + (bigId+1), gridX, gridY);
-                    if (!m.checkSpace(gridX, gridY)  && (!m.checkSpace(gridX, gridY+1)
-                    &&(!m.checkSpace(gridX-1, gridY+1))&&(!m.checkSpace(gridX-1, gridY)))){
-                        m.setSpaces(gridX, gridY, true, giz);
-                        m.addGizmo(giz);
+                    if (gridX-1>=0 && gridY+1<20) {
+                        if (!m.checkSpace(gridX, gridY) && (!m.checkSpace(gridX, gridY + 1)
+                                && (!m.checkSpace(gridX - 1, gridY + 1)) && (!m.checkSpace(gridX - 1, gridY)))) {
+                            m.setSpaces(gridX, gridY, true, giz);
+                            m.addGizmo(giz);
+                        }
                     }
                     break;
                 case "leftFlipper":
@@ -142,10 +144,13 @@ public class GridClickListener implements MouseListener {
                         }
                     }
                     giz = new LeftFlipper("LF" + (bigId+1), gridX, gridY);
-                    if (!m.checkSpace(gridX, gridY) && !m.checkSpace(gridX, gridY+1)
-                            && !m.checkSpace(gridX+1, gridY) && !m.checkSpace(gridX+1, gridY+1)){
-                        m.setSpaces(gridX, gridY, true, giz);
-                        m.addGizmo(giz);
+
+                    if (gridX+1<20 && gridY+1<20) {
+                        if (!m.checkSpace(gridX, gridY) && !m.checkSpace(gridX, gridY + 1)
+                                && !m.checkSpace(gridX + 1, gridY) && !m.checkSpace(gridX + 1, gridY + 1)) {
+                            m.setSpaces(gridX, gridY, true, giz);
+                            m.addGizmo(giz);
+                        }
                     }
                     break;
                 case "star":
@@ -246,18 +251,37 @@ public class GridClickListener implements MouseListener {
         int end_gridX = e.getX()/GRID_SIZE;
         int end_gridY = e.getY()/GRID_SIZE;
 
+        if (end_gridX>=20 || end_gridX < 0) return;
+        if (end_gridY>=20 || end_gridY < 0) return;
+
        if (selected=="absorber"){
-            System.out.println("Absorber start : " + start_gridX + " | " + start_gridY);
-            System.out.println("Absorber end : " + end_gridX + " | " + end_gridY);
+            //System.out.println("Absorber start : " + start_gridX + " | " + start_gridY);
+            //System.out.println("Absorber end : " + end_gridX + " | " + end_gridY);
+            if (start_gridX>end_gridX){
+                int temp = start_gridX;
+                start_gridX = end_gridX;
+                end_gridX = temp;
+            }
+            if (start_gridY>end_gridY){
+                int temp = start_gridY;
+                start_gridY = end_gridY;
+                end_gridY = temp;
+            }
             //create absorber here!
-            //Functionality for more than one absorber??
-            //if (m.getAbsorber()==null) {
-            //TODO : set spaces and check overlap  of other gizmos
-                Absorber abs = new Absorber("A", start_gridX, start_gridY, end_gridX+1, end_gridY+1);
-                m.addGizmo(abs);
-            //} else {
-            //    System.out.println("Absorber already exists");
-            //}
+           Absorber abs = new Absorber("A", start_gridX, start_gridY, end_gridX+1, end_gridY+1);
+           boolean absPlace = true;
+           int posWidth=abs.getWidth(), posHeight=abs.getHeight();
+           for(int x=0; x<posWidth; x++){
+               for (int y=0; y<posHeight; y++){
+                   if (m.checkSpace(start_gridX +x, start_gridY+y)){
+                       absPlace = false;
+                   }
+               }
+           }
+           if(absPlace){
+               m.addGizmo(abs);
+               m.setSpaces(start_gridX, start_gridY,  true, abs);
+           }
         }
 
     }
