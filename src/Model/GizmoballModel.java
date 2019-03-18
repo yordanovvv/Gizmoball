@@ -295,6 +295,7 @@ public class GizmoballModel extends iModel {
         return spaces;
     }
 
+    //todo this neeeeeds to be fixed, with regards to movement of gizmos
     public boolean checkSpace(int gridX, int gridY){
         if(gridX>=20|gridY>=20)return false;
         return spaces[gridX][gridY];

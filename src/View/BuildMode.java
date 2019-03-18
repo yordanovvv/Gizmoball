@@ -141,7 +141,7 @@ public class BuildMode extends JPanel{
         button_move = utils.addImgToBtn("move.png",button_move,Color.WHITE);
         button_keypressConnect = utils.addImgToBtn("keypress.png", button_keypressConnect, Color.WHITE);
         button_changeBallVelo = utils.addImgToBtn("ballvelochange.png", button_changeBallVelo, Color.WHITE);
-        button_changeFrictionandGravity = utils.addImgToBtn("f.png",button_changeFrictionandGravity, Color.WHITE);
+        button_changeFrictionandGravity = utils.addImgToBtn("gravityFriction.png",button_changeFrictionandGravity, Color.WHITE);
 
         controlsPanel.add(label_controls,BorderLayout.PAGE_START);
         controlsPanel.add(container_play,BorderLayout.CENTER);
@@ -181,8 +181,8 @@ public class BuildMode extends JPanel{
         AddButtonGizmoListener deleteListener = new AddButtonGizmoListener("delete", lis);
         AddButtonGizmoListener moveListener = new AddButtonGizmoListener("move", lis);
 
-        UpdateBallVeloListener updateBallVeloListener = new UpdateBallVeloListener(mainFrame.getModel());
-        //AddButtonGizmoListener connectKeyListener = new AddButtonGizmoListener("connectKey", lis);
+        ShowPopupListener updateBallVeloListener = new ShowPopupListener(mainFrame.getModel(), "updateBall");
+        ShowPopupListener updateGravFricListener = new ShowPopupListener(mainFrame.getModel(), "updateGravity");
 
         ClearClickListener clearClickListener = new ClearClickListener(mainFrame.getModel());
 
@@ -195,6 +195,7 @@ public class BuildMode extends JPanel{
         button_clear.addMouseListener(clearClickListener);
         button_move.addMouseListener(moveListener);
         button_changeBallVelo.addMouseListener(updateBallVeloListener);
+        button_changeFrictionandGravity.addMouseListener(updateGravFricListener);
 
         //mainFrame.getGameBoard().addMouseListener(board_listener);
         //---------------------------------------

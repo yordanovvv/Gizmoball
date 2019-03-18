@@ -55,11 +55,10 @@ public class GravityandFrictionPopup {
         container.setLayout(new GridLayout(0,2,10,10));
         container.setBackground(bg_color);
 
-       gravityLabel = new JLabel("Choose gizmo1");
-      gravityLabel = utils.editLabel(gravityLabel,12,Color.WHITE);
+       gravityLabel = new JLabel("Set gravity value : ");
+       gravityLabel = utils.editLabel(gravityLabel,12,Color.WHITE);
 
-
-       frictionLabel = new JLabel("Choose gizmo2");
+       frictionLabel = new JLabel("Set friction value : ");
        frictionLabel = utils.editLabel(frictionLabel,12,Color.WHITE);
 
 
