@@ -206,14 +206,14 @@ public class Star implements iGizmo{
          */
         LineSegment line1 = new LineSegment(polyPoint1_x,polyPoint1_y,polyPoint5_x-20,polyPoint2_y);
         LineSegment line2 = new LineSegment(polyPoint5_x-20,polyPoint2_y,polyPoint5_x,polyPoint5_y);
-       /* LineSegment line3 = new LineSegment(polyPoint1_x,polyPoint1_y,polyPoint2_x+22,polyPoint2_y);
+        LineSegment line3 = new LineSegment(polyPoint1_x,polyPoint1_y,polyPoint2_x+22,polyPoint2_y);
         LineSegment line4 = new LineSegment(polyPoint2_x+22,polyPoint2_y,polyPoint2_x,polyPoint2_y);
         LineSegment line5 = new LineSegment(polyPoint2_x,polyPoint2_y,polyPoint3_x+6,polyPoint3_y-20);
         LineSegment line6 = new LineSegment(polyPoint3_x+6,polyPoint3_y-20,polyPoint3_x,polyPoint3_y);
         LineSegment line7 = new LineSegment(polyPoint3_x,polyPoint3_y,polyPoint4_x-18,polyPoint4_y-12);
         LineSegment line8 = new LineSegment(polyPoint4_x-18,polyPoint4_y-12,polyPoint4_x,polyPoint4_y);
         LineSegment line9 = new LineSegment(polyPoint4_x,polyPoint4_y,polyPoint5_x-16,polyPoint5_y+13);
-        LineSegment line10 = new LineSegment(polyPoint5_x-16,polyPoint5_y+13,polyPoint5_x,polyPoint5_y);*/
+        LineSegment line10 = new LineSegment(polyPoint5_x-16,polyPoint5_y+13,polyPoint5_x,polyPoint5_y);
         LineSegment line11 = new LineSegment(polyPoint1_x,polyPoint1_y-1,polyPoint3_x,polyPoint3_y);
         LineSegment line12 = new LineSegment(polyPoint3_x,polyPoint3_y+1,polyPoint5_x,polyPoint5_y);//!!
         LineSegment line13 = new LineSegment(polyPoint5_x,polyPoint5_y+1,polyPoint2_x,polyPoint2_y+1);
