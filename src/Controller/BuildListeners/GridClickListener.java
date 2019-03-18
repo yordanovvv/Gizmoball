@@ -116,13 +116,11 @@ public class GridClickListener implements MouseListener {
                 case "rightFlipper":
                     for (iGizmo g : m.getGizmos()) {
                         if (g.getGizmoType().equals("RightFlipper")) {
-                            if (g.getGizmoType().equals("Square")) {
                                 bigId = Integer.parseInt(g.getID().substring(2));
                                 System.out.println(bigId);
                                 if (idNo > bigId){
                                     bigId = idNo;
                                 }
-                            }
                         }
                     }
                     giz = new RightFlipper("RF" + (bigId+1), gridX, gridY);
