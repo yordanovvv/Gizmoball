@@ -68,4 +68,8 @@ public abstract class iModel extends Observable {
 
     public abstract boolean[][] getSpaces();
 
+    public abstract iGizmo getGizmoByID(String id);
+
+    public abstract boolean removeConnection(iGizmo gizmo, String id);
+
 }

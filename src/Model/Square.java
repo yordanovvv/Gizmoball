@@ -182,8 +182,8 @@ public class Square implements iGizmo {
     }
 
     @Override
-    public void removeGizmoConnection(String id) {
-        gizmoConnections.remove(id);
+    public boolean removeGizmoConnection(String id) {
+        return gizmoConnections.remove(id);
 
     }
 

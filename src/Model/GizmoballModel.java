@@ -853,9 +853,8 @@ public class GizmoballModel extends iModel {
 
     //TODO need to decide if player can remove all connections or specific ones
 
-    public void removeConnections(String id){
-
-
+    public boolean removeConnection(iGizmo gizmo, String id){
+        return gizmo.removeGizmoConnection(id);
     }
 
     public void removeKeyConnections(String id){

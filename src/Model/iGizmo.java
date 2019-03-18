@@ -58,7 +58,7 @@ public interface iGizmo {
 
     ArrayList<String> getKeyConnections();
 
-    void removeGizmoConnection(String id);
+    boolean removeGizmoConnection(String id);
 
     void removeKeyConnection();
 

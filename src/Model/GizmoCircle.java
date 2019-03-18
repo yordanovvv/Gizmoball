@@ -158,14 +158,8 @@ public class GizmoCircle implements iGizmo {
     }
 
     @Override
-    public void removeGizmoConnection(String id) {
-        int i =0;
-        for (String giz: gizmoConnections){
-            if(giz.equals(id)){
-                gizmoConnections.remove(i);
-            }
-            i++;
-        }
+    public boolean removeGizmoConnection(String id) {
+     return gizmoConnections.remove(id);
 
     }
 

@@ -313,8 +313,8 @@ public class Star implements iGizmo{
     }
 
     @Override
-    public void removeGizmoConnection(String id) {
-    //??
+    public boolean removeGizmoConnection(String id) {
+        return gizmoConnections.remove(id);
     }
 
     @Override
