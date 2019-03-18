@@ -39,7 +39,7 @@ public abstract class iModel extends Observable {
 
     public abstract Absorber getAbsorber();
 
-    public abstract boolean checkSpace(int gridX, int gridY);
+    public abstract boolean checkSpace(int gridX, int gridY, iGizmo g);
 
     public abstract void wipeSpaces();
 

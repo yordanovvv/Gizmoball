@@ -296,8 +296,73 @@ public class GizmoballModel extends iModel {
     }
 
     //todo this neeeeeds to be fixed, with regards to movement of gizmos
-    public boolean checkSpace(int gridX, int gridY){
+    public boolean checkSpace(int gridX, int gridY, iGizmo g){
         if(gridX>=20|gridY>=20)return false;
+        if (g==null){
+            return spaces[gridX][gridY];
+        }
+
+        //Spaces true if free, false if not
+
+        switch (g.getGizmoType()){
+            case "Circle":
+                return spaces[gridX][gridY];
+            case "Square":
+                return spaces[gridX][gridY];
+            case "Triangle":
+                return spaces[gridX][gridY];
+            case "LeftFlipper":
+                boolean  canPlaceLF = true;
+                if (spaces[gridX][gridY] || spaces[gridX][gridY+1] || spaces[gridX+1][gridY+1] || spaces[gridX+1][gridY]){
+                    canPlaceLF = false;
+                }
+                return canPlaceLF;
+            case "RightFlipper":
+                boolean canPlaceRF = true;
+                if (spaces[gridX][gridY] || spaces[gridX][gridY+1] || spaces[gridX-1][gridY+1] || spaces[gridX-1][gridY]){
+                    canPlaceRF = false;
+                }
+                return canPlaceRF;
+            case "Star":
+                boolean canPlaceStar = true;
+                if (spaces[gridX][gridY] ||
+                        spaces[gridX][gridY+1] ||
+                        spaces[gridX][gridY+2] ||
+                        spaces[gridX+1][gridY] ||
+                        spaces[gridX+2][gridY] ||
+                        spaces[gridX+1][gridY+1] ||
+                        spaces[gridX+1][gridY+2] ||
+                        spaces[gridX+2][gridY+1] ||
+                        spaces[gridX+2][gridY+2] ||
+                        spaces[gridX-1][gridY-1] ||
+                        spaces[gridX-1][gridY] ||
+                        spaces[gridX-1][gridY+1] ||
+                        spaces[gridX-1][gridY+2] ||
+                        spaces[gridX][gridY-1] ||
+                        spaces[gridX+1][gridY-1] ||
+                        spaces[gridX+2][gridY-1]){
+                    canPlaceStar = false;
+                }
+                return canPlaceStar;
+            case "Absorber":
+                int posWidth, posHeight;
+                boolean absPlace = true;
+                posWidth=g.getWidth();
+                posHeight=g.getHeight();
+                for(int x=0; x<posWidth; x++){
+                    for (int y=0; y<posHeight; y++){
+                        try {
+                        if (spaces[gridX+x][gridY+y]){
+                            absPlace=false;
+                        }
+                        }catch(ArrayIndexOutOfBoundsException aoe){
+                            System.out.println("Absorber out of bounds");
+                            return false;
+                        }
+                    }
+                }
+                return absPlace;
+        }
         return spaces[gridX][gridY];
     }
 

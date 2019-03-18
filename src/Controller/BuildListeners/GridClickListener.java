@@ -47,7 +47,7 @@ public class GridClickListener implements MouseListener {
         if (gridX>=20 || gridY>=20){
             canPlace = false;
         } else {
-            canPlace = !m.checkSpace(gridX, gridY);
+            canPlace = !m.checkSpace(gridX, gridY, null);
         }
 
         iGizmo giz = null;
@@ -72,8 +72,7 @@ public class GridClickListener implements MouseListener {
                         }
                     }
                     giz = new GizmoCircle("C" + (bigId+1), gridX, gridY, rad);
-                    System.out.println("-" + m.checkSpace(gridX, gridY));
-                    if (!m.checkSpace(gridX, gridY)){
+                    if (!m.checkSpace(gridX, gridY, giz)){   //must be !checkspace bc checkspace returns false is free
                         m.setSpaces(gridX, gridY, true, giz);
                         m.addGizmo(giz);
                     }
@@ -89,7 +88,7 @@ public class GridClickListener implements MouseListener {
                         }
                     }
                     giz = new Square("S" + (bigId+1), gridX, gridY);
-                    if (!m.checkSpace(gridX, gridY)){
+                    if (!m.checkSpace(gridX, gridY, giz)){
                         m.setSpaces(gridX, gridY, true, giz);
                         m.addGizmo(giz);
                     }
@@ -105,7 +104,7 @@ public class GridClickListener implements MouseListener {
                         }
                     }
                     giz = new Triangle("T" + (bigId+1), gridX, gridY);
-                    if (!m.checkSpace(gridX, gridY)){
+                    if (!m.checkSpace(gridX, gridY, giz)){
                         m.setSpaces(gridX, gridY, true, giz);
                         m.addGizmo(giz);
                     }
@@ -122,8 +121,7 @@ public class GridClickListener implements MouseListener {
                     }
                     giz = new RightFlipper("RF" + (bigId+1), gridX, gridY);
                     if (gridX-1>=0 && gridY+1<20) {
-                        if (!m.checkSpace(gridX, gridY) && (!m.checkSpace(gridX, gridY + 1)
-                                && (!m.checkSpace(gridX - 1, gridY + 1)) && (!m.checkSpace(gridX - 1, gridY)))) {
+                        if (m.checkSpace(gridX, gridY, giz)) {
                             m.setSpaces(gridX, gridY, true, giz);
                             m.addGizmo(giz);
                             SelectKeyPopup keyPopup = new SelectKeyPopup(m, giz);
@@ -141,13 +139,10 @@ public class GridClickListener implements MouseListener {
                         }
                     }
                     giz = new LeftFlipper("LF" + (bigId+1), gridX, gridY);
-
                     if (gridX+1<20 && gridY+1<20) {
-                        if (!m.checkSpace(gridX, gridY) && !m.checkSpace(gridX, gridY + 1)
-                                && !m.checkSpace(gridX + 1, gridY) && !m.checkSpace(gridX + 1, gridY + 1)) {
+                        if (m.checkSpace(gridX, gridY, giz)) {
                             m.setSpaces(gridX, gridY, true, giz);
                             m.addGizmo(giz);
-
                             SelectKeyPopup keyPopup = new SelectKeyPopup(m, giz);
                         }
                     }
@@ -164,25 +159,7 @@ public class GridClickListener implements MouseListener {
                     }
                     giz = new Star("ST" + (bigId+1), gridX, gridY);
                     if(gridX+2<20 && gridY+2<20 && gridX-1>=0 && gridY-1>=0) {
-                        //Hefty IF here ...
-                        if (!m.checkSpace(gridX, gridY) &&
-                                !m.checkSpace(gridX, gridY+1) &&
-                                !m.checkSpace(gridX, gridY+2) &&
-                                !m.checkSpace(gridX+1, gridY) &&
-                                !m.checkSpace(gridX+2, gridY) &&
-                                !m.checkSpace(gridX+1, gridY+1) &&
-                                !m.checkSpace(gridX+2, gridY+1) &&
-                                !m.checkSpace(gridX+1, gridY+2) &&
-                                !m.checkSpace(gridX+2, gridY+2) &&
-                                !m.checkSpace(gridX-1, gridY-1) &&
-                                !m.checkSpace(gridX-1, gridY-1) &&
-                                !m.checkSpace(gridX-1, gridY) &&
-                                !m.checkSpace(gridX-1, gridY+1) &&
-                                !m.checkSpace(gridX-1, gridY+2) &&
-                                !m.checkSpace(gridX, gridY-1) &&
-                                !m.checkSpace(gridX+1, gridY-1) &&
-                                !m.checkSpace(gridX+2, gridY-1)){
-
+                        if (m.checkSpace(gridX, gridY, giz)) {
                             m.setSpaces(gridX, gridY, true, giz);
                             m.addGizmo(giz);
                         }
@@ -190,14 +167,16 @@ public class GridClickListener implements MouseListener {
                     break;
                 case "move":
                     if(moveGizmo != null) {
-                        //clear spaces gizmo was at
-                        m.setSpaces(moveGizmo.getXCoord(), moveGizmo.getYCoord(), false, moveGizmo);
-                        //move gizmo
-                        moveGizmo.setXCoord(gridX);
-                        moveGizmo.setYCoord(gridY);
-                        //set spaces of new position
-                        m.setSpaces(gridX, gridY, true, moveGizmo);
-                        moveGizmo = null;
+                        if ( m.checkSpace(gridX, gridY, moveGizmo)) {
+                                //clear spaces gizmo was at
+                                m.setSpaces(moveGizmo.getXCoord(), moveGizmo.getYCoord(), false, moveGizmo);
+                                //move gizmo
+                                moveGizmo.setXCoord(gridX);
+                                moveGizmo.setYCoord(gridY);
+                                //set spaces of new position
+                                m.setSpaces(gridX, gridY, true, moveGizmo);
+                                moveGizmo = null;
+                        }
                     }
                     break;
                 case "connectKey":
@@ -233,7 +212,6 @@ public class GridClickListener implements MouseListener {
                     for (iGizmo g : m.getGizmos()) {
                         if (g.getXCoord() == gridX && g.getYCoord() == gridY) {
                             moveGizmo = g;
-                            System.out.println("clicked on " + moveGizmo.getID());
                         }
                     }
                     break;
@@ -301,17 +279,7 @@ public class GridClickListener implements MouseListener {
         switch (selected){
             case "absorber":
                 Absorber abs = new Absorber("A", start_gridX, start_gridY, end_gridX+1, end_gridY+1);
-                boolean absPlace = true;
-                posWidth=abs.getWidth();
-                posHeight=abs.getHeight();
-                for(int x=0; x<posWidth; x++){
-                    for (int y=0; y<posHeight; y++){
-                        if (m.checkSpace(start_gridX +x, start_gridY+y)){
-                            absPlace = false;
-                        }
-                    }
-                }
-                if(absPlace){
+                if (m.checkSpace(start_gridX, start_gridY, abs)){
                     m.addGizmo(abs);
                     m.setSpaces(start_gridX, start_gridY,  true, abs);
                 }
