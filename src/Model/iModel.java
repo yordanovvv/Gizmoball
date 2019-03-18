@@ -47,8 +47,7 @@ public abstract class iModel extends Observable {
 
     public abstract void loadGame(File file) ;
 
-    public void addBall(Ball b) {
-    }
+    public void addBall(Ball b) { }
 
     public abstract void getAudio(String path);
 

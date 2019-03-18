@@ -137,6 +137,7 @@ public class GizmoTest {
     @Test
     public void getWalls() {
 
+        //check all are same
 
         assertEquals(walls.getXCoord(), model.getWalls().getXCoord());
         assertEquals(walls.getXCoord2(), model.getWalls().getXCoord2());
