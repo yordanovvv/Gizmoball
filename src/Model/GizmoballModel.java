@@ -682,6 +682,9 @@ public class GizmoballModel extends iModel {
                             this.connectGizmos(giz1.getID(), giz2.getID());
 
                         break;
+                    case "KeyConnect":
+
+                        break;
                     default:
                         break;
                 }
@@ -756,6 +759,7 @@ public class GizmoballModel extends iModel {
             iGizmo gizmo = getGizmoByID(id);
             //set the key connection
             gizmo.setKeyConnection(key);
+            keyTriggers.put(gizmo, key.charAt(0));
 
         }
     }

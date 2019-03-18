@@ -54,6 +54,7 @@ public class PlayMode extends JPanel {
         }
 
         mainFrame.addKeyListener(absorberListener);
+        mainFrame.setFocusable(true);
         mainFrame.requestFocus();
 
         init();

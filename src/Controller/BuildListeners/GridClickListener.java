@@ -1,10 +1,7 @@
 package Controller.BuildListeners;
 
 import Model.*;
-import View.ConnectGizmosPopup;
-import View.PlaceBallPopup;
-import View.GameBoard;
-import View.UpdateBallPopup;
+import View.*;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -129,6 +126,7 @@ public class GridClickListener implements MouseListener {
                                 && (!m.checkSpace(gridX - 1, gridY + 1)) && (!m.checkSpace(gridX - 1, gridY)))) {
                             m.setSpaces(gridX, gridY, true, giz);
                             m.addGizmo(giz);
+                            SelectKeyPopup keyPopup = new SelectKeyPopup(m, giz);
                         }
                     }
                     break;
@@ -149,6 +147,8 @@ public class GridClickListener implements MouseListener {
                                 && !m.checkSpace(gridX + 1, gridY) && !m.checkSpace(gridX + 1, gridY + 1)) {
                             m.setSpaces(gridX, gridY, true, giz);
                             m.addGizmo(giz);
+
+                            SelectKeyPopup keyPopup = new SelectKeyPopup(m, giz);
                         }
                     }
                     break;
