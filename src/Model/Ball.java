@@ -106,6 +106,13 @@ public class Ball extends Observable {
         return Vnew;
     }
 
+    public  void setFriction(double mu1, double mu2)
+    {
+        double delta_t = 0.05;
+        Vect Vnew  = this.getVelo().times(1 - (mu1 * delta_t) - (mu2 * abs(this.getVelo().length()) * delta_t/30));
+        this.setVelo(Vnew);
+    }
+
     public double getFriction()
     {
         return friction;
