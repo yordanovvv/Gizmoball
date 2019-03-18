@@ -27,6 +27,7 @@ public class Star implements iGizmo{
     private final int constant = 30;
 
     private int rotationAngle = 0;
+    private boolean tick = false;
     private boolean down = false, hit, stopped = true;
 
     private int
@@ -100,7 +101,24 @@ public class Star implements iGizmo{
     }
 
     public void startStarRotation(){
-        spinStar(200);
+        if(tick){
+          //  rotate();
+        }else {
+            if (stopped) spinStar(200);
+        }
+    }
+
+    public boolean isTick(){
+        return tick;
+    }
+    public void setTick(boolean tick){
+        this.tick = tick;
+    }
+
+    public void spinStarForTime(double timeTill){
+        int movementpersec = 18*5;
+        double formatted_tuc = timeTill*30;
+        //rotate();
     }
 
     private void spinStar(int delay){

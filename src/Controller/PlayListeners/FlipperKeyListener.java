@@ -28,7 +28,7 @@ public class FlipperKeyListener implements KeyListener {
         this.keypressed = false;
         this.runningTimer =false;
         this.time = Integer.toUnsignedLong(0);
-        this.executor =(ThreadPoolExecutor) Executors.newFixedThreadPool(3);
+        this.executor =(ThreadPoolExecutor) Executors.newFixedThreadPool(1);
 
         //timer event for flipper rotation
        this.timer = new Timer(13 , e -> {
