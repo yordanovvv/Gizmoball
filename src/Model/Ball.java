@@ -165,7 +165,7 @@ public class Ball extends Observable {
 
     public double getSpeed()
     {
-
+        calculateSpeed(0.05);
         return speed;
     }
 }
