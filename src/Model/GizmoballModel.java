@@ -112,7 +112,10 @@ public class GizmoballModel extends iModel {
                         //playSound(collisionGizmo);
                         ball = moveBallForTime(ball, tuc + moveTime);
                         absorber.addBall(ball);
-                    
+                        ball.setExactX((((Absorber)absorber).getXCoord2()-.5)*30);
+                        ball.setExactY((((Absorber)absorber).getYCoord2()-.5)*30);
+
+
                         ball.setStopped(true);
                         ball.setVelo(new Vect(0,0));
                         absorberCollision = false;
