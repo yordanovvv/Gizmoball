@@ -1,6 +1,10 @@
 import Model.*;
+import com.sun.source.tree.AssertTree;
 import org.junit.*;
 
+import java.util.ArrayList;
+
+import static java.lang.StrictMath.sqrt;
 import static org.junit.Assert.*;
 
 public class GizmoTest {
@@ -12,6 +16,8 @@ public class GizmoTest {
     private iGizmo leftFlipper;
     private iGizmo absorber;
     private iGizmo star;
+    private Ball ball;
+    private ArrayList<Ball> balls;
 
     //Set up a board in order to test gizmos
     @Before
@@ -24,6 +30,8 @@ public class GizmoTest {
         leftFlipper = new LeftFlipper("LF1", 15, 8);
         absorber = new Absorber("A1", 0, 1, 20, 1);
         star = new Star("S1", 19, 17);
+        ball= new Ball("B1",18,6,3,2);
+        balls= new ArrayList<>();
         model.addGizmo(circle);
         model.addGizmo(triangle);
         model.addGizmo(square);
@@ -31,6 +39,7 @@ public class GizmoTest {
         model.addGizmo(leftFlipper);
         model.addGizmo(absorber);
         model.addGizmo(star);
+        model.addBall(ball);
 
 
     }
@@ -111,6 +120,34 @@ public class GizmoTest {
         assertEquals("Circle", circle.getGizmoType());
     }
 
+    @Test
+    public void removeGizmo(){
+        model.removeGizmo(triangle);
+        assertFalse(model.getGizmos().contains(triangle));
+
+    }
+
+    @Test
+    public void getBalls(){
+        assertTrue(model.getBalls().contains(ball));
+    }
+
+    @Test
+    public void addBall(){
+        balls.add(ball);
+        assertTrue(balls.contains(ball));
+    }
+
+    @Test
+    public void setBallSpeed(){
+        model.setBallSpeed(ball,6,4);
+        double speed = sqrt(36 + 16)*0.05;
+
+        assertEquals((long)ball.getSpeed(), (long)speed, 0 );
+
+    }
+
+  
 
 
    //TODO need to test equals method for gizmos
