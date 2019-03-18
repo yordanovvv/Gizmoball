@@ -1,15 +1,3 @@
-Ball B1 9 4 0 0
-Absorber A1 0 18 20 20
-RightFlipper R1 5 10
-Triangle T1 9 4
-Triangle T2 6 4
-Rotate T2
-Rotate T2
-Rotate T2
-Triangle T3 6 6
-Rotate T3
-Rotate T3
-Circle C4 5 5 0.5
-Square S1 8 3
-Square S2 7 3
-Triangle T5 19 0
+Ball B1 17 18 0 0
+Ball B2 18 19 0 -33
+Ball B3 10 17 0 0

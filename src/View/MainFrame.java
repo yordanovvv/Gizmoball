@@ -6,11 +6,13 @@ import Model.iModel;
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.util.Observable;
 import java.util.Observer;
 
-public class MainFrame extends JFrame implements iMainFrame, Observer {
+public class MainFrame extends JFrame implements iMainFrame, Observer, ActionListener {
 
     private JPanel upperMenu;
     private JMenuBar optionsMenu;
@@ -37,10 +39,11 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
 
     private JTextField output_Gravity;
     public JTextField output_Friction;
-    private JTextField output_BallPosition;
-    public JTextField output_Velocity;
+    private JLabel output_BallPosition;
+    public JLabel output_Velocity;
 
     private iModel model;
+    private Timer textUpdateTimer;
 
     private final int WIDTH = 1000, HEIGHT = 900;
 
@@ -139,15 +142,15 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
         label_Gravity = util.editLabel(label_Gravity, 12, Color.BLACK);
         label_Velocity = util.editLabel(label_Velocity, 12, Color.BLACK);
 
-        output_BallPosition = new JTextField("");
+        output_BallPosition = new JLabel("---");
         output_Friction = new JTextField("");
         output_Gravity = new JTextField("");
-        output_Velocity = new JTextField("");
+        output_Velocity = new JLabel("---");
 
-        output_BallPosition = util.styleTextField(output_BallPosition, 11);
+        //output_BallPosition = util.styleTextField(output_BallPosition, 11);
         output_Friction = util.styleTextField(output_Friction, 11);
         output_Gravity = util.styleTextField(output_Gravity, 11);
-        output_Velocity = util.styleTextField(output_Velocity, 11);
+        //output_Velocity = util.styleTextField(output_Velocity, 11);
 
         GridLayout layout_physicsComponent = new GridLayout(2, 2, 20, 20);
 
@@ -223,6 +226,12 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
 
         componentBoard.add(gamestateBoard, BorderLayout.CENTER);
         this.add(componentBoard, BorderLayout.LINE_START);
+
+        //Start timer for updating the text panels
+        textUpdateTimer = new Timer(50, this);
+        textUpdateTimer.start();
+
+
 
     }
 
@@ -300,5 +309,10 @@ public class MainFrame extends JFrame implements iMainFrame, Observer {
     @Override
     public void update(Observable o, Object arg) {
         this.repaint();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        //probs dont need this
     }
 }

@@ -3,13 +3,15 @@ package View;
 import Model.Ball;
 import Model.iGizmo;
 import Model.iModel;
+import physics.Vect;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-public class PlaceBallPopup {
+public class UpdateBallPopup {
 
     JFrame pop_upFrame;
     JLabel description;
@@ -26,18 +28,27 @@ public class PlaceBallPopup {
     int gridX;
     int gridY;
 
-    public PlaceBallPopup(iModel m, int gridX, int gridY){
+    JLabel label_comboBall;
+    private JComboBox<String> combo_ball;
+    private ArrayList<Ball> balls;
+
+
+    public UpdateBallPopup(iModel m){
 
         this.m = m;
-        this.gridX = gridX;
-        this.gridY = gridY;
+
+        combo_ball = new JComboBox<>();
+        balls = m.getBalls();
+        for (Ball b : balls){
+            combo_ball.addItem("Ball " + b.getID());
+        }
 
         Utils utils = new Utils();
         Color bg_color = (new Color(0, 41, 57, 255));
 
         pop_upFrame = new JFrame();
         pop_upFrame.setLayout(new BorderLayout());
-        pop_upFrame.setPreferredSize(new Dimension(400,150));
+        pop_upFrame.setPreferredSize(new Dimension(400,200));
         pop_upFrame.setTitle("Add a Ball.");
 
 
@@ -58,6 +69,9 @@ public class PlaceBallPopup {
         container.setLayout(new GridLayout(0,2,10,10));
         container.setBackground(bg_color);
 
+        label_comboBall = new JLabel("Select Ball :");
+        label_comboBall = utils.editLabel(label_comboBall,12,Color.WHITE);
+
         label_xVelocity = new JLabel("X Velocity");
         label_xVelocity = utils.editLabel(label_xVelocity,12,Color.WHITE);
 
@@ -69,6 +83,9 @@ public class PlaceBallPopup {
 
         yVelocity = new JTextField();
         xVelocity.setEditable(true);
+
+        container.add(label_comboBall);
+        container.add(combo_ball);
 
         container.add(label_xVelocity);
         container.add(xVelocity);
@@ -117,6 +134,9 @@ public class PlaceBallPopup {
             try {
                 xVelo = Double.parseDouble(xVelocity.getText());
                 yVelo = Double.parseDouble(yVelocity.getText());
+
+                Ball selectedBall = balls.get(combo_ball.getSelectedIndex());
+                selectedBall.setVelo(new Vect(xVelo, yVelo));
             } catch (NumberFormatException nfe){
                 System.out.println("Must enter text, cancelling addition");
                 pop_upFrame.setVisible(false);
@@ -124,18 +144,7 @@ public class PlaceBallPopup {
                 return;
             }
 
-            int bigId =0, idNo=0;
-            for (Ball b : m.getBalls()) {
-                    bigId = Integer.parseInt(b.getID().substring(1));
-                    System.out.println(bigId);
-                    if (idNo > bigId){
-                        bigId = idNo;
-                    }
-            }
-           if (e.getActionCommand().equals("Done")){
-                Ball b = new Ball("B"+(bigId+1), gridX, gridY, xVelo, yVelo);
-                m.addBall(b);
-            }
+            //selectedball
 
             pop_upFrame.setVisible(false);
             pop_upFrame.dispose();

@@ -4,6 +4,7 @@ import Model.*;
 import View.ConnectGizmosPopup;
 import View.PlaceBallPopup;
 import View.GameBoard;
+import View.UpdateBallPopup;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -201,6 +202,9 @@ public class GridClickListener implements MouseListener {
                         moveGizmo = null;
                     }
                     break;
+                case "connectKey":
+
+                    break;
                 default:
                     break;
                 //---------------------------------
@@ -235,8 +239,7 @@ public class GridClickListener implements MouseListener {
                         }
                     }
                     break;
-                case "connectKey":
-                    break;
+
             }
         }
 
@@ -253,7 +256,7 @@ public class GridClickListener implements MouseListener {
 
         if (end_gridX>=20 || end_gridX < 0) return;
         if (end_gridY>=20 || end_gridY < 0) return;
-
+        /*
        if (selected=="absorber"){
             //System.out.println("Absorber start : " + start_gridX + " | " + start_gridY);
             //System.out.println("Absorber end : " + end_gridX + " | " + end_gridY);
@@ -283,6 +286,43 @@ public class GridClickListener implements MouseListener {
                m.setSpaces(start_gridX, start_gridY,  true, abs);
            }
         }
+        */
+        if (start_gridX>end_gridX){
+            int temp = start_gridX;
+            start_gridX = end_gridX;
+            end_gridX = temp;
+        }
+        if (start_gridY>end_gridY){
+            int temp = start_gridY;
+            start_gridY = end_gridY;
+            end_gridY = temp;
+        }
+
+        int posWidth, posHeight;
+
+        switch (selected){
+            case "absorber":
+                Absorber abs = new Absorber("A", start_gridX, start_gridY, end_gridX+1, end_gridY+1);
+                boolean absPlace = true;
+                posWidth=abs.getWidth();
+                posHeight=abs.getHeight();
+                for(int x=0; x<posWidth; x++){
+                    for (int y=0; y<posHeight; y++){
+                        if (m.checkSpace(start_gridX +x, start_gridY+y)){
+                            absPlace = false;
+                        }
+                    }
+                }
+                if(absPlace){
+                    m.addGizmo(abs);
+                    m.setSpaces(start_gridX, start_gridY,  true, abs);
+                }
+                break;
+        }
+
+
+
+
 
     }
 
