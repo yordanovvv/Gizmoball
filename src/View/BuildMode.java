@@ -28,6 +28,7 @@ public class BuildMode extends JPanel{
     private JButton button_delete;
     private JButton button_clear;
     private JButton button_changeBallVelo;
+    private JButton button_changeFrictionandGravity;
 
 
     private MainFrame mainFrame;
@@ -70,7 +71,7 @@ public class BuildMode extends JPanel{
 
         button_square = new JButton("Square");
         button_triangle = new JButton("Triangle");
-        button_circle= new JButton("GizmoCircle");
+        button_circle= new JButton("Circle");
         button_absorber = new JButton("Absorber");
         button_leftFlipper = new JButton("Left flipper");
         button_rightFlipper = new JButton("Right flipper");
@@ -119,6 +120,7 @@ public class BuildMode extends JPanel{
         button_delete = new JButton("Delete");
         button_keypressConnect = new JButton("Connect Key");
         button_changeBallVelo = new JButton("Change Ball Velocity");
+        button_changeFrictionandGravity= new JButton("Gravity/Friction");
 
         container_play.add(button_rotate);
         container_play.add(button_connectButton);
@@ -128,6 +130,7 @@ public class BuildMode extends JPanel{
         container_play.add(button_move);
         container_play.add(button_keypressConnect);
         container_play.add(button_changeBallVelo);
+        container_play.add(button_changeFrictionandGravity);
 
 
         button_rotate = utils.addImgToBtn("rotate.png",button_rotate, Color.WHITE);
@@ -138,6 +141,7 @@ public class BuildMode extends JPanel{
         button_move = utils.addImgToBtn("move.png",button_move,Color.WHITE);
         button_keypressConnect = utils.addImgToBtn("keypress.png", button_keypressConnect, Color.WHITE);
         button_changeBallVelo = utils.addImgToBtn("ballvelochange.png", button_changeBallVelo, Color.WHITE);
+        button_changeFrictionandGravity = utils.addImgToBtn("f.png",button_changeFrictionandGravity, Color.WHITE);
 
         controlsPanel.add(label_controls,BorderLayout.PAGE_START);
         controlsPanel.add(container_play,BorderLayout.CENTER);
