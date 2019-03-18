@@ -27,6 +27,7 @@ public class BuildMode extends JPanel{
     private JButton button_move;
     private JButton button_delete;
     private JButton button_clear;
+    private JButton button_changeBallVelo;
 
 
     private MainFrame mainFrame;
@@ -117,6 +118,7 @@ public class BuildMode extends JPanel{
         button_clear = new JButton("Clear");
         button_delete = new JButton("Delete");
         button_keypressConnect = new JButton("Connect Key");
+        button_changeBallVelo = new JButton("Change Ball Velocity");
 
         container_play.add(button_rotate);
         container_play.add(button_connectButton);
@@ -125,6 +127,7 @@ public class BuildMode extends JPanel{
         container_play.add(button_clear);
         container_play.add(button_move);
         container_play.add(button_keypressConnect);
+        container_play.add(button_changeBallVelo);
 
 
         button_rotate = utils.addImgToBtn("rotate.png",button_rotate, Color.WHITE);
@@ -134,6 +137,7 @@ public class BuildMode extends JPanel{
         button_clear = utils.addImgToBtn("clearAll.png",button_clear,Color.WHITE);
         button_move = utils.addImgToBtn("move.png",button_move,Color.WHITE);
         button_keypressConnect = utils.addImgToBtn("keypress.png", button_keypressConnect, Color.WHITE);
+        button_changeBallVelo = utils.addImgToBtn("ballvelochange.png", button_changeBallVelo, Color.WHITE);
 
         controlsPanel.add(label_controls,BorderLayout.PAGE_START);
         controlsPanel.add(container_play,BorderLayout.CENTER);
@@ -173,7 +177,6 @@ public class BuildMode extends JPanel{
         AddButtonGizmoListener deleteListener = new AddButtonGizmoListener("delete", lis);
         AddButtonGizmoListener moveListener = new AddButtonGizmoListener("move", lis);
 
-        //hijacking this
         UpdateBallVeloListener updateBallVeloListener = new UpdateBallVeloListener(mainFrame.getModel());
         //AddButtonGizmoListener connectKeyListener = new AddButtonGizmoListener("connectKey", lis);
 
@@ -187,7 +190,7 @@ public class BuildMode extends JPanel{
         button_disconnect.setActionCommand("disconnect");
         button_clear.addMouseListener(clearClickListener);
         button_move.addMouseListener(moveListener);
-        button_keypressConnect.addMouseListener(updateBallVeloListener);
+        button_changeBallVelo.addMouseListener(updateBallVeloListener);
 
         //mainFrame.getGameBoard().addMouseListener(board_listener);
         //---------------------------------------
