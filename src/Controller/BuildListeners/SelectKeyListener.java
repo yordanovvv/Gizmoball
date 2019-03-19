@@ -23,6 +23,7 @@ public class SelectKeyListener implements KeyListener {
 
         System.out.println("typed=" + KeyEvent.getKeyText(e.getKeyCode()));
         String key = KeyEvent.getKeyText(e.getKeyCode()) + "";
+        gizmo.removeKeyConnection();
         model.keyConnectGizmo(gizmo.getID(), key);
         keyView.close();
     }
@@ -32,6 +33,7 @@ public class SelectKeyListener implements KeyListener {
 
         System.out.println("pressed=" + KeyEvent.getKeyText(e.getKeyCode()));
         String key = KeyEvent.getKeyText(e.getKeyCode()) + "";
+        gizmo.removeKeyConnection();
         model.keyConnectGizmo(gizmo.getID(), key);
         System.out.println("connections=" + gizmo.getKeyConnections());
         keyView.close();
@@ -42,6 +44,7 @@ public class SelectKeyListener implements KeyListener {
     public void keyReleased(KeyEvent e) {
         System.out.println("released=" + KeyEvent.getKeyText(e.getKeyCode()));
         String key = KeyEvent.getKeyText(e.getKeyCode()) + "";
+        gizmo.removeKeyConnection();
         model.keyConnectGizmo(gizmo.getID(), key);
         keyView.close();
     }

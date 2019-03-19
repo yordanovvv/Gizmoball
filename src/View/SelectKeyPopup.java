@@ -28,7 +28,7 @@ public class SelectKeyPopup {
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.setPreferredSize(new Dimension(500, 200));
-        frame.setTitle("Select key");
+        frame.setTitle("Key Bind for " + gizmo.getID());
         frame.setBackground(bg_color);
 
         JPanel itsMakingMeDoThis = new JPanel(new BorderLayout());

@@ -274,6 +274,7 @@ public class RightFlipper implements iGizmo {
 
     @Override
     public void removeKeyConnection() {
+        keyConnections.removeAll(keyConnections);
     }
 
     @Override
