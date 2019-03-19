@@ -440,7 +440,6 @@ public class GizmoballModel extends iModel {
                             if (gizmo.getGizmoType().equals("Absorber")) {
                                 absorberCollision = true;
                             } else absorberCollision = false;
-
                             wallCollision = false; //we found a gizmo that is closer to the ball than a wall
                             if (!gizmo.getGizmoType().equals("Star"))
                                 newVelo = Geometry.reflectWall(ls, ball.getVelo(), 1);
@@ -603,17 +602,13 @@ public class GizmoballModel extends iModel {
     }
     @Override
     public double getBallSpeed(Ball b){
-
         //System.out.println("Speed is" + ball.getSpeed());
         return b.getSpeed();
-
     }
-
     @Override
     public Absorber getAbsorber() {
         return (Absorber) absorber;
     }
-
     @Override
     public void saveGame(File file) {
        System.out.println("SAVING GAME\n\n");

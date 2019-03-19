@@ -1,3 +1,8 @@
+import Model.Ball;
+import org.junit.Before;
+
+import java.awt.*;
+import java.util.ArrayList;
 import Model.*;
 import org.junit.Before;
 import org.junit.Rule;
@@ -160,6 +165,7 @@ public class GizmoTest {
         assertTrue(balls.contains(ball));
     }
 
+
     @Test
     public void setBallSpeed() {
         model.setBallSpeed(ball, 6, 4);
@@ -170,6 +176,7 @@ public class GizmoTest {
         assertEquals((long) model.getBallSpeed(ball), (long) speed);
 
     }
+
 
     @Test
     public void gizmoFound() {
@@ -253,6 +260,8 @@ public class GizmoTest {
         circle5.setGizmoConnection("S5");
         assertTrue(model.removeConnection(circle5, "S5"));
     }
+
+
 
     @Test
     public void moveBall() {
@@ -345,6 +354,19 @@ public class GizmoTest {
         assertEquals(30, m.getBalls().get(1).getExactX(), 3);
 
     }
+
+    @Test
+    public void ballSettersTest()
+    {
+        Ball b = new Ball("b",1,0,0,7);
+        b.setID("c");
+        assertTrue(b.getID().equals("c"));
+
+        b.setRadius(0.4);
+        assertTrue(b.getRadius() == 0.4);
+
+    }
+
 
     @Test
     public void wipeSpaces() {
