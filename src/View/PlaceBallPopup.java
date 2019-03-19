@@ -119,8 +119,7 @@ public class PlaceBallPopup {
                 yVelo = Double.parseDouble(yVelocity.getText());
             } catch (NumberFormatException nfe){
                 System.out.println("Must enter text, cancelling addition");
-                pop_upFrame.setVisible(false);
-                pop_upFrame.dispose();
+                JOptionPane.showMessageDialog(null, "Please enter a number!", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
