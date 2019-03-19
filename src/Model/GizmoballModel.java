@@ -23,10 +23,12 @@ public class GizmoballModel extends iModel {
     private iGizmo collisionGizmo = null;
     private boolean wallCollision = false;
     private double gravity = 25; //25L/sec^2
+    double mu1 = 0.025, mu2 = 0.025;
     boolean[][] spaces = new boolean[20][20];
     HashMap<iGizmo,Character> keyTriggers;
     HashMap<iGizmo,String> keyOrientation;
     private int wait = 0;
+
 
     public GizmoballModel() {
 
@@ -90,10 +92,11 @@ public class GizmoballModel extends iModel {
             if (ball != null && !ball.isStopped()) {
 
                 ball.applyGravity(gravity, moveTime);
-                ball.applyFriction();
+                ball.applyFriction(mu1, mu2);
 
                 CollisionDetails cd = timeUntilCollision(ball);
                 double tuc = cd.getTuc();
+                System.out.println("SPeed " + ball.getSpeed() );
 
                 if (tuc > moveTime) //no collision
                 {
@@ -1128,6 +1131,17 @@ public class GizmoballModel extends iModel {
         return gizmo.removeGizmoConnection(id);
     }
 
+    public void setGravity(double g){
+        gravity = g;
+        //Vect g = new Vect (0, grav);
+        // this.setVelo(this.getVelo().plus(g));
+    }
+
+    public  void setFriction(double mu1, double mu2)
+    {
+        this.mu1 = mu1;
+        this.mu2 = mu2;
+    }
 
 
 }
