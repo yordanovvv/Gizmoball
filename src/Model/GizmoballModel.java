@@ -270,13 +270,13 @@ public class GizmoballModel extends iModel {
                 if (spaces[gridX][gridY] || spaces[gridX][gridY+1] || spaces[gridX+1][gridY+1] || spaces[gridX+1][gridY]){
                     canPlaceLF = true;
                 }
-                return canPlaceLF;
+                return !canPlaceLF;
             case "RightFlipper":
                 boolean canPlaceRF = false;
                 if (spaces[gridX][gridY] || spaces[gridX][gridY+1] || spaces[gridX-1][gridY+1] || spaces[gridX-1][gridY]){
                     canPlaceRF = true;
                 }
-                return canPlaceRF;
+                return !canPlaceRF;
             case "Star":
                 boolean canPlaceStar = false;
                 if (spaces[gridX][gridY] ||
@@ -297,7 +297,7 @@ public class GizmoballModel extends iModel {
                         spaces[gridX+2][gridY-1]){
                     canPlaceStar = true;
                 }
-                return canPlaceStar;
+                return !canPlaceStar;
             case "Absorber":
                 int posWidth, posHeight;
                 boolean absPlace = true;
@@ -888,7 +888,6 @@ public class GizmoballModel extends iModel {
     public void updateActiveTimers(Timer t) {
         activeTimers.add(t);
     }
-    
 
     public boolean removeConnection(iGizmo gizmo, String id){
         return gizmo.removeGizmoConnection(id);
