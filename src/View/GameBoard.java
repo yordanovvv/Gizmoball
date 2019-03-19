@@ -218,11 +218,11 @@ public class GameBoard extends JPanel implements Observer{
         Polygon poly1 = new Polygon(px, py, px.length);
         g2.fillPolygon(poly1);
 
-        g2.setColor(new Color(250, 215, 0));
+        g2.setColor(new Color(74, 0, 129));
         g2.drawLine(polyPoint1_x,polyPoint1_y,polyPoint5_x-20,polyPoint2_y);
         g2.drawLine(polyPoint5_x-20,polyPoint2_y,polyPoint5_x,polyPoint5_y);
 
-        g2.setColor(new Color(52, 9, 14));
+//        g2.setColor(new Color(52, 9, 14));
 
         g2.drawLine(polyPoint1_x,polyPoint1_y,polyPoint2_x+22,polyPoint2_y);
         g2.drawLine(polyPoint2_x+22,polyPoint2_y,polyPoint2_x,polyPoint2_y);

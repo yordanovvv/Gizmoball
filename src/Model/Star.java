@@ -111,14 +111,20 @@ public class Star implements iGizmo{
     public boolean isTick(){
         return tick;
     }
+
     public void setTick(boolean tick){
         this.tick = tick;
     }
 
     public void spinStarForTime(double timeTill){
-        int movementpersec = 18*5;
         double formatted_tuc = timeTill*30;
         //rotate();
+        long start = System.currentTimeMillis();
+        Timer t = new Timer(200, e -> {
+            Timer clone = (Timer) e.getSource();
+            if(System.currentTimeMillis() - start >= formatted_tuc | stopped)clone.stop();
+            rotate();
+        });
     }
 
     private void spinStar(int delay){
@@ -211,8 +217,9 @@ public class Star implements iGizmo{
         Circle c3 = new Circle(polyPoint3_x+6,polyPoint3_y-20,1);
         Circle c4 = new Circle(polyPoint4_x-18,polyPoint4_y-12,1);
         Circle c5 = new Circle(polyPoint5_x-16,polyPoint5_y+13,1);
+        Circle c6 = new Circle((XCoord+1)*30,(YCoord + 1)*30,15);
 
-        circles.addAll(Arrays.asList(new Circle[]{poly1,poly2,poly3,poly4,poly5,c1,c2,c3,c4,c5}));
+        circles.addAll(Arrays.asList(new Circle[]{poly1,poly2,poly3,poly4,poly5,c1,c2,c3,c4,c5,c6}));
     }
 
     @Override
@@ -238,7 +245,7 @@ public class Star implements iGizmo{
         LineSegment line14 = new LineSegment(polyPoint2_x,polyPoint2_y,polyPoint4_x,polyPoint4_y);//!!
         LineSegment line15 = new LineSegment(polyPoint4_x,polyPoint4_y,polyPoint1_x,polyPoint1_y);
 
-        lines.addAll(Arrays.asList(new LineSegment[]{line1,line2/*,line3,line4,line5,line6,line7,line8,line9,line10*/,line11,line12,line13,line14,line15}));
+        lines.addAll(Arrays.asList(new LineSegment[]{line1,line2,line3,line4,line5,line6,line7,line8,line9,line10,line11,line12,line13,line14,line15}));
     }
 
     @Override
