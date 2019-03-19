@@ -47,6 +47,12 @@ public class GizmoballModel extends iModel {
         return keyOrientation;
     }
 
+    public void addKeyOrientation(iGizmo g, String o){
+        if(!keyOrientation.containsKey(g)){
+            keyOrientation.put(g,o);
+        }
+    }
+
     @Override
     public ArrayList<iGizmo> getAllStars(){
         ArrayList<iGizmo> stars = new ArrayList<>();
@@ -963,6 +969,7 @@ public class GizmoballModel extends iModel {
                 //set the key connection
                 gizmo.setKeyConnection(key.toLowerCase());
                 keyTriggers.put(gizmo, (key.toLowerCase()).charAt(0));
+                keyOrientation.put(gizmo,"Both");
                 return true;
             }
         return false;
