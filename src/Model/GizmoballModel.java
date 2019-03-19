@@ -995,6 +995,20 @@ public class GizmoballModel extends iModel {
                             keyConnectGizmo(id, key);
                         }
                         break;
+            /*
+                    case"Gravity":
+                        double gravity= Double.parseDouble(inputStream[1]);
+                       if(!balls.isEmpty()) {
+                           ball.setGravity(gravity);
+                       }
+                       break;
+                    case"Friction":
+                        double mu1 = Double.parseDouble(inputStream[1]);
+                        double mu2= Double.parseDouble(inputStream[2]);
+                        ball.setFriction(mu1,mu2);
+                        break;
+             */
+
                     default:
                         break;
                 }
