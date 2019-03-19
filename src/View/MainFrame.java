@@ -211,6 +211,7 @@ public class MainFrame extends JFrame implements iMainFrame, Observer, ActionLis
         switchBoard = new JPanel(new FlowLayout(FlowLayout.LEFT));
         switchBoard.setBackground((new Color(0, 41, 57, 255)));
 
+
         label_sameState = new JLabel("   GAME STATE");
         label_sameState = util.editLabel(label_sameState, 20, Color.WHITE);
         //label_sameState.setHorizontalAlignment(Label.CENTER);

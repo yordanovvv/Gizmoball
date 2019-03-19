@@ -179,6 +179,8 @@ public class GizmoballModel extends iModel {
 
     //Clears spaces, avoids NullPointer when clearing spaces
     public void wipeSpaces(){
+        this.keyTriggers = new HashMap<>();//todo check
+        this.gizmos = new ArrayList<>();
         for (int i=0; i<20; i++){
             for (int j=0; j<20; j++){
                spaces[i][j] = false;
@@ -266,17 +268,17 @@ public class GizmoballModel extends iModel {
             case "Triangle":
                 return !spaces[gridX][gridY];
             case "LeftFlipper":
-                boolean  canPlaceLF = false;
+                boolean  canPlaceLF = true;
                 if (spaces[gridX][gridY] || spaces[gridX][gridY+1] || spaces[gridX+1][gridY+1] || spaces[gridX+1][gridY]){
-                    canPlaceLF = true;
+                    canPlaceLF = false;
                 }
-                return !canPlaceLF;
+                return canPlaceLF;
             case "RightFlipper":
                 boolean canPlaceRF = true;
                 if (spaces[gridX][gridY] || spaces[gridX][gridY+1] || spaces[gridX-1][gridY+1] || spaces[gridX-1][gridY]){
                     canPlaceRF = false;
                 }
-                return !canPlaceRF;
+                return canPlaceRF;
             case "Star":
                 boolean canPlaceStar = true;
                 if (spaces[gridX][gridY] ||
@@ -297,7 +299,7 @@ public class GizmoballModel extends iModel {
                         spaces[gridX+2][gridY-1]){
                     canPlaceStar = false;
                 }
-                return !canPlaceStar;
+                return canPlaceStar;
             case "Absorber":
                 int posWidth, posHeight;
                 boolean absPlace = true;
@@ -315,7 +317,7 @@ public class GizmoballModel extends iModel {
                         }
                     }
                 }
-                return !absPlace;
+                return absPlace;
         }
         return spaces[gridX][gridY];
     }

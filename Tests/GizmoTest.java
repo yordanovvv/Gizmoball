@@ -503,10 +503,10 @@ public class GizmoTest {
     public void checkSpaces_flippers() {
         GizmoballModel m = new GizmoballModel();
         LeftFlipper lf = new LeftFlipper("test1", 4, 4);
-        assertTrue(!m.checkSpace(4, 4, lf));
+        assertTrue(m.checkSpace(4, 4, lf));
         m.setSpaces(4, 4, true, lf);
 
-        assertFalse(!m.checkSpace(4, 4, lf));
+        assertFalse(m.checkSpace(4, 4, lf));
 
         GizmoballModel m1 = new GizmoballModel();
         RightFlipper rf = new RightFlipper("test1", 4, 4);
@@ -519,36 +519,36 @@ public class GizmoTest {
     public void checkSpaces_square() {
         GizmoballModel m = new GizmoballModel();
         Square s = new Square("test1", 5, 4);
-        assertTrue(!m.checkSpace(5, 4, s));
+        assertTrue(m.checkSpace(5, 4, s));
         m.setSpaces(5, 4, true, s);
-        assertFalse(!m.checkSpace(5, 4, s));
+        assertFalse(m.checkSpace(5, 4, s));
     }
 
     @Test
     public void checkSpaces_triangle() {
         GizmoballModel m = new GizmoballModel();
         Triangle s = new Triangle("test1", 5, 4);
-        assertTrue(!m.checkSpace(5, 4, s));
+        assertTrue(m.checkSpace(5, 4, s));
         m.setSpaces(5, 4, true, s);
-        assertFalse(!m.checkSpace(5, 4, s));
+        assertFalse(m.checkSpace(5, 4, s));
     }
 
     @Test
     public void checkSpaces_circle() {
         GizmoballModel m = new GizmoballModel();
         GizmoCircle s = new GizmoCircle("test1", 5, 4, 15);
-        assertTrue(!m.checkSpace(5, 4, s));
+        assertTrue(m.checkSpace(5, 4, s));
         m.setSpaces(5, 4, true, s);
-        assertFalse(!m.checkSpace(5, 4, s));
+        assertFalse(m.checkSpace(5, 4, s));
     }
 
     @Test
     public void checkSpaces_absorber() {
         GizmoballModel m = new GizmoballModel();
         Absorber s = new Absorber("test1", 4, 4, 6, 6);
-        assertTrue(!m.checkSpace(4, 4, s));
+        assertTrue(m.checkSpace(4, 4, s));
         m.setSpaces(5, 4, true, s);
-        assertFalse(!m.checkSpace(4, 4, s));
+        assertFalse(m.checkSpace(4, 4, s));
 
         assertFalse(m.checkSpace(19, 19, new Absorber("A!", 19, 19, 22, 22)));
     }
@@ -577,28 +577,41 @@ public class GizmoTest {
     @Test
     public void checkConnections() {
         GizmoballModel m = new GizmoballModel();
-        Ball b = new Ball("b1", 1, 2, 0, 1);
-        Triangle t = new Triangle("T1", 1, 2);
+        Ball b = new Ball("b1", 1, 2, 0, 20);
+        Triangle t = new Triangle("t1", 1, 3);
         Triangle t2 = new Triangle("t2", 5, 5);
-        Triangle t3 = new Triangle("t3", 10, 5);
-        t.setGizmoConnection("t2");
-        t.setGizmoConnection("t3");
-        t.setGizmoConnection("t1");
 
-        assertEquals(3, t.getGizmoConnections().size());
 
         m.addGizmo(t);
         m.addGizmo(t2);
         m.addBall(b);
 
-        for (int i = 0; i < 500; i++) {
-            m.moveBall();
-        }
+        m.connectGizmos("t1","t2");
+        m.connectGizmos("t1","t3");
+        m.getBalls().get(1).setStopped(false);
 
+        m.moveBall();
+
+        assertTrue(m.getGizmoByID("t1").getHit());
+        assertTrue(m.getGizmoByID("t2").getHit());
     }
 
     @Test
     public void checkKeyConnections(){
+        GizmoballModel m = new GizmoballModel();
+        RightFlipper rf  = new RightFlipper("RF1",1,2);
+        Ball b = new Ball("b1", 1, 2, 0, 20);
+
+        m.addBall(b);
+        m.addGizmo(rf);
+
+        assertTrue(m.keyConnectGizmo("RF1","f"));
+        assertFalse(m.keyConnectGizmo("RFF1","f"));
+
+        assertTrue(m.getKeyTriggers().get(rf) == 'f');
+
+        m.checkKeyConnections(rf,b);
+        assertFalse(((RightFlipper) m.getGizmoByID("RF1")).isMoving());
 
     }
 
