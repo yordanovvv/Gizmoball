@@ -48,6 +48,7 @@ public class PlayModeListener implements ActionListener {
             //System.out.println(e.getActionCommand());
             ArrayList<Ball> balls = gModel.getBalls();
             ArrayList<iGizmo> stars = gModel.getAllStars();
+            ArrayList<iGizmo> flippers = gModel.getGizmos();
             switch (e.getActionCommand()) {
                 case "Play":
                     //gModel.getRightFlipListener().setIsStopped(false);
@@ -85,6 +86,13 @@ public class PlayModeListener implements ActionListener {
                        star.rotate();
                     }
 
+                   //TODO probably remove since ticking like that is independent of key press
+                    for(iGizmo g:flippers){
+                       if(g.getGizmoType().equals("RightFlipper"))
+                       {
+                           g.rotate();
+                       }
+                    }
                     for (Ball b : balls)
                     {
                         b.setStopped(false);

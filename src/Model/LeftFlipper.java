@@ -1,9 +1,6 @@
 package Model;
 
-import physics.Angle;
-import physics.Circle;
-import physics.Geometry;
-import physics.LineSegment;
+import physics.*;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -238,5 +235,14 @@ public class LeftFlipper implements iGizmo {
     @Override
     public String toString() {
         return getGizmoType() + " " + getID() + " " + getXCoord() + " " + getYCoord();
+    }
+
+    public Vect getCentre(){
+        return circles.get(0).getCenter();
+    }
+
+    public double getAngularVelo() {
+        //rad/sec
+        return Math.toRadians(rotationAngle) * 0.05;
     }
 }
