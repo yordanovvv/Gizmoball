@@ -493,9 +493,9 @@ public class GizmoTest {
     public void checkSpaces_star(){
         GizmoballModel m = new GizmoballModel();
         Star test =new Star("test",4,4);
-        assertTrue(!m.checkSpace(4,4,star));
+        assertTrue(m.checkSpace(4,4,star));
         m.setSpaces(4,4,true,test);
-        assertFalse(!m.checkSpace(4,4,star));
+        assertFalse(m.checkSpace(4,4,star));
     }
 
     @Test
@@ -509,9 +509,9 @@ public class GizmoTest {
 
         GizmoballModel m1 = new GizmoballModel();
         RightFlipper rf = new RightFlipper("test1",4,4);
-        assertTrue(!m1.checkSpace(4,4,rf));
+        assertTrue(m1.checkSpace(4,4,rf));
         m1.setSpaces(4,4,true,rf);
-        assertFalse(!m1.checkSpace(4,4,rf));
+        assertFalse(m1.checkSpace(4,4,rf));
     }
 
     @Test
@@ -540,6 +540,17 @@ public class GizmoTest {
         m.setSpaces(5,4,true,s);
         assertFalse( !m.checkSpace(5,4,s));
     }
+
+    @Test
+    public void checkSpaces_absorber(){
+        GizmoballModel m = new GizmoballModel();
+        Absorber s = new Absorber("test1",4,4,6,6);
+        assertTrue( !m.checkSpace(4,4,s));
+        m.setSpaces(5,4,true,s);
+        assertFalse( !m.checkSpace(4,4,s));
+
+        assertFalse( m.checkSpace(19,19,new Absorber("A!",19,19,22,22)));
+    }
     @Test
     public void collisionDetails(){
 
@@ -564,15 +575,29 @@ public class GizmoTest {
     @Test
     public void checkConnections(){
         GizmoballModel m = new GizmoballModel();
-        Ball b = new Ball("b1",2,0,1,2);
+        Ball b = new Ball("b1",1,2,0,1);
         Triangle t = new Triangle("T1",1,2);
         Triangle t2 = new Triangle("t2",5,5);
+        Triangle t3 = new Triangle("t3",10,5);
+        t.setGizmoConnection("t2");
+        t.setGizmoConnection("t3");
+        t.setGizmoConnection("t1");
+
+        assertEquals(3,t.getGizmoConnections().size());
+
         m.addGizmo(t);
         m.addGizmo(t2);
         m.addBall(b);
-        m.moveBall();
-        m.checkConnections(t,b);
-        assertFalse(t.getHit());
+
+        for (int i = 0; i < 100 ; i++) {
+            m.moveBall();
+            m.checkConnections(m.getGizmoByID("T1"),m.getBalls().get(1));
+        }
+        t.setHit(true);
+
+
+      //  assertTrue(m.getGizmoByID("t2").getHit());
+       // assertTrue(m.getGizmoByID("t3").getHit());
 
     }
 
