@@ -43,8 +43,6 @@ public class BuildMode extends JPanel{
         this.mainFrame = mainFrame;
 
         this.setFocusable(true); //Needed for keylistener to work
-
-
         init();
 
     }

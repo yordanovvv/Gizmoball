@@ -3,6 +3,7 @@ package View;
 import Controller.PlayListeners.FlipperKeyListener;
 import Controller.PlayListeners.PlayModeListener;
 import Controller.PlayListeners.AbsorberKeyListener;
+import Model.Absorber;
 import Model.GizmoballModel;
 import Model.iGizmo;
 import Model.iModel;
@@ -41,7 +42,7 @@ public class PlayMode extends JPanel {
         this.mainFrame = mainFrame;
 
         iModel model = mainFrame.getGameBoard().getGizModel();
-        AbsorberKeyListener absorberListener = new AbsorberKeyListener(model.getAbsorber().getID(),
+       AbsorberKeyListener absorberListener = new AbsorberKeyListener(model.getAbsorber().getID(),
                 model, 'f', model.getAbsorber());
 
         ArrayList<iGizmo> flippers = new ArrayList<>();
@@ -50,8 +51,9 @@ public class PlayMode extends JPanel {
                 flippers.add(giz);
             }
         }
-        for (iGizmo key:model.getKeyTriggers().keySet()) {
-            mainFrame.addKeyListener(new FlipperKeyListener(model, model.getKeyTriggers().get(key), key));
+        for (iGizmo key:model.getKeyTriggers().keySet()) {//todo fix for both
+            if(key.getGizmoType().equals("RightFlipper")|key.getGizmoType().equals("LeftFlipper"))
+                mainFrame.addKeyListener(new FlipperKeyListener(model, model.getKeyTriggers().get(key), key, "BOTH"));
         }
 
         mainFrame.addKeyListener(absorberListener);

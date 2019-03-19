@@ -202,16 +202,52 @@ public class GizmoballModel extends iModel {
                 spaces[gridX][gridY] = val;
                 break;
             case "RightFlipper":
-                spaces[gridX][gridY] = val;
-                spaces[gridX][gridY+1] = val;
-                spaces[gridX-1][gridY] = val;
-                spaces[gridX-1][gridY+1] = val;
+                int rotationDegree = ((RightFlipper)g).getFlipperRotationDegree();
+                if(rotationDegree == 0) {
+                    spaces[gridX][gridY] = val;
+                    spaces[gridX][gridY + 1] = val;
+                    spaces[gridX - 1][gridY] = val;
+                    spaces[gridX - 1][gridY + 1] = val;
+                }else if(rotationDegree == 90){
+                    spaces[gridX][gridY -1] = val;
+                    spaces[gridX- 1][gridY - 1] = val;
+                    spaces[gridX - 1][gridY - 2] = val;
+                    spaces[gridX][gridY - 2] = val;
+                }else if(rotationDegree == 180){
+                    spaces[gridX+1][gridY-1] = val;
+                    spaces[gridX+1][gridY -2] = val;
+                    spaces[gridX + 2][gridY -1] = val;
+                    spaces[gridX + 2][gridY - 2] = val;
+                }else{
+                    spaces[gridX+1][gridY] = val;
+                    spaces[gridX + 1][gridY + 1] = val;
+                    spaces[gridX + 2][gridY] = val;
+                    spaces[gridX + 2][gridY + 1] = val;
+                }
                 break;
             case "LeftFlipper":
-                spaces[gridX][gridY] = val;
-                spaces[gridX][gridY+1] = val;
-                spaces[gridX+1][gridY] = val;
-                spaces[gridX+1][gridY+1] = val;
+                int rdeg = ((LeftFlipper)g).getFlipperRotationDegree();
+                if(rdeg == 0) {
+                    spaces[gridX][gridY] = val;
+                    spaces[gridX][gridY + 1] = val;
+                    spaces[gridX + 1][gridY] = val;
+                    spaces[gridX + 1][gridY + 1] = val;
+                }else if(rdeg == 90){
+                    spaces[gridX - 1][gridY] = val;
+                    spaces[gridX-  1][gridY + 1] = val;
+                    spaces[gridX - 2][gridY] = val;
+                    spaces[gridX - 2][gridY + 1] = val;
+                }else if(rdeg == 180){
+                    spaces[gridX - 1][gridY -1] = val;
+                    spaces[gridX- 2][gridY - 1] = val;
+                    spaces[gridX - 1][gridY - 2] = val;
+                    spaces[gridX - 2][gridY - 2] = val;
+                }else{
+                    spaces[gridX+1][gridY-1] = val;
+                    spaces[gridX+1][gridY -2] = val;
+                    spaces[gridX ][gridY -1] = val;
+                    spaces[gridX ][gridY - 2] = val;
+                }
                 break;
             case "Star":
                 spaces[gridX][gridY] = val;
@@ -269,14 +305,68 @@ public class GizmoballModel extends iModel {
                 return !spaces[gridX][gridY];
             case "LeftFlipper":
                 boolean  canPlaceLF = true;
-                if (spaces[gridX][gridY] || spaces[gridX][gridY+1] || spaces[gridX+1][gridY+1] || spaces[gridX+1][gridY]){
-                    canPlaceLF = false;
+                int rdeg = ((LeftFlipper)g).getFlipperRotationDegree();
+                if(rdeg == 0) {
+                    if(spaces[gridX][gridY]||
+                    spaces[gridX][gridY + 1] ||
+                    spaces[gridX + 1][gridY] ||
+                    spaces[gridX + 1][gridY + 1]){
+                        canPlaceLF = false;
+                    }
+                }else if(rdeg == 90){
+                    if(spaces[gridX - 1][gridY]||
+                    spaces[gridX-  1][gridY + 1] ||
+                    spaces[gridX - 2][gridY] ||
+                    spaces[gridX - 2][gridY + 1]){
+                        canPlaceLF = false;
+                    }
+                }else if(rdeg == 180){
+                   if( spaces[gridX - 1][gridY -1]||
+                    spaces[gridX- 2][gridY - 1]||
+                    spaces[gridX - 1][gridY - 2] ||
+                    spaces[gridX - 2][gridY - 2]){
+                       canPlaceLF = false;
+                   }
+                }else{
+                    if(spaces[gridX+1][gridY-1] ||
+                    spaces[gridX+1][gridY -2] ||
+                    spaces[gridX ][gridY -1] ||
+                    spaces[gridX ][gridY - 2] ){
+                        canPlaceLF = false;
+                    }
                 }
+
                 return canPlaceLF;
             case "RightFlipper":
                 boolean canPlaceRF = true;
-                if (spaces[gridX][gridY] || spaces[gridX][gridY+1] || spaces[gridX-1][gridY+1] || spaces[gridX-1][gridY]){
-                    canPlaceRF = false;
+                int rotationDegree = ((RightFlipper)g).getFlipperRotationDegree();
+                if(rotationDegree == 0) {
+                    if( spaces[gridX][gridY] || spaces[gridX][gridY + 1] ||
+                    spaces[gridX - 1][gridY]||
+                    spaces[gridX - 1][gridY + 1]){
+                        canPlaceRF = false;
+                    }
+                }else if(rotationDegree == 90){
+                    if(spaces[gridX][gridY -1]||
+                    spaces[gridX- 1][gridY - 1] ||
+                    spaces[gridX - 1][gridY - 2] ||
+                    spaces[gridX][gridY - 2]){
+                        canPlaceRF = false;
+                    }
+                }else if(rotationDegree == 180){
+                    if(spaces[gridX+1][gridY-1] ||
+                    spaces[gridX+1][gridY -2]||
+                    spaces[gridX + 2][gridY -1] ||
+                    spaces[gridX + 2][gridY - 2] ){
+                        canPlaceRF = false;
+                    }
+                }else{
+                   if( spaces[gridX+1][gridY] ||
+                    spaces[gridX + 1][gridY + 1] ||
+                    spaces[gridX + 2][gridY]||
+                    spaces[gridX + 2][gridY + 1]){
+                       canPlaceRF = false;
+                   }
                 }
                 return canPlaceRF;
             case "Star":
@@ -698,7 +788,7 @@ public class GizmoballModel extends iModel {
                     case "Circle":
                         gizXCoord = Integer.parseInt(inputStream[2]);
                         gizYCoord = Integer.parseInt(inputStream[3]);
-                        GizmoCircle circle = new GizmoCircle(inputStream[1], gizXCoord, gizYCoord);
+                        GizmoCircle circle = new GizmoCircle(inputStream[1], gizXCoord, gizYCoord, Double.parseDouble(inputStream[4]));
                         gizmos.add(circle);
                         setSpaces(gizXCoord, gizYCoord, true, circle);
                         break;
@@ -789,7 +879,6 @@ public class GizmoballModel extends iModel {
         }
         return false;
     }
-
 
     //helper method to get gizmo by id, needed for connections
     public iGizmo getGizmoByID(String id) {
