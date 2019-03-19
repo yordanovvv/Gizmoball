@@ -52,7 +52,7 @@ public class FlipperKeyListener implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if(type.equals("UP") | type.equals("BOTH")) {
+        if(type.equalsIgnoreCase("UP") | type.equalsIgnoreCase("BOTH")) {
             if (!keypressed) { //if key not pressed
                 char key = keys;
                 if (e.getKeyChar() == key) { //matches character
@@ -66,7 +66,7 @@ public class FlipperKeyListener implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if (type.equals("DOWN") | type.equals("BOTH")) {
+        if (type.equalsIgnoreCase("DOWN") | type.equalsIgnoreCase("BOTH")) {
             keypressed = false;// longer pressed
             char key = keys;
             if (e.getKeyChar() == key) { //keys match
