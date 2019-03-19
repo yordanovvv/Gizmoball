@@ -22,7 +22,7 @@ public class UpdateBallPopup {
     JLabel label_yVelocity;
     JTextField yVelocity;
 
-    JButton button_done, button_cancel;
+    JButton button_done, button_cancel, button_delete;
 
     iModel m;
     int gridX;
@@ -99,14 +99,21 @@ public class UpdateBallPopup {
         buttonContainer.setLayout(new GridLayout(0,2,10,10));
         buttonContainer.setBackground(bg_color);
 
-        button_done = new JButton("Done");
+        button_done = new JButton("Update Selected Ball");
         button_cancel = new JButton("Cancel");
+        button_delete = new JButton("Delete Ball");
 
         button_done.addActionListener(new tempActionListener());
         button_cancel.addActionListener(new tempActionListener());
+        button_delete.addActionListener(new tempActionListener());
 
         buttonContainer.add(button_done);
+        buttonContainer.add(button_delete);
         buttonContainer.add(button_cancel);
+
+        if (m.getBalls().size() == 0){
+            button_done.setEnabled(false);
+        }
 
         pop_upFrame.add(buttonContainer, BorderLayout.PAGE_END);
 
@@ -131,7 +138,7 @@ public class UpdateBallPopup {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            if (e.getActionCommand().equals("Done")) {
+            if (e.getActionCommand().equals("Update Selected Ball")) {
                 try {
                     xVelo = Double.parseDouble(xVelocity.getText());
                     yVelo = Double.parseDouble(yVelocity.getText());
@@ -140,10 +147,11 @@ public class UpdateBallPopup {
                     selectedBall.setVelo(new Vect(xVelo, yVelo));
                 } catch (NumberFormatException nfe) {
                     System.out.println("Must enter text, cancelling addition");
-                    pop_upFrame.setVisible(false);
-                    pop_upFrame.dispose();
-                    return;
+                    JOptionPane.showMessageDialog(null, "Enter numerical value.", "Error", JOptionPane.ERROR_MESSAGE);return;
                 }
+            } else if (e.getActionCommand().equals("Delete Ball")){
+                Ball selectedBall = balls.get(combo_ball.getSelectedIndex());
+                m.getBalls().remove(selectedBall);
             }
             //selectedball
 

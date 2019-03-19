@@ -33,17 +33,15 @@ public interface iGizmo {
 
     String getID();
 
-    //------------------------
-    //-------------------------
+
     void setHit(boolean hit);
 
     Color getColor();
-    // ------------------------
-    //todo check that these are okay.They are added for the absorber
+
     int getHeight();
 
     int getWidth();
-    // ------------------------
+
 
     int getXCoord();
 

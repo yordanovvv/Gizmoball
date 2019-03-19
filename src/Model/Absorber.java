@@ -43,7 +43,7 @@ public class Absorber implements iGizmo {
         generateCircles();
         generateLines();
 
-        //TODO not sure about the intergral stuff,ie height/width
+
         height = YCoord2 - YCoord;
         width = XCoord2 - XCoord;
 

@@ -137,6 +137,7 @@ public class MainFrame extends JFrame implements iMainFrame, Observer, ActionLis
 
         gameSpacer.add(gameBoard);
 
+        /*
         physicsBoard = new JPanel();
 
         //--------------------------------------------------------
@@ -189,11 +190,13 @@ public class MainFrame extends JFrame implements iMainFrame, Observer, ActionLis
         physicsBoard.add(label_Gravity);
         physicsBoard.add(output_Gravity);
 
+        */
+
         //--------------------------------------------------------
         //                    gameContainer
 
         gameContainer.add(gameSpacer, BorderLayout.CENTER);
-        gameContainer.add(physicsBoard, BorderLayout.PAGE_END);
+        //gameContainer.add(physicsBoard, BorderLayout.PAGE_END);
 
 
 

@@ -33,8 +33,7 @@ public class PlayModeListener implements ActionListener {
     @Override
     public final void actionPerformed(final ActionEvent e) {
 
-        //System.out.println(e.getSource() + " | " + e.getActionCommand());
-        //System.out.println(e.getSource() +" | " + timer);
+
 
         if (e.getSource() == timer) {
             gModel.moveBall();
@@ -66,8 +65,7 @@ public class PlayModeListener implements ActionListener {
                     timer.stop();
                     break;
                 case "Tick":
-                    //gModel.getRightFlipListener().setIsStopped(false);
-                    //gModel.getRightFlipListener().moveFlipper("TICK");
+
                    for(iGizmo g:stars){
                         /*Star star = (Star) g;
                         star.stopRotation();
@@ -79,7 +77,7 @@ public class PlayModeListener implements ActionListener {
                        star.rotate();
                     }
 
-                   //TODO probably remove since ticking like that is independent of key press
+
                     for(iGizmo g:flippers){
                        if(g.getGizmoType().equals("RightFlipper"))
                        {
@@ -95,7 +93,7 @@ public class PlayModeListener implements ActionListener {
 
                     break;
                 case "Restart":
-                    //Reload file?
+
                     gModel.loadGame((new File("game.giz")));
                     break;
             }

@@ -105,10 +105,10 @@ public class GameBoard extends JPanel implements Observer{
                     paintAbsorber(g2,x,y,gizmo.getWidth()*30,gizmo.getHeight()*30,c,gizmo.getID(),displayID);
                     break;
                 case "LeftFlipper":
-                    paintLeftFlipper(g2,x,y,gizmo.getRotationAngle(),c,gizmo.getID(),displayID);
+                    paintLeftFlipper(g2,x,y,gizmo.getRotationAngle(),c,gizmo.getID(),displayID,((LeftFlipper )gizmo).getFlipperRotationDegree());
                     break;
                 case "RightFlipper":
-                    paintRightFlipper(g2,x,y,gizmo.getRotationAngle(),7.5, 6, c,gizmo.getID(),displayID);
+                    paintRightFlipper(g2,x,y,gizmo.getRotationAngle(),7.5, 6, c,gizmo.getID(),displayID,((RightFlipper)gizmo).getFlipperRotationDegree());
                     break;
                 case"Star":
                     paintStar(g,x,y,gizmo.getRotationAngle(),c,gizmo.getID(),displayID);
@@ -249,13 +249,14 @@ public class GameBoard extends JPanel implements Observer{
         g2.setTransform(old);
         g2.dispose();
     }
-    private void paintLeftFlipper(Graphics g,int x, int y, int angle,Color c,String id,Boolean displayID){
+    private void paintLeftFlipper(Graphics g,int x, int y, int angle,Color c,String id,Boolean displayID, int actualRotation){
         Graphics2D g2 =(Graphics2D) g.create();
-
 
         AffineTransform transform = new AffineTransform();
         AffineTransform old = g2.getTransform();
-        transform.rotate(Math.toRadians(angle), x + 8, y + 7);
+
+        transform.rotate(Math.toRadians(actualRotation),x , y );
+        transform.rotate(Math.toRadians( angle), x + 8, y + 7);
         g2.transform(transform);
 
         g2.setColor(new Color(170, 169, 50, 255));
@@ -277,12 +278,14 @@ public class GameBoard extends JPanel implements Observer{
         g2.dispose();
     }
 
-    private void paintRightFlipper(Graphics g,int x, int y, int angle, double bigR, double smallR, Color c, String id,Boolean displayID){
+    private void paintRightFlipper(Graphics g,int x, int y, int angle, double bigR, double smallR, Color c, String id,Boolean displayID ,int actualRotation){
         Graphics2D g2 =(Graphics2D) g.create();
 
         AffineTransform transform = new AffineTransform();
         AffineTransform old = g2.getTransform();
         //transform.rotate(Math.toRadians(angle), x + (30/2) + 8, y + 6);
+        //actualRotation
+        transform.rotate(Math.toRadians(actualRotation),x + 30 , y);
         transform.rotate(Math.toRadians(angle), x + 30 - bigR, y + smallR);
         g2.transform(transform);
 

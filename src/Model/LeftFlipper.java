@@ -18,17 +18,15 @@ public class LeftFlipper implements iGizmo {
     private ArrayList<String> keyConnections;
     private int rotationCount;
     private final double constant = 30;
-
+    private int rotationDegree = 0;
     private int rotationAngle = 0;
     private boolean down = false, hit;
-
 
     public LeftFlipper(String id, int x, int y){
         this.ID = id;
         this.XCoord = x;
         this.YCoord = y;
         this.hit = false;
-
         height = 2;
         width = 2;
 
@@ -40,6 +38,55 @@ public class LeftFlipper implements iGizmo {
 
         generateCircles();
         generateLines();
+    }
+
+    public int getFlipperRotationDegree(){
+        return rotationDegree;
+    }
+
+    public void rotateFlipper(){
+        int  rotationDegree = 90;
+        Circle  center = circles.get(0);
+        for (int i = 0; i < lines.size(); i++) {
+            Angle rotation = new Angle(Math.toRadians(rotationDegree));
+            LineSegment currentLine = lines.get(i);
+            lines.set(i,Geometry.rotateAround(currentLine, center.getCenter(),rotation));
+        }
+
+        for (int i = 0; i < circles.size(); i++) {
+            Angle rotation = new Angle(Math.toRadians(rotationDegree));
+            Circle currentCircle = circles.get(i);
+            circles.set(i, Geometry.rotateAround(currentCircle,center.getCenter(),rotation));
+        }
+        if(this.rotationDegree==360)this.rotationDegree=0;
+        this.rotationDegree+=90;
+        if(this.rotationDegree==360)this.rotationDegree=0;
+    }
+
+    public int getRotatedXCoord(){
+       if(rotationDegree == 0) {
+            return  XCoord;
+
+        }else if(rotationDegree == 90){
+            return XCoord-1;
+
+        }else if(rotationDegree == 180){
+            return XCoord-1;
+        }else{
+            return XCoord;
+        }
+    }
+//if(spaces[gridX+1][gridY-1] ||
+    public int getRotatedYCoord(){
+        if(rotationDegree == 0) {
+            return  YCoord;
+        }else if(rotationDegree == 90){
+            return  YCoord;
+        }else if(rotationDegree == 180){
+            return  YCoord - 1;
+        }else {
+            return  YCoord - 1;
+        }
     }
 
     @Override
@@ -79,7 +126,7 @@ public class LeftFlipper implements iGizmo {
     @Override
     public void generateCircles() {
 
-        //todo fix me
+
         Circle bigTopCircle = new Circle(XCoord*constant + 7,YCoord*constant+ 8,8);
         Circle bigBottomCircle = new Circle(XCoord*constant + 6.9,(YCoord+2)*constant - 6,7);
         Circle topLeft  = new Circle(XCoord*constant + 17, YCoord*constant + 8,0);
@@ -97,7 +144,7 @@ public class LeftFlipper implements iGizmo {
 
     @Override
     public void generateLines() {
-        //todo fix me
+
         LineSegment rightL = new LineSegment((XCoord)*constant + 7 + 8 + 2,YCoord*constant +8,XCoord * constant + 1 + 7 + 2,(YCoord + 2)*constant + 6);
         LineSegment leftL = new LineSegment((XCoord)*constant + 7 - 8 + 4,YCoord*constant -8,XCoord * constant + 1 - 7 + 5,(YCoord + 2)*constant + 6);
 

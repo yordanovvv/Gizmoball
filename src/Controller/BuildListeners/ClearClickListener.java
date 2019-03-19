@@ -18,6 +18,7 @@ public class ClearClickListener implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         m.getGizmos().removeAll(m.getGizmos());
         m.wipeSpaces();
+        m.getBalls().removeAll(m.getBalls());
     }
 
     @Override

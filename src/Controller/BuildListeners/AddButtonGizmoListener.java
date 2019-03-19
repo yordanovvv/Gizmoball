@@ -37,7 +37,6 @@ public class AddButtonGizmoListener implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("Button id : " + id);
         gcl.setSelected(id); //Change what button is "selected" for when clicking on the grid.
     }
 
