@@ -12,7 +12,7 @@ public class DisconnectGizmosPopup {
     private JFrame frame;
     private JLabel description, disconnectLabel;
     private JComboBox<String> connectionsComboBox;
-    private JButton button_done, button_cancel;
+    private JButton button_remove, button_cancel;
 
     private iModel model;
 
@@ -51,6 +51,8 @@ public class DisconnectGizmosPopup {
         container.add(disconnectLabel);
 
         connectionsComboBox = new JComboBox<>();
+        button_remove = new JButton("Remove");
+        button_cancel = new JButton("Close");
 
         for(iGizmo gizmo : model.getGizmos()) {
             if(gizmo.getGizmoConnections() != null ) {
@@ -65,6 +67,10 @@ public class DisconnectGizmosPopup {
             }
         }
 
+        if(connectionsComboBox.getItemCount() == 0) {
+            button_remove.setEnabled(false);
+        }
+
         container.add(connectionsComboBox);
 
         frame.add(container, BorderLayout.CENTER);
@@ -73,16 +79,14 @@ public class DisconnectGizmosPopup {
         buttonContainer.setLayout(new GridLayout(0, 2, 10, 10));
         buttonContainer.setBackground(bg_color);
 
-        button_done = new JButton("Remove");
-        button_cancel = new JButton("Close");
 
         //need to add action listeners to these?^^
-        button_done.setActionCommand("Remove");
-        button_done.addActionListener(new SmallDisconnectActionListener());
+        button_remove.setActionCommand("Remove");
+        button_remove.addActionListener(new SmallDisconnectActionListener());
         button_cancel.setActionCommand("Close");
         button_cancel.addActionListener(new SmallDisconnectActionListener());
 
-        buttonContainer.add(button_done);
+        buttonContainer.add(button_remove);
         buttonContainer.add(button_cancel);
 
 
