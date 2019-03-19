@@ -72,7 +72,7 @@ public class GridClickListener implements MouseListener {
                     }
                     giz = new GizmoCircle("C" + (bigId+1), gridX, gridY);
                     if (m.checkSpace(gridX, gridY, giz)){   //must be !checkspace bc checkspace returns false is free
-                        m.setSpaces(gridX, gridY, true, giz);
+                        m.setSpaces(gridX, gridY, true, giz, null);
                         m.addGizmo(giz);
                     }
                     break;
@@ -88,7 +88,7 @@ public class GridClickListener implements MouseListener {
                     }
                     giz = new Square("S" + (bigId+1), gridX, gridY);
                     if (m.checkSpace(gridX, gridY, giz)){
-                        m.setSpaces(gridX, gridY, true, giz);
+                        m.setSpaces(gridX, gridY, true, giz, null);
                         m.addGizmo(giz);
                     }
                     break;
@@ -104,7 +104,7 @@ public class GridClickListener implements MouseListener {
                     }
                     giz = new Triangle("T" + (bigId+1), gridX, gridY);
                     if (m.checkSpace(gridX, gridY, giz)){
-                        m.setSpaces(gridX, gridY, true, giz);
+                        m.setSpaces(gridX, gridY, true, giz, null);
                         m.addGizmo(giz);
                     }
                     break;
@@ -121,7 +121,7 @@ public class GridClickListener implements MouseListener {
                     giz = new RightFlipper("RF" + (bigId+1), gridX, gridY);
                     if (gridX-1>=0 && gridY+1<20) {
                         if (m.checkSpace(gridX, gridY, giz)) {
-                            m.setSpaces(gridX, gridY, true, giz);
+                            m.setSpaces(gridX, gridY, true, giz, null);
                             m.addGizmo(giz);
                             SelectKeyPopup keyPopup = new SelectKeyPopup(m, giz);
                         }
@@ -140,7 +140,7 @@ public class GridClickListener implements MouseListener {
                     giz = new LeftFlipper("LF" + (bigId+1), gridX, gridY);
                     if (gridX+1<20 && gridY+1<20) {
                         if (m.checkSpace(gridX, gridY, giz)) {
-                            m.setSpaces(gridX, gridY, true, giz);
+                            m.setSpaces(gridX, gridY, true, giz, null);
                             m.addGizmo(giz);
                             SelectKeyPopup keyPopup = new SelectKeyPopup(m, giz);
                         }
@@ -159,7 +159,7 @@ public class GridClickListener implements MouseListener {
                     giz = new Star("ST" + (bigId+1), gridX, gridY);
                     if(gridX+2<20 && gridY+2<20 && gridX-1>=0 && gridY-1>=0) {
                         if (m.checkSpace(gridX, gridY, giz)) {
-                            m.setSpaces(gridX, gridY, true, giz);
+                            m.setSpaces(gridX, gridY, true, giz, null);
                             m.addGizmo(giz);
                         }
                     }
@@ -169,12 +169,12 @@ public class GridClickListener implements MouseListener {
                         System.out.println();
                         if (m.checkSpace(gridX, gridY, moveGizmo)) {
                                 //clear spaces gizmo was at
-                                m.setSpaces(moveGizmo.getXCoord(), moveGizmo.getYCoord(), false, moveGizmo);
+                                m.setSpaces(moveGizmo.getXCoord(), moveGizmo.getYCoord(), false, moveGizmo, null);
                                 //move gizmo
                                 moveGizmo.setXCoord(gridX);
                                 moveGizmo.setYCoord(gridY);
                                 //set spaces of new position
-                                m.setSpaces(gridX, gridY, true, moveGizmo);
+                                m.setSpaces(gridX, gridY, true, moveGizmo, null);
                                 moveGizmo = null;
                         }
                     }
@@ -197,12 +197,12 @@ public class GridClickListener implements MouseListener {
                             }else if(g.getGizmoType() == "RightFlipper"){
                               //  m.setSpaces(g.getXCoord(), g.getYCoord(),  false, g);
                                 ((RightFlipper)g).rotateFlipper();
-                                m.setSpaces(g.getXCoord(), g.getYCoord(),  true, g);
+                                m.setSpaces(g.getXCoord(), g.getYCoord(),  true, g, null);
                                 System.out.println(g.getXCoord() + "  " + g.getYCoord());
                             }else if(g.getGizmoType() == "LeftFlipper"){
                                // m.setSpaces(g.getXCoord(), g.getYCoord(),  false, g);
                                 ((LeftFlipper)g).rotateFlipper();
-                                m.setSpaces(g.getXCoord(), g.getYCoord(),  true, g);
+                                m.setSpaces(g.getXCoord(), g.getYCoord(),  true, g, null);
                             }else if(g.getGizmoType() == "LeftFlipper"){
                             }
                         }
@@ -213,7 +213,7 @@ public class GridClickListener implements MouseListener {
                     for (iGizmo g : m.getGizmos()) {
                         if (g.getXCoord() == gridX && g.getYCoord() == gridY) {
                             removeGimzo = g;
-                            m.setSpaces(gridX, gridY, false, g);
+                            m.setSpaces(gridX, gridY, false, g, null);
                         }
                     }
                     m.removeGizmo(removeGimzo);
@@ -292,7 +292,7 @@ public class GridClickListener implements MouseListener {
                 Absorber abs = new Absorber("A", start_gridX, start_gridY, end_gridX+1, end_gridY+1);
                 if (m.checkSpace(start_gridX, start_gridY, abs)){
                     m.addGizmo(abs);
-                    m.setSpaces(start_gridX, start_gridY,  true, abs);
+                    m.setSpaces(start_gridX, start_gridY,  true, abs, null);
                 }
                 break;
         }

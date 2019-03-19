@@ -188,100 +188,113 @@ public class GizmoballModel extends iModel {
         }
     }
 
-    public void setSpaces(int gridX, int gridY, boolean val, iGizmo g){
+    public void setSpaces(int gridX, int gridY, boolean val, iGizmo g, Ball b){
         if(gridX>=20)return;
         if(gridY>=20)return;
-        switch(g.getGizmoType()){
-            case "Square":
-                spaces[gridX][gridY] = val;
-                break;
-            case "Circle":
-                spaces[gridX][gridY] = val;
-                break;
-            case "Triangle":
-                spaces[gridX][gridY] = val;
-                break;
-            case "RightFlipper":
-                int rotationDegree = ((RightFlipper)g).getFlipperRotationDegree();
-                if(rotationDegree == 0) {
+
+        if (g != null) {
+            switch (g.getGizmoType()) {
+                case "Square":
+                    spaces[gridX][gridY] = val;
+                    break;
+                case "Circle":
+                    spaces[gridX][gridY] = val;
+                    break;
+                case "Triangle":
+                    spaces[gridX][gridY] = val;
+                    break;
+                case "RightFlipper":
+                    int rotationDegree = ((RightFlipper) g).getFlipperRotationDegree();
+                    if (rotationDegree == 0) {
+                        spaces[gridX][gridY] = val;
+                        spaces[gridX][gridY + 1] = val;
+                        spaces[gridX - 1][gridY] = val;
+                        spaces[gridX - 1][gridY + 1] = val;
+                    } else if (rotationDegree == 90) {
+                        spaces[gridX][gridY - 1] = val;
+                        spaces[gridX - 1][gridY - 1] = val;
+                        spaces[gridX - 1][gridY - 2] = val;
+                        spaces[gridX][gridY - 2] = val;
+                    } else if (rotationDegree == 180) {
+                        spaces[gridX + 1][gridY - 1] = val;
+                        spaces[gridX + 1][gridY - 2] = val;
+                        spaces[gridX + 2][gridY - 1] = val;
+                        spaces[gridX + 2][gridY - 2] = val;
+                    } else {
+                        spaces[gridX + 1][gridY] = val;
+                        spaces[gridX + 1][gridY + 1] = val;
+                        spaces[gridX + 2][gridY] = val;
+                        spaces[gridX + 2][gridY + 1] = val;
+                    }
+                    break;
+                case "LeftFlipper":
+                    int rdeg = ((LeftFlipper) g).getFlipperRotationDegree();
+                    if (rdeg == 0) {
+                        spaces[gridX][gridY] = val;
+                        spaces[gridX][gridY + 1] = val;
+                        spaces[gridX + 1][gridY] = val;
+                        spaces[gridX + 1][gridY + 1] = val;
+                    } else if (rdeg == 90) {
+                        spaces[gridX - 1][gridY] = val;
+                        spaces[gridX - 1][gridY + 1] = val;
+                        spaces[gridX - 2][gridY] = val;
+                        spaces[gridX - 2][gridY + 1] = val;
+                    } else if (rdeg == 180) {
+                        spaces[gridX - 1][gridY - 1] = val;
+                        spaces[gridX - 2][gridY - 1] = val;
+                        spaces[gridX - 1][gridY - 2] = val;
+                        spaces[gridX - 2][gridY - 2] = val;
+                    } else {
+                        spaces[gridX + 1][gridY - 1] = val;
+                        spaces[gridX + 1][gridY - 2] = val;
+                        spaces[gridX][gridY - 1] = val;
+                        spaces[gridX][gridY - 2] = val;
+                    }
+                    break;
+                case "Star":
                     spaces[gridX][gridY] = val;
                     spaces[gridX][gridY + 1] = val;
+                    spaces[gridX][gridY + 2] = val;
+
+                    spaces[gridX + 1][gridY] = val;
+                    spaces[gridX + 2][gridY] = val;
+
+                    spaces[gridX + 1][gridY + 1] = val;
+                    spaces[gridX + 2][gridY + 1] = val;
+                    spaces[gridX + 1][gridY + 2] = val;
+                    spaces[gridX + 2][gridY + 2] = val;
+
+                    spaces[gridX - 1][gridY - 1] = val;
                     spaces[gridX - 1][gridY] = val;
                     spaces[gridX - 1][gridY + 1] = val;
-                }else if(rotationDegree == 90){
-                    spaces[gridX][gridY -1] = val;
-                    spaces[gridX- 1][gridY - 1] = val;
-                    spaces[gridX - 1][gridY - 2] = val;
-                    spaces[gridX][gridY - 2] = val;
-                }else if(rotationDegree == 180){
-                    spaces[gridX+1][gridY-1] = val;
-                    spaces[gridX+1][gridY -2] = val;
-                    spaces[gridX + 2][gridY -1] = val;
-                    spaces[gridX + 2][gridY - 2] = val;
-                }else{
-                    spaces[gridX+1][gridY] = val;
-                    spaces[gridX + 1][gridY + 1] = val;
-                    spaces[gridX + 2][gridY] = val;
-                    spaces[gridX + 2][gridY + 1] = val;
-                }
-                break;
-            case "LeftFlipper":
-                int rdeg = ((LeftFlipper)g).getFlipperRotationDegree();
-                if(rdeg == 0) {
-                    spaces[gridX][gridY] = val;
-                    spaces[gridX][gridY + 1] = val;
-                    spaces[gridX + 1][gridY] = val;
-                    spaces[gridX + 1][gridY + 1] = val;
-                }else if(rdeg == 90){
-                    spaces[gridX - 1][gridY] = val;
-                    spaces[gridX-  1][gridY + 1] = val;
-                    spaces[gridX - 2][gridY] = val;
-                    spaces[gridX - 2][gridY + 1] = val;
-                }else if(rdeg == 180){
-                    spaces[gridX - 1][gridY -1] = val;
-                    spaces[gridX- 2][gridY - 1] = val;
-                    spaces[gridX - 1][gridY - 2] = val;
-                    spaces[gridX - 2][gridY - 2] = val;
-                }else{
-                    spaces[gridX+1][gridY-1] = val;
-                    spaces[gridX+1][gridY -2] = val;
-                    spaces[gridX ][gridY -1] = val;
-                    spaces[gridX ][gridY - 2] = val;
-                }
-                break;
-            case "Star":
-                spaces[gridX][gridY] = val;
-                spaces[gridX][gridY+1] = val;
-                spaces[gridX][gridY+2] = val;
+                    spaces[gridX - 1][gridY + 2] = val;
 
-                spaces[gridX+1][gridY] = val;
-                spaces[gridX+2][gridY] = val;
-
-                spaces[gridX+1][gridY+1] = val;
-                spaces[gridX+2][gridY+1] = val;
-                spaces[gridX+1][gridY+2] = val;
-                spaces[gridX+2][gridY+2] = val;
-
-                spaces[gridX-1][gridY-1] = val;
-                spaces[gridX-1][gridY] = val;
-                spaces[gridX-1][gridY+1] = val;
-                spaces[gridX-1][gridY+2] = val;
-
-                spaces[gridX][gridY-1] = val;
-                spaces[gridX+1][gridY-1] = val;
-                spaces[gridX+2][gridY-1] = val;
-                break;
-            case "Absorber":
-                for (int x=0; x<g.getWidth(); x++){
-                    for (int y=0; y<g.getHeight(); y++){
-                        spaces[gridX+x][gridY+y] = val;
+                    spaces[gridX][gridY - 1] = val;
+                    spaces[gridX + 1][gridY - 1] = val;
+                    spaces[gridX + 2][gridY - 1] = val;
+                    break;
+                case "Absorber":
+                    for (int x = 0; x < g.getWidth(); x++) {
+                        for (int y = 0; y < g.getHeight(); y++) {
+                            spaces[gridX + x][gridY + y] = val;
+                        }
                     }
-                }
-                break;
-            default:
-                spaces[gridX][gridY] = val; //this might break it?
+                    break;
+                default:
+                    spaces[gridX][gridY] = false; //this might break it?
+            }
+        } else if (b != null){
+                System.out.println("Ball " + b.getID() + " at grid " + Math.floor(b.getExactX()/30) + " , " + Math.floor(b.getExactY()/30));
+                int ballX = (int) Math.floor(b.getExactX()/30);
+                int ballY = (int) Math.floor(b.getExactY()/30);
+                spaces[ballX][ballY] = val;
+        } else {
+            spaces[gridX][gridY] = val;
         }
+
     }
+
+
 
     public boolean[][] getSpaces(){
         return spaces;
@@ -768,57 +781,60 @@ public class GizmoballModel extends iModel {
                 int gizYCoord =0;
                 switch(inputStream[0]) {
                     case "Ball":
-                        Ball ball = new Ball(inputStream[1], Double.parseDouble(inputStream[2]), Double.parseDouble(inputStream[3]), Double.parseDouble(inputStream[4]), Double.parseDouble(inputStream[5]));
+                        gizXCoord = Integer.parseInt(inputStream[2]);
+                        gizYCoord = Integer.parseInt(inputStream[3]);
+                        Ball ball = new Ball(inputStream[1], gizXCoord, gizYCoord, Double.parseDouble(inputStream[4]), Double.parseDouble(inputStream[5]));
                         balls.add(ball);
+                        setSpaces(gizXCoord, gizYCoord, true, null, ball);
                         break;
                     case "Absorber":
                         gizXCoord = Integer.parseInt(inputStream[2]);
                         gizYCoord = Integer.parseInt(inputStream[3]);
                         Absorber abs = new Absorber(inputStream[1], gizXCoord, gizYCoord, Integer.parseInt(inputStream[4]), Integer.parseInt(inputStream[5]));
                         gizmos.add(abs);
-                        setSpaces(gizXCoord, gizYCoord, true, abs);
+                        setSpaces(gizXCoord, gizYCoord, true, abs, null);
                         break;
                     case "Square":
                         gizXCoord = Integer.parseInt(inputStream[2]);
                         gizYCoord = Integer.parseInt(inputStream[3]);
                         Square square = new Square(inputStream[1], gizXCoord, gizYCoord);
                         gizmos.add(square);
-                        setSpaces(gizXCoord, gizYCoord, true, square);
+                        setSpaces(gizXCoord, gizYCoord, true, square, null);
                         break;
                     case "Circle":
                         gizXCoord = Integer.parseInt(inputStream[2]);
                         gizYCoord = Integer.parseInt(inputStream[3]);
                         GizmoCircle circle = new GizmoCircle(inputStream[1], gizXCoord, gizYCoord);
                         gizmos.add(circle);
-                        setSpaces(gizXCoord, gizYCoord, true, circle);
+                        setSpaces(gizXCoord, gizYCoord, true, circle, null);
                         break;
                     case "Triangle":
                         gizXCoord = Integer.parseInt(inputStream[2]);
                         gizYCoord = Integer.parseInt(inputStream[3]);
                         Triangle triangle = new Triangle(inputStream[1], gizXCoord, gizYCoord);
                         gizmos.add(triangle);
-                        setSpaces(gizXCoord, gizYCoord, true, triangle);
+                        setSpaces(gizXCoord, gizYCoord, true, triangle, null);
                         break;
                     case "RightFlipper":
                         gizXCoord = Integer.parseInt(inputStream[2]);
                         gizYCoord = Integer.parseInt(inputStream[3]);
                         RightFlipper rightFlipper = new RightFlipper(inputStream[1], gizXCoord, gizYCoord);
                         gizmos.add(rightFlipper);
-                        setSpaces(gizXCoord, gizYCoord, true, rightFlipper);
+                        setSpaces(gizXCoord, gizYCoord, true, rightFlipper, null);
                         break;
                     case "LeftFlipper":
                         gizXCoord = Integer.parseInt(inputStream[2]);
                         gizYCoord = Integer.parseInt(inputStream[3]);
                         LeftFlipper leftFlipper = new LeftFlipper(inputStream[1], gizXCoord, gizYCoord);
                         gizmos.add(leftFlipper);
-                        setSpaces(gizXCoord, gizYCoord, true, leftFlipper);
+                        setSpaces(gizXCoord, gizYCoord, true, leftFlipper, null);
                         break;
                     case "Star":
                         gizXCoord = Integer.parseInt(inputStream[2]);
                         gizYCoord = Integer.parseInt(inputStream[3]);
                         Star star = new Star(inputStream[1], gizXCoord, gizYCoord);
                         gizmos.add(star);
-                        setSpaces(gizXCoord, gizYCoord, true, star);
+                        setSpaces(gizXCoord, gizYCoord, true, star, null);
                         break;
                     case "Rotate":
                         for(iGizmo gizmo : gizmos) {

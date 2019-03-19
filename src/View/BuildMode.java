@@ -1,6 +1,9 @@
 package View;
 
 import Controller.BuildListeners.*;
+import Model.Ball;
+import Model.iGizmo;
+import Model.iModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,6 +35,7 @@ public class BuildMode extends JPanel{
 
 
     private MainFrame mainFrame;
+    private iModel m;
 
 
     public BuildMode(MainFrame mainFrame){
@@ -41,6 +45,7 @@ public class BuildMode extends JPanel{
         this.setLayout(new GridLayout(0,1,10,10));
 
         this.mainFrame = mainFrame;
+        m = mainFrame.getModel();
 
         this.setFocusable(true); //Needed for keylistener to work
         init();
@@ -170,17 +175,17 @@ public class BuildMode extends JPanel{
         //-------------
         //controls
         AddButtonGizmoListener rotateListener = new AddButtonGizmoListener("rotate", lis);
-        ConnectListener connectListener = new ConnectListener(mainFrame.getModel());
-        ConnectListener disconnectListener = new ConnectListener(mainFrame.getModel());
+        ConnectListener connectListener = new ConnectListener(m);
+        ConnectListener disconnectListener = new ConnectListener(m);
         AddButtonGizmoListener deleteListener = new AddButtonGizmoListener("delete", lis);
         AddButtonGizmoListener moveListener = new AddButtonGizmoListener("move", lis);
 
-        ShowPopupListener keyBindsListener = new ShowPopupListener(mainFrame.getModel(), "key binds");
+        ShowPopupListener keyBindsListener = new ShowPopupListener(m, "key binds");
 
-        ShowPopupListener updateBallVeloListener = new ShowPopupListener(mainFrame.getModel(), "updateBall");
-        ShowPopupListener updateGravFricListener = new ShowPopupListener(mainFrame.getModel(), "updateGravity");
+        ShowPopupListener updateBallVeloListener = new ShowPopupListener(m, "updateBall");
+        ShowPopupListener updateGravFricListener = new ShowPopupListener(m, "updateGravity");
 
-        ClearClickListener clearClickListener = new ClearClickListener(mainFrame.getModel());
+        ClearClickListener clearClickListener = new ClearClickListener(m);
 
         button_rotate.addMouseListener(rotateListener);
         button_delete.addMouseListener(deleteListener);
@@ -197,6 +202,27 @@ public class BuildMode extends JPanel{
 
         this.add(buildPanel);
         this.add(controlsPanel);
+
+        //-----------
+
+        //do the spaces check again, for all moved balls
+
+        for (int x=0; x<20; x++){
+            for (int y=0; y<20; y++){
+                m.setSpaces(x, y, false, null, null);
+            }
+        }
+
+        for (Ball b : m.getBalls()){
+            int ballX = (int) Math.floor(b.getExactX()/30);
+            int ballY = (int) Math.floor(b.getExactY()/30);
+            m.setSpaces(ballX, ballY, true, null, b);
+        }
+        for (iGizmo g : m.getGizmos()){
+            m.setSpaces(g.getXCoord(), g.getYCoord(), true, g, null);
+        }
+
+
 
     }
 }

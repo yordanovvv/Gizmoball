@@ -26,11 +26,11 @@ public class PlaceBallPopup {
     int gridX;
     int gridY;
 
-    public PlaceBallPopup(iModel m, int gridX, int gridY){
+    public PlaceBallPopup(iModel m, int ballX, int ballY){
 
         this.m = m;
-        this.gridX = gridX;
-        this.gridY = gridY;
+        this.gridX = ballX;
+        this.gridY = ballY;
 
         Utils utils = new Utils();
         Color bg_color = (new Color(0, 41, 57, 255));
@@ -133,8 +133,9 @@ public class PlaceBallPopup {
                     }
             }
            if (e.getActionCommand().equals("Done")){
-                Ball b = new Ball("B"+(bigId+1), gridX, gridY, xVelo, yVelo);
-                m.addBall(b);
+               Ball b = new Ball("B"+(bigId+1), gridX, gridY, xVelo, yVelo);
+                   m.addBall(b);
+                   m.setSpaces(gridX, gridY, true, null, b);
             }
 
             pop_upFrame.setVisible(false);
