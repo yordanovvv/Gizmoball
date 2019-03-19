@@ -216,21 +216,35 @@ public class GizmoballModel extends iModel {
                 case "RightFlipper":
                     int rotationDegree = ((RightFlipper) g).getFlipperRotationDegree();
                     if (rotationDegree == 0) {
+                        if(gridX+1>=20)return;
+                        if(gridX-1<0)return;
+                        if(gridY+1>=20)return;
                         spaces[gridX][gridY] = val;
                         spaces[gridX][gridY + 1] = val;
                         spaces[gridX - 1][gridY] = val;
                         spaces[gridX - 1][gridY + 1] = val;
                     } else if (rotationDegree == 90) {
+                        if(gridY-2<0)return;
+                        if(gridY-1<0)return;
+                        if(gridX-1<0)return;
                         spaces[gridX][gridY - 1] = val;
                         spaces[gridX - 1][gridY - 1] = val;
                         spaces[gridX - 1][gridY - 2] = val;
                         spaces[gridX][gridY - 2] = val;
                     } else if (rotationDegree == 180) {
+                        if(gridY-2<0)return;
+                        if(gridY-1<0)return;
+                        if(gridX+1>=20)return;
+                        if(gridX+2>=20)return;
                         spaces[gridX + 1][gridY - 1] = val;
                         spaces[gridX + 1][gridY - 2] = val;
                         spaces[gridX + 2][gridY - 1] = val;
                         spaces[gridX + 2][gridY - 2] = val;
                     } else {
+                       if(gridX+2>=20)return;
+                        if(gridX+1>=20)return;
+                        if(gridY+1>=20)return;
+
                         spaces[gridX + 1][gridY] = val;
                         spaces[gridX + 1][gridY + 1] = val;
                         spaces[gridX + 2][gridY] = val;
@@ -240,21 +254,34 @@ public class GizmoballModel extends iModel {
                 case "LeftFlipper":
                     int rdeg = ((LeftFlipper) g).getFlipperRotationDegree();
                     if (rdeg == 0) {
+                        if(gridX+1>=20)return;
+                        if(gridY+1>=20)return;
                         spaces[gridX][gridY] = val;
                         spaces[gridX][gridY + 1] = val;
                         spaces[gridX + 1][gridY] = val;
                         spaces[gridX + 1][gridY + 1] = val;
                     } else if (rdeg == 90) {
+                        if(gridX-2<0)return;
+                        if(gridX-1<0)return;
+                        if(gridY+1>=20)return;
                         spaces[gridX - 1][gridY] = val;
                         spaces[gridX - 1][gridY + 1] = val;
                         spaces[gridX - 2][gridY] = val;
                         spaces[gridX - 2][gridY + 1] = val;
                     } else if (rdeg == 180) {
+                        if(gridX-2<0)return;
+                        if(gridX-1<0)return;
+                        if(gridY-1<0)return;
+                        if(gridY-2<0)return;
                         spaces[gridX - 1][gridY - 1] = val;
                         spaces[gridX - 2][gridY - 1] = val;
                         spaces[gridX - 1][gridY - 2] = val;
                         spaces[gridX - 2][gridY - 2] = val;
                     } else {
+                        if(gridX-2<0)return;
+                        if(gridX-1<0)return;
+                        if(gridY-1<0)return;
+                        if(gridY-2<0)return;
                         spaces[gridX + 1][gridY - 1] = val;
                         spaces[gridX + 1][gridY - 2] = val;
                         spaces[gridX][gridY - 1] = val;
@@ -314,50 +341,14 @@ public class GizmoballModel extends iModel {
     public boolean checkRotatedFlipperSpace(int gridX, int gridY, iGizmo g){
         switch (g.getGizmoType()){
              case "LeftFlipper":
-                boolean  canPlaceLF = true;
                 int rdeg = ((LeftFlipper)g).getFlipperRotationDegree();
-                boolean rotated = ((LeftFlipper)g).getRotated();
+
                 if(rdeg == 360) rdeg = 0;
-
-
 
                 rdeg = rdeg + 90;
                 if (rdeg == 360) rdeg = 0;
-
-
-                if(rdeg == 0) {
-                    if(spaces[gridX][gridY]||
-                            spaces[gridX][gridY + 1] ||
-                            spaces[gridX + 1][gridY] ||
-                            spaces[gridX + 1][gridY + 1]){
-                        canPlaceLF = false;
-                    }
-                }else if(rdeg == 90){
-                    if(spaces[gridX - 1][gridY]||
-                            spaces[gridX-  1][gridY + 1] ||
-                            spaces[gridX - 2][gridY] ||
-                            spaces[gridX - 2][gridY + 1]){
-                        canPlaceLF = false;
-                    }
-                }else if(rdeg == 180){
-                    if( spaces[gridX - 1][gridY -1]||
-                            spaces[gridX- 2][gridY - 1]||
-                            spaces[gridX - 1][gridY - 2] ||
-                            spaces[gridX - 2][gridY - 2]){
-                        canPlaceLF = false;
-                    }
-                }else{
-                    if(spaces[gridX+1][gridY-1] ||
-                            spaces[gridX+1][gridY -2] ||
-                            spaces[gridX ][gridY -1] ||
-                            spaces[gridX ][gridY - 2] ){
-                        canPlaceLF = false;
-                    }
-                }
-
-                return canPlaceLF;
+                return checkLeftFlipperGrid(rdeg,gridY,gridX);
             case "RightFlipper":
-                boolean canPlaceRF = true;
                 int rotationDegree = ((RightFlipper)g).getFlipperRotationDegree();
 
                 if(rotationDegree == 360) rotationDegree = 0;
@@ -365,38 +356,106 @@ public class GizmoballModel extends iModel {
                 rotationDegree = rotationDegree + 90;
                 if (rotationDegree == 360) rotationDegree = 0;
 
-
-                if(rotationDegree == 0) {
-                    if( spaces[gridX][gridY] || spaces[gridX][gridY + 1] ||
-                            spaces[gridX - 1][gridY]||
-                            spaces[gridX - 1][gridY + 1]){
-                        canPlaceRF = false;
-                    }
-                }else if(rotationDegree == 90){
-                    if(spaces[gridX][gridY -1]||
-                            spaces[gridX- 1][gridY - 1] ||
-                            spaces[gridX - 1][gridY - 2] ||
-                            spaces[gridX][gridY - 2]){
-                        canPlaceRF = false;
-                    }
-                }else if(rotationDegree == 180){
-                    if(spaces[gridX+1][gridY-1] ||
-                            spaces[gridX+1][gridY -2]||
-                            spaces[gridX + 2][gridY -1] ||
-                            spaces[gridX + 2][gridY - 2] ){
-                        canPlaceRF = false;
-                    }
-                }else{
-                    if( spaces[gridX+1][gridY] ||
-                            spaces[gridX + 1][gridY + 1] ||
-                            spaces[gridX + 2][gridY]||
-                            spaces[gridX + 2][gridY + 1]){
-                        canPlaceRF = false;
-                    }
-                }
-                return canPlaceRF;
+                return checkRightFlipper(rotationDegree,gridX,gridY);
         }
         return false;
+    }
+
+
+    private boolean checkLeftFlipperGrid(int rdeg,int gridY,int gridX){
+        boolean canPlaceLF = true;
+        if(rdeg == 0) {
+
+            if(gridY+1>=20)return false;
+            if(gridX+1>=20)return false;
+
+            if(spaces[gridX][gridY]||
+                    spaces[gridX][gridY + 1] ||
+                    spaces[gridX + 1][gridY] ||
+                    spaces[gridX + 1][gridY + 1]){
+                canPlaceLF = false;
+            }
+        }else if(rdeg == 90){
+            if(gridY+1>=20)return false;
+            if(gridX-1<0)return false;
+            if(gridX-2<0)return false;
+
+            if(spaces[gridX - 1][gridY]||
+                    spaces[gridX-  1][gridY + 1] ||
+                    spaces[gridX - 2][gridY] ||
+                    spaces[gridX - 2][gridY + 1]){
+                canPlaceLF = false;
+            }
+        }else if(rdeg == 180){
+            if(gridX-1<0)return false;
+            if(gridX-2<0)return false;
+            if(gridY-1<0)return false;
+            if(gridY-2<0)return false;
+
+            if( spaces[gridX - 1][gridY -1]||
+                    spaces[gridX- 2][gridY - 1]||
+                    spaces[gridX - 1][gridY - 2] ||
+                    spaces[gridX - 2][gridY - 2]){
+                canPlaceLF = false;
+            }
+        }else{
+            if(gridY+1>=20)return false;
+            if(gridY-1<0)return false;
+            if(gridY-2<0)return false;
+            if(spaces[gridX+1][gridY-1] ||
+                    spaces[gridX+1][gridY -2] ||
+                    spaces[gridX ][gridY -1] ||
+                    spaces[gridX ][gridY - 2] ){
+                canPlaceLF = false;
+            }
+        }
+        return canPlaceLF;
+    }
+
+
+    private boolean checkRightFlipper(int rotationDegree, int gridX, int gridY){
+        boolean canPlaceRF = true;
+        if(rotationDegree == 0) {
+            if(gridY+1>=20)return false;
+            if(gridX-1<0)return false;
+            if( spaces[gridX][gridY] || spaces[gridX][gridY + 1] ||
+                    spaces[gridX - 1][gridY]||
+                    spaces[gridX - 1][gridY + 1]){
+                canPlaceRF = false;
+            }
+        }else if(rotationDegree == 90){
+            if(gridY-1<0)return false;
+            if(gridY-2<0)return false;
+            if(gridX-1<0)return false;
+            if(spaces[gridX][gridY -1]||
+                    spaces[gridX- 1][gridY - 1] ||
+                    spaces[gridX - 1][gridY - 2] ||
+                    spaces[gridX][gridY - 2]){
+                canPlaceRF = false;
+            }
+        }else if(rotationDegree == 180){
+            if(gridY-1<0)return false;
+            if(gridY-2<0)return false;
+            if(gridX+1>=20)return false;
+            if(gridX+2>=20)return false;
+            if(spaces[gridX+1][gridY-1] ||
+                    spaces[gridX+1][gridY -2]||
+                    spaces[gridX + 2][gridY -1] ||
+                    spaces[gridX + 2][gridY - 2] ){
+                canPlaceRF = false;
+            }
+        }else{
+            if(gridY+1>=20)return false;
+            if(gridX+1>=20)return false;
+            if(gridX+2>=20)return false;
+            if( spaces[gridX+1][gridY] ||
+                    spaces[gridX + 1][gridY + 1] ||
+                    spaces[gridX + 2][gridY]||
+                    spaces[gridX + 2][gridY + 1]){
+                canPlaceRF = false;
+            }
+        }
+        return canPlaceRF;
     }
 
     //todo this neeeeeds to be fixed, with regards to movement of gizmos
@@ -416,76 +475,16 @@ public class GizmoballModel extends iModel {
             case "Triangle":
                 return !spaces[gridX][gridY];
             case "LeftFlipper":
-                boolean  canPlaceLF = true;
                 int rdeg = ((LeftFlipper)g).getFlipperRotationDegree();
                 if(rdeg == 360) rdeg = 0;
 
-                if(rdeg == 0) {
-                    if(spaces[gridX][gridY]||
-                    spaces[gridX][gridY + 1] ||
-                    spaces[gridX + 1][gridY] ||
-                    spaces[gridX + 1][gridY + 1]){
-                        canPlaceLF = false;
-                    }
-                }else if(rdeg == 90){
-                    if(spaces[gridX - 1][gridY]||
-                    spaces[gridX-  1][gridY + 1] ||
-                    spaces[gridX - 2][gridY] ||
-                    spaces[gridX - 2][gridY + 1]){
-                        canPlaceLF = false;
-                    }
-                }else if(rdeg == 180){
-                   if( spaces[gridX - 1][gridY -1]||
-                    spaces[gridX- 2][gridY - 1]||
-                    spaces[gridX - 1][gridY - 2] ||
-                    spaces[gridX - 2][gridY - 2]){
-                       canPlaceLF = false;
-                   }
-                }else{
-                    if(spaces[gridX+1][gridY-1] ||
-                    spaces[gridX+1][gridY -2] ||
-                    spaces[gridX ][gridY -1] ||
-                    spaces[gridX ][gridY - 2] ){
-                        canPlaceLF = false;
-                    }
-                }
-
-                return canPlaceLF;
+                return checkLeftFlipperGrid(rdeg,gridX,gridY);
             case "RightFlipper":
-                boolean canPlaceRF = true;
                 int rotationDegree = ((RightFlipper)g).getFlipperRotationDegree();
 
                 if(rotationDegree == 360) rotationDegree = 0;
 
-                if(rotationDegree == 0) {
-                    if( spaces[gridX][gridY] || spaces[gridX][gridY + 1] ||
-                    spaces[gridX - 1][gridY]||
-                    spaces[gridX - 1][gridY + 1]){
-                        canPlaceRF = false;
-                    }
-                }else if(rotationDegree == 90){
-                    if(spaces[gridX][gridY -1]||
-                    spaces[gridX- 1][gridY - 1] ||
-                    spaces[gridX - 1][gridY - 2] ||
-                    spaces[gridX][gridY - 2]){
-                        canPlaceRF = false;
-                    }
-                }else if(rotationDegree == 180){
-                    if(spaces[gridX+1][gridY-1] ||
-                    spaces[gridX+1][gridY -2]||
-                    spaces[gridX + 2][gridY -1] ||
-                    spaces[gridX + 2][gridY - 2] ){
-                        canPlaceRF = false;
-                    }
-                }else{
-                   if( spaces[gridX+1][gridY] ||
-                    spaces[gridX + 1][gridY + 1] ||
-                    spaces[gridX + 2][gridY]||
-                    spaces[gridX + 2][gridY + 1]){
-                       canPlaceRF = false;
-                   }
-                }
-                return canPlaceRF;
+                return checkRightFlipper(rotationDegree,gridX,gridY);
             case "Star":
                 boolean canPlaceStar = true;
                 if (spaces[gridX][gridY] ||

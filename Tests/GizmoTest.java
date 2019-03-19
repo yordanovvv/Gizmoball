@@ -637,6 +637,11 @@ public class GizmoTest {
 
     }
 
+    @Test
+    public void checkRotatedFlipperSpace(){
+
+    }
+
 
     //TODO need to test equals method for gizmos and fix absorber test
 /*

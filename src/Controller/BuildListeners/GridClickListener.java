@@ -169,13 +169,37 @@ public class GridClickListener implements MouseListener {
                         System.out.println();
                         if (m.checkSpace(gridX, gridY, moveGizmo)) {
                                 //clear spaces gizmo was at
-                                m.setSpaces(moveGizmo.getXCoord(), moveGizmo.getYCoord(), false, moveGizmo,null);
-                                //move gizmo
-                                moveGizmo.setXCoord(gridX);
-                                moveGizmo.setYCoord(gridY);
-                                //set spaces of new position
-                                m.setSpaces(gridX, gridY, true, moveGizmo,null);
-                                moveGizmo = null;
+                                    if(moveGizmo.getGizmoType().equalsIgnoreCase("RightFlipper")){
+                                        RightFlipper rf = (RightFlipper)  moveGizmo;
+                                        m.setSpaces(rf.getXCoord(), rf.getYCoord(), false, moveGizmo, null);
+                                        //move gizmo
+                                        rf.setXCoord(gridX);
+                                        rf.setYCoord(gridY);
+                                            //set spaces of new position
+                                        m.setSpaces(gridX, gridY, true, rf, null);
+                                        moveGizmo = null;
+
+                                    } else if(moveGizmo.getGizmoType().equalsIgnoreCase("LeftFlipper")) {
+                                        LeftFlipper lf = (LeftFlipper)  moveGizmo;
+                                        m.setSpaces(lf.getXCoord(), lf.getYCoord(), false, moveGizmo, null);
+                                        //move gizmo
+
+                                        lf.setXCoord(gridX);
+                                        lf.setYCoord(gridY);
+                                        //set spaces of new position
+                                        m.setSpaces(gridX, gridY, true, lf, null);
+                                        moveGizmo = null;
+                                    }else {
+                                        m.setSpaces(moveGizmo.getXCoord(), moveGizmo.getYCoord(), false, moveGizmo, null);
+                                        //move gizmo
+                                        moveGizmo.setXCoord(gridX);
+                                        moveGizmo.setYCoord(gridY);
+                                        //set spaces of new position
+                                        m.setSpaces(gridX, gridY, true, moveGizmo, null);
+                                        moveGizmo = null;
+                                    }
+
+
                         }
                     }
                     break;
@@ -193,7 +217,7 @@ public class GridClickListener implements MouseListener {
                     for (iGizmo g : m.getGizmos()) {
                         if(g.getGizmoType() == "RightFlipper"){
                             if (((RightFlipper)g).getRotatedXCoord() == gridX &&((RightFlipper)g).getRotatedYCoord() == gridY) {
-                                if(m.checkSpace(g.getXCoord(), g.getYCoord(),g)) {
+                                if(m.checkRotatedFlipperSpace(((RightFlipper)g).getRotatedXCoord(), ((RightFlipper)g).getRotatedYCoord(),g)) {
                                     m.setSpaces(g.getXCoord(), g.getYCoord(), false, g,null);
                                     ((RightFlipper) g).rotateFlipper();
                                     m.setSpaces(g.getXCoord(), g.getYCoord(), true, g,null);
@@ -201,7 +225,7 @@ public class GridClickListener implements MouseListener {
                             }
                         }else if(g.getGizmoType() == "LeftFlipper"){
                             if (((LeftFlipper)g).getRotatedXCoord() == gridX &&((LeftFlipper)g).getRotatedYCoord() == gridY) {
-                                if(m.checkSpace(g.getXCoord(), g.getYCoord(),g)) {
+                                if(m.checkRotatedFlipperSpace(((LeftFlipper)g).getRotatedXCoord(), ((LeftFlipper)g).getRotatedYCoord(),g)) {
                                     m.setSpaces(g.getXCoord(), g.getYCoord(), false, g,null);
                                     //todo null?
                                     ((LeftFlipper) g).rotateFlipper();
@@ -229,9 +253,21 @@ public class GridClickListener implements MouseListener {
                     break;
                 case "move":
                     for (iGizmo g : m.getGizmos()) {
-                        if (g.getXCoord() == gridX && g.getYCoord() == gridY) {
-                            moveGizmo = g;
-                            System.out.println("- : " + g.getID());
+                       if(g.getGizmoType().equals("RightFlipper")){
+                            if (((RightFlipper) g).getRotatedXCoord() == gridX && ((RightFlipper) g).getRotatedYCoord() == gridY) {
+
+                                    moveGizmo = g;
+                            }
+                        }else if(g.getGizmoType().equals("LeftFlipper")){
+                            if (((LeftFlipper) g).getRotatedXCoord() == gridX && ((LeftFlipper) g).getRotatedYCoord() == gridY) {
+
+                                    moveGizmo = g;
+                            }
+                       } else {
+                            if (g.getXCoord() == gridX && g.getYCoord() == gridY) {
+                                moveGizmo = g;
+                                System.out.println("- : " + g.getID());
+                            }
                         }
                     }
                     break;
