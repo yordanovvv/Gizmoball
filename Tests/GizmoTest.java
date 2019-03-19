@@ -1,6 +1,6 @@
 import Model.*;
-import com.sun.source.tree.AssertTree;
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ArrayList;
 
@@ -253,17 +253,70 @@ public class GizmoTest {
     public void moveBall() {
         GizmoballModel m = new GizmoballModel();
         Ball test1 = new Ball("test1",1,0,0,7);
+        test1.setStopped(false);
+        m.addBall(test1);
         m.moveBall();
-        assertEquals(0.0,test1.getExactY(),3);
-        assertEquals(0.0,test1.getExactX(),3);
+
+        assertEquals(12.375,m.getBalls().get(1).getExactY(),3);
+        assertEquals(30.0,m.getBalls().get(1).getExactX(),3);
     }
+
+    @Test
+    public void moveBallWithCollisions(){
+        GizmoballModel m = new GizmoballModel();
+        Ball test1 = new Ball("test1",1,0,0,7);
+        test1.setStopped(false);
+        m.addBall(test1);
+
+
+        iGizmo c1 = new GizmoCircle("C1", 2, 0,2);
+        iGizmo c2 = new GizmoCircle("c2", 2, 1,2);
+        iGizmo c3 = new GizmoCircle("c3", 2, 2,2);
+        iGizmo s1 = new Square("s1",0,2);
+        iGizmo t1 = new Triangle("t1",1,2);
+        m.addGizmo(c1);
+        m.addGizmo(c2);
+        m.addGizmo(c3);
+        m.addGizmo(t1);
+        m.addGizmo(s1);
+
+        for (int i = 0; i < 5; i++) {
+            m.moveBall();
+        }
+
+        assertEquals(34.875,m.getBalls().get(1).getExactY(),3);
+        assertEquals(30.0,m.getBalls().get(1).getExactX(),3);
+    }
+
+    @Test
+    public void moveBallWithAbsorber(){
+        GizmoballModel m = new GizmoballModel();
+        Ball test1 = new Ball("test1",1,0,0,7);
+        test1.setStopped(false);
+        m.addBall(test1);
+
+        Absorber a1 = new Absorber("a1",0,2,5,5);
+        m.addGizmo(a1);
+
+        for (int i = 0; i < 5; i++) {
+            m.moveBall();
+        }
+
+        assertEquals(1,m.getAbsorber().getBalls().size());
+        assertEquals(585.0,m.getBalls().get(1).getExactY(),3);
+        assertEquals(585.0,m.getBalls().get(1).getExactX(),3);
+
+    }
+
 
     @Test
     public void moveBallForTime() {
         GizmoballModel m = new GizmoballModel();
         Ball test1 = new Ball("test1",1,0,0,7);
         m.addBall(test1);
+
         test1 =m.moveBallForTime(test1,1);
+
         assertEquals(210,test1.getExactY(),3);
         assertEquals(30,test1.getExactX(),3);
     }
