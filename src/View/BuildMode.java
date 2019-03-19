@@ -69,14 +69,14 @@ public class BuildMode extends JPanel{
         label_components = new JLabel("Components");
         label_components = utils.editLabel(label_components,15,Color.WHITE);
 
-        button_square = new JButton("Square");
-        button_triangle = new JButton("Triangle");
-        button_circle= new JButton("Circle");
-        button_absorber = new JButton("Absorber");
-        button_leftFlipper = new JButton("Left flipper");
-        button_rightFlipper = new JButton("Right flipper");
-        button_ball= new JButton("Ball");
-        button_star = new JButton("Star");
+        button_square = new JButton("<html> Square </html> ");
+        button_triangle = new JButton("<html> Triangle </html>");
+        button_circle= new JButton("<html> Circle </html>");
+        button_absorber = new JButton("<html> Absorber </html>");
+        button_leftFlipper = new JButton("<html> Left Flipper </html>");
+        button_rightFlipper = new JButton("<html> Right Flipper </html>");
+        button_ball= new JButton("<html> Ball</html>");
+        button_star = new JButton("<html> Star</html>");
 
         button_square = utils.addImgToBtn("square.png",button_square, Color.RED);
         button_triangle = utils.addImgToBtn("triangle.png",button_triangle,Color.CYAN);
@@ -112,15 +112,15 @@ public class BuildMode extends JPanel{
         label_controls = new JLabel("Controls");
         label_controls = utils.editLabel(label_controls,15,Color.WHITE);
 
-        button_connectButton = new JButton("Connect");
-        button_disconnect = new JButton("Disconnect");
-        button_rotate = new JButton("Rotate");
-        button_move = new JButton("Move");
-        button_clear = new JButton("Clear");
-        button_delete = new JButton("Delete");
-        button_keypressConnect = new JButton("Key Binds");
-        button_changeBallVelo = new JButton("Change Ball Velocity");
-        button_changeFrictionandGravity= new JButton("Gravity+Friction");
+        button_connectButton = new JButton("<html> Connect </html>");
+        button_disconnect = new JButton("<html> Disconnect</html>");
+        button_rotate = new JButton("<html> Rotate</html>");
+        button_move = new JButton("<html> Move</html>");
+        button_clear = new JButton("<html> Clear</html>");
+        button_delete = new JButton("<html> Delete</html>");
+        button_keypressConnect = new JButton("<html> Key Binds</html>");
+        button_changeBallVelo = new JButton("<html> Change Ball Velocity </html>");
+        button_changeFrictionandGravity= new JButton("<html> Gravity + Friction </html>");
 
         container_play.add(button_rotate);
         container_play.add(button_connectButton);
