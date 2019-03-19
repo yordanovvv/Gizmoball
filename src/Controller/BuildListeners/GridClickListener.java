@@ -195,9 +195,15 @@ public class GridClickListener implements MouseListener {
                             if (g.getGizmoType() == "Triangle") {
                                 g.rotate();
                             }else if(g.getGizmoType() == "RightFlipper"){
+                              //  m.setSpaces(g.getXCoord(), g.getYCoord(),  false, g);
                                 ((RightFlipper)g).rotateFlipper();
+                                m.setSpaces(g.getXCoord(), g.getYCoord(),  true, g);
+                                System.out.println(g.getXCoord() + "  " + g.getYCoord());
                             }else if(g.getGizmoType() == "LeftFlipper"){
+                               // m.setSpaces(g.getXCoord(), g.getYCoord(),  false, g);
                                 ((LeftFlipper)g).rotateFlipper();
+                                m.setSpaces(g.getXCoord(), g.getYCoord(),  true, g);
+                            }else if(g.getGizmoType() == "LeftFlipper"){
                             }
                         }
                     }

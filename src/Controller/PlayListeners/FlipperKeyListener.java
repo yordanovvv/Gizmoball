@@ -19,8 +19,9 @@ public class FlipperKeyListener implements KeyListener {
     private Boolean keypressed;
     private Boolean runningTimer;
     private ThreadPoolExecutor executor ;
+    private String type;
 
-    public FlipperKeyListener(iModel model, Character key, iGizmo flipper){
+    public FlipperKeyListener(iModel model, Character key, iGizmo flipper, String type){
         this.model = model;
         this.keys = key;
         this.flipper = flipper;
@@ -29,6 +30,7 @@ public class FlipperKeyListener implements KeyListener {
         this.runningTimer =false;
         this.time = Integer.toUnsignedLong(0);
         this.executor =(ThreadPoolExecutor) Executors.newFixedThreadPool(1);
+        this.type = type;
 
         //timer event for flipper rotation
        this.timer = new Timer(13 , e -> {
@@ -50,25 +52,29 @@ public class FlipperKeyListener implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if(!keypressed) { //if key not pressed
+        if(type.equals("UP") | type.equals("BOTH")) {
+            if (!keypressed) { //if key not pressed
                 char key = keys;
                 if (e.getKeyChar() == key) { //matches character
                     int finalI = 0;
                     key_press_code(finalI);
-                  //  executor.execute(r);
+                    //  executor.execute(r);
                 }
+            }
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        keypressed = false;// longer pressed
+        if (type.equals("DOWN") | type.equals("BOTH")) {
+            keypressed = false;// longer pressed
             char key = keys;
             if (e.getKeyChar() == key) { //keys match
-                   int finalI = 0;
-                   key_release_code(finalI);
-                   //executor.execute(r);
+                int finalI = 0;
+                key_release_code(finalI);
+                //executor.execute(r);
             }
+        }
     }
 
     private void key_press_code(int i){
