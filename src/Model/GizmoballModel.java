@@ -874,7 +874,8 @@ public class GizmoballModel extends iModel {
                     fileWriter.write("KeyConnect key " + KeyEvent.getExtendedKeyCodeForChar(keyTriggers.get(key)) + " " + keyOrientation.get(key) + " " + key.getID() + "\n");
                 }
             }
-
+            fileWriter.write("Gravity " +getGravity() + "\n");
+            fileWriter.write("Friction "+ getFrictionMu1() + " " + getFrictionMu2() + "\n");
             fileWriter.flush();
 
             fileWriter.close();
