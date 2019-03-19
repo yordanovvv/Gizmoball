@@ -11,6 +11,5 @@ public class BallTests {
           b.setID("B1");
           assertEquals("B1", b.getID());
           assertEquals("Ball B1 5 5 0 0", b.toString());
-
      }
 }

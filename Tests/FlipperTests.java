@@ -64,14 +64,12 @@ public class FlipperTests {
         rf.setKeyConnection("r");
         assertTrue(rf.getKeyConnections().size() ==1);
         lf.removeKeyConnection();
-        //TODO
-        //assertEquals(0, rf.getKeyConnections().size());
+//        assertEquals(0, rf.getKeyConnections().size());
 
         lf.setKeyConnection("l");
         assertEquals(1, lf.getKeyConnections().size());
         lf.removeKeyConnection();
-        //TODO
-        //assertEquals(0, rf.getKeyConnections().size());
+//        assertEquals(0, rf.getKeyConnections().size());
 
         assertFalse(rf.isMoving());
         assertFalse(lf.isMoving());
@@ -123,5 +121,15 @@ public class FlipperTests {
         assertTrue(rf.getAngle() == 90);
         rf.rotate();
         assertEquals(72,rf.getRotationAngle(), 0);
+
+
+        rf.rotateFlipper();
+        assertEquals(7, rf.getRotatedXCoord());
+        assertEquals(7, rf.getYCoord());
+
+        lf.rotateFlipper();
+        assertEquals(2, lf.getRotatedXCoord());
+        assertEquals(3, lf.getRotatedYCoord());
+
     }
 }

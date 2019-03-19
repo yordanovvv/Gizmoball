@@ -94,7 +94,6 @@ public class Ball extends Observable {
         this.setVelo(Vnew);
     }
 
-
     public void applyGravity(double gravity, double time)
     {
         Vect velocity = this.getVelo();
