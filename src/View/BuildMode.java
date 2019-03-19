@@ -44,10 +44,6 @@ public class BuildMode extends JPanel{
 
         this.setFocusable(true); //Needed for keylistener to work
 
-        //TODO : Link this keylistener when doing connections
-        //KeyListenerTest kl = new KeyListenerTest("build", mainFrame);
-        //mainFrame.getFocusOwner().addKeyListener(kl);
-        //mainFrame.addKeyListener(kl);
 
         init();
 
@@ -200,8 +196,6 @@ public class BuildMode extends JPanel{
         button_changeBallVelo.addMouseListener(updateBallVeloListener);
         button_changeFrictionandGravity.addMouseListener(updateGravFricListener);
 
-        //mainFrame.getGameBoard().addMouseListener(board_listener);
-        //---------------------------------------
 
         this.add(buildPanel);
         this.add(controlsPanel);

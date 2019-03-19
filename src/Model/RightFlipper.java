@@ -120,12 +120,7 @@ public class RightFlipper implements iGizmo {
         Circle bottomRight = new Circle(X + constant ,Y + (2*constant - bottomCircleRadius),0);
 
 
-       /* Circle bigTopCircle = new Circle(XCoord*constant + 22.6,YCoord*constant + 7.5,7.4);
-        Circle bigBottomCircle = new Circle(XCoord*constant + 22.6,YCoord*constant +7.51+47.5,6);
-        Circle topLeft = new Circle(XCoord*constant + 30,YCoord*constant +7,0);
-        Circle topRight = new Circle((XCoord + .9) * constant,YCoord*constant +7.5+48,0);
-        Circle bottomLeft = new Circle(XCoord*constant + 17.5,YCoord*constant +7,0);
-        Circle bottomRight = new Circle((XCoord) * constant + 15.8,YCoord*constant +7.5+48,0);*/
+
 
         circles.add(bigTopCircle);
         circles.add(bigBottomCircle);
@@ -147,8 +142,7 @@ public class RightFlipper implements iGizmo {
 
         LineSegment leftL = new LineSegment(X + (constant - 2*topCircleRadius), Y + topCircleRadius, X + (constant - 2*bottomCircleRadius),Y + (2*constant - bottomCircleRadius));
         LineSegment rightL = new LineSegment(X + constant,Y + topCircleRadius, X + constant ,Y + (2*constant - bottomCircleRadius));
-        /*LineSegment rightL = new LineSegment(XCoord*constant + 30 ,YCoord*constant +7,(XCoord + .9) * constant   ,YCoord*constant +8+48);
-        LineSegment leftL = new LineSegment(XCoord*constant + 17.5,YCoord*constant +7,(XCoord) * constant + 15.8 ,YCoord*constant +8+48);*/
+
         System.out.println();
         lines.add(leftL);
         lines.add(rightL);

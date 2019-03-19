@@ -12,7 +12,7 @@ public class Wall{
     private int YCoord;
     private int XCoord2;
     private int YCoord2;
-    private final double constant = 30;//-.73;//-.9;//-.5;//73;
+    private final double constant = 30;
     private boolean hit = false;
 
 

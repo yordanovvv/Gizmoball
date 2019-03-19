@@ -20,7 +20,7 @@ public abstract class iModel extends Observable {
 
     public abstract ArrayList<iGizmo> getAllStars();
 
-    //public abstract ArrayList<iGizmo> getFlippers();
+
 
     public abstract void moveBall() ;
 
@@ -66,7 +66,7 @@ public abstract class iModel extends Observable {
 
     public abstract void setSpaces(int gridX, int gridY, boolean val, iGizmo g);
 
-    //public abstract boolean[][] getSpaceGrid();
+
 
     public abstract boolean[][] getSpaces();
 
@@ -80,7 +80,7 @@ public abstract class iModel extends Observable {
 
     public abstract boolean keyConnectGizmo(String id, String key);
 
-    //--
+
 
     public abstract ArrayList<Timer> getActiveTimers();
     public abstract void updateActiveTimers(Timer t);

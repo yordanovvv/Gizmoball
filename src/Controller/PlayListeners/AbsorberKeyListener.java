@@ -35,8 +35,7 @@ public class AbsorberKeyListener implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyChar() == key ){
-          //  System.out.println("Absorber fire!");
-            //model.getBall().setStopped(false);
+
             Ball b = model.getAbsorber().activateAbsorber();
             try {
                 model.getAudio("res/clips/laser_cannon.wav");
@@ -63,6 +62,6 @@ public class AbsorberKeyListener implements KeyListener {
     public void keyReleased(KeyEvent e) {
     }
 
-    //TODO Link connections (flippers and what not)
+
 
 }

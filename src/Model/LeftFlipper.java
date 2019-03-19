@@ -101,7 +101,7 @@ public class LeftFlipper implements iGizmo {
     @Override
     public void generateCircles() {
 
-        //todo fix me
+
         Circle bigTopCircle = new Circle(XCoord*constant + 7,YCoord*constant+ 8,8);
         Circle bigBottomCircle = new Circle(XCoord*constant + 6.9,(YCoord+2)*constant - 6,7);
         Circle topLeft  = new Circle(XCoord*constant + 17, YCoord*constant + 8,0);
@@ -119,7 +119,7 @@ public class LeftFlipper implements iGizmo {
 
     @Override
     public void generateLines() {
-        //todo fix me
+
         LineSegment rightL = new LineSegment((XCoord)*constant + 7 + 8 + 2,YCoord*constant +8,XCoord * constant + 1 + 7 + 2,(YCoord + 2)*constant + 6);
         LineSegment leftL = new LineSegment((XCoord)*constant + 7 - 8 + 4,YCoord*constant -8,XCoord * constant + 1 - 7 + 5,(YCoord + 2)*constant + 6);
 

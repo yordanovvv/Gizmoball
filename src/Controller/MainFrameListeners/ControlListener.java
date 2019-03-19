@@ -20,7 +20,7 @@ public class ControlListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String actionCMD =  e.getActionCommand();
-        //todo check that the file loaders actually follow MVC
+
         if(actionCMD.equals("Save")){
             JFrame f = new JFrame();
             JFileChooser fileLoader = new JFileChooser();
@@ -33,7 +33,7 @@ public class ControlListener implements ActionListener {
             int rVal = fileLoader.showSaveDialog(f);
             if (rVal == JFileChooser.APPROVE_OPTION) {
 
-                //todo file saving for controller
+
                 filename = fileLoader.getSelectedFile().getName();
                 filePath = fileLoader.getSelectedFile().getPath();
                 System.out.println("filename: "  + filename);
@@ -47,7 +47,7 @@ public class ControlListener implements ActionListener {
 
             }
             if (rVal == JFileChooser.CANCEL_OPTION) {
-               //todo cancel file loading
+
                 return;
             };
         }else if(actionCMD.equals("Quit")){
@@ -65,7 +65,7 @@ public class ControlListener implements ActionListener {
 
             int rVal = fileLoader.showOpenDialog(f);
             if (rVal == JFileChooser.APPROVE_OPTION) {
-                //todo file loading for controller
+
                 filePath = fileLoader.getSelectedFile().getPath();
                 if(filePath.endsWith(".giz")) {
                     view.getModel().loadGame(new File(filePath));
@@ -76,7 +76,7 @@ public class ControlListener implements ActionListener {
                 }
             }
             if (rVal == JFileChooser.CANCEL_OPTION) {
-                //todo cancel file loading
+
                 return;
             }
         }
