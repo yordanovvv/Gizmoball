@@ -219,7 +219,8 @@ public class GameBoard extends JPanel implements Observer{
         g2.fillPolygon(poly1);
 
         g2.setColor(c);
-        g2.drawLine(polyPoint1_x,polyPoint1_y,polyPoint5_x-20,polyPoint2_y);
+        g2.fillOval(x + 18, y + 18,25,25);
+       /* g2.drawLine(polyPoint1_x,polyPoint1_y,polyPoint5_x-20,polyPoint2_y);
         g2.drawLine(polyPoint5_x-20,polyPoint2_y,polyPoint5_x,polyPoint5_y);
         g2.fillOval(x + 18, y + 18,25,25);
 //        g2.setColor(new Color(52, 9, 14));
@@ -236,7 +237,9 @@ public class GameBoard extends JPanel implements Observer{
         g2.drawLine(polyPoint4_x,polyPoint4_y,polyPoint5_x-16,polyPoint5_y+13);
 
         g2.drawLine(polyPoint5_x-16,polyPoint5_y+13,polyPoint5_x,polyPoint5_y);
-
+*/
+        g2.setColor(new Color(74, 0, 129,2));
+        g2.drawPolygon(poly1);
 
         if(displayID) {
             g2.setColor(Color.WHITE);

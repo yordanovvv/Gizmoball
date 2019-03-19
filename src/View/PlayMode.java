@@ -159,8 +159,8 @@ public class PlayMode extends JPanel {
     }
 
     public void editTriggerArea(String content){
-
         if(content.length()>0) {
+            container.setText(null);
             container.setText(content);
         }
     }

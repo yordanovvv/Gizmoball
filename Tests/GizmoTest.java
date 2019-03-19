@@ -251,12 +251,21 @@ public class GizmoTest {
 
     @Test
     public void moveBall() {
-
+        GizmoballModel m = new GizmoballModel();
+        Ball test1 = new Ball("test1",1,0,0,7);
+        m.moveBall();
+        assertEquals(0.0,test1.getExactY(),3);
+        assertEquals(0.0,test1.getExactX(),3);
     }
 
     @Test
     public void moveBallForTime() {
-
+        GizmoballModel m = new GizmoballModel();
+        Ball test1 = new Ball("test1",1,0,0,7);
+        m.addBall(test1);
+        test1 =m.moveBallForTime(test1,1);
+        assertEquals(210,test1.getExactY(),3);
+        assertEquals(30,test1.getExactX(),3);
     }
 
     @Test
