@@ -25,6 +25,7 @@ public class GizmoballModel extends iModel {
     private double gravity = 25; //25L/sec^2
     boolean[][] spaces = new boolean[20][20];
     HashMap<iGizmo,Character> keyTriggers;
+    HashMap<iGizmo,String> keyOrientation;
     private int wait = 0;
 
     public GizmoballModel() {
@@ -32,7 +33,7 @@ public class GizmoballModel extends iModel {
         balls = new ArrayList<>();
         gizmos = new ArrayList<iGizmo>();
         keyTriggers = new HashMap<>();
-
+        keyOrientation = new HashMap<>();
 
         //TODO remove all of this, eventually will be empty board
         balls.add(new Ball("B1", 8, 5,  7.5, 7.5)); //2.5 = 50L/sec if moveTime is 0.05 (20 ticks/sec)
@@ -42,6 +43,15 @@ public class GizmoballModel extends iModel {
         gizmos.add(absorber);
     }
 
+    public HashMap<iGizmo,String> getKeyOrientation(){
+        return keyOrientation;
+    }
+
+    public void addKeyOrientation(iGizmo g, String o){
+        if(!keyOrientation.containsKey(g)){
+            keyOrientation.put(g,o);
+        }
+    }
 
     @Override
     public ArrayList<iGizmo> getAllStars(){
@@ -94,9 +104,9 @@ public class GizmoballModel extends iModel {
                         //playSound(collisionGizmo);
                         ball = moveBallForTime(ball, tuc + moveTime);
                         absorber.addBall(ball);
-                        ball.setExactX((((Absorber)absorber).getXCoord2()-.5)*30);
-                        ball.setExactY((((Absorber)absorber).getYCoord2()-.5)*30);
 
+                        ball.setExactX((((Absorber)collisionGizmo).getXCoord2()-.5)*30);
+                        ball.setExactY((((Absorber)collisionGizmo).getYCoord2()-.5)*30);
 
                         ball.setStopped(true);
                         ball.setVelo(new Vect(0,0));
@@ -319,6 +329,9 @@ public class GizmoballModel extends iModel {
             case "LeftFlipper":
                 boolean  canPlaceLF = true;
                 int rdeg = ((LeftFlipper)g).getFlipperRotationDegree();
+                if(rdeg == 360) rdeg = 0;
+                rdeg = rdeg + 90;
+                if(rdeg == 360) rdeg = 0;
                 if(rdeg == 0) {
                     if(spaces[gridX][gridY]||
                     spaces[gridX][gridY + 1] ||
@@ -353,6 +366,11 @@ public class GizmoballModel extends iModel {
             case "RightFlipper":
                 boolean canPlaceRF = true;
                 int rotationDegree = ((RightFlipper)g).getFlipperRotationDegree();
+
+                if(rotationDegree == 360) rotationDegree = 0;
+                rotationDegree = rotationDegree + 90;
+                if(rotationDegree == 360) rotationDegree = 0;
+
                 if(rotationDegree == 0) {
                     if( spaces[gridX][gridY] || spaces[gridX][gridY + 1] ||
                     spaces[gridX - 1][gridY]||
@@ -748,14 +766,30 @@ public class GizmoballModel extends iModel {
             }
 
             //key connections
-            for(iGizmo gizmo : gizmos) {
+            /*for(iGizmo gizmo : gizmos) {
                 if(gizmo.getKeyConnections() != null & gizmo.getKeyConnections().size() > 0) {
                     for(String key : gizmo.getKeyConnections()) {
-                        fileWriter.write("KeyConnect key " + key + " up " + gizmo.getID() + "\n");
-                        fileWriter.write("KeyConnect key " + key + " down " + gizmo.getID()+ "\n");
+                       // if(keyOrientation.get(key)!=null){
+                            if(keyOrientation.get(key).equalsIgnoreCase("Both")) {
+                                fileWriter.write("KeyConnect key " + key + " up " + gizmo.getID() + "\n");
+                                fileWriter.write("KeyConnect key " + key + " down " + gizmo.getID() + "\n");
+                            }else{
+                                fileWriter.write("KeyConnect key " + key +  keyOrientation.get(key) + gizmo.getID() + "\n");
+                            }
+                       // }
                     }
                 }
+            }*/
+
+            for(iGizmo key : keyTriggers.keySet()) {
+                if(keyOrientation.get(key).equalsIgnoreCase("Both")) {
+                    fileWriter.write("KeyConnect key " + KeyEvent.getExtendedKeyCodeForChar( keyTriggers.get(key)) + " up " + key.getID() + "\n");
+                    fileWriter.write("KeyConnect key " + KeyEvent.getExtendedKeyCodeForChar( keyTriggers.get(key))  + " down " + key.getID() + "\n");
+                }else{
+                    fileWriter.write("KeyConnect key " + KeyEvent.getExtendedKeyCodeForChar( keyTriggers.get(key)) + " " +  keyOrientation.get(key) +  " " +  key.getID() + "\n");
+                }
             }
+
             fileWriter.flush();
 
             fileWriter.close();
@@ -859,7 +893,19 @@ public class GizmoballModel extends iModel {
                     case "KeyConnect":
                         if(inputStream.length >= 5) {
                             String key = inputStream[2],
+                                    orientation = inputStream[3],
                                     id = inputStream[4];
+
+                            if(keyOrientation.containsKey(getGizmoByID(id))){
+                                if(keyTriggers.get(getGizmoByID(id))==(key.charAt(0))) {
+                                    keyOrientation.replace(getGizmoByID(id), "both");
+                                }else{
+                                    keyOrientation.put(getGizmoByID(id), orientation);
+                                }
+                            }else {
+                                keyOrientation.put(getGizmoByID(id), orientation);
+                            }
+
                             keyConnectGizmo(id, key);
                         }
                         break;
@@ -939,6 +985,7 @@ public class GizmoballModel extends iModel {
                 //set the key connection
                 gizmo.setKeyConnection(key.toLowerCase());
                 keyTriggers.put(gizmo, (key.toLowerCase()).charAt(0));
+                keyOrientation.put(gizmo,"Both");
                 return true;
             }
         return false;

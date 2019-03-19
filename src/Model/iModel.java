@@ -20,7 +20,9 @@ public abstract class iModel extends Observable {
 
     public abstract ArrayList<iGizmo> getAllStars();
 
+    public  abstract HashMap<iGizmo,String> getKeyOrientation();
 
+    public  abstract void addKeyOrientation(iGizmo g, String o);
 
     public abstract void moveBall() ;
 

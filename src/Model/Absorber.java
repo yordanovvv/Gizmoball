@@ -1,6 +1,5 @@
 package Model;
 
-import physics.Angle;
 import physics.Circle;
 import physics.LineSegment;
 import physics.Vect;
@@ -88,34 +87,30 @@ public class Absorber implements iGizmo {
 
     @Override
     public void setID (String id){
-
         this.ID = id;
     }
 
     @Override
     public void setXCoord (int x){
-
         this.XCoord = x;
-
     }
 
     @Override
     public void setYCoord ( int y){
         this.YCoord = y;
-
     }
     @Override
     public void setHit(boolean hit){
         this.hit = hit;
     }
 
-    public void setXcoord2 ( int x2){
+ /*   public void setXcoord2 ( int x2){
         this.XCoord2 = x2;
     }
 
     public void setYCoord2 ( int y2){
         this.YCoord2 = y2;
-    }
+    }*/
 
     @Override
     public void generateCircles () {
@@ -149,7 +144,6 @@ public class Absorber implements iGizmo {
         if(!gizmoConnections.contains(id)) {
             gizmoConnections.add(id);
         }
-
     }
 
     @Override
@@ -161,8 +155,9 @@ public class Absorber implements iGizmo {
 
     @Override
     public void rotate () {
-        //empty as absorbers cant rotate
+        //empty as absorbers cant rotate}
     }
+
 
     @Override
     public int getRotationAngle () {
