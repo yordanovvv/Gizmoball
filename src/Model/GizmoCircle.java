@@ -84,7 +84,6 @@ public class GizmoCircle implements iGizmo {
     @Override
     public void generateLines() {
         //not needed for circle
-
     }
 
     @Override
@@ -96,7 +95,6 @@ public class GizmoCircle implements iGizmo {
 
     @Override
     public void setKeyConnection(String key) {
-
     }
 
     @Override
@@ -173,7 +171,6 @@ public class GizmoCircle implements iGizmo {
 
     @Override
     public void addBall(Ball ball) {
-
     }
 
     public int getRotationCount() {

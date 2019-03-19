@@ -123,14 +123,10 @@ public class Square implements iGizmo {
     }
 
     @Override
-    public void setKeyConnection(String key) {
-
-    }
+    public void setKeyConnection(String key) { }
 
     @Override
-    public void rotate() {
-//TODO guess this will be empty as square looks same rotated
-    }
+    public void rotate() {}
 
     @Override
     public int getRotationAngle() {
@@ -194,9 +190,7 @@ public class Square implements iGizmo {
     }
 
     @Override
-    public void addBall(Ball ball) {
-
-    }
+    public void addBall(Ball ball) {}
 
 
     public int getRotationCount() {

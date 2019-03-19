@@ -31,7 +31,7 @@ public class BuildMode extends JPanel{
     private JButton button_delete;
     private JButton button_clear;
     private JButton button_changeBallVelo;
-    private JButton button_changeFrictionandGravity;
+   // private JButton button_changeFrictionandGravity;
 
 
     private MainFrame mainFrame;
@@ -119,7 +119,7 @@ public class BuildMode extends JPanel{
         button_delete = new JButton("<html> Delete</html>");
         button_keypressConnect = new JButton("<html> Key Binds</html>");
         button_changeBallVelo = new JButton("<html> Edit balls </html>");
-        button_changeFrictionandGravity= new JButton("<html> Gravity + Friction </html>");
+        //button_changeFrictionandGravity= new JButton("<html> Gravity + Friction </html>");
 
         container_play.add(button_rotate);
         container_play.add(button_connectButton);
@@ -129,7 +129,7 @@ public class BuildMode extends JPanel{
         container_play.add(button_move);
         container_play.add(button_keypressConnect);
         container_play.add(button_changeBallVelo);
-        container_play.add(button_changeFrictionandGravity);
+       // container_play.add(button_changeFrictionandGravity);
 
 
         button_rotate = utils.addImgToBtn("rotate.png",button_rotate, Color.WHITE);
@@ -140,7 +140,7 @@ public class BuildMode extends JPanel{
         button_move = utils.addImgToBtn("move.png",button_move,Color.WHITE);
         button_keypressConnect = utils.addImgToBtn("keypress.png", button_keypressConnect, Color.WHITE);
         button_changeBallVelo = utils.addImgToBtn("speed.png", button_changeBallVelo, Color.WHITE);
-        button_changeFrictionandGravity = utils.addImgToBtn("gravityFriction.png",button_changeFrictionandGravity, Color.WHITE);
+       // button_changeFrictionandGravity = utils.addImgToBtn("gravityFriction.png",button_changeFrictionandGravity, Color.WHITE);
 
         controlsPanel.add(label_controls,BorderLayout.PAGE_START);
         controlsPanel.add(container_play,BorderLayout.CENTER);
@@ -197,7 +197,7 @@ public class BuildMode extends JPanel{
         button_clear.addMouseListener(clearClickListener);
         button_move.addMouseListener(moveListener);
         button_changeBallVelo.addMouseListener(updateBallVeloListener);
-        button_changeFrictionandGravity.addMouseListener(updateGravFricListener);
+       // button_changeFrictionandGravity.addMouseListener(updateGravFricListener);
 
 
         this.add(buildPanel);

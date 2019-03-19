@@ -61,7 +61,7 @@ public class Absorber implements iGizmo {
     public Ball activateAbsorber() {
         if (!balls.isEmpty()) {
             Ball fireBall = balls.remove(0);
-            Vect shootUp = new Vect(0, -1000);//new Vect(new Angle(0, -180), 50*30);
+            Vect shootUp = new Vect(0, -1275);//new Vect(new Angle(0, -180), 50*30);
             fireBall.setVelo(shootUp);
             fireBall.setStopped(false);
 
@@ -99,18 +99,19 @@ public class Absorber implements iGizmo {
     public void setYCoord ( int y){
         this.YCoord = y;
     }
+
     @Override
     public void setHit(boolean hit){
         this.hit = hit;
     }
 
- /*   public void setXcoord2 ( int x2){
+    public void setXcoord2 ( int x2){
         this.XCoord2 = x2;
     }
 
     public void setYCoord2 ( int y2){
         this.YCoord2 = y2;
-    }*/
+    }
 
     @Override
     public void generateCircles () {
@@ -200,10 +201,6 @@ public class Absorber implements iGizmo {
     @Override
     public int getWidth () {
         return width;
-    }
-
-    public Color getColour () {
-        return colour;
     }
 
     @Override

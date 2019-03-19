@@ -299,8 +299,7 @@ public class RightFlipper implements iGizmo {
     }
 
     @Override
-    public void addBall(Ball ball) {
-    }
+    public void addBall(Ball ball) {}
 
     public boolean isMoving(){
         return (rotationAngle!=0 && rotationAngle!=90);

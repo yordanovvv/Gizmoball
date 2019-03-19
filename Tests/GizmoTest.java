@@ -56,10 +56,15 @@ public class GizmoTest {
         model.addGizmo(absorber);
         model.addGizmo(star);
         model.addBall(ball);
-
-
     }
 
+    @Test
+    public void iModelTest()
+    {
+        model.setDisplayID(true);
+        assertTrue(model.displayID());
+        model.addBall(ball);
+    }
 
     @Test
     public void getID() {
@@ -75,6 +80,22 @@ public class GizmoTest {
         circle.setID("C4");
         assertEquals("C4", circle.getID());
 
+    }
+    @Test
+    public void circleTests()
+    {
+        circle.setXCoord(7);
+        circle.setYCoord(7);
+        assertEquals(7, circle.getXCoord());
+        assertEquals(7, circle.getYCoord());
+        circle.rotate();
+        assertEquals(1, circle.getRotationCount());
+        assertEquals(0, circle.getRotationAngle());
+
+        assertEquals("Circle C1 7 7", circle.toString());
+
+        circle.setKeyConnection("k");
+        assertEquals(0, circle.getKeyConnections().size());
     }
 
     @Test
@@ -157,6 +178,11 @@ public class GizmoTest {
         assertEquals(walls.getXCoord2(), model.getWalls().getXCoord2());
         assertEquals(walls.getYCoord(), model.getWalls().getYCoord());
         assertEquals(walls.getYCoord2(), model.getWalls().getYCoord2());
+
+        assertTrue(walls.getGizmoType().equals("Wall"));
+        walls.setHit(true);
+        assertTrue(walls.getHit());
+
     }
 
     @Test
@@ -233,8 +259,6 @@ public class GizmoTest {
     public void getStars() {
         ArrayList<iGizmo> testStars = new ArrayList<>();
         testStars.add(star);
-
-
         assertEquals(testStars, model.getAllStars());
     }
 
@@ -652,19 +676,5 @@ public class GizmoTest {
 
         assertEquals(triangle5,triangle6);
 
-    }
-
-
-     //this doesnt work??
-    /*
-    @Test
-    public void getAbsorber(){
-        Absorber test = model.getAbsorber();
-        assertEquals(test,absorber);
-    }
-
-
-    */
-
-
+    }*/
 }

@@ -114,7 +114,6 @@ public class Triangle implements iGizmo {
 
     @Override
     public void setKeyConnection(String key) {
-
     }
 
     @Override

@@ -16,7 +16,7 @@ public class Ball extends Observable {
     private boolean stopped;
     private double constant = 30;
     private double speed;
-    private double friction;
+
 
     //fixed size. so size 1 for pixel
     public Ball(String id, double x, double y, double xv, double yv) {
@@ -87,68 +87,18 @@ public class Ball extends Observable {
         return "Ball " + getID() + " " + Math.round(getExactX()/30*100)/100 + " " + Math.round(getExactY()/30*100)/100+ " " + Math.round(getVelo().x()/30)/100 + " " + Math.round(getVelo().y()/30)/100;
     }
 
-    public Vect applyFriction()
-    {
-        double mu = 0.025; //per second
-        double mu2 = 0.025; //per L
-        double delta_t = 0.05;
-        //Vect absVold = new Vect (abs(Vold.x()), abs(Vold.y()));
-
-        Vect Vnew  = this.getVelo().times(1 - (mu * delta_t) - (mu2 * abs(this.getVelo().length()) * delta_t/30));
-
-      //  Vect Vold = this.getVelo();
-      //  double x = Vold.x() * (1 - (mu * delta_t) - (mu2 * absVold.x() * delta_t));
-       // double y = Vold.y() * (1 - (mu * delta_t) - (mu2 * absVold.y() * delta_t));
-
-
-        friction = Vnew.length();
-
-        return Vnew;
-    }
-
-    public  void setFriction(double mu1, double mu2)
+    public void applyFriction(double mu1, double mu2)
     {
         double delta_t = 0.05;
         Vect Vnew  = this.getVelo().times(1 - (mu1 * delta_t) - (mu2 * abs(this.getVelo().length()) * delta_t/30));
         this.setVelo(Vnew);
     }
 
-    public double getFriction()
-    {
-        return friction;
-    }
-
-  /*  public double applyFriction(double moveT)
-    {
-        double mu = 0.025; //per second
-        double mu2 = 0.025; //per L
-        double delta_t = 0.05; //what is a sufficiently small delta_t?
-
-        double Vold = this.calculateSpeed(delta_t);
-
-        double absVold = abs(Vold);
-        double Vnew = Vold * (1 - (mu * delta_t) - (mu2 * absVold * delta_t));
-
-        return Vnew;
-    }*/
-
-    public void applyGravity(double g, double time)
+    public void applyGravity(double gravity, double time)
     {
         Vect velocity = this.getVelo();
-        Vect grav = new Vect (0, g*constant*time);
-
+        Vect grav = new Vect (0, gravity*constant*time);
         this.setVelo(this.getVelo().plus(grav));
-
-       // double x = velocity.x();// + g; gravity only acts in the y direction
-        //double y = velocity.y()+g;
-
-        // velocity = new Vect(x,y);
-        //return velocity;
-    }
-
-    public void setGravity(double grav){
-        Vect g = new Vect (0, grav);
-        this.setVelo(this.getVelo().plus(g));
     }
 
     public double calculateSpeed(double time)
@@ -157,15 +107,8 @@ public class Ball extends Observable {
         Vect velocity = this.getVelo();
         double x = velocity.x();
         double y = velocity.y();
-
-        //speed = sqrt(x*x + y*y)/timeInSecs;
-
-        //speed = velocity.length()/30;
-
         speed = velocity.length()/timeInSecs;
-
         return speed;
-
     }
 
     public double getSpeed()
