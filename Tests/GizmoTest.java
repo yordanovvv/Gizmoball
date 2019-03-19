@@ -371,7 +371,7 @@ public class GizmoTest {
     @Test
     public void wipeSpaces() {
         GizmoballModel m = new GizmoballModel();
-        m.setSpaces(4, 4, true, new Star("test", 4, 4));
+        m.setSpaces(4, 4, true, new Star("test", 4, 4),null);
         boolean[][] testSpaces = new boolean[20][20];
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 20; j++) {
@@ -385,7 +385,7 @@ public class GizmoTest {
     @Test
     public void setSpaces_star() {
         GizmoballModel m = new GizmoballModel();
-        m.setSpaces(4, 4, true, new Star("test", 4, 4));
+        m.setSpaces(4, 4, true, new Star("test", 4, 4),null);
 
         boolean[][] testSpaces = new boolean[20][20];
         for (int i = 0; i < 20; i++) {
@@ -406,7 +406,7 @@ public class GizmoTest {
     @Test
     public void setSpaces_square() {
         GizmoballModel m = new GizmoballModel();
-        m.setSpaces(4, 4, true, new Square("test", 4, 4));
+        m.setSpaces(4, 4, true, new Square("test", 4, 4),null);
 
         boolean[][] testSpaces = new boolean[20][20];
         for (int i = 0; i < 20; i++) {
@@ -422,7 +422,7 @@ public class GizmoTest {
     @Test
     public void setSpaces_circle() {
         GizmoballModel m = new GizmoballModel();
-        m.setSpaces(4, 4, true, new GizmoCircle("test", 4, 4));
+        m.setSpaces(4, 4, true, new GizmoCircle("test", 4, 4),null);
 
         boolean[][] testSpaces = new boolean[20][20];
         for (int i = 0; i < 20; i++) {
@@ -438,7 +438,7 @@ public class GizmoTest {
     @Test
     public void setSpaces_triangle() {
         GizmoballModel m = new GizmoballModel();
-        m.setSpaces(4, 4, true, new Triangle("test", 4, 4));
+        m.setSpaces(4, 4, true, new Triangle("test", 4, 4),null);
 
         boolean[][] testSpaces = new boolean[20][20];
         for (int i = 0; i < 20; i++) {
@@ -454,7 +454,7 @@ public class GizmoTest {
     @Test
     public void setSpaces_LeftFlipper() {
         iModel m = new GizmoballModel();
-        m.setSpaces(4, 4, true, new LeftFlipper("test", 4, 4));
+        m.setSpaces(4, 4, true, new LeftFlipper("test", 4, 4),null);
 
         boolean[][] testSpaces = new boolean[20][20];
         for (int i = 0; i < 20; i++) {
@@ -474,7 +474,7 @@ public class GizmoTest {
     @Test
     public void setSpaces_RightFlipper() {
         iModel m = new GizmoballModel();
-        m.setSpaces(4, 4, true, new RightFlipper("test", 4, 4));
+        m.setSpaces(4, 4, true, new RightFlipper("test", 4, 4),null);
 
         boolean[][] testSpaces = new boolean[20][20];
         for (int i = 0; i < 20; i++) {
@@ -494,7 +494,7 @@ public class GizmoTest {
     @Test
     public void setSpaces_Absorber() {
         iModel m = new GizmoballModel();
-        m.setSpaces(4, 4, true, new Absorber("test", 4, 4, 6, 6));
+        m.setSpaces(4, 4, true, new Absorber("test", 4, 4, 6, 6),null);
 
         boolean[][] testSpaces = new boolean[20][20];
         for (int i = 0; i < 20; i++) {
@@ -517,7 +517,7 @@ public class GizmoTest {
         iModel m = new GizmoballModel();
         Star test = new Star("test", 4, 4);
         assertTrue(m.checkSpace(4, 4, star));
-        m.setSpaces(4, 4, true, test);
+        m.setSpaces(4, 4, true, test,null);
         assertFalse(m.checkSpace(4, 4, star));
     }
 
@@ -526,14 +526,14 @@ public class GizmoTest {
         iModel m = new GizmoballModel();
         LeftFlipper lf = new LeftFlipper("test1", 4, 4);
         assertTrue(m.checkSpace(4, 4, lf));
-        m.setSpaces(4, 4, true, lf);
+        m.setSpaces(4, 4, true, lf,null);
 
         assertFalse(m.checkSpace(4, 4, lf));
 
         iModel m1 = new GizmoballModel();
         RightFlipper rf = new RightFlipper("test1", 4, 4);
         assertTrue(m1.checkSpace(4, 4, rf));
-        m1.setSpaces(4, 4, true, rf);
+        m1.setSpaces(4, 4, true, rf,null);
         assertFalse(m1.checkSpace(4, 4, rf));
     }
 
@@ -542,7 +542,7 @@ public class GizmoTest {
         iModel m = new GizmoballModel();
         Square s = new Square("test1", 5, 4);
         assertTrue(m.checkSpace(5, 4, s));
-        m.setSpaces(5, 4, true, s);
+        m.setSpaces(5, 4, true, s,null);
         assertFalse(m.checkSpace(5, 4, s));
     }
 
@@ -551,7 +551,7 @@ public class GizmoTest {
         iModel m = new GizmoballModel();
         Triangle s = new Triangle("test1", 5, 4);
         assertTrue(m.checkSpace(5, 4, s));
-        m.setSpaces(5, 4, true, s);
+        m.setSpaces(5, 4, true, s,null);
         assertFalse(m.checkSpace(5, 4, s));
     }
 
@@ -560,7 +560,7 @@ public class GizmoTest {
         iModel m = new GizmoballModel();
         GizmoCircle s = new GizmoCircle("test1", 5, 4);
         assertTrue(m.checkSpace(5, 4, s));
-        m.setSpaces(5, 4, true, s);
+        m.setSpaces(5, 4, true, s,null);
         assertFalse(m.checkSpace(5, 4, s));
     }
 
@@ -569,7 +569,7 @@ public class GizmoTest {
         iModel m = new GizmoballModel();
         Absorber s = new Absorber("test1", 4, 4, 6, 6);
         assertTrue(m.checkSpace(4, 4, s));
-        m.setSpaces(5, 4, true, s);
+        m.setSpaces(5, 4, true, s,null);
         assertFalse(m.checkSpace(4, 4, s));
 
         assertFalse(m.checkSpace(19, 19, new Absorber("A!", 19, 19, 22, 22)));
