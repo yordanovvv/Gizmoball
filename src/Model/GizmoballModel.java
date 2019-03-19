@@ -27,6 +27,7 @@ public class GizmoballModel extends iModel {
     HashMap<iGizmo,Character> keyTriggers;
     HashMap<iGizmo,String> keyOrientation;
     private int wait = 0;
+    private double mu1 = 0.025, mu2 = 0.025;
 
     public GizmoballModel() {
 
@@ -90,7 +91,7 @@ public class GizmoballModel extends iModel {
             if (ball != null && !ball.isStopped()) {
 
                 ball.applyGravity(gravity, moveTime);
-                ball.applyFriction();
+                ball.applyFriction(mu1, mu2);
 
                 CollisionDetails cd = timeUntilCollision(ball);
                 double tuc = cd.getTuc();
@@ -871,8 +872,8 @@ public class GizmoballModel extends iModel {
                     fileWriter.write("KeyConnect key " + KeyEvent.getExtendedKeyCodeForChar(keyTriggers.get(key)) + " " + keyOrientation.get(key) + " " + key.getID() + "\n");
                 }
             }
-            fileWriter.write("Gravity " +getGravity() + "\n");
-            fileWriter.write("Friction "+ getFrictionMu1() + " " + getFrictionMu2() + "\n");
+            //fileWriter.write("Gravity " +getGravity() + "\n");
+           // fileWriter.write("Friction "+ getFrictionMu1() + " " + getFrictionMu2() + "\n");
             fileWriter.flush();
 
             fileWriter.close();
@@ -1135,6 +1136,17 @@ public class GizmoballModel extends iModel {
 
     public void updateActiveTimers(Timer t) {
         activeTimers.add(t);
+    }
+
+    @Override
+    public void setFriction(double mu1, double mu2) {
+        this.mu1 = mu1;
+        this.mu1 = mu2;
+    }
+
+    @Override
+    public void setGravity(double g) {
+        this.gravity = g;
     }
 
     public boolean removeConnection(iGizmo gizmo, String id){
