@@ -16,7 +16,7 @@ public class AbsorberTests {
         a.addBall(b);
         assertEquals(1, a.getBalls().size(), 0);
         a.activateAbsorber();
-        assertEquals(-1000, b.getVelo().y(), 1);
+        assertEquals(-1275, b.getVelo().y(), 1);
         assertEquals(0, a.getBalls().size(), 0);
     }
 
