@@ -647,19 +647,5 @@ public class GizmoTest {
 
         assertEquals(triangle5,triangle6);
 
-    }
-
-
-     //this doesnt work??
-    /*
-    @Test
-    public void getAbsorber(){
-        Absorber test = model.getAbsorber();
-        assertEquals(test,absorber);
-    }
-
-
-    */
-
-
+    }*/
 }

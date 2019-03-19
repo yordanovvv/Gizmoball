@@ -96,7 +96,6 @@ public class GizmoballModel extends iModel {
 
                 CollisionDetails cd = timeUntilCollision(ball);
                 double tuc = cd.getTuc();
-                System.out.println("SPeed " + ball.getSpeed());
 
                 if (tuc > moveTime) //no collision
                 {
@@ -1002,16 +1001,14 @@ public class GizmoballModel extends iModel {
 
                     case "Gravity":
                         double gravity = Double.parseDouble(inputStream[1]);
-
                         setGravity(gravity);
-
                         break;
+
                     case "Friction":
                         double mu1 = Double.parseDouble(inputStream[1]);
                         double mu2 = Double.parseDouble(inputStream[2]);
                         setFriction(mu1, mu2);
                         break;
-
 
                     default:
                         break;
@@ -1158,5 +1155,7 @@ public class GizmoballModel extends iModel {
         this.mu2 = mu2;
     }
 
-
+    public double getFrictionMu1() {return mu1;}
+    public double getFrictionMu2() {return mu2;}
+    public double getGravity() {return gravity;}
 }

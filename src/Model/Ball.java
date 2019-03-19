@@ -90,8 +90,6 @@ public class Ball extends Observable {
 
     public void applyFriction(double mu1, double mu2)
     {
-        //double mu = 0.025; //per second
-        //double mu2 = 0.025; //per L
         double delta_t = 0.05;
         Vect Vnew  = this.getVelo().times(1 - (mu1 * delta_t) - (mu2 * abs(this.getVelo().length()) * delta_t/30));
         friction = Vnew.length();
@@ -110,7 +108,6 @@ public class Ball extends Observable {
         Vect grav = new Vect (0, gravity*constant*time);
         this.setVelo(this.getVelo().plus(grav));
     }
-
 
     public double calculateSpeed(double time)
     {
