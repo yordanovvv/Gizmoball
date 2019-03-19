@@ -36,6 +36,8 @@ public class GizmoballModel extends iModel {
         gizmos = new ArrayList<iGizmo>();
         keyTriggers = new HashMap<>();
 
+
+        //TODO remove all of this, eventually will be empty board
         balls.add(new Ball("B1", 8, 5,  7.5, 7.5)); //2.5 = 50L/sec if moveTime is 0.05 (20 ticks/sec)
         //balls.add(new Ball("B2", 6, 7,  7.5, 7.5));
 
@@ -901,14 +903,12 @@ public class GizmoballModel extends iModel {
         }
     }
 
-    //TODO need to decide if player can remove all connections or specific ones
+
 
     public boolean removeConnection(iGizmo gizmo, String id){
         return gizmo.removeGizmoConnection(id);
     }
 
-    public void removeKeyConnections(String id){
 
-    }
 
 }
