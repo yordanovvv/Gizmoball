@@ -165,14 +165,6 @@ public class GizmoballModel extends iModel {
         return ball;
     }
 
-
-     public Star moveStarForTime(Star s, double time){
-        double tuc = time*30*50;
-         System.out.println("tuc " +tuc);
-         s.spinStarForTime(tuc);
-        return s;
-    }
-
     //Clears spaces, avoids NullPointer when clearing spaces
     public void wipeSpaces(){
         for (int i=0; i<20; i++){

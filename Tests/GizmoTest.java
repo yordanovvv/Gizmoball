@@ -2,7 +2,9 @@ import Model.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static java.lang.StrictMath.sqrt;
 import static org.junit.Assert.*;
@@ -321,19 +323,58 @@ public class GizmoTest {
         assertEquals(30,test1.getExactX(),3);
     }
 
+
     @Test
-    public void moveStarForTime() {
+    public void moveBallStarCollisions() {
+        GizmoballModel m = new GizmoballModel();
+        Ball test1 = new Ball("test1",1,0,0,7);
+        test1.setStopped(false);
+        m.addBall(test1);
+
+        Star a1 = new Star("star",1,2);
+        m.addGizmo(a1);
+
+        for (int i = 0; i < 5; i++) {
+            m.moveBall();
+        }
+
+        assertEquals(72.92,m.getBalls().get(1).getExactY(),3);
+        assertEquals(30,m.getBalls().get(1).getExactX(),3);
 
     }
 
     @Test
     public void wipeSpaces() {
-
+        GizmoballModel m = new GizmoballModel();
+        m.setSpaces(4,4,true,new Star("test",4,4));
+        boolean[][] testSpaces = new boolean[20][20];
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
+                testSpaces[i][j] = false;
+            }
+        }
+        m.wipeSpaces();
+        assertTrue(Arrays.deepEquals(m.getSpaces(),testSpaces));
     }
 
     @Test
     public void setSpaces(){
+        GizmoballModel m = new GizmoballModel();
+        m.setSpaces(4,4,true,new Star("test",4,4));
+        boolean[][] testSpaces = new boolean[20][20];
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
+                testSpaces[i][j] = false;
+            }
+        }
+        for (int i = 0; i <= 4; i++) {
+            testSpaces[4+i][4] = true;
+            testSpaces[4+i][5] = true;
+            testSpaces[4+i][6] = true;
+            testSpaces[4+i][7] = true;
+        }
 
+        assertTrue(Arrays.deepEquals(m.getSpaces(),testSpaces));
     }
 
     @Test
