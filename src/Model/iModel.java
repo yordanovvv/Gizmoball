@@ -1,7 +1,10 @@
 package Model;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
@@ -49,7 +52,7 @@ public abstract class iModel extends Observable {
 
     public void addBall(Ball b) { }
 
-    public abstract void getAudio(String path);
+    public abstract void getAudio(String path) throws IOException, UnsupportedAudioFileException, LineUnavailableException;
 
 
     public boolean displayID(){

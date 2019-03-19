@@ -122,7 +122,17 @@ public class GizmoballModel extends iModel {
                                 System.out.println("connections not a star");
                                 checkConnections(collisionGizmo, ball);
 
-                            if(ball.getSpeed()!=0) playSound(collisionGizmo);
+                            if(ball.getSpeed()!=0) {
+                                try {
+                                    playSound(collisionGizmo);
+                                } catch (UnsupportedAudioFileException e) {
+                                    e.printStackTrace();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                } catch (LineUnavailableException e) {
+                                    e.printStackTrace();
+                                }
+                            }
 
                             switch (collisionGizmo.getID().charAt(0))
                             {
@@ -254,19 +264,19 @@ public class GizmoballModel extends iModel {
             case "Triangle":
                 return spaces[gridX][gridY];
             case "LeftFlipper":
-                boolean  canPlaceLF = true;
+                boolean  canPlaceLF = false;
                 if (spaces[gridX][gridY] || spaces[gridX][gridY+1] || spaces[gridX+1][gridY+1] || spaces[gridX+1][gridY]){
-                    canPlaceLF = false;
+                    canPlaceLF = true;
                 }
                 return canPlaceLF;
             case "RightFlipper":
-                boolean canPlaceRF = true;
+                boolean canPlaceRF = false;
                 if (spaces[gridX][gridY] || spaces[gridX][gridY+1] || spaces[gridX-1][gridY+1] || spaces[gridX-1][gridY]){
-                    canPlaceRF = false;
+                    canPlaceRF = true;
                 }
                 return canPlaceRF;
             case "Star":
-                boolean canPlaceStar = true;
+                boolean canPlaceStar = false;
                 if (spaces[gridX][gridY] ||
                         spaces[gridX][gridY+1] ||
                         spaces[gridX][gridY+2] ||
@@ -283,7 +293,7 @@ public class GizmoballModel extends iModel {
                         spaces[gridX][gridY-1] ||
                         spaces[gridX+1][gridY-1] ||
                         spaces[gridX+2][gridY-1]){
-                    canPlaceStar = false;
+                    canPlaceStar = true;
                 }
                 return canPlaceStar;
             case "Absorber":
@@ -514,8 +524,7 @@ public class GizmoballModel extends iModel {
         return cd;
     }
 
-    public void getAudio(String path) {
-        try {
+    public void getAudio(String path) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
             AudioInputStream stream;
             AudioFormat format;
             DataLine.Info info;
@@ -527,16 +536,9 @@ public class GizmoballModel extends iModel {
             clip = (Clip) AudioSystem.getLine(info);
             clip.open(stream);
             clip.start();
-        } catch (LineUnavailableException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (UnsupportedAudioFileException e) {
-            e.printStackTrace();
-        }
     }
 
-    private void playSound(iGizmo giz){
+    private void playSound(iGizmo giz) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         switch (giz.getGizmoType()){
             case "Square":
                 getAudio("res/clips/jump.wav");
@@ -840,6 +842,7 @@ public class GizmoballModel extends iModel {
 
     public void checkConnections(iGizmo gizmo, Ball ball) {
         //get the collided gizmos id
+        if(collisionGizmo==null) return;
         if (!collisionGizmo.getID().equals("")) {
             //get the triggers
             if(gizmo.getGizmoConnections()==null) return;

@@ -1,7 +1,13 @@
 import Model.*;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -153,7 +159,6 @@ public class GizmoTest {
         assertTrue(balls.contains(ball));
     }
 
-
     @Test
     public void setBallSpeed() {
         model.setBallSpeed(ball, 6, 4);
@@ -164,7 +169,6 @@ public class GizmoTest {
         assertEquals((long) model.getBallSpeed(ball), (long) speed);
 
     }
-
 
     @Test
     public void gizmoFound() {
@@ -248,8 +252,6 @@ public class GizmoTest {
         circle5.setGizmoConnection("S5");
         assertTrue(model.removeConnection(circle5, "S5"));
     }
-
-
 
     @Test
     public void moveBall() {
@@ -358,38 +360,195 @@ public class GizmoTest {
     }
 
     @Test
-    public void setSpaces(){
+    public void setSpaces_star(){
         GizmoballModel m = new GizmoballModel();
         m.setSpaces(4,4,true,new Star("test",4,4));
+
         boolean[][] testSpaces = new boolean[20][20];
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 20; j++) {
                 testSpaces[i][j] = false;
             }
         }
-        for (int i = 0; i <= 4; i++) {
-            testSpaces[4+i][4] = true;
-            testSpaces[4+i][5] = true;
-            testSpaces[4+i][6] = true;
-            testSpaces[4+i][7] = true;
+        for (int i = 0; i < 4; i++) {
+            testSpaces[3+i][3] = true;
+            testSpaces[3+i][4] = true;
+            testSpaces[3+i][5] = true;
+            testSpaces[3+i][6] = true;
         }
 
         assertTrue(Arrays.deepEquals(m.getSpaces(),testSpaces));
     }
 
     @Test
-    public void checkSpaces(){
+    public void setSpaces_square(){
+        GizmoballModel m = new GizmoballModel();
+        m.setSpaces(4,4,true,new Square("test",4,4));
 
+        boolean[][] testSpaces = new boolean[20][20];
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
+                testSpaces[i][j] = false;
+            }
+        }
+        testSpaces[4][4] = true;
+
+        assertTrue(Arrays.deepEquals(m.getSpaces(),testSpaces));
     }
 
+    @Test
+    public void setSpaces_circle(){
+        GizmoballModel m = new GizmoballModel();
+        m.setSpaces(4,4,true,new GizmoCircle("test",4,4,15));
+
+        boolean[][] testSpaces = new boolean[20][20];
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
+                testSpaces[i][j] = false;
+            }
+        }
+        testSpaces[4][4] = true;
+
+        assertTrue(Arrays.deepEquals(m.getSpaces(),testSpaces));
+    }
+
+    @Test
+    public void setSpaces_triangle(){
+        GizmoballModel m = new GizmoballModel();
+        m.setSpaces(4,4,true,new Triangle("test",4,4));
+
+        boolean[][] testSpaces = new boolean[20][20];
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
+                testSpaces[i][j] = false;
+            }
+        }
+        testSpaces[4][4] = true;
+
+        assertTrue(Arrays.deepEquals(m.getSpaces(),testSpaces));
+    }
+
+    @Test
+    public void setSpaces_LeftFlipper(){
+        GizmoballModel m = new GizmoballModel();
+        m.setSpaces(4,4,true,new LeftFlipper("test",4,4));
+
+        boolean[][] testSpaces = new boolean[20][20];
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
+                testSpaces[i][j] = false;
+            }
+        }
+        testSpaces[4][4] = true;
+        testSpaces[4][5] = true;
+        testSpaces[5][4] = true;
+        testSpaces[5][5] = true;
+
+
+        assertTrue(Arrays.deepEquals(m.getSpaces(),testSpaces));
+    }
+
+    @Test
+    public void setSpaces_RightFlipper(){
+        GizmoballModel m = new GizmoballModel();
+        m.setSpaces(4,4,true,new RightFlipper("test",4,4));
+
+        boolean[][] testSpaces = new boolean[20][20];
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
+                testSpaces[i][j] = false;
+            }
+        }
+        testSpaces[4][4] = true;
+        testSpaces[4][5] = true;
+        testSpaces[3][4] = true;
+        testSpaces[3][5] = true;
+
+
+        assertTrue(Arrays.deepEquals(m.getSpaces(),testSpaces));
+    }
+
+    @Test
+    public void setSpaces_Absorber(){
+        GizmoballModel m = new GizmoballModel();
+        m.setSpaces(4,4,true,new Absorber("test",4,4,6,6));
+
+        boolean[][] testSpaces = new boolean[20][20];
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
+                testSpaces[i][j] = false;
+            }
+        }
+
+        testSpaces[4][4] = true;
+        testSpaces[4][5] = true;
+        testSpaces[5][4] = true;
+        testSpaces[5][5] = true;
+
+
+        assertTrue(Arrays.deepEquals(m.getSpaces(),testSpaces));
+    }
+
+    @Test
+    public void checkSpaces_star(){
+        GizmoballModel m = new GizmoballModel();
+        Star test =new Star("test",4,4);
+        assertTrue(!m.checkSpace(4,4,star));
+        m.setSpaces(4,4,true,test);
+        assertFalse(!m.checkSpace(4,4,star));
+    }
+
+    @Test
+    public void checkSpaces_flippers(){
+        GizmoballModel m = new GizmoballModel();
+        LeftFlipper lf = new LeftFlipper("test1",4,4);
+        assertTrue(!m.checkSpace(4,4,lf));
+        m.setSpaces(4,4,true,lf);
+
+        assertFalse(!m.checkSpace(4,4,lf));
+
+        GizmoballModel m1 = new GizmoballModel();
+        RightFlipper rf = new RightFlipper("test1",4,4);
+        assertTrue(!m1.checkSpace(4,4,rf));
+        m1.setSpaces(4,4,true,rf);
+        assertFalse(!m1.checkSpace(4,4,rf));
+    }
+
+    @Test
+    public void checkSpaces_square(){
+        GizmoballModel m = new GizmoballModel();
+        Square s = new Square("test1",5,4);
+        assertTrue( !m.checkSpace(5,4,s));
+        m.setSpaces(5,4,true,s);
+        assertFalse( !m.checkSpace(5,4,s));
+    }
+
+    @Test
+    public void checkSpaces_triangle(){
+        GizmoballModel m = new GizmoballModel();
+        Triangle s = new Triangle("test1",5,4);
+        assertTrue(! m.checkSpace(5,4,s));
+        m.setSpaces(5,4,true,s);
+        assertFalse( !m.checkSpace(5,4,s));
+    }
+
+    @Test
+    public void checkSpaces_circle(){
+        GizmoballModel m = new GizmoballModel();
+        GizmoCircle s = new GizmoCircle("test1",5,4,15);
+        assertTrue( !m.checkSpace(5,4,s));
+        m.setSpaces(5,4,true,s);
+        assertFalse( !m.checkSpace(5,4,s));
+    }
     @Test
     public void collisionDetails(){
 
     }
 
-    @Test
-    public void getAudio(){
-
+    @Test(expected = IOException.class)
+    public void getAudio_non_existant() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        GizmoballModel m = new GizmoballModel();
+        m.getAudio("res/clips/jum.wav");
     }
 
     @Test
@@ -404,6 +563,16 @@ public class GizmoTest {
 
     @Test
     public void checkConnections(){
+        GizmoballModel m = new GizmoballModel();
+        Ball b = new Ball("b1",2,0,1,2);
+        Triangle t = new Triangle("T1",1,2);
+        Triangle t2 = new Triangle("t2",5,5);
+        m.addGizmo(t);
+        m.addGizmo(t2);
+        m.addBall(b);
+        m.moveBall();
+        m.checkConnections(t,b);
+        assertFalse(t.getHit());
 
     }
 
