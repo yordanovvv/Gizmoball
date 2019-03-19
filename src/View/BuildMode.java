@@ -113,7 +113,7 @@ public class BuildMode extends JPanel{
         button_clear = new JButton("<html> Clear</html>");
         button_delete = new JButton("<html> Delete</html>");
         button_keypressConnect = new JButton("<html> Key Binds</html>");
-        button_changeBallVelo = new JButton("<html> Change Ball Velocity </html>");
+        button_changeBallVelo = new JButton("<html> Edit balls </html>");
         button_changeFrictionandGravity= new JButton("<html> Gravity + Friction </html>");
 
         container_play.add(button_rotate);
