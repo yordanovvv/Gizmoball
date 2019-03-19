@@ -224,9 +224,7 @@ public class LeftFlipper implements iGizmo {
     }
 
     @Override
-    public void addBall(Ball ball) {
-
-    }
+    public void addBall(Ball ball) {}
 
     public int getRotationCount() {
         return rotationCount;

@@ -113,25 +113,8 @@ public class RightFlipper implements iGizmo {
 
     }
 
-    public Vect getBigTopCircleCentre()
-    {
-        return circles.get(0).getCenter();
-    }
-
-    public Vect getBigBottomCircleCentre()
-    {
-        return circles.get(1).getCenter();
-    }
-
-    public Vect getTopLeftCircleCentre()
-    {
-        return circles.get(2).getCenter();
-    }
-
-
     @Override
     public void generateLines() {
-
         double topCircleRadius = 7.5; //in pixels
         double bottomCircleRadius = 6;
 
@@ -141,23 +124,11 @@ public class RightFlipper implements iGizmo {
 
         LineSegment leftL = new LineSegment(X + (constant - 2*topCircleRadius), Y + topCircleRadius, X + (constant - 2*bottomCircleRadius),Y + (2*constant - bottomCircleRadius));
         LineSegment rightL = new LineSegment(X + constant,Y + topCircleRadius, X + constant ,Y + (2*constant - bottomCircleRadius));
-
         /*LineSegment rightL = new LineSegment(XCoord*constant + 30 ,YCoord*constant +7,(XCoord + .9) * constant   ,YCoord*constant +8+48);
         LineSegment leftL = new LineSegment(XCoord*constant + 17.5,YCoord*constant +7,(XCoord) * constant + 15.8 ,YCoord*constant +8+48);*/
-
         System.out.println();
         lines.add(leftL);
         lines.add(rightL);
-    }
-
-    public Vect getRightLineVectCentre()
-    {
-        return lines.get(0).p1();
-    }
-
-    public Vect getLeftLineVectCentre()
-    {
-        return lines.get(1).p1();
     }
 
     @Override
@@ -170,10 +141,8 @@ public class RightFlipper implements iGizmo {
     @Override
     public void setKeyConnection(String key) {
         if(!keyConnections.contains(key)) {
-            keyConnections.add(key);
-        }
+            keyConnections.add(key);}
     }
-
     private void updateLinePositions(){
         int rotationDegree = 18;
         if(rotationAngle == 90) rotationDegree = +18;
@@ -190,8 +159,7 @@ public class RightFlipper implements iGizmo {
         for (int i = 0; i < circles.size(); i++) {
             Angle rotation = new Angle(Math.toRadians(rotationDegree));
             Circle currentCircle = circles.get(i);
-            circles.set(i, Geometry.rotateAround(currentCircle,center.getCenter(),rotation));
-        }
+            circles.set(i, Geometry.rotateAround(currentCircle,center.getCenter(),rotation));        }
     }
 
     @Override
