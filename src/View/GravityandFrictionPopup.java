@@ -71,9 +71,8 @@ public class GravityandFrictionPopup {
         label_comboBall = new JLabel("Select Ball :");
         label_comboBall = utils.editLabel(label_comboBall,12,Color.WHITE);
 
-
         gravityLabel = new JLabel("Set gravity value : ");
-       gravityLabel = utils.editLabel(gravityLabel,12,Color.WHITE);
+        gravityLabel = utils.editLabel(gravityLabel,12,Color.WHITE);
 
        frictionLabel = new JLabel("Set friction value : ");
        frictionLabel = utils.editLabel(frictionLabel,12,Color.WHITE);
@@ -85,14 +84,13 @@ public class GravityandFrictionPopup {
 
         //need to make sliders now, initially set to 5?
         //friction takes in 2 numbers in Ball class, one of them will be fixed, the other can get from slider???
-        gravitySlider= new JSlider(0,100,5);
-        frictionSlider= new JSlider(0,100,5);
-
+        gravitySlider = new JSlider(-50,50,5);
+        frictionSlider = new JSlider(-50,50,5);
 
         gravitySlider.setPaintTicks(true);
-     gravitySlider.setPaintLabels(true);
-      gravitySlider.setMajorTickSpacing(10);
-       gravitySlider.setMinorTickSpacing(5);
+        gravitySlider.setPaintLabels(true);
+        gravitySlider.setMajorTickSpacing(10);
+        gravitySlider.setMinorTickSpacing(5);
 
 
         container.add(gravityLabel);
@@ -100,12 +98,11 @@ public class GravityandFrictionPopup {
 
         frictionSlider.setPaintTicks(true);
         frictionSlider.setPaintLabels(true);
-       frictionSlider.setMajorTickSpacing(10);
-       frictionSlider.setMinorTickSpacing(5);
+        frictionSlider.setMajorTickSpacing(10);
+        frictionSlider.setMinorTickSpacing(5);
 
         container.add(frictionLabel);
         container.add(frictionSlider);
-
 
         frame.add(container, BorderLayout.CENTER);
 
@@ -116,7 +113,6 @@ public class GravityandFrictionPopup {
         button_done = new JButton("Done");
         button_cancel = new JButton("Cancel");
 
-
         //TODO action listeners for done and cancel
 
         button_done.addActionListener(new GravityandFrictionPopup.tempActionListener());
@@ -124,7 +120,6 @@ public class GravityandFrictionPopup {
 
         buttonContainer.add(button_done);
         buttonContainer.add(button_cancel);
-
 
         frame.add(buttonContainer, BorderLayout.PAGE_END);
 
@@ -141,7 +136,7 @@ public class GravityandFrictionPopup {
                 System.out.println("updating stuff");
 
                 Ball selectedBall = balls.get(combo_ball.getSelectedIndex());
-                selectedBall.setGravity(gravitySlider.getValue());
+                selectedBall.applyGravity(gravitySlider.getValue(), 0.05);
                 selectedBall.setFriction(0.025, frictionSlider.getValue());
 
             }
