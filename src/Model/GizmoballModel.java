@@ -653,25 +653,39 @@ public class GizmoballModel extends iModel {
         try {
             FileWriter fileWriter = new FileWriter(file);
 
+            //balls
             for(Ball ball: balls){
                 fileWriter.write(ball.toString() + "\n");
             }
 
+            //gizmos
             for(iGizmo gizmo : gizmos) {
                 fileWriter.write(gizmo.toString() + "\n");
+                //rotations
                 if(gizmo.getRotationCount() > 0) {
                     for(int i = 0; i < gizmo.getRotationCount(); i++) {
                         fileWriter.write("Rotate " + gizmo.getID() + "\n");
                     }
                 }
             }
+
+            //connections
             for(iGizmo gizmo : gizmos) {
-           //     fileWriter.write(gizmo.toString() + "\n");
                 if(gizmo.getGizmoConnections()!=null){
                     if(gizmo.getGizmoConnections().size() > 0) {
                         for(String giz : gizmo.getGizmoConnections()) {
                             fileWriter.write("Connect " + gizmo.getID() +" "+ giz +"\n");
                         }
+                    }
+                }
+            }
+
+            //key connections
+            for(iGizmo gizmo : gizmos) {
+                if(gizmo.getKeyConnections() != null & gizmo.getKeyConnections().size() > 0) {
+                    for(String key : gizmo.getKeyConnections()) {
+                        fileWriter.write("KeyConnect key " + key + " up " + gizmo.getID() + "\n");
+                        fileWriter.write("KeyConnect key " + key + " down " + gizmo.getID()+ "\n");
                     }
                 }
             }
@@ -773,7 +787,11 @@ public class GizmoballModel extends iModel {
 
                         break;
                     case "KeyConnect":
-
+                        if(inputStream.length >= 5) {
+                            String key = inputStream[2],
+                                    id = inputStream[4];
+                            keyConnectGizmo(id, key);
+                        }
                         break;
                     default:
                         break;
@@ -843,14 +861,18 @@ public class GizmoballModel extends iModel {
         return false;
     }
 
-    public void keyConnectGizmo(String id, String key) {
+    public boolean keyConnectGizmo(String id, String key) {
         if (gizmoFound(id)) {
             //get the gizmo
             iGizmo gizmo = getGizmoByID(id);
-            //set the key connection
-            gizmo.setKeyConnection(key.toLowerCase());
-            keyTriggers.put(gizmo, (key.toLowerCase()).charAt(0));
-        }
+
+            if(!gizmo.getGizmoConnections().contains(key))
+                //set the key connection
+                gizmo.setKeyConnection(key.toLowerCase());
+                keyTriggers.put(gizmo, (key.toLowerCase()).charAt(0));
+                return true;
+            }
+        return false;
     }
 
     public void checkConnections(iGizmo gizmo, Ball ball) {
