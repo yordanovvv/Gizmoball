@@ -25,6 +25,7 @@ public class GizmoballModel extends iModel {
     private double gravity = 25; //25L/sec^2
     boolean[][] spaces = new boolean[20][20];
     HashMap<iGizmo,Character> keyTriggers;
+    HashMap<iGizmo,String> keyOrientation;
     private int wait = 0;
 
     public GizmoballModel() {
@@ -32,7 +33,7 @@ public class GizmoballModel extends iModel {
         balls = new ArrayList<>();
         gizmos = new ArrayList<iGizmo>();
         keyTriggers = new HashMap<>();
-
+        keyOrientation = new HashMap<>();
 
         //TODO remove all of this, eventually will be empty board
         balls.add(new Ball("B1", 8, 5,  7.5, 7.5)); //2.5 = 50L/sec if moveTime is 0.05 (20 ticks/sec)
@@ -42,6 +43,9 @@ public class GizmoballModel extends iModel {
         gizmos.add(absorber);
     }
 
+    public HashMap<iGizmo,String> getKeyOrientation(){
+        return keyOrientation;
+    }
 
     @Override
     public ArrayList<iGizmo> getAllStars(){
@@ -746,8 +750,14 @@ public class GizmoballModel extends iModel {
             for(iGizmo gizmo : gizmos) {
                 if(gizmo.getKeyConnections() != null & gizmo.getKeyConnections().size() > 0) {
                     for(String key : gizmo.getKeyConnections()) {
-                        fileWriter.write("KeyConnect key " + key + " up " + gizmo.getID() + "\n");
-                        fileWriter.write("KeyConnect key " + key + " down " + gizmo.getID()+ "\n");
+                        if(keyOrientation.get(key)!=null){
+                            if(keyOrientation.get(key).equalsIgnoreCase("Both")) {
+                                fileWriter.write("KeyConnect key " + key + " up " + gizmo.getID() + "\n");
+                                fileWriter.write("KeyConnect key " + key + " down " + gizmo.getID() + "\n");
+                            }else{
+                                fileWriter.write("KeyConnect key " + key +  keyOrientation.get(key) + gizmo.getID() + "\n");
+                            }
+                        }
                     }
                 }
             }
@@ -851,7 +861,19 @@ public class GizmoballModel extends iModel {
                     case "KeyConnect":
                         if(inputStream.length >= 5) {
                             String key = inputStream[2],
+                                    orientation = inputStream[3],
                                     id = inputStream[4];
+
+                            if(keyOrientation.containsKey(getGizmoByID(id))){
+                                if(keyTriggers.get(getGizmoByID(id))==(key.charAt(0))) {
+                                    keyOrientation.replace(getGizmoByID(id), "both");
+                                }else{
+                                    keyOrientation.put(getGizmoByID(id), orientation);
+                                }
+                            }else {
+                                keyOrientation.put(getGizmoByID(id), orientation);
+                            }
+
                             keyConnectGizmo(id, key);
                         }
                         break;
