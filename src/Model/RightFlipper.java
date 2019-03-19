@@ -22,7 +22,7 @@ public class RightFlipper implements iGizmo {
     private ArrayList<String> keyConnections;
     private final double constant = 30;
     private int rotationCount;
-    private boolean down = false;
+    private boolean down = false, rotated = false;
     private boolean hit;
     private int rotationDegree = 0;
 
@@ -60,6 +60,14 @@ public class RightFlipper implements iGizmo {
         }
     }
 
+    public void setRotated(boolean r){
+        this.rotated = r;
+    }
+
+    public boolean getRotated(){
+        return rotated;
+    }
+
     public int getRotatedYCoord(){
         if(rotationDegree == 0) {
             return  YCoord;
@@ -78,6 +86,7 @@ public class RightFlipper implements iGizmo {
 
     public void rotateFlipper(){
        int  rotationDegree = 90;
+       rotated =true;
         Circle  center = circles.get(0);
         for (int i = 0; i < lines.size(); i++) {
             Angle rotation = new Angle(Math.toRadians(rotationDegree));

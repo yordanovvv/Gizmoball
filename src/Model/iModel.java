@@ -57,6 +57,7 @@ public abstract class iModel extends Observable {
 
     public abstract void getAudio(String path) throws IOException, UnsupportedAudioFileException, LineUnavailableException;
 
+    public  abstract boolean checkRotatedFlipperSpace(int gridX, int gridY, iGizmo g);
 
     public boolean displayID(){
         return displayID;

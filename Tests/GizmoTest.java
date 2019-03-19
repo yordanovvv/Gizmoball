@@ -317,8 +317,8 @@ public class GizmoTest {
         }
 
         assertEquals(1, m.getAbsorber().getBalls().size());
-        assertEquals(585.0, m.getBalls().get(1).getExactY(), 3);
-        assertEquals(585.0, m.getBalls().get(1).getExactX(), 3);
+        assertEquals(135, m.getBalls().get(1).getExactY(), 3);
+        assertEquals(135, m.getBalls().get(1).getExactX(), 3);
 
     }
 

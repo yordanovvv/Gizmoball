@@ -20,7 +20,7 @@ public class LeftFlipper implements iGizmo {
     private final double constant = 30;
     private int rotationDegree = 0;
     private int rotationAngle = 0;
-    private boolean down = false, hit;
+    private boolean down = false, hit,rotated = false;
 
     public LeftFlipper(String id, int x, int y){
         this.ID = id;
@@ -44,8 +44,17 @@ public class LeftFlipper implements iGizmo {
         return rotationDegree;
     }
 
+    public void setRotated(boolean r){
+        this.rotated = r;
+    }
+
+    public boolean getRotated(){
+       return rotated;
+    }
+
     public void rotateFlipper(){
         int  rotationDegree = 90;
+        rotated =true;
         Circle  center = circles.get(0);
         for (int i = 0; i < lines.size(); i++) {
             Angle rotation = new Angle(Math.toRadians(rotationDegree));
