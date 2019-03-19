@@ -901,9 +901,13 @@ public class GizmoballModel extends iModel {
                 int gizYCoord =0;
                 switch(inputStream[0]) {
                     case "Ball":
-                        gizXCoord = Integer.parseInt(inputStream[2]);
-                        gizYCoord = Integer.parseInt(inputStream[3]);
-                        Ball ball = new Ball(inputStream[1], gizXCoord, gizYCoord, Double.parseDouble(inputStream[4]), Double.parseDouble(inputStream[5]));
+                        double x_double= Double.parseDouble(inputStream[2]);
+                        double y_double = Double.parseDouble(inputStream[3]);
+
+                        gizXCoord = (int) Math.round(x_double);
+                        gizYCoord = (int) Math.round(y_double);
+
+                        Ball ball = new Ball(inputStream[1], x_double, y_double, Double.parseDouble(inputStream[4]), Double.parseDouble(inputStream[5]));
                         balls.add(ball);
                         setSpaces(gizXCoord, gizYCoord, true, null, ball);
                         break;
