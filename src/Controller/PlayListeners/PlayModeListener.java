@@ -49,7 +49,7 @@ public class PlayModeListener implements ActionListener {
                    for(iGizmo g:stars){
                         Star star = (Star) g;
                         star.setTick(false);
-                        if(star.isRoating()) star.startStarRotation();
+                        if(star.isNotRotating()) star.startStarRotation();
                     }
                     for (Ball b : balls) b.setStopped(false);
                     timer.start();

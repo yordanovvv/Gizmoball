@@ -96,16 +96,14 @@ public class Star implements iGizmo{
         stopped = true;
     }
 
-    public Boolean isRoating(){
+    public Boolean isNotRotating(){
         return stopped;
     }
 
     public void startStarRotation(){
-        if(tick){
-          //  rotate();
-        }else {
+        if(!tick)
             if (stopped) spinStar(200);
-        }
+
     }
 
     public boolean isTick(){
@@ -116,7 +114,7 @@ public class Star implements iGizmo{
         this.tick = tick;
     }
 
-    public void spinStarForTime(double timeTill){
+   /* public void spinStarForTime(double timeTill){
         double formatted_tuc = timeTill*30;
         //rotate();
         long start = System.currentTimeMillis();
@@ -125,7 +123,7 @@ public class Star implements iGizmo{
             if(System.currentTimeMillis() - start >= formatted_tuc | stopped)clone.stop();
             rotate();
         });
-    }
+    }*/
 
     private void spinStar(int delay){
         stopped = false;
@@ -137,7 +135,7 @@ public class Star implements iGizmo{
         t.start();
     }
 
-    public Ball shootBallOut(){
+    /*public Ball shootBallOut(){
         //this is where the star rotates for a random amount of times and shoots the ball out ;)
         if (!balls.isEmpty()) {
             final Ball[] fireBall = {balls.remove(0)};
@@ -170,7 +168,7 @@ public class Star implements iGizmo{
             }
        // }
         return null;
-    }
+    }*/
 
     public int getmiddleXCoord(){return (XCoord+1);}
 
