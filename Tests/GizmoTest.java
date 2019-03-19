@@ -453,7 +453,7 @@ public class GizmoTest {
 
     @Test
     public void setSpaces_LeftFlipper() {
-        GizmoballModel m = new GizmoballModel();
+        iModel m = new GizmoballModel();
         m.setSpaces(4, 4, true, new LeftFlipper("test", 4, 4));
 
         boolean[][] testSpaces = new boolean[20][20];
@@ -473,7 +473,7 @@ public class GizmoTest {
 
     @Test
     public void setSpaces_RightFlipper() {
-        GizmoballModel m = new GizmoballModel();
+        iModel m = new GizmoballModel();
         m.setSpaces(4, 4, true, new RightFlipper("test", 4, 4));
 
         boolean[][] testSpaces = new boolean[20][20];
@@ -493,7 +493,7 @@ public class GizmoTest {
 
     @Test
     public void setSpaces_Absorber() {
-        GizmoballModel m = new GizmoballModel();
+        iModel m = new GizmoballModel();
         m.setSpaces(4, 4, true, new Absorber("test", 4, 4, 6, 6));
 
         boolean[][] testSpaces = new boolean[20][20];
@@ -514,7 +514,7 @@ public class GizmoTest {
 
     @Test
     public void checkSpaces_star() {
-        GizmoballModel m = new GizmoballModel();
+        iModel m = new GizmoballModel();
         Star test = new Star("test", 4, 4);
         assertTrue(m.checkSpace(4, 4, star));
         m.setSpaces(4, 4, true, test);
@@ -523,14 +523,14 @@ public class GizmoTest {
 
     @Test
     public void checkSpaces_flippers() {
-        GizmoballModel m = new GizmoballModel();
+        iModel m = new GizmoballModel();
         LeftFlipper lf = new LeftFlipper("test1", 4, 4);
         assertTrue(m.checkSpace(4, 4, lf));
         m.setSpaces(4, 4, true, lf);
 
         assertFalse(m.checkSpace(4, 4, lf));
 
-        GizmoballModel m1 = new GizmoballModel();
+        iModel m1 = new GizmoballModel();
         RightFlipper rf = new RightFlipper("test1", 4, 4);
         assertTrue(m1.checkSpace(4, 4, rf));
         m1.setSpaces(4, 4, true, rf);
@@ -539,7 +539,7 @@ public class GizmoTest {
 
     @Test
     public void checkSpaces_square() {
-        GizmoballModel m = new GizmoballModel();
+        iModel m = new GizmoballModel();
         Square s = new Square("test1", 5, 4);
         assertTrue(m.checkSpace(5, 4, s));
         m.setSpaces(5, 4, true, s);
@@ -548,7 +548,7 @@ public class GizmoTest {
 
     @Test
     public void checkSpaces_triangle() {
-        GizmoballModel m = new GizmoballModel();
+        iModel m = new GizmoballModel();
         Triangle s = new Triangle("test1", 5, 4);
         assertTrue(m.checkSpace(5, 4, s));
         m.setSpaces(5, 4, true, s);
@@ -557,7 +557,7 @@ public class GizmoTest {
 
     @Test
     public void checkSpaces_circle() {
-        GizmoballModel m = new GizmoballModel();
+        iModel m = new GizmoballModel();
         GizmoCircle s = new GizmoCircle("test1", 5, 4, 15);
         assertTrue(m.checkSpace(5, 4, s));
         m.setSpaces(5, 4, true, s);
@@ -566,7 +566,7 @@ public class GizmoTest {
 
     @Test
     public void checkSpaces_absorber() {
-        GizmoballModel m = new GizmoballModel();
+        iModel m = new GizmoballModel();
         Absorber s = new Absorber("test1", 4, 4, 6, 6);
         assertTrue(m.checkSpace(4, 4, s));
         m.setSpaces(5, 4, true, s);
@@ -582,7 +582,7 @@ public class GizmoTest {
 
     @Test(expected = IOException.class)
     public void getAudio_non_existant() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        GizmoballModel m = new GizmoballModel();
+        iModel m = new GizmoballModel();
         m.getAudio("res/clips/jum.wav");
     }
 
@@ -598,7 +598,7 @@ public class GizmoTest {
 
     @Test
     public void checkConnections() {
-        GizmoballModel m = new GizmoballModel();
+        iModel m = new GizmoballModel();
         Ball b = new Ball("b1", 1, 2, 0, 20);
         Triangle t = new Triangle("t1", 1, 3);
         Triangle t2 = new Triangle("t2", 5, 5);
