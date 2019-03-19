@@ -223,7 +223,7 @@ public class LeftFlipper implements iGizmo {
 
     @Override
     public void removeKeyConnection() {
-
+        keyConnections.removeAll(keyConnections);
     }
 
     @Override

@@ -118,7 +118,7 @@ public class BuildMode extends JPanel{
         button_move = new JButton("Move");
         button_clear = new JButton("Clear");
         button_delete = new JButton("Delete");
-        button_keypressConnect = new JButton("Connect Key");
+        button_keypressConnect = new JButton("Key Binds");
         button_changeBallVelo = new JButton("Change Ball Velocity");
         button_changeFrictionandGravity= new JButton("Gravity+Friction");
 
@@ -181,6 +181,8 @@ public class BuildMode extends JPanel{
         AddButtonGizmoListener deleteListener = new AddButtonGizmoListener("delete", lis);
         AddButtonGizmoListener moveListener = new AddButtonGizmoListener("move", lis);
 
+        ShowPopupListener keyBindsListener = new ShowPopupListener(mainFrame.getModel(), "key binds");
+
         ShowPopupListener updateBallVeloListener = new ShowPopupListener(mainFrame.getModel(), "updateBall");
         ShowPopupListener updateGravFricListener = new ShowPopupListener(mainFrame.getModel(), "updateGravity");
 
@@ -192,6 +194,7 @@ public class BuildMode extends JPanel{
         button_connectButton.setActionCommand("connect");
         button_disconnect.addActionListener(disconnectListener);
         button_disconnect.setActionCommand("disconnect");
+        button_keypressConnect.addMouseListener(keyBindsListener);
         button_clear.addMouseListener(clearClickListener);
         button_move.addMouseListener(moveListener);
         button_changeBallVelo.addMouseListener(updateBallVeloListener);
