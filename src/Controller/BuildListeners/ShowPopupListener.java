@@ -1,7 +1,6 @@
 package Controller.BuildListeners;
 
 import Model.iModel;
-import View.GravityandFrictionPopup;
 import View.KeyBinds;
 import View.UpdateBallPopup;
 
@@ -23,9 +22,7 @@ public class ShowPopupListener implements MouseListener {
     {
         if (popupId.equals("updateBall")){
             UpdateBallPopup pop = new UpdateBallPopup(m);
-        } else if (popupId.equals("updateGravity")){
-            GravityandFrictionPopup gpop = new GravityandFrictionPopup(m);
-        }else if (popupId.equals("key binds")){
+        } else if (popupId.equals("key binds")){
             KeyBinds gpop = new KeyBinds(m);
         }
     }
