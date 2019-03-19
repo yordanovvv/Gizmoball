@@ -191,19 +191,27 @@ public class GridClickListener implements MouseListener {
             switch (selected) {
                 case "rotate":
                     for (iGizmo g : m.getGizmos()) {
-                        if (g.getXCoord() == gridX && g.getYCoord() == gridY) {
-                            if (g.getGizmoType() == "Triangle") {
-                                g.rotate();
-                            }else if(g.getGizmoType() == "RightFlipper"){
-                              //  m.setSpaces(g.getXCoord(), g.getYCoord(),  false, g);
-                                ((RightFlipper)g).rotateFlipper();
-                                m.setSpaces(g.getXCoord(), g.getYCoord(),  true, g);
-                                System.out.println(g.getXCoord() + "  " + g.getYCoord());
-                            }else if(g.getGizmoType() == "LeftFlipper"){
-                               // m.setSpaces(g.getXCoord(), g.getYCoord(),  false, g);
-                                ((LeftFlipper)g).rotateFlipper();
-                                m.setSpaces(g.getXCoord(), g.getYCoord(),  true, g);
-                            }else if(g.getGizmoType() == "LeftFlipper"){
+                        if(g.getGizmoType() == "RightFlipper"){
+                            if (((RightFlipper)g).getRotatedXCoord() == gridX &&((RightFlipper)g).getRotatedYCoord() == gridY) {
+                                if(m.checkSpace(g.getXCoord(), g.getYCoord(),g)) {
+                                    m.setSpaces(g.getXCoord(), g.getYCoord(), false, g);
+                                    ((RightFlipper) g).rotateFlipper();
+                                    m.setSpaces(g.getXCoord(), g.getYCoord(), true, g);
+                                }
+                            }
+                        }else if(g.getGizmoType() == "LeftFlipper"){
+                            if (((LeftFlipper)g).getRotatedXCoord() == gridX &&((LeftFlipper)g).getRotatedYCoord() == gridY) {
+                                if(m.checkSpace(g.getXCoord(), g.getYCoord(),g)) {
+                                    m.setSpaces(g.getXCoord(), g.getYCoord(), false, g);
+                                    ((LeftFlipper) g).rotateFlipper();
+                                    m.setSpaces(g.getXCoord(), g.getYCoord(), true, g);
+                                }
+                            }
+                        }else{
+                            if (g.getXCoord() == gridX && g.getYCoord() == gridY) {
+                                if (g.getGizmoType() == "Triangle") {
+                                    g.rotate();
+                                }
                             }
                         }
                     }

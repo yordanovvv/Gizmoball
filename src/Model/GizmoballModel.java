@@ -306,6 +306,9 @@ public class GizmoballModel extends iModel {
             case "LeftFlipper":
                 boolean  canPlaceLF = true;
                 int rdeg = ((LeftFlipper)g).getFlipperRotationDegree();
+                if(rdeg == 360) rdeg = 0;
+                rdeg = rdeg + 90;
+                if(rdeg == 360) rdeg = 0;
                 if(rdeg == 0) {
                     if(spaces[gridX][gridY]||
                     spaces[gridX][gridY + 1] ||
@@ -340,6 +343,11 @@ public class GizmoballModel extends iModel {
             case "RightFlipper":
                 boolean canPlaceRF = true;
                 int rotationDegree = ((RightFlipper)g).getFlipperRotationDegree();
+
+                if(rotationDegree == 360) rotationDegree = 0;
+                rotationDegree = rotationDegree + 90;
+                if(rotationDegree == 360) rotationDegree = 0;
+
                 if(rotationDegree == 0) {
                     if( spaces[gridX][gridY] || spaces[gridX][gridY + 1] ||
                     spaces[gridX - 1][gridY]||

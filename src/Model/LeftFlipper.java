@@ -22,13 +22,11 @@ public class LeftFlipper implements iGizmo {
     private int rotationAngle = 0;
     private boolean down = false, hit;
 
-
     public LeftFlipper(String id, int x, int y){
         this.ID = id;
         this.XCoord = x;
         this.YCoord = y;
         this.hit = false;
-
         height = 2;
         width = 2;
 
@@ -62,6 +60,33 @@ public class LeftFlipper implements iGizmo {
         }
         if(this.rotationDegree==360)this.rotationDegree=0;
         this.rotationDegree+=90;
+        if(this.rotationDegree==360)this.rotationDegree=0;
+    }
+
+    public int getRotatedXCoord(){
+       if(rotationDegree == 0) {
+            return  XCoord;
+
+        }else if(rotationDegree == 90){
+            return XCoord-1;
+
+        }else if(rotationDegree == 180){
+            return XCoord-1;
+        }else{
+            return XCoord;
+        }
+    }
+//if(spaces[gridX+1][gridY-1] ||
+    public int getRotatedYCoord(){
+        if(rotationDegree == 0) {
+            return  YCoord;
+        }else if(rotationDegree == 90){
+            return  YCoord;
+        }else if(rotationDegree == 180){
+            return  YCoord - 1;
+        }else {
+            return  YCoord - 1;
+        }
     }
 
     @Override

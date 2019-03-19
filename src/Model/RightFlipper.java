@@ -46,6 +46,32 @@ public class RightFlipper implements iGizmo {
 
     }
 
+    public int getRotatedXCoord(){
+        if(rotationDegree == 0) {
+            return  XCoord;
+
+        }else if(rotationDegree == 90){
+            return XCoord;
+
+        }else if(rotationDegree == 180){
+            return XCoord+1;
+        }else{
+            return XCoord+1;
+        }
+    }
+
+    public int getRotatedYCoord(){
+        if(rotationDegree == 0) {
+            return  YCoord;
+        }else if(rotationDegree == 90){
+            return  YCoord-1;
+        }else if(rotationDegree == 180){
+            return  YCoord - 1;
+        }else{
+            return  YCoord;
+        }
+    }
+
     public int getFlipperRotationDegree(){
         return rotationDegree;
     }
@@ -66,6 +92,7 @@ public class RightFlipper implements iGizmo {
         }
         if(this.rotationDegree==360)this.rotationDegree=0;
         this.rotationDegree+=90;
+        if(this.rotationDegree==360)this.rotationDegree=0;
     }
 
     @Override
