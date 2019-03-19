@@ -88,15 +88,12 @@ public class Absorber implements iGizmo {
 
     @Override
     public void setID (String id){
-
         this.ID = id;
     }
 
     @Override
     public void setXCoord (int x){
-
         this.XCoord = x;
-
     }
 
     @Override
@@ -149,7 +146,6 @@ public class Absorber implements iGizmo {
         if(!gizmoConnections.contains(id)) {
             gizmoConnections.add(id);
         }
-
     }
 
     @Override
@@ -161,8 +157,9 @@ public class Absorber implements iGizmo {
 
     @Override
     public void rotate () {
-        //empty as absorbers cant rotate
+        //empty as absorbers cant rotate}
     }
+
 
     @Override
     public int getRotationAngle () {
