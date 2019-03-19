@@ -74,6 +74,8 @@ public class ConnectGizmosPopup {
         combo_gizmo1= new JComboBox<>();
         combo_gizmo2= new JComboBox<>();
 
+        button_done = new JButton("Done");
+        button_cancel = new JButton("Cancel");
 
         //get all gizmos on board
         gizmos = model.getGizmos();
@@ -82,12 +84,13 @@ public class ConnectGizmosPopup {
             for (iGizmo g : gizmos) {
                 //combo_gizmo1.addItem("id " + g.getID() + " type " + g.getGizmoType());
                 combo_gizmo1.addItem(g.getGizmoType() + "[" + g.getID() + "]: x = " + g.getXCoord() + "; y = " + g.getYCoord());
+                combo_gizmo2.addItem(g.getGizmoType() + "[" + g.getID() + "]: x = " + g.getXCoord() + "; y = " + g.getYCoord());
             }
 
-        //do the same for combo box 2
-        for (iGizmo g : gizmos) {
-            //combo_gizmo2.addItem("id " + g.getID() + " type " + g.getGizmoType());
-            combo_gizmo2.addItem(g.getGizmoType() + "[" + g.getID() + "]: x = " + g.getXCoord() + "; y = " + g.getYCoord());
+
+
+        if(combo_gizmo1.getItemCount() == 0 || combo_gizmo2.getItemCount() == 0 ) {
+            button_done.setEnabled(false);
         }
 
         container.add(connectLabel);
@@ -103,8 +106,6 @@ public class ConnectGizmosPopup {
         buttonContainer.setLayout(new GridLayout(0, 2, 10, 10));
         buttonContainer.setBackground(bg_color);
 
-        button_done = new JButton("Done");
-        button_cancel = new JButton("Cancel");
 
         //need to add action listeners to these?^^
         button_done.setActionCommand("Done");

@@ -52,6 +52,9 @@ public class KeyBinds {
 
         bindsComboBox = new JComboBox<>();
 
+        button_change = new JButton("Change");
+        button_cancel = new JButton("Close");
+
         updateComboBox();
 
         container.add(bindsComboBox);
@@ -62,8 +65,6 @@ public class KeyBinds {
         buttonContainer.setLayout(new GridLayout(0, 2, 10, 10));
         buttonContainer.setBackground(bg_color);
 
-        button_change = new JButton("Change");
-        button_cancel = new JButton("Close");
 
         button_change.setActionCommand("Change");
         button_change.addActionListener(new KeyBindsListener());
@@ -90,22 +91,27 @@ public class KeyBinds {
                 }
             }
         }
+
+        if(bindsComboBox.getItemCount() == 0) {
+            button_change.setEnabled(false);
+        }
     }
 
     private class KeyBindsListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String message = bindsComboBox.getItemAt(bindsComboBox.getSelectedIndex());
-            String gizmoID = message.substring(message.indexOf("[") + 1, message.indexOf("]"));
-            String key = message.substring(message.indexOf("'") + 1, message.length()-1);
-            System.out.println("gizmoID=" + gizmoID);
-            System.out.println("key=" + key);
 
-            model.getGizmoByID(gizmoID).removeKeyConnection();
 
             switch (e.getActionCommand()) {
                 case "Change":
+                    String message = bindsComboBox.getItemAt(bindsComboBox.getSelectedIndex());
+                    String gizmoID = message.substring(message.indexOf("[") + 1, message.indexOf("]"));
+                    String key = message.substring(message.indexOf("'") + 1, message.length()-1);
+                    System.out.println("gizmoID=" + gizmoID);
+                    System.out.println("key=" + key);
+
+                    model.getGizmoByID(gizmoID).removeKeyConnection();
                     SelectKeyPopup selectKeyPopup = new SelectKeyPopup(model, model.getGizmoByID(gizmoID));
                 case "Close":
                     frame.setVisible(false);
