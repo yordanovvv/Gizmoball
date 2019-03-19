@@ -74,6 +74,6 @@ public abstract class iModel extends Observable {
 
     public abstract boolean removeConnection(iGizmo gizmo, String id);
 
-    public abstract void keyConnectGizmo(String id, String key);
+    public abstract boolean keyConnectGizmo(String id, String key);
 
 }

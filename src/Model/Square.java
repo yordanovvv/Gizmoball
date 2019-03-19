@@ -117,8 +117,9 @@ public class Square implements iGizmo {
 
     @Override
     public void setGizmoConnection(String id) {
-
-        gizmoConnections.add(id);
+        if(!gizmoConnections.contains(id)) {
+            gizmoConnections.add(id);
+        }
     }
 
     @Override

@@ -49,7 +49,7 @@ public class UpdateBallPopup {
         pop_upFrame = new JFrame();
         pop_upFrame.setLayout(new BorderLayout());
         pop_upFrame.setPreferredSize(new Dimension(400,200));
-        pop_upFrame.setTitle("Add a Ball.");
+        pop_upFrame.setTitle("Ball Settings");
 
 
         pop_upFrame.setBackground(bg_color);
