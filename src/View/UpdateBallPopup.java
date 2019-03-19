@@ -113,6 +113,7 @@ public class UpdateBallPopup {
 
         if (m.getBalls().size() == 0){
             button_done.setEnabled(false);
+            button_delete.setEnabled(false);
         }
 
         pop_upFrame.add(buttonContainer, BorderLayout.PAGE_END);

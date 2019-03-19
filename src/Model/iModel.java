@@ -67,7 +67,7 @@ public abstract class iModel extends Observable {
         displayID = display;
     }
 
-    public abstract void setSpaces(int gridX, int gridY, boolean val, iGizmo g);
+    public abstract void setSpaces(int gridX, int gridY, boolean val, iGizmo g, Ball b);
 
 
 

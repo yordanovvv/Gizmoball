@@ -192,23 +192,20 @@ public class GridClickListener implements MouseListener {
                 case "rotate":
                     for (iGizmo g : m.getGizmos()) {
                         if(g.getGizmoType() == "RightFlipper"){
-                            if ((((RightFlipper)g).getRotatedXCoord() == gridX &&((RightFlipper)g).getRotatedYCoord() == gridY)) {
-                                if(m.checkRotatedFlipperSpace(g.getXCoord(), g.getYCoord(),g)) {
+                            if (((RightFlipper)g).getRotatedXCoord() == gridX &&((RightFlipper)g).getRotatedYCoord() == gridY) {
+                                if(m.checkSpace(g.getXCoord(), g.getYCoord(),g)) {
                                     m.setSpaces(g.getXCoord(), g.getYCoord(), false, g);
                                     ((RightFlipper) g).rotateFlipper();
-                                    m.setiGizmo(g);
                                     m.setSpaces(g.getXCoord(), g.getYCoord(), true, g);
-                                    ((RightFlipper)g).setRotated(false);
-                                    m.setiGizmo(g);
                                 }
                             }
-
                         }else if(g.getGizmoType() == "LeftFlipper"){
                             if (((LeftFlipper)g).getRotatedXCoord() == gridX &&((LeftFlipper)g).getRotatedYCoord() == gridY) {
-                                if(m.checkRotatedFlipperSpace(g.getXCoord(), g.getYCoord(),g)) {
-                                        m.setSpaces(g.getXCoord(), g.getYCoord(), false, g);
-                                        ((LeftFlipper) g).rotateFlipper();
-                                        m.setSpaces(g.getXCoord(), g.getYCoord(), true, g);
+                                if(m.checkSpace(g.getXCoord(), g.getYCoord(),g)) {
+                                    m.setSpaces(g.getXCoord(), g.getYCoord(), false, g);
+                                    //todo null?
+                                    ((LeftFlipper) g).rotateFlipper();
+                                    m.setSpaces(g.getXCoord(), g.getYCoord(), true, g);
                                 }
                             }
                         }else{
