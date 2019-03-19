@@ -2,6 +2,7 @@ package Model;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -78,5 +79,10 @@ public abstract class iModel extends Observable {
     public abstract boolean removeConnection(iGizmo gizmo, String id);
 
     public abstract boolean keyConnectGizmo(String id, String key);
+
+    //--
+
+    public abstract ArrayList<Timer> getActiveTimers();
+    public abstract void updateActiveTimers(Timer t);
 
 }

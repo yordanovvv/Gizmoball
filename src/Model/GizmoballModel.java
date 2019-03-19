@@ -3,11 +3,13 @@ package Model;
 import physics.*;
 
 import javax.sound.sampled.*;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+
 
 
 public class GizmoballModel extends iModel {
@@ -258,11 +260,11 @@ public class GizmoballModel extends iModel {
 
         switch (g.getGizmoType()){
             case "Circle":
-                return spaces[gridX][gridY];
+                return !spaces[gridX][gridY];
             case "Square":
-                return spaces[gridX][gridY];
+                return !spaces[gridX][gridY];
             case "Triangle":
-                return spaces[gridX][gridY];
+                return !spaces[gridX][gridY];
             case "LeftFlipper":
                 boolean  canPlaceLF = false;
                 if (spaces[gridX][gridY] || spaces[gridX][gridY+1] || spaces[gridX+1][gridY+1] || spaces[gridX+1][gridY]){
@@ -877,7 +879,16 @@ public class GizmoballModel extends iModel {
         }
     }
 
+    ArrayList<Timer> activeTimers = new ArrayList<>();
+    //testing
+    public ArrayList<Timer> getActiveTimers(){
+      return activeTimers;
+    }
 
+    public void updateActiveTimers(Timer t) {
+        activeTimers.add(t);
+    }
+    
 
     public boolean removeConnection(iGizmo gizmo, String id){
         return gizmo.removeGizmoConnection(id);

@@ -61,6 +61,12 @@ public class ChangeModeListener implements ActionListener {
                 triggers = triggers + keyStr+ "\n";
             }
 
+            //kill listener timers here
+            for (Timer t : model.getActiveTimers()){
+                t.stop();
+            }
+
+
             view.switchModes(1,triggers);
             model.saveGame((new File("game.giz")));
             view.setGridVisability(false);

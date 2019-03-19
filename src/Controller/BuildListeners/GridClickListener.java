@@ -72,7 +72,7 @@ public class GridClickListener implements MouseListener {
                         }
                     }
                     giz = new GizmoCircle("C" + (bigId+1), gridX, gridY, rad);
-                    if (!m.checkSpace(gridX, gridY, giz)){   //must be !checkspace bc checkspace returns false is free
+                    if (m.checkSpace(gridX, gridY, giz)){   //must be !checkspace bc checkspace returns false is free
                         m.setSpaces(gridX, gridY, true, giz);
                         m.addGizmo(giz);
                     }
@@ -88,7 +88,7 @@ public class GridClickListener implements MouseListener {
                         }
                     }
                     giz = new Square("S" + (bigId+1), gridX, gridY);
-                    if (!m.checkSpace(gridX, gridY, giz)){
+                    if (m.checkSpace(gridX, gridY, giz)){
                         m.setSpaces(gridX, gridY, true, giz);
                         m.addGizmo(giz);
                     }
@@ -104,7 +104,7 @@ public class GridClickListener implements MouseListener {
                         }
                     }
                     giz = new Triangle("T" + (bigId+1), gridX, gridY);
-                    if (!m.checkSpace(gridX, gridY, giz)){
+                    if (m.checkSpace(gridX, gridY, giz)){
                         m.setSpaces(gridX, gridY, true, giz);
                         m.addGizmo(giz);
                     }
@@ -167,7 +167,8 @@ public class GridClickListener implements MouseListener {
                     break;
                 case "move":
                     if(moveGizmo != null) {
-                        if ( m.checkSpace(gridX, gridY, moveGizmo)) {
+                        System.out.println();
+                        if (m.checkSpace(gridX, gridY, moveGizmo)) {
                                 //clear spaces gizmo was at
                                 m.setSpaces(moveGizmo.getXCoord(), moveGizmo.getYCoord(), false, moveGizmo);
                                 //move gizmo
@@ -212,6 +213,7 @@ public class GridClickListener implements MouseListener {
                     for (iGizmo g : m.getGizmos()) {
                         if (g.getXCoord() == gridX && g.getYCoord() == gridY) {
                             moveGizmo = g;
+                            System.out.println("- : " + g.getID());
                         }
                     }
                     break;

@@ -1,13 +1,15 @@
 package Controller.PlayListeners;
 
-import Model.*;
+import Model.Ball;
+import Model.Star;
+import Model.iGizmo;
+import Model.iModel;
 import View.MainFrame;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class PlayModeListener implements ActionListener {
@@ -17,7 +19,6 @@ public class PlayModeListener implements ActionListener {
     String id;
 
     private Timer timer;
-    private Timer statisticsTimer;
     private iModel gModel;
 
     public PlayModeListener(MainFrame mainframe, String id) {
@@ -26,25 +27,18 @@ public class PlayModeListener implements ActionListener {
 
         gModel = mf.getGameBoard().getGizModel();
         timer = new Timer(50, this);
-        statisticsTimer = new Timer(50, this);
-
 
     }
 
     @Override
     public final void actionPerformed(final ActionEvent e) {
 
+        //System.out.println(e.getSource() + " | " + e.getActionCommand());
+        //System.out.println(e.getSource() +" | " + timer);
+
         if (e.getSource() == timer) {
             gModel.moveBall();
-       } else if (e.getSource() == statisticsTimer) {
-
-            //TODO display balls speed ?
-          // double s = gModel.getBallSpeed(Ball b);
-          // String speed = Double.toString(s);
-          // mf.output_Velocity.setText(speed);
-
-
-        } else {
+       }  else {
             //System.out.println(e.getActionCommand());
             ArrayList<Ball> balls = gModel.getBalls();
             ArrayList<iGizmo> stars = gModel.getAllStars();
@@ -58,8 +52,8 @@ public class PlayModeListener implements ActionListener {
                         if(star.isRoating()) star.startStarRotation();
                     }
                     for (Ball b : balls) b.setStopped(false);
-                    timer.restart();
-                    statisticsTimer.start();
+                    timer.start();
+                    mf.getModel().updateActiveTimers(timer);
                     break;
                 case "Pause":
                     //gModel.getRightFlipListener().setIsStopped(true);
@@ -68,7 +62,6 @@ public class PlayModeListener implements ActionListener {
                         star.setTick(false);
                         star.stopRotation();
                     }
-
                     for (Ball b : balls) b.setStopped(true);
                     timer.stop();
                     break;
@@ -109,5 +102,6 @@ public class PlayModeListener implements ActionListener {
             mf.setFocusable(true);
             mf.requestFocus();
         }
+
     }
 }

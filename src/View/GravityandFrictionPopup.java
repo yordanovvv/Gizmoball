@@ -3,9 +3,12 @@ package View;
 import Model.Ball;
 import Model.iGizmo;
 import Model.iModel;
+import physics.Vect;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class GravityandFrictionPopup {
@@ -23,11 +26,21 @@ public class GravityandFrictionPopup {
     private JButton button_cancel;
 
     private iModel model;
+    //-
+    JLabel label_comboBall;
+    private JComboBox<String> combo_ball;
+    private ArrayList<Ball> balls;
 
 
     public GravityandFrictionPopup(iModel m) {
         this.model = m;
         model.setDisplayID(true);
+
+        combo_ball = new JComboBox<>();
+        balls = m.getBalls();
+        for (Ball b : balls){
+            combo_ball.addItem("Ball " + b.getID());
+        }
 
 
         Utils utils = new Utils();
@@ -55,11 +68,19 @@ public class GravityandFrictionPopup {
         container.setLayout(new GridLayout(0,2,10,10));
         container.setBackground(bg_color);
 
-       gravityLabel = new JLabel("Set gravity value : ");
+        label_comboBall = new JLabel("Select Ball :");
+        label_comboBall = utils.editLabel(label_comboBall,12,Color.WHITE);
+
+
+        gravityLabel = new JLabel("Set gravity value : ");
        gravityLabel = utils.editLabel(gravityLabel,12,Color.WHITE);
 
        frictionLabel = new JLabel("Set friction value : ");
        frictionLabel = utils.editLabel(frictionLabel,12,Color.WHITE);
+
+
+        container.add(label_comboBall);
+        container.add(combo_ball);
 
 
         //need to make sliders now, initially set to 5?
@@ -72,6 +93,7 @@ public class GravityandFrictionPopup {
      gravitySlider.setPaintLabels(true);
       gravitySlider.setMajorTickSpacing(10);
        gravitySlider.setMinorTickSpacing(5);
+
 
         container.add(gravityLabel);
         container.add(gravitySlider);
@@ -97,6 +119,9 @@ public class GravityandFrictionPopup {
 
         //TODO action listeners for done and cancel
 
+        button_done.addActionListener(new GravityandFrictionPopup.tempActionListener());
+        button_cancel.addActionListener(new GravityandFrictionPopup.tempActionListener());
+
         buttonContainer.add(button_done);
         buttonContainer.add(button_cancel);
 
@@ -106,6 +131,24 @@ public class GravityandFrictionPopup {
         frame.setVisible(true);
         frame.pack();
 
+    }
+
+    class tempActionListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getActionCommand().equals("Done")){
+                System.out.println("updating stuff");
+
+                Ball selectedBall = balls.get(combo_ball.getSelectedIndex());
+                selectedBall.setGravity(gravitySlider.getValue());
+                selectedBall.setFriction(0.025, frictionSlider.getValue());
+
+            }
+            frame.setVisible(false);
+            frame.dispose();
+
+        }
     }
 
 }

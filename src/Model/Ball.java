@@ -139,11 +139,16 @@ public class Ball extends Observable {
 
         this.setVelo(this.getVelo().plus(grav));
 
-        // double x = velocity.x();// + g; gravity only acts in the y direction
+       // double x = velocity.x();// + g; gravity only acts in the y direction
         //double y = velocity.y()+g;
 
         // velocity = new Vect(x,y);
         //return velocity;
+    }
+
+    public void setGravity(double grav){
+        Vect g = new Vect (0, grav);
+        this.setVelo(this.getVelo().plus(g));
     }
 
     public double calculateSpeed(double time)

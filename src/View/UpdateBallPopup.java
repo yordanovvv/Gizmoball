@@ -131,19 +131,20 @@ public class UpdateBallPopup {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            try {
-                xVelo = Double.parseDouble(xVelocity.getText());
-                yVelo = Double.parseDouble(yVelocity.getText());
+            if (e.getActionCommand().equals("Done")) {
+                try {
+                    xVelo = Double.parseDouble(xVelocity.getText());
+                    yVelo = Double.parseDouble(yVelocity.getText());
 
-                Ball selectedBall = balls.get(combo_ball.getSelectedIndex());
-                selectedBall.setVelo(new Vect(xVelo, yVelo));
-            } catch (NumberFormatException nfe){
-                System.out.println("Must enter text, cancelling addition");
-                pop_upFrame.setVisible(false);
-                pop_upFrame.dispose();
-                return;
+                    Ball selectedBall = balls.get(combo_ball.getSelectedIndex());
+                    selectedBall.setVelo(new Vect(xVelo, yVelo));
+                } catch (NumberFormatException nfe) {
+                    System.out.println("Must enter text, cancelling addition");
+                    pop_upFrame.setVisible(false);
+                    pop_upFrame.dispose();
+                    return;
+                }
             }
-
             //selectedball
 
             pop_upFrame.setVisible(false);
