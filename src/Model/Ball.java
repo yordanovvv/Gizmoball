@@ -16,7 +16,6 @@ public class Ball extends Observable {
     private boolean stopped;
     private double constant = 30;
     private double speed;
-    private double friction;
 
 
     //fixed size. so size 1 for pixel
@@ -92,15 +91,9 @@ public class Ball extends Observable {
     {
         double delta_t = 0.05;
         Vect Vnew  = this.getVelo().times(1 - (mu1 * delta_t) - (mu2 * abs(this.getVelo().length()) * delta_t/30));
-        friction = Vnew.length();
         this.setVelo(Vnew);
     }
 
-
-    public double getFriction()
-    {
-        return friction;
-    }
 
     public void applyGravity(double gravity, double time)
     {
@@ -115,10 +108,6 @@ public class Ball extends Observable {
         Vect velocity = this.getVelo();
         double x = velocity.x();
         double y = velocity.y();
-
-        //speed = sqrt(x*x + y*y)/timeInSecs;
-        //speed = velocity.length()/30;
-
         speed = velocity.length()/timeInSecs;
         return speed;
     }
