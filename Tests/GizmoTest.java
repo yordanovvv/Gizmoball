@@ -38,7 +38,7 @@ public class GizmoTest {
     @Before
     public void createBoard() {
         model = new GizmoballModel();
-        circle = new GizmoCircle("C1", 3, 5, 2);
+        circle = new GizmoCircle("C1", 3, 5);
         triangle = new Triangle("T1", 4, 7);
         square = new Square("S1", 20, 9);
         rightFlipper = new RightFlipper("RF1", 8, 10);
@@ -188,7 +188,7 @@ public class GizmoTest {
 
     @Test
     public void getGizmoByID() {
-        iGizmo circle2 = new GizmoCircle("C2", 4, 9, 2);
+        iGizmo circle2 = new GizmoCircle("C2", 4, 9);
         model.addGizmo(circle2);
         assertEquals(model.getGizmoByID("C2"), circle2);
         assertNull(model.getGizmoByID("C10"));
@@ -241,7 +241,7 @@ public class GizmoTest {
     @Test
     public void setiGizmo() {
 
-        iGizmo circle3 = new GizmoCircle("C1", 3, 5, 2);
+        iGizmo circle3 = new GizmoCircle("C1", 3, 5);
 
         assertEquals(circle3.getID(), circle.getID());
         model.setiGizmo(circle3);
@@ -251,7 +251,7 @@ public class GizmoTest {
     @Test
     public void removeConnetions() {
 
-        iGizmo circle5 = new GizmoCircle("C5", 3, 4, 2);
+        iGizmo circle5 = new GizmoCircle("C5", 3, 4);
         iGizmo square5 = new Square("S5", 6, 7);
 
         model.addGizmo(circle5);
@@ -283,9 +283,9 @@ public class GizmoTest {
         m.addBall(test1);
 
 
-        iGizmo c1 = new GizmoCircle("C1", 2, 0, 2);
-        iGizmo c2 = new GizmoCircle("c2", 2, 1, 2);
-        iGizmo c3 = new GizmoCircle("c3", 2, 2, 2);
+        iGizmo c1 = new GizmoCircle("C1", 2, 0);
+        iGizmo c2 = new GizmoCircle("c2", 2, 1);
+        iGizmo c3 = new GizmoCircle("c3", 2, 2);
         iGizmo s1 = new Square("s1", 0, 2);
         iGizmo t1 = new Triangle("t1", 1, 2);
         m.addGizmo(c1);
@@ -422,7 +422,7 @@ public class GizmoTest {
     @Test
     public void setSpaces_circle() {
         GizmoballModel m = new GizmoballModel();
-        m.setSpaces(4, 4, true, new GizmoCircle("test", 4, 4, 15));
+        m.setSpaces(4, 4, true, new GizmoCircle("test", 4, 4));
 
         boolean[][] testSpaces = new boolean[20][20];
         for (int i = 0; i < 20; i++) {
@@ -558,7 +558,7 @@ public class GizmoTest {
     @Test
     public void checkSpaces_circle() {
         iModel m = new GizmoballModel();
-        GizmoCircle s = new GizmoCircle("test1", 5, 4, 15);
+        GizmoCircle s = new GizmoCircle("test1", 5, 4);
         assertTrue(m.checkSpace(5, 4, s));
         m.setSpaces(5, 4, true, s);
         assertFalse(m.checkSpace(5, 4, s));

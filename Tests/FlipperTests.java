@@ -14,7 +14,7 @@ public class FlipperTests {
     {
         LeftFlipper lf = new LeftFlipper("LF", 3, 3);
         RightFlipper rf = new RightFlipper("rf", 7, 7);
-        GizmoCircle c = new GizmoCircle("C",19, 19, 5);
+        GizmoCircle c = new GizmoCircle("C",19, 19);
 
         lf.setHit(true);
         assertTrue(lf.getHit());
