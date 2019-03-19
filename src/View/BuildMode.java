@@ -140,7 +140,7 @@ public class BuildMode extends JPanel{
         button_clear = utils.addImgToBtn("clearAll.png",button_clear,Color.WHITE);
         button_move = utils.addImgToBtn("move.png",button_move,Color.WHITE);
         button_keypressConnect = utils.addImgToBtn("keypress.png", button_keypressConnect, Color.WHITE);
-        button_changeBallVelo = utils.addImgToBtn("ballvelochange.png", button_changeBallVelo, Color.WHITE);
+        button_changeBallVelo = utils.addImgToBtn("speed.png", button_changeBallVelo, Color.WHITE);
         button_changeFrictionandGravity = utils.addImgToBtn("gravityFriction.png",button_changeFrictionandGravity, Color.WHITE);
 
         controlsPanel.add(label_controls,BorderLayout.PAGE_START);

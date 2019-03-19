@@ -124,15 +124,15 @@ public class GizmoballModel extends iModel {
                     {
                         ball = moveBallForTime(ball, moveTime);
                     }else if(starCollision){
-                       // ((Star) star).stopRotation();
-                        //star.rotate();
-                     //   moveStarForTime((Star)star,tuc);
                         System.out.println("--> star collided with ball ");
                         ball = moveBallForTime(ball, tuc);
                         ball.setVelo(cd.getVelo());
                         ball.calculateSpeed(tuc);
-                        if(((Star)star).isRoating())
-                            ((Star)star).startStarRotation();
+
+                      //  moveStarForTime((Star)star,tuc);
+
+                      /* if(!((Star) star).isRoating())
+                            ((Star) star).startStarRotation();*/
 
                     }
                    /* else if(starCollision == true && starShotOut == ){
@@ -218,8 +218,9 @@ public class GizmoballModel extends iModel {
 
 
      public Star moveStarForTime(Star s, double time){
-        s.stopRotation();
-        s.spinStarForTime(time);
+        double tuc = time*30*50;
+         System.out.println("tuc " +tuc);
+         s.spinStarForTime(tuc);
         return s;
     }
 
@@ -398,22 +399,19 @@ public class GizmoballModel extends iModel {
                 newVelo = Geometry.reflectWall(ls, ball.getVelo(), 1.0);
             }
         }
-        //iterating through  gizmos
-        // (i.e. lines and circles that gizmos are composed of) to find tuc
+
         for (iGizmo gizmo : gizmos) {
             ArrayList<LineSegment> lineSegs = gizmo.getLines();
             ArrayList<Circle> circls = gizmo.getCircles();
 
-            double star_rotation_degree =(18*5);
-            double time_passed = 5;
+            double star_rotation_degree =(18*5)+5;
+            double time_passed = 0.05;
             if(starShotOut){
                 star_rotation_degree=18*20;
             }
 
             if (lineSegs.size() > 0) {
                 for (LineSegment ls : lineSegs) {
-
-
                     if (gizmo.getGizmoType().equals("RightFlipper") && gizmo.getRotationAngle() != 0 && gizmo.getRotationAngle() != 90) {
                         absorberCollision = false;
 
@@ -433,7 +431,7 @@ public class GizmoballModel extends iModel {
                     }
                     else if (gizmo.getGizmoType().equals("Star")) {
                              Star current_star = (Star) gizmo;
-                              boolean collision = false;
+                            // current_star.stopRotation();
                              double angular_velocity = Math.toRadians(star_rotation_degree) * time_passed;
                              double time = Geometry.timeUntilRotatingWallCollision(
                                     ls,
@@ -441,8 +439,6 @@ public class GizmoballModel extends iModel {
                                     angular_velocity,
                                     ballCircle,
                                     ballVelocity);
-                         //  double time =  Geometry.timeUntilWallCollision(ls, ballCircle, ballVelocity);
-
                             if (time < shortestTime) {
                                 absorberCollision = false;
                                 starCollision = true;
@@ -450,27 +446,20 @@ public class GizmoballModel extends iModel {
                                 collisionGizmo = gizmo;
                                 shortestTime = time;
                                 this.star = current_star;
-
                                 newVelo = Geometry.reflectRotatingWall(
                                         ls,
                                         current_star.getCenter(),
                                         angular_velocity,
                                         ballCircle,
                                         ballVelocity, 1.0);
-                              //  newVelo = Geometry.reflectWall(ls, ball.getVelo(), 1);
-                                collision = true;
                             }
 
-                            //if (starShotOut != t    ) {
                             for (LineSegment feeder : current_star.getFeederLines()) {
                                 if (ls.equals(feeder)) {
                                     this.starShotOut = true;
                                 }
                             }
-                            // }
 
-                           /* if(!current_star.isRoating() && !collision)
-                                current_star.startStarRotation();*/
                     }
                     else {
                         starCollision = false;
@@ -642,6 +631,7 @@ public class GizmoballModel extends iModel {
         return b.getSpeed();
 
     }
+
     @Override
     public Absorber getAbsorber() {
         return (Absorber) absorber;
@@ -888,61 +878,6 @@ public class GizmoballModel extends iModel {
             }
         }
     }
-
-    /*
-    public boolean[][] getSpaceGrid(){
-        boolean[][] grid = new boolean[20][20];
-
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 20; j++) {
-                grid[i][j] = false;
-            }
-        }
-
-        for (iGizmo gizmo:gizmos) {
-           int x =  gizmo.getXCoord();
-           int y = gizmo.getYCoord();
-           int width = 1;
-           int height = 1;
-           if(gizmo.getGizmoType().equals("Star")){
-               width = 4;
-               height = 4;
-           }else if(gizmo.getGizmoType().equals("RightFlipper")){
-               width= 2;
-               height = 2;
-           }else if(gizmo.getGizmoType().equals("LeftFlipper")){
-               width= 2;
-               height = 2;
-           }
-
-            for (int i = 0; i < height; i++) {
-                for (int j = 0; j < width; j++) {
-                    if(x + i < 20 && y + j<20&& x + i >=0 &&  y + j>=0  ) {
-                        if (gizmo.getGizmoType().equals("RightFlipper")) {
-
-                            grid[x - i][y + j] = true;
-
-                        } else if (gizmo.getGizmoType().equals("LeftFlipper")) {
-                            grid[x + i][y + j] = true;
-
-                        } else if (gizmo.getGizmoType().equals("Star")) {
-                            int w = i, h = j;
-                            if (i > 2) w = -1;
-                            if (j > 2) h = -1;
-                            if (x + w < 20 && y + h < 20 && x + w >= 0 && y + h >= 0) {
-                                grid[x + w][y + h] = true;
-                            }
-                        } else {
-                            grid[x + i][y + j] = true;
-                        }
-                    }
-                }
-            }
-
-        }
-        return grid;
-    }
-    */
 
     //TODO need to decide if player can remove all connections or specific ones
 

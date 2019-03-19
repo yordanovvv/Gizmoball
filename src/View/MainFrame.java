@@ -5,6 +5,7 @@ import Model.iModel;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,7 +28,7 @@ public class MainFrame extends JFrame implements iMainFrame, Observer, ActionLis
     private JPanel gamestateBoard;
 
     private JPanel gameContainer;
-    //private JPanel gameBoard;
+    private JPanel gameSpacer;
 
     private GameBoard gameBoard;
 
@@ -118,14 +119,23 @@ public class MainFrame extends JFrame implements iMainFrame, Observer, ActionLis
         //                     GAME BOX
 
         gameContainer = new JPanel();
+        gameSpacer = new JPanel();
+
+        int gap = 20;
+        gameSpacer.setBackground(new Color(0, 11, 19, 255));
+        gameSpacer.setBorder(new EmptyBorder(gap, gap, gap, gap));
 
         BorderLayout layout_gameContainer = new BorderLayout();
         gameContainer.setLayout(layout_gameContainer);
-        int size = 700;
-        gameContainer.setPreferredSize(new Dimension(size, size));
-        gameContainer.setMaximumSize(new Dimension(size,size));
-        gameContainer.setMinimumSize(new Dimension(size,size));
+        gameContainer.setMaximumSize(new Dimension(700,700));
+
+        int size = 600;
         gameBoard = new GameBoard("BUILD",model);
+        gameBoard.setPreferredSize(new Dimension(size, size));
+        gameBoard.setMaximumSize(new Dimension(size,size));
+        gameBoard.setMinimumSize(new Dimension(size,size));
+
+        gameSpacer.add(gameBoard);
 
         physicsBoard = new JPanel();
 
@@ -182,7 +192,7 @@ public class MainFrame extends JFrame implements iMainFrame, Observer, ActionLis
         //--------------------------------------------------------
         //                    gameContainer
 
-        gameContainer.add(gameBoard, BorderLayout.CENTER);
+        gameContainer.add(gameSpacer, BorderLayout.CENTER);
         gameContainer.add(physicsBoard, BorderLayout.PAGE_END);
 
 
@@ -251,16 +261,16 @@ public class MainFrame extends JFrame implements iMainFrame, Observer, ActionLis
             gamestateBoard = new PlayMode(this);
             componentBoard.add(gamestateBoard, BorderLayout.CENTER);
 
-            gameContainer.remove(gameBoard);
+            gameSpacer.remove(gameBoard);
             gameBoard = new GameBoard("PLAY",model);
-            gameContainer.add(gameBoard, BorderLayout.CENTER);
+            gameSpacer.add(gameBoard, BorderLayout.CENTER);
 
         } else {
             label_sameState.setText("  BUILD STATE");
             button_switchState.setActionCommand("BUILD");
-            gameContainer.remove(gameBoard);
+            gameSpacer.remove(gameBoard);
             gameBoard = new GameBoard("BUILD",model);
-            gameContainer.add(gameBoard, BorderLayout.CENTER);
+            gameSpacer.add(gameBoard, BorderLayout.CENTER);
 
             componentBoard.remove(gamestateBoard);
             gamestateBoard = new BuildMode(this);
