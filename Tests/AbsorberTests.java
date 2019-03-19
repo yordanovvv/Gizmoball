@@ -3,6 +3,8 @@ import Model.Ball;
 import Model.GizmoCircle;
 import org.junit.Test;
 
+import java.awt.*;
+
 import static org.junit.Assert.*;
 
 public class AbsorberTests {
@@ -14,7 +16,7 @@ public class AbsorberTests {
         a.addBall(b);
         assertEquals(1, a.getBalls().size(), 0);
         a.activateAbsorber();
-        assertEquals(-1000, b.getVelo().y(), 1);
+        assertEquals(-1275, b.getVelo().y(), 1);
         assertEquals(0, a.getBalls().size(), 0);
     }
 
@@ -48,5 +50,14 @@ public class AbsorberTests {
         a.rotate();
         a.setYCoord(6);
         assertEquals(6, a.getYCoord());
+
+        a.setXcoord2(7);
+        assertEquals(7, a.getXCoord2());
+        a.rotate();
+        a.setYCoord2(7);
+        assertEquals(7, a.getYCoord2());
+
+        assertEquals(new Color(170, 71, 144, 255), a.getColor());
+        assertEquals("Absorber a1 5 6 7 7", a.toString());
     }
 }

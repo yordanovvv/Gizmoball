@@ -1,4 +1,4 @@
-Ball B0 8 1 0 0
+Ball B0 0 11 0 0
 Absorber A1 0 17 20 20
 Square S1 0 0
 Square S2 1 0
@@ -69,5 +69,3 @@ Circle C15 0 14
 Circle C16 5 12
 Circle C17 3 11
 Circle C18 17 4
-KeyConnect key 51 up RF1
-KeyConnect key 51 down RF1

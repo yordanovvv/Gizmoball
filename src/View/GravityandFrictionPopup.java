@@ -137,7 +137,7 @@ public class GravityandFrictionPopup {
 
                 Ball selectedBall = balls.get(combo_ball.getSelectedIndex());
                 selectedBall.applyGravity(gravitySlider.getValue(), 0.05);
-                selectedBall.setFriction(0.025, frictionSlider.getValue());
+                model.setFriction(0.025, frictionSlider.getValue()/100);
 
             }
             frame.setVisible(false);

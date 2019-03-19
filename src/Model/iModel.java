@@ -88,4 +88,6 @@ public abstract class iModel extends Observable {
     public abstract ArrayList<Timer> getActiveTimers();
     public abstract void updateActiveTimers(Timer t);
 
+    public abstract void setFriction(double mu1, double mu2);
+    public abstract void setGravity(double g);
 }
