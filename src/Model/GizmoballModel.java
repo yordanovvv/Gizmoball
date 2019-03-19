@@ -747,20 +747,30 @@ public class GizmoballModel extends iModel {
             }
 
             //key connections
-            for(iGizmo gizmo : gizmos) {
+            /*for(iGizmo gizmo : gizmos) {
                 if(gizmo.getKeyConnections() != null & gizmo.getKeyConnections().size() > 0) {
                     for(String key : gizmo.getKeyConnections()) {
-                        if(keyOrientation.get(key)!=null){
+                       // if(keyOrientation.get(key)!=null){
                             if(keyOrientation.get(key).equalsIgnoreCase("Both")) {
                                 fileWriter.write("KeyConnect key " + key + " up " + gizmo.getID() + "\n");
                                 fileWriter.write("KeyConnect key " + key + " down " + gizmo.getID() + "\n");
                             }else{
                                 fileWriter.write("KeyConnect key " + key +  keyOrientation.get(key) + gizmo.getID() + "\n");
                             }
-                        }
+                       // }
                     }
                 }
+            }*/
+
+            for(iGizmo key : keyTriggers.keySet()) {
+                if(keyOrientation.get(key).equalsIgnoreCase("Both")) {
+                    fileWriter.write("KeyConnect key " + KeyEvent.getExtendedKeyCodeForChar( keyTriggers.get(key)) + " up " + key.getID() + "\n");
+                    fileWriter.write("KeyConnect key " + KeyEvent.getExtendedKeyCodeForChar( keyTriggers.get(key))  + " down " + key.getID() + "\n");
+                }else{
+                    fileWriter.write("KeyConnect key " + KeyEvent.getExtendedKeyCodeForChar( keyTriggers.get(key)) + " " +  keyOrientation.get(key) +  " " +  key.getID() + "\n");
+                }
             }
+
             fileWriter.flush();
 
             fileWriter.close();
