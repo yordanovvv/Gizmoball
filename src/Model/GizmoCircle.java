@@ -22,11 +22,11 @@ public class GizmoCircle implements iGizmo {
     private boolean hit;
 
 
-    public GizmoCircle(String id, int XCoord, int YCoord, double radius){
+    public GizmoCircle(String id, int XCoord, int YCoord){
         this.ID=id;
         this.XCoord=XCoord;
         this.YCoord=YCoord;
-        this.radius=radius;
+        this.radius=0.5;
         this.hit = false;
 
         gizmoConnections = new ArrayList<>();
@@ -182,6 +182,6 @@ public class GizmoCircle implements iGizmo {
 
     @Override
     public String toString() {
-        return getGizmoType() + " " + getID() + " " + getXCoord() + " " + getYCoord() + " " + radius;
+        return getGizmoType() + " " + getID() + " " + getXCoord() + " " + getYCoord();
     }
 }

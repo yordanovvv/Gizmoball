@@ -698,7 +698,7 @@ public class GizmoballModel extends iModel {
                     case "Circle":
                         gizXCoord = Integer.parseInt(inputStream[2]);
                         gizYCoord = Integer.parseInt(inputStream[3]);
-                        GizmoCircle circle = new GizmoCircle(inputStream[1], gizXCoord, gizYCoord, Double.parseDouble(inputStream[4]));
+                        GizmoCircle circle = new GizmoCircle(inputStream[1], gizXCoord, gizYCoord);
                         gizmos.add(circle);
                         setSpaces(gizXCoord, gizYCoord, true, circle);
                         break;
