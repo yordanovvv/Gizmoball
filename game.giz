@@ -31,12 +31,12 @@ Square S13 15 6
 Square S14 14 6
 Square S15 6 6
 RightFlipper RF1 13 6
-Circle C1 7 9 0.5
-Circle C2 8 10 0.5
-Circle C3 13 9 0.5
-Circle C4 12 10 0.5
-Circle C5 11 11 0.5
-Circle C6 9 11 0.5
+Circle C1 7 9
+Circle C2 8 10
+Circle C3 13 9
+Circle C4 12 10
+Circle C5 11 11
+Circle C6 9 11
 Triangle T7 7 2
 Rotate T7
 Rotate T7
@@ -57,17 +57,17 @@ Rotate T12
 Triangle T13 6 3
 Triangle T14 6 2
 Rotate T14
-Circle C7 2 4 0.5
-Circle C8 3 1 0.5
-Circle C9 17 10 0.5
-Circle C10 16 13 0.5
-Circle C11 5 15 0.5
-Circle C12 0 9 0.5
-Circle C13 4 9 0.5
-Circle C14 10 13 0.5
-Circle C15 0 14 0.5
-Circle C16 5 12 0.5
-Circle C17 3 11 0.5
-Circle C18 17 4 0.5
+Circle C7 2 4
+Circle C8 3 1
+Circle C9 17 10
+Circle C10 16 13
+Circle C11 5 15
+Circle C12 0 9
+Circle C13 4 9
+Circle C14 10 13
+Circle C15 0 14
+Circle C16 5 12
+Circle C17 3 11
+Circle C18 17 4
 KeyConnect key 3 up RF1
 KeyConnect key 3 down RF1
