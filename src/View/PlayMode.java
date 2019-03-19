@@ -26,8 +26,9 @@ public class PlayMode extends JPanel {
     private JPanel statsPanel;
         JLabel label_stats;
         JScrollPane area_stats;
+        JTextArea container;
 
-        private MainFrame mainFrame;
+    private MainFrame mainFrame;
 
     public PlayMode(MainFrame mainFrame){
        // Color bg_color = new Color(241, 241, 255, 162);
@@ -137,11 +138,14 @@ public class PlayMode extends JPanel {
         statsPanel.setPreferredSize(new Dimension(200,200));
         statsPanel.setMaximumSize(new Dimension(200,200));
 
-        JTextArea container = new JTextArea(
+         container = new JTextArea(
                 "No triggers available");
+
         label_stats = new JLabel("Triggers");
         label_stats = utils.editLabel(label_stats,15,Color.WHITE);
         container.setLineWrap(true);
+        container.setEditable(false);
+        container.setWrapStyleWord(true);
         area_stats = new JScrollPane(container);
         area_stats.setBorder(BorderFactory.createLineBorder(Color.BLACK,1,true));
 
@@ -153,4 +157,12 @@ public class PlayMode extends JPanel {
         statsPanel.setBorder( BorderFactory.createEmptyBorder(10, 10, 10, 10));
         this.add(statsPanel);
     }
+
+    public void editTriggerArea(String content){
+
+        if(content.length()>0) {
+            container.setText(content);
+        }
+    }
+
 }

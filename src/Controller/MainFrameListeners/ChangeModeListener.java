@@ -25,7 +25,7 @@ public class ChangeModeListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("PLAY")){
-            view.switchModes(2);
+            view.switchModes(2,"");
             ArrayList<Ball> balls = model.getBalls();
             for(Ball b : balls) b.setStopped(true);
             for (iGizmo giz:model.getGizmos()) {
@@ -36,11 +36,30 @@ public class ChangeModeListener implements ActionListener {
             }
             view.setGridVisability(true);
             model.setDisplayID(true);
-        }else {
-            view.switchModes(1);
+
+        }else {   String triggers = "";
+            String triggerSet = "";
+            for (iGizmo giz:model.getGizmos()) {
+                if(giz.getGizmoConnections().size()!=0){
+                    triggerSet = giz.getID() + "-->";
+                    int i  = 0;
+                    for (String trigger:giz.getGizmoConnections()) {
+                        triggerSet = triggerSet + " " + trigger;
+                        if( i < giz.getGizmoConnections().size()-1){
+                            triggerSet = triggerSet + " , ";
+                        }
+                        i++;
+                    }
+                    triggers = triggers + triggerSet + "\n";
+                }
+            }
+            view.switchModes(1,triggers);
             model.saveGame((new File("game.giz")));
             view.setGridVisability(false);
             model.setDisplayID(false);
+
+
+
         }
     }
 }
