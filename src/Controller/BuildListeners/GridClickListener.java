@@ -18,7 +18,6 @@ public class GridClickListener implements MouseListener {
 
     int gridX;
     int gridY;
-    double rad = 0.5 ;
 
     iModel m;
 
@@ -71,7 +70,7 @@ public class GridClickListener implements MouseListener {
                             }
                         }
                     }
-                    giz = new GizmoCircle("C" + (bigId+1), gridX, gridY, rad);
+                    giz = new GizmoCircle("C" + (bigId+1), gridX, gridY);
                     if (m.checkSpace(gridX, gridY, giz)){   //must be !checkspace bc checkspace returns false is free
                         m.setSpaces(gridX, gridY, true, giz);
                         m.addGizmo(giz);
