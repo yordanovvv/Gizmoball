@@ -18,7 +18,7 @@ public class LeftFlipper implements iGizmo {
     private ArrayList<String> keyConnections;
     private int rotationCount;
     private final double constant = 30;
-
+    private int rotationDegree = 0;
     private int rotationAngle = 0;
     private boolean down = false, hit;
 
@@ -40,6 +40,28 @@ public class LeftFlipper implements iGizmo {
 
         generateCircles();
         generateLines();
+    }
+
+    public int getFlipperRotationDegree(){
+        return rotationDegree;
+    }
+
+    public void rotateFlipper(){
+        int  rotationDegree = 90;
+        Circle  center = circles.get(0);
+        for (int i = 0; i < lines.size(); i++) {
+            Angle rotation = new Angle(Math.toRadians(rotationDegree));
+            LineSegment currentLine = lines.get(i);
+            lines.set(i,Geometry.rotateAround(currentLine, center.getCenter(),rotation));
+        }
+
+        for (int i = 0; i < circles.size(); i++) {
+            Angle rotation = new Angle(Math.toRadians(rotationDegree));
+            Circle currentCircle = circles.get(i);
+            circles.set(i, Geometry.rotateAround(currentCircle,center.getCenter(),rotation));
+        }
+        if(this.rotationDegree==360)this.rotationDegree=0;
+        this.rotationDegree+=90;
     }
 
     @Override

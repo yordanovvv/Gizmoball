@@ -195,6 +195,10 @@ public class GridClickListener implements MouseListener {
                         if (g.getXCoord() == gridX && g.getYCoord() == gridY) {
                             if (g.getGizmoType() == "Triangle") {
                                 g.rotate();
+                            }else if(g.getGizmoType() == "RightFlipper"){
+                                ((RightFlipper)g).rotateFlipper();
+                            }else if(g.getGizmoType() == "LeftFlipper"){
+                                ((LeftFlipper)g).rotateFlipper();
                             }
                         }
                     }
