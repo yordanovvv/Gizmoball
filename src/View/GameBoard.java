@@ -83,14 +83,6 @@ public class GameBoard extends JPanel implements Observer{
         }
 
 
-       Wall w = m.getWalls();
-        w.getXCoord();
-        g.setColor(Color.MAGENTA);
-        g.drawLine(w.getXCoord()*30,w.getYCoord()*30,w.getXCoord2()*30,w.getYCoord()*30);
-        g.drawLine(w.getXCoord()*30,w.getYCoord()*30,w.getXCoord()*30,w.getYCoord2()*30);
-        g.drawLine(w.getXCoord2()*30,w.getYCoord2()*30,w.getXCoord2()*30,w.getYCoord()*30);
-        g.drawLine(w.getXCoord2()*30,w.getYCoord2()*30,w.getXCoord()*30,w.getYCoord2()*30);
-
         Graphics2D g2 = (Graphics2D) g;
         int x , y;
         Color c;
@@ -139,6 +131,14 @@ public class GameBoard extends JPanel implements Observer{
            int width = (int) (2 * b.getRadius());
            paintBall(g,p, q, width);
        }
+
+       Wall w = m.getWalls();
+       w.getXCoord();
+       g.setColor(new Color(0, 246, 255, 255));
+       g.drawLine(w.getXCoord()*30,w.getYCoord()*30,w.getXCoord2()*30,w.getYCoord()*30);
+       g.drawLine(w.getXCoord()*30,w.getYCoord()*30,w.getXCoord()*30,w.getYCoord2()*30);
+       g.drawLine(w.getXCoord2()*30,w.getYCoord2()*30,w.getXCoord2()*30,w.getYCoord()*30);
+       g.drawLine(w.getXCoord2()*30,w.getYCoord2()*30,w.getXCoord()*30,w.getYCoord2()*30);
        repaint();
     }
 

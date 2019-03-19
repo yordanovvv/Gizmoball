@@ -53,6 +53,14 @@ public class ChangeModeListener implements ActionListener {
                     triggers = triggers + triggerSet + "\n";
                 }
             }
+
+            triggers = triggers + "\n";
+            String keyStr = "";
+            for(iGizmo key  : model.getKeyTriggers().keySet()){
+                keyStr = key.getID()  + " ---> key " + model.getKeyTriggers().get(key) + "\n";
+                triggers = triggers + keyStr+ "\n";
+            }
+
             view.switchModes(1,triggers);
             model.saveGame((new File("game.giz")));
             view.setGridVisability(false);
