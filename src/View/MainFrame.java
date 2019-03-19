@@ -246,7 +246,7 @@ public class MainFrame extends JFrame implements iMainFrame, Observer, ActionLis
     }
 
     @Override
-    public void switchModes(int mode) {
+    public void switchModes(int mode,String list) {
 
         //Clear all the keylisteners
         for (KeyListener kl : this.getKeyListeners()) {
@@ -255,15 +255,18 @@ public class MainFrame extends JFrame implements iMainFrame, Observer, ActionLis
 
         this.invalidate();
         if (mode == 1) {
+            PlayMode m = new PlayMode(this);
+            m.editTriggerArea(list);
             label_sameState.setText("   GAME STATE");
             button_switchState.setActionCommand("PLAY");
             componentBoard.remove(gamestateBoard);
-            gamestateBoard = new PlayMode(this);
+            gamestateBoard =m;
             componentBoard.add(gamestateBoard, BorderLayout.CENTER);
 
             gameSpacer.remove(gameBoard);
             gameBoard = new GameBoard("PLAY",model);
             gameSpacer.add(gameBoard, BorderLayout.CENTER);
+
 
         } else {
             label_sameState.setText("  BUILD STATE");
