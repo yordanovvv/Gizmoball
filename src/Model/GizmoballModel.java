@@ -272,13 +272,13 @@ public class GizmoballModel extends iModel {
                 }
                 return !canPlaceLF;
             case "RightFlipper":
-                boolean canPlaceRF = false;
+                boolean canPlaceRF = true;
                 if (spaces[gridX][gridY] || spaces[gridX][gridY+1] || spaces[gridX-1][gridY+1] || spaces[gridX-1][gridY]){
-                    canPlaceRF = true;
+                    canPlaceRF = false;
                 }
                 return !canPlaceRF;
             case "Star":
-                boolean canPlaceStar = false;
+                boolean canPlaceStar = true;
                 if (spaces[gridX][gridY] ||
                         spaces[gridX][gridY+1] ||
                         spaces[gridX][gridY+2] ||
@@ -295,7 +295,7 @@ public class GizmoballModel extends iModel {
                         spaces[gridX][gridY-1] ||
                         spaces[gridX+1][gridY-1] ||
                         spaces[gridX+2][gridY-1]){
-                    canPlaceStar = true;
+                    canPlaceStar = false;
                 }
                 return !canPlaceStar;
             case "Absorber":
@@ -315,7 +315,7 @@ public class GizmoballModel extends iModel {
                         }
                     }
                 }
-                return absPlace;
+                return !absPlace;
         }
         return spaces[gridX][gridY];
     }
