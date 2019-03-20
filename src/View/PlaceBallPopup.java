@@ -125,6 +125,7 @@ public class PlaceBallPopup {
 
             int bigId =0, idNo=0;
             for (Ball b : m.getBalls()) {
+                System.out.println(b.getID());
                     bigId = Integer.parseInt(b.getID().substring(1));
                     System.out.println(bigId);
                     if (idNo > bigId){
