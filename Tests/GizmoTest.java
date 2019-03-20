@@ -2,24 +2,25 @@ import Model.Ball;
 import org.junit.Before;
 
 import java.awt.*;
+import java.io.*;
 import java.util.ArrayList;
 import Model.*;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.junit.rules.TemporaryFolder;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import static java.lang.StrictMath.sqrt;
 import static org.junit.Assert.*;
+
 
 public class GizmoTest {
     private iModel model;
@@ -610,15 +611,28 @@ public class GizmoTest {
         m.getAudio("res/clips/jum.wav");
     }
 
+
+
     @Test
-    public void saveGame() {
+    public void saveGame() throws IOException {
+
+        File tempFile = new File("test.txt");
+
+        FileWriter fileWriter = new FileWriter(tempFile, true);
+
+        BufferedWriter bw = new BufferedWriter(fileWriter);
+
+        fileWriter.write("gravity 0.25");
+
+
+        tempFile.deleteOnExit();
+        assertTrue(tempFile.exists());
+
+
+
 
     }
 
-    @Test
-    public void loadGame() {
-
-    }
 
     @Test
     public void checkConnections() {
