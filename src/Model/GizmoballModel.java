@@ -103,7 +103,6 @@ public class GizmoballModel extends iModel {
                 } else {
                     if (absorberCollision == true && ball.getVelo().y()>0) //collision with an absorber
                     {
-                        //playSound(collisionGizmo);
                         ball = moveBallForTime(ball, tuc + moveTime);
                         absorber.addBall(ball);
 
@@ -123,12 +122,20 @@ public class GizmoballModel extends iModel {
                     {
                         ball = moveBallForTime(ball, moveTime);
                     }else if(starCollision){
-                        System.out.println("--> star collided with ball ");
+
                         ball = moveBallForTime(ball, tuc);
                         ball.setVelo(cd.getVelo());
                         ball.calculateSpeed(tuc);
                     } else { //collision
-
+                        try {
+                            playSound(collisionGizmo);
+                        } catch (UnsupportedAudioFileException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (LineUnavailableException e) {
+                            e.printStackTrace();
+                        }
                         ball = moveBallForTime(ball, tuc); //collision in time tuc
                         ball.setVelo(cd.getVelo());
 
@@ -344,7 +351,6 @@ public class GizmoballModel extends iModel {
         }
 
     }
-
 
     public boolean[][] getSpaces() {
         return spaces;
