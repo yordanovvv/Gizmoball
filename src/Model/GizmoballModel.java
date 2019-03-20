@@ -112,6 +112,7 @@ public class GizmoballModel extends iModel {
                         ball.setStopped(true);
                         ball.setVelo(new Vect(0,0));
                         absorberCollision = false;
+                        checkConnections(collisionGizmo, ball);
                     }
                     else if(absorberCollision == true && ball.getVelo().y()<0) //ball is moving up so ignore absorber line
                     {
@@ -781,6 +782,10 @@ public class GizmoballModel extends iModel {
 
     @Override
     public void addGizmo(iGizmo gizmo) {
+        if(gizmo.getGizmoType().equals("Absorber")){
+            keyTriggers.put(gizmo,'f');
+        }
+
         gizmos.add(gizmo);
     }
 
@@ -865,11 +870,13 @@ public class GizmoballModel extends iModel {
             }*/
 
             for (iGizmo key : keyTriggers.keySet()) {
-                if (keyOrientation.get(key).equalsIgnoreCase("Both")) {
-                    fileWriter.write("KeyConnect key " + KeyEvent.getExtendedKeyCodeForChar(keyTriggers.get(key)) + " up " + key.getID() + "\n");
-                    fileWriter.write("KeyConnect key " + KeyEvent.getExtendedKeyCodeForChar(keyTriggers.get(key)) + " down " + key.getID() + "\n");
-                } else {
-                    fileWriter.write("KeyConnect key " + KeyEvent.getExtendedKeyCodeForChar(keyTriggers.get(key)) + " " + keyOrientation.get(key) + " " + key.getID() + "\n");
+                if(key.getGizmoType().equals("RightFlipper")  || key.getGizmoType().equals("LeftFlipper")) {
+                    if (keyOrientation.get(key).equalsIgnoreCase("Both")) {
+                        fileWriter.write("KeyConnect key " + KeyEvent.getExtendedKeyCodeForChar(keyTriggers.get(key)) + " up " + key.getID() + "\n");
+                        fileWriter.write("KeyConnect key " + KeyEvent.getExtendedKeyCodeForChar(keyTriggers.get(key)) + " down " + key.getID() + "\n");
+                    } else {
+                        fileWriter.write("KeyConnect key " + KeyEvent.getExtendedKeyCodeForChar(keyTriggers.get(key)) + " " + keyOrientation.get(key) + " " + key.getID() + "\n");
+                    }
                 }
             }
             //fileWriter.write("Gravity " +getGravity() + "\n");
@@ -914,6 +921,7 @@ public class GizmoballModel extends iModel {
                         gizYCoord = Integer.parseInt(inputStream[3]);
                         Absorber abs = new Absorber(inputStream[1], gizXCoord, gizYCoord, Integer.parseInt(inputStream[4]), Integer.parseInt(inputStream[5]));
                         gizmos.add(abs);
+                        keyTriggers.put(abs,'f');
                         setSpaces(gizXCoord, gizYCoord, true, abs, null);
                         break;
                     case "Square":
@@ -1107,7 +1115,7 @@ public class GizmoballModel extends iModel {
 
     public void checkKeyConnections(iGizmo gizmo, Ball ball) {
         //only check if key press list isn't empty
-        if (gizmo.getGizmoType().equals("LeftFlipper") || gizmo.getGizmoType().equals("RightFlipper")) {
+        if (gizmo.getGizmoType().equals("LeftFlipper") || gizmo.getGizmoType().equals("RightFlipper") || gizmo.getGizmoType().equals("Absorber") ) {
             if (!keyTriggers.isEmpty()) {
 
                 if(keyTriggers.containsKey(gizmo)) {

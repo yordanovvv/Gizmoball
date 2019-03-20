@@ -54,6 +54,10 @@ public class PlayMode extends JPanel {
         for (iGizmo key:model.getKeyTriggers().keySet()) {//todo fix for both
             if(key.getGizmoType().equals("RightFlipper")|key.getGizmoType().equals("LeftFlipper"))
                 mainFrame.addKeyListener(new FlipperKeyListener(model, model.getKeyTriggers().get(key), key, model.getKeyOrientation().get(key)));
+            if(key.getGizmoType().equals("Absorber")){
+                mainFrame.addKeyListener( new AbsorberKeyListener(key.getID(),
+                        model, 'f', (Absorber) key));
+            }
         }
 
         mainFrame.addKeyListener(absorberListener);

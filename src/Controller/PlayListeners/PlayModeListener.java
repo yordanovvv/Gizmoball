@@ -67,10 +67,6 @@ public class PlayModeListener implements ActionListener {
                 case "Tick":
 
                    for(iGizmo g:stars){
-                        /*Star star = (Star) g;
-                        star.stopRotation();
-                        star.rotate();
-                        star.stopRotation();*/
                        Star star = (Star) g;
                        star.stopRotation();
                        star.setTick(true);
