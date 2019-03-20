@@ -18,6 +18,7 @@ public class Wall{
 
     private LineSegment bottomWall, topWall, leftWall, rightWall;
     ArrayList<LineSegment> walls = new ArrayList<>();
+    ArrayList<String> connections = new ArrayList<>();
 
 
     public Wall(int XCoord, int YCoord, int XCoord2, int YCoord2) {
@@ -61,7 +62,6 @@ public class Wall{
         return YCoord2;
     }
 
-
     public String getGizmoType() {
         return "Wall";
     }
@@ -73,5 +73,12 @@ public class Wall{
     public boolean getHit()
     {
         return hit;
+    }
+
+    public void addConnection(String id){
+        connections.add(id);
+    }
+    public ArrayList<String> getConnections(){
+            return connections;
     }
 }

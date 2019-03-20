@@ -81,6 +81,9 @@ public class ConnectGizmosPopup {
         //get all gizmos on board
         gizmos = model.getGizmos();
 
+        combo_gizmo1.addItem("OuterWalls");
+        combo_gizmo2.addItem("OuterWalls");
+
         //get their id and type, so player can know whats what?
             for (iGizmo g : gizmos) {
                 //combo_gizmo1.addItem("id " + g.getID() + " type " + g.getGizmoType());
@@ -131,23 +134,34 @@ public class ConnectGizmosPopup {
         public void actionPerformed(ActionEvent e) {
             switch(e.getActionCommand()) {
                 case "Done":
-                    iGizmo gizmo1 = gizmos.get(combo_gizmo1.getSelectedIndex());
-                    iGizmo gizmo2 = gizmos.get(combo_gizmo2.getSelectedIndex());
-                    boolean status = model.connectGizmos(gizmo1.getID(), gizmo2.getID());
-                    if(!status) {
-                        JOptionPane.showMessageDialog(null, "There is a problem connecting the selected gizmos. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                    else {
-                        JOptionPane.showMessageDialog(null, "Gizmo " + gizmo1.getID() + " and " + gizmo2.getID() + " connected successfully!");
-
-
-                        if (gizmo1.getID() == gizmo2.getID() && gizmo1.getGizmoType()=="Absorber"){
-                            ((Absorber) gizmo1).activateAbsorber();
-                            System.out.println("absorber connected to self!");
+                    if(combo_gizmo1.getSelectedIndex()==0){
+                        if(combo_gizmo2.getSelectedIndex()==0) {
+                            model.connectGizmos("OuterWalls", "OuterWalls");
+                        }else{
+                            model.connectGizmos("OuterWalls",  gizmos.get(combo_gizmo2.getSelectedIndex()-1).getID());
                         }
+                    }
+                    else if(combo_gizmo2.getSelectedIndex()==0){
+                        if(combo_gizmo1.getSelectedIndex()==0) {
+                            model.connectGizmos("OuterWalls", "OuterWalls");
+                        }else{
+                            model.connectGizmos( gizmos.get(combo_gizmo1.getSelectedIndex()).getID(),"OuterWall");
+                        }
+                    }else {
+                        iGizmo gizmo1 = gizmos.get(combo_gizmo1.getSelectedIndex());
+                        iGizmo gizmo2 = gizmos.get(combo_gizmo2.getSelectedIndex());
+                        boolean status = model.connectGizmos(gizmo1.getID(), gizmo2.getID());
+                        if (!status) {
+                            JOptionPane.showMessageDialog(null, "There is a problem connecting the selected gizmos. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Gizmo " + gizmo1.getID() + " and " + gizmo2.getID() + " connected successfully!");
 
+                            if (gizmo1.getID() == gizmo2.getID() && gizmo1.getGizmoType() == "Absorber") {
+                                ((Absorber) gizmo1).activateAbsorber();
+                                System.out.println("absorber connected to self!");
+                            }
 
-
+                        }
                     }
                     break;
                 case "Cancel":

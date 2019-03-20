@@ -14,6 +14,8 @@ public abstract class iModel extends Observable {
 
     boolean displayID=true;
 
+    public abstract ArrayList<String> getWallConns();
+
     public abstract void setiGizmo(iGizmo gizmo);
 
     public abstract HashMap<iGizmo,Character> getKeyTriggers();
