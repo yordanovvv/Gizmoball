@@ -10,6 +10,6 @@ public class BallTests {
           Ball b = new Ball ("B", 5, 5, 0, 10);
           b.setID("B1");
           assertEquals("B1", b.getID());
-          assertEquals("Ball B1 5 5 0 0", b.toString());
+          assertEquals("Ball B1 5 5 0 10", b.toString());
      }
 }

@@ -885,8 +885,8 @@ public class GizmoballModel extends iModel {
                     fileWriter.write("Connect OuterWalls " +  conn + "\n");
                 }
             }
-            //fileWriter.write("Gravity " +getGravity() + "\n");
-           // fileWriter.write("Friction "+ getFrictionMu1() + " " + getFrictionMu2() + "\n");
+            fileWriter.write("Gravity " +gravity + "\n");
+            fileWriter.write("Friction "+ mu1 + " " + mu2 + "\n");
             fileWriter.flush();
 
             fileWriter.close();
