@@ -29,8 +29,6 @@ public class GameBoard extends JPanel implements Observer{
         init();
     }
 
-    //TODO Check if this is in right place -C
-    //TODO Continue this
     public iModel getGizModel(){
         return m;
     }

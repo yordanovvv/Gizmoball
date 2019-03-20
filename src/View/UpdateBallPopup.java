@@ -55,8 +55,7 @@ public class UpdateBallPopup {
         pop_upFrame.setBackground(bg_color);
 
         JPanel itsMakingMeDoThis = new JPanel(new BorderLayout());
-        itsMakingMeDoThis.setBackground(bg_color); //todo fix the colouring - remove this panel to see issue
-
+        itsMakingMeDoThis.setBackground(bg_color);
         description = new JLabel("Please select the X & Y ball velocity.");
         description = utils.editLabel(description,12,Color.WHITE);
         description.setBackground(bg_color);

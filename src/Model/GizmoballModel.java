@@ -37,7 +37,6 @@ public class GizmoballModel extends iModel {
         keyTriggers = new HashMap<>();
         keyOrientation = new HashMap<>();
 
-        //TODO remove all of this, eventually will be empty board
         balls.add(new Ball("B1", 8, 5,  7.5, 7.5)); //2.5 = 50L/sec if moveTime is 0.05 (20 ticks/sec)
         walls = new Wall(0, 0, 20, 20);
         absorber = new Absorber("A1", 0, 18, 20, 20);
@@ -210,7 +209,7 @@ public class GizmoballModel extends iModel {
 
     //Clears spaces, avoids NullPointer when clearing spaces
     public void wipeSpaces(){
-        this.keyTriggers = new HashMap<>();//todo check
+        this.keyTriggers = new HashMap<>();
         this.gizmos = new ArrayList<>();
         for (int i=0; i<20; i++){
             for (int j=0; j<20; j++){
@@ -476,7 +475,6 @@ public class GizmoballModel extends iModel {
         return canPlaceRF;
     }
 
-    //todo this neeeeeds to be fixed, with regards to movement of gizmos
     public boolean checkSpace(int gridX, int gridY, iGizmo g){
         if(gridX>=20|gridY>=20)return false;
         if (g==null){

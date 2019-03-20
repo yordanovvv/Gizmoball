@@ -56,7 +56,6 @@ public class DisconnectGizmosPopup {
 
         for(iGizmo gizmo : model.getGizmos()) {
             if(gizmo.getGizmoConnections() != null ) {
-                //TODO: Loop through connections and fix text
                 for(String gizmoID : gizmo.getGizmoConnections()) {
                     iGizmo connectionGizmo = model.getGizmoByID(gizmoID);
                     String s1 = gizmo.getGizmoType() + "[" + gizmo.getID() + "]: x = " + gizmo.getXCoord() + "; y = " + gizmo.getYCoord();

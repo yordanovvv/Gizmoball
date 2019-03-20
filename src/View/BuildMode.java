@@ -149,7 +149,6 @@ public class BuildMode extends JPanel{
 
         GridClickListener lis = mainFrame.getGameBoard().getListener();
 
-        //TODO Refactor ADDBUTTONGIZMOLISTENER
         AddButtonGizmoListener ballButListener = new AddButtonGizmoListener("ball", lis);
         AddButtonGizmoListener squareButListener = new AddButtonGizmoListener("square", lis);
         AddButtonGizmoListener circleButListener = new AddButtonGizmoListener("circle", lis);
