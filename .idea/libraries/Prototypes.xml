@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Prototypes">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Prototypes/cs308-gizmo-absorb-prot.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Prototypes/cs308-gizmoball.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Prototypes/cs308-gizmo-flipper-prot.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

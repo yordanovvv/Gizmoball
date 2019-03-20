@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="cs308-gizmo-loadsave-prot">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Prototypes/jars/load-save-prot/cs308-gizmo-loadsave-prot.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

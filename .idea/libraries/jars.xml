@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="jars">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Prototypes/jars/cs308-gizmo-flipper-prot.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Prototypes/jars/cs308-gizmo-absorb-prot-fixed.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

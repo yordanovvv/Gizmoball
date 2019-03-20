@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Prototypes/Absorber Prot SRC/Absorber Prot SRC.iml" filepath="$PROJECT_DIR$/Prototypes/Absorber Prot SRC/Absorber Prot SRC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Prototypes/Absorber Prototype/Absorber Prototype.iml" filepath="$PROJECT_DIR$/Prototypes/Absorber Prototype/Absorber Prototype.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Prototypes/Collision Prot SRC/Collision Prot SRC.iml" filepath="$PROJECT_DIR$/Prototypes/Collision Prot SRC/Collision Prot SRC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Prototypes/Flipper Prot SRC/Flipper Prot SRC.iml" filepath="$PROJECT_DIR$/Prototypes/Flipper Prot SRC/Flipper Prot SRC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cs308-gizmoball.iml" filepath="$PROJECT_DIR$/cs308-gizmoball.iml" />
+    </modules>
+  </component>
+</project>

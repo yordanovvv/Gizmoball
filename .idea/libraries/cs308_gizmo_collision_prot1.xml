@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="cs308-gizmo-collision-prot1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Prototypes/collision prototype/cs308-gizmo-collision-prot.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
