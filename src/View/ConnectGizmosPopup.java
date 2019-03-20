@@ -3,6 +3,7 @@ package View;
 import javax.swing.*;
 
 
+import Model.Absorber;
 import Model.iGizmo;
 import Model.iModel;
 
@@ -138,6 +139,15 @@ public class ConnectGizmosPopup {
                     }
                     else {
                         JOptionPane.showMessageDialog(null, "Gizmo " + gizmo1.getID() + " and " + gizmo2.getID() + " connected successfully!");
+
+
+                        if (gizmo1.getID() == gizmo2.getID() && gizmo1.getGizmoType()=="Absorber"){
+                            ((Absorber) gizmo1).activateAbsorber();
+                            System.out.println("absorber connected to self!");
+                        }
+
+
+
                     }
                     break;
                 case "Cancel":

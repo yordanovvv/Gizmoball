@@ -111,8 +111,12 @@ public class GizmoballModel extends iModel {
 
                         ball.setStopped(true);
                         ball.setVelo(new Vect(0,0));
+
                         absorberCollision = false;
                         checkConnections(collisionGizmo, ball);
+
+
+
                     }
                     else if(absorberCollision == true && ball.getVelo().y()<0) //ball is moving up so ignore absorber line
                     {
@@ -133,7 +137,7 @@ public class GizmoballModel extends iModel {
 
                             collisionGizmo.setHit(!collisionGizmo.getHit());
                             if (!collisionGizmo.getGizmoType().equals("Star"))
-                                System.out.println("connections not a star");
+                                //System.out.println("connections not a star");
                                 checkConnections(collisionGizmo, ball);
 
                             if(ball.getSpeed()!=0) {
@@ -1111,6 +1115,15 @@ public class GizmoballModel extends iModel {
                 checkKeyConnections(getGizmoByID(gizmo.getGizmoConnections().get(i)),ball);
             }
         }
+
+        if (collisionGizmo.getGizmoType().equals("Absorber")) {
+            if (collisionGizmo.getGizmoConnections().contains(collisionGizmo.getID())) {
+                ((Absorber)gizmo).addBall(ball);
+                ((Absorber) gizmo).activateAbsorber();
+            }
+        }
+
+
     }
 
     public void checkKeyConnections(iGizmo gizmo, Ball ball) {
