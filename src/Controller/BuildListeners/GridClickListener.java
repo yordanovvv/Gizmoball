@@ -334,7 +334,19 @@ public class GridClickListener implements MouseListener {
 
         switch (selected){
             case "absorber":
-                Absorber abs = new Absorber("A", start_gridX, start_gridY, end_gridX+1, end_gridY+1);
+                int bigId = 0;
+                int idNo = 1;
+                for (iGizmo g : m.getGizmos()) {
+                    if (g.getGizmoType().equals("Absorber")) {
+                        bigId = Integer.parseInt(g.getID().substring(1));
+                        System.out.println(bigId);
+                        if (idNo > bigId){
+                            bigId = idNo;
+                        }
+                    }
+                }
+
+                Absorber abs = new Absorber("A" + (bigId+1), start_gridX, start_gridY, end_gridX+1, end_gridY+1);
                 if (m.checkSpace(start_gridX, start_gridY, abs)){
                     m.addGizmo(abs);
                     m.setSpaces(start_gridX, start_gridY,  true, abs,null);
