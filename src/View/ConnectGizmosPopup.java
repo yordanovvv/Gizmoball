@@ -137,19 +137,24 @@ public class ConnectGizmosPopup {
                     if(combo_gizmo1.getSelectedIndex()==0){
                         if(combo_gizmo2.getSelectedIndex()==0) {
                             model.connectGizmos("OuterWalls", "OuterWalls");
+                            JOptionPane.showMessageDialog(null, "Connecting OuterWalls to Outerwalls will result in nothing", "Error", JOptionPane.ERROR_MESSAGE);
                         }else{
                             model.connectGizmos("OuterWalls",  gizmos.get(combo_gizmo2.getSelectedIndex()-1).getID());
+                            JOptionPane.showMessageDialog(null, "Outerwall to " + gizmos.get(combo_gizmo2.getSelectedIndex()-1).getID() + " connected successfully!");
+
                         }
                     }
                     else if(combo_gizmo2.getSelectedIndex()==0){
                         if(combo_gizmo1.getSelectedIndex()==0) {
                             model.connectGizmos("OuterWalls", "OuterWalls");
+                            JOptionPane.showMessageDialog(null, "Connecting OuterWalls to Outerwalls will result in nothing", "Error", JOptionPane.ERROR_MESSAGE);
                         }else{
                             model.connectGizmos( gizmos.get(combo_gizmo1.getSelectedIndex()).getID(),"OuterWall");
+                            JOptionPane.showMessageDialog(null, "Connecting OuterWalls to a gizmo will result in nothing", "Error", JOptionPane.ERROR_MESSAGE);
                         }
                     }else {
-                        iGizmo gizmo1 = gizmos.get(combo_gizmo1.getSelectedIndex());
-                        iGizmo gizmo2 = gizmos.get(combo_gizmo2.getSelectedIndex());
+                        iGizmo gizmo1 = gizmos.get(combo_gizmo1.getSelectedIndex()-1);
+                        iGizmo gizmo2 = gizmos.get(combo_gizmo2.getSelectedIndex()-1);
                         boolean status = model.connectGizmos(gizmo1.getID(), gizmo2.getID());
                         if (!status) {
                             JOptionPane.showMessageDialog(null, "There is a problem connecting the selected gizmos. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);

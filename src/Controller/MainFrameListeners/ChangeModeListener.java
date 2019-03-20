@@ -37,8 +37,24 @@ public class ChangeModeListener implements ActionListener {
             view.setGridVisability(true);
             model.setDisplayID(true);
 
-        }else {   String triggers = "";
+        }else {
+            String triggers = "";
             String triggerSet = "";
+            String cmp = "";
+            if(model.getWallConns().size()!=0) {
+                cmp = "OuterWalls --> ";
+                String c = "";
+                for (int i = 0; i < model.getWallConns().size(); i++) {
+                    c = c + " " + model.getWallConns().get(i);
+                    if( i < model.getWallConns().size()-1){
+                        c = c + " , ";
+                    }
+                }
+                cmp = cmp + c;
+            }
+
+            triggers = cmp + "\n";
+
             for (iGizmo giz:model.getGizmos()) {
                 if(giz.getGizmoConnections().size()!=0){
                     triggerSet = giz.getID() + "-->";
@@ -56,8 +72,11 @@ public class ChangeModeListener implements ActionListener {
 
             triggers = triggers + "\n";
             String keyStr = "";
+            keyStr = "";
+
+
             for(iGizmo key  : model.getKeyTriggers().keySet()){
-                keyStr = key.getID()  + " ---> key " + model.getKeyTriggers().get(key) + "\n";
+                keyStr = key.getID()  + " --> key " + model.getKeyTriggers().get(key) + "\n";
                 triggers = triggers + keyStr+ "\n";
             }
 
